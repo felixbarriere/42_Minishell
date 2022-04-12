@@ -1,40 +1,37 @@
-NAME = minishell
+NAME =		minishell
 
 SRCS	=	main.c\
-			
-OBJS	=	${SRCS:.c=.o}
-CC		=	gcc
-FLAGS	=	-Wall -Wextra -Werror -lreadline
+src/parser_utils.c\
+src/parser.c\
+src/prompt.c\
+src/lists.c
 
-INCS = -I ./includes -I ./libft/includes
-LIBC = -L ./libft -lft
-HEADER_MESSAGE = MINISHELL${_END}
+OBJS = ${SRCS:.c=.o}
+INCS	=	-I ./includes -I ./libft/includes
+LIBC	=	libft/libft.a
+CC		=	clang
+CFLAGS	=	-Wall -Wextra -Werror
+RM		=	rm -rf
+SYSTEM	=	${shell uname}
+
+
+.c.o:
+			${CC} ${CFLAGS} ${INCS} -c $< -o $@
 
 all:		${NAME}
 
-.c.o:
-			@${CC} ${FLAGS} ${INCS} -c $< -o $@
-
 ${NAME}:	${OBJS}
-			@echo "[${HEADER_MESSAGE}]"
-			@echo "[1 / 2] Compiling libft..."
-			@${MAKE} -C libft >/dev/null
-			@echo "[2 / 2] Compiling Minishell..."
-			@${CC} ${FLAGS} ${INCS} ${LIBC} -o ${NAME} ${OBJS}
-			@echo "Minishell ready to be used !"
+			@${MAKE} -C libft > /dev/null
+			${CC} ${CFLAGS} -lreadline ${INCS} ${OBJS} -o ${NAME} ${LIBC}
 
-clean:		
-			@echo "Deleting libft library..."
-			@${MAKE} -C libft clean >/dev/null
-			@echo "Deleting minishell binary files..."
-			@rm -f ${OBJS}
+clean:
+			@${MAKE} -C libft clean > /dev/null
+			${RM} ${OBJS}
 
 fclean:		clean
-			@${MAKE} -C libft fclean >/dev/null
-			@echo "Deleting minishell executable..."
-			@rm -f ${NAME}
-			@echo "Minishell's has been cleaned !"
+			@${MAKE} -C libft fclean > /dev/null
+			${RM} ${NAME}
 
 re:			fclean all
 
-.PHONY:		all fclean clean all bonus
+.PHONY:		all clean fclean re

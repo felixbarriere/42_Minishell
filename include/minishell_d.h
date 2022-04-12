@@ -1,6 +1,10 @@
 #ifndef MINISHELL_D_H
 # define MINISHELL_D_H
 
+#include "minishell.h"
+#include "minishell_f.h"
+#include "minishell_s.h"
+
 /****************** MACROS ******************/
 # ifndef FAILURE
 #  define FAILURE 1
