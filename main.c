@@ -8,6 +8,9 @@ void	ft_init_values(t_sh *sh)
 	sh->token_lst = NULL;
 	sh->prompt = NULL;
 	sh->p_index = 0;
+	sh->lenght = 0;
+	sh->state_quote = DEFAULT;
+	
 }
 
 int main(int ac, char **av)

@@ -11,5 +11,6 @@
 # include "minishell_d.h"
 # include "minishell_f.h"
 # include "minishell_s.h"
+#include "minishell_e.h"
 
 #endif

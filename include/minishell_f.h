@@ -4,6 +4,7 @@
 #include "minishell.h"
 #include "minishell_d.h"
 #include "minishell_s.h"
+#include "minishell_e.h"
 
 /**************** FUNCTIONS ****************/
 
@@ -16,13 +17,13 @@ void	ft_prompt_init(t_sh *sh);
 
 
 /****** PARSER UTILS ******/
-int	isin_charset(char c);
-int	isonly_space(char *str);
+int	is_in_charset(char c);
+int	is_only_space(char *str);
 int	ft_parse_red(t_sh *sh);
 
 /****** PARSER  ******/
 char 	*string_token(t_sh *sh, char *prompt);
-void	tokenizer(t_sh *sh, char first, char second);
+void	tokenizer(t_sh *sh);
 void 	lexer(t_sh *sh);
 
 /****** LISTS  ******/
