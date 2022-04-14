@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/04/14 17:08:01 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/04/14 18:27:37 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,18 @@
 #include "../include/minishell_f.h"
 #include "../include/minishell_s.h"
 
+char *string_token_quote(t_sh *sh, char *prompt)
+{
+	char *str;
+	int j = 0;
+
+	while (prompt[j])
+		j++;
+	str = ft_strdup(prompt, j);
+	if (j > 0)
+		sh->p_index += j - 1;
+	return (str);
+}
 
 char *string_token(t_sh *sh, char *prompt)
 {
@@ -23,6 +35,7 @@ char *string_token(t_sh *sh, char *prompt)
 
 	while (prompt[j])
 	{
+	
 		if (is_in_charset(prompt[j]))
 			break;
 		j++;
@@ -37,9 +50,10 @@ char *string_token(t_sh *sh, char *prompt)
 //fonction a separer en plusieurs sous fonctions (tokenize string, tokenize separators...)
 void	tokenizer(t_sh *sh)
 {
-	char	*str;
+	char	*str_cmd;
 
-	str = NULL;
+
+	str_cmd = NULL;
 	if (sh->prompt[sh->p_index] == PIPE)
 		sh->token_lst = add_back_token(sh->token_lst, PIPE, "|");
 	else if (sh->prompt[sh->p_index] == RED_LEFT || sh->prompt[sh->p_index] == RED_RIGHT)
@@ -60,10 +74,29 @@ void	tokenizer(t_sh *sh)
 			sh->token_lst = add_back_token(sh->token_lst, RED_RIGHT, ">");
 	}
 	else
-	{
-		str = string_token(sh, &sh->prompt[sh->p_index]);
-		if (!is_only_space(str))
-			sh->token_lst = add_back_token(sh->token_lst, STR, str);
+	{	
+		// if (sh->state_quote == DOUBLE || sh->state_quote == SIMPLE)
+		
+		// if (sh->state_quote == DEFAULT)
+		// {
+		// 	printf("DEFAULT\n");	
+			str_cmd = string_token(sh, &sh->prompt[sh->p_index]);
+		// }
+		// else if (sh->state_quote != DEFAULT)
+		// {
+		// 	printf("NOT DEFAULT\n");	
+		// 	str_cmd = string_token_quote(sh, &sh->prompt[sh->p_index]);
+		// }
+
+		if (!is_only_space(str_cmd))
+		{
+			// if (sh->state_quote == DEFAULT)
+				sh->token_lst = add_back_token(sh->token_lst, CMD, str_cmd);
+			// else if (sh->state_quote == SIMPLE)
+				// sh->token_lst = add_back_token(sh->token_lst, STR_SIMPLE, str_cmd);
+			// else if (sh->state_quote == DOUBLE)
+				// sh->token_lst = add_back_token(sh->token_lst, STR_DOUBLE, str_cmd);
+		}
 	}
 }
 
@@ -102,7 +135,7 @@ void	ft_find_quote_state(t_sh *sh, int i)
 		sh->state_quote = DEFAULT;
 }
 
-int ft_is_quote_ok(t_sh *sh) 
+int ft_is_quote_ok(t_sh *sh)
 {
 	int i;
 
@@ -125,7 +158,7 @@ void lexer(t_sh *sh)
 	type = 0;
 	start = 0;
 
-	// printf("is quotes number ok: %d\n", ft_is_quote_ok(sh));
+	// printf("is quotes ok: %d\n", ft_is_quote_ok(sh));
 	if (ft_is_quote_ok(sh) != 0)
 	{
 		ft_putstr_fd("quotes unclosed :(", 2);
@@ -151,59 +184,7 @@ void lexer(t_sh *sh)
 		// }
 		sh->p_index ++;
 	}
-	// if (state != DEFAULT)
-	// {
-	// 	ft_putstr_fd("quotes unclosed :(", 2);
-	// 	// exit() quitte le programme, trouver un moyen de quitter uniquement le shell.
-	// 	// exit(1);
-	// }
+
 	print_tokens(sh->token_lst);
 	printf("list length=%d\n", list_length(sh->token_lst));
 }
-
-
-
-// void lexer(t_sh *sh)
-// {
-// 	int state;
-// 	int	type;
-// 	int	start;
-	
-// 	state = DEFAULT;
-// 	type = 0;
-// 	start = 0;
-// 	// 
-// 	while (sh->prompt[sh->p_index])
-// 	{
-// 		state = ft_find_state(sh, state);
-// 		//à faire à un moment : gérer les tabulations et les espaces (les virer)
-// 		if (state == DEFAULT)
-// 		{
-// 			type = ft_is_separator(sh, sh->p_index);
-// 			printf(" TYPE : %d \n", type);
-// 			printf(" INDEX : %d \n", sh->p_index);
-// 			if (sh->p_index != 0 && ft_is_separator(sh, sh->p_index) != 0)
-// 			{
-// 				printf("Fin de STR\n");
-// 			}
-// 			if (type == DOUBLE_RED_RIGHT || type == DOUBLE_RED_LEFT || type == PIPE || type == RED_LEFT || type == RED_RIGHT || type == END)
-// 			{
-// 				printf("INDEX : %d is separator, \n", sh->p_index);
-// 				if (type == DOUBLE_RED_RIGHT || type == DOUBLE_RED_LEFT)
-// 				{
-// 					sh->p_index++;
-// 					printf("INDEX : %d  DOUBLE is separator, \n", sh->p_index);
-// 				}
-// 			}
-// 			start = sh->p_index + 1;
-// 		}
-// 		// tokenizer(sh);
-// 		sh->p_index ++;
-// 	}
-// 	if (state != DEFAULT)
-// 	{
-// 		ft_putstr_fd("quotes unclosed :(", 2);
-// 	}
-// 	print_tokens(sh->token_lst);
-// 	// printf("list length = %d\n", list_length(sh->token_lst));
-// }
