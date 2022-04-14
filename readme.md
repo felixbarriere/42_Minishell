@@ -1,7 +1,10 @@
+WIP
+
+
+
 ## Features à intégrer:
 
 - Working history
-- Tab autocompletion
 - Launch programs (absolute or relative path using PATH)
 - echo with option -n
 - cd with only a relative or absolute path
