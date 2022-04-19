@@ -15,7 +15,7 @@
 #include "../include/minishell_f.h"
 #include "../include/minishell_s.h"
 
-char *string_token_quote(t_sh *sh, char *prompt)
+char	*string_token_quote(t_sh *sh, char *prompt)
 {
 	char *str;
 	int j = 0;
@@ -28,14 +28,14 @@ char *string_token_quote(t_sh *sh, char *prompt)
 	return (str);
 }
 
-char *string_token(t_sh *sh, char *prompt)
+char	*string_token(t_sh *sh, char *prompt)
 {
 	char *str;
 	int j = 0;
 
 	while (prompt[j])
 	{
-	
+
 		if (is_in_charset(prompt[j]))
 			break;
 		j++;
@@ -47,11 +47,10 @@ char *string_token(t_sh *sh, char *prompt)
 }
 
 // ajoute le bon token à la liste chainée des tokens sh->token_lst
-//fonction a separer en plusieurs sous fonctions (tokenize string, tokenize separators...)
+// fonction a separer en plusieurs sous fonctions (tokenize string, tokenize separators...)
 void	tokenizer(t_sh *sh)
 {
 	char	*str_cmd;
-
 
 	str_cmd = NULL;
 	if (sh->prompt[sh->p_index] == PIPE)
@@ -74,32 +73,31 @@ void	tokenizer(t_sh *sh)
 			sh->token_lst = add_back_token(sh->token_lst, RED_RIGHT, ">");
 	}
 	else
-	{	
+	{
 		// if (sh->state_quote == DOUBLE || sh->state_quote == SIMPLE)
-		
+
 		// if (sh->state_quote == DEFAULT)
 		// {
-		// 	printf("DEFAULT\n");	
-			str_cmd = string_token(sh, &sh->prompt[sh->p_index]);
+		// 	printf("DEFAULT\n");
+		str_cmd = string_token(sh, &sh->prompt[sh->p_index]);
 		// }
 		// else if (sh->state_quote != DEFAULT)
 		// {
-		// 	printf("NOT DEFAULT\n");	
+		// 	printf("NOT DEFAULT\n");
 		// 	str_cmd = string_token_quote(sh, &sh->prompt[sh->p_index]);
 		// }
 
 		if (!is_only_space(str_cmd))
 		{
 			// if (sh->state_quote == DEFAULT)
-				sh->token_lst = add_back_token(sh->token_lst, CMD, str_cmd);
+			sh->token_lst = add_back_token(sh->token_lst, CMD, str_cmd);
 			// else if (sh->state_quote == SIMPLE)
-				// sh->token_lst = add_back_token(sh->token_lst, STR_SIMPLE, str_cmd);
+			// sh->token_lst = add_back_token(sh->token_lst, STR_SIMPLE, str_cmd);
 			// else if (sh->state_quote == DOUBLE)
-				// sh->token_lst = add_back_token(sh->token_lst, STR_DOUBLE, str_cmd);
+			// sh->token_lst = add_back_token(sh->token_lst, STR_DOUBLE, str_cmd);
 		}
 	}
 }
-
 
 int	ft_is_separator(t_sh *sh, int i)
 {
@@ -107,21 +105,21 @@ int	ft_is_separator(t_sh *sh, int i)
 		return (BLANK);
 	else if (sh->prompt[i] == '|')
 		return (PIPE);
-	else if (sh->prompt[i] == '<'  && sh->prompt[i + 1] == '<')
+	else if (sh->prompt[i] == '<' && sh->prompt[i + 1] == '<')
 		return (DOUBLE_RED_LEFT);
-	else if (sh->prompt[i] == '>'  && sh->prompt[i + 1] == '>')
+	else if (sh->prompt[i] == '>' && sh->prompt[i + 1] == '>')
 		return (DOUBLE_RED_RIGHT);
 	else if (sh->prompt[i] == '<')
 		return (RED_LEFT);
 	else if (sh->prompt[i] == '>')
-		return(RED_RIGHT);
+		return (RED_RIGHT);
 	else if (sh->prompt[i] == '\0')
 		return (END);
 	else
 		return (0);
 }
 
-// la fonction "find_state" permet de definir si on se trouve 
+// la fonction "find_state" permet de definir si on se trouve
 // dans une quote ou non.
 void	ft_find_quote_state(t_sh *sh, int i)
 {
@@ -135,7 +133,7 @@ void	ft_find_quote_state(t_sh *sh, int i)
 		sh->state_quote = DEFAULT;
 }
 
-int ft_is_quote_ok(t_sh *sh)
+int	ft_is_quote_ok(t_sh *sh)
 {
 	int i;
 
@@ -150,11 +148,11 @@ int ft_is_quote_ok(t_sh *sh)
 	return (SUCCESS);
 }
 
-void lexer(t_sh *sh)
+void	lexer(t_sh *sh)
 {
 	int	type;
 	int	start;
-	
+
 	type = 0;
 	start = 0;
 
@@ -176,13 +174,13 @@ void lexer(t_sh *sh)
 		}
 		// else if(state == SIMPLE)
 		// {
-			
+
 		// }
 		// else if(state == DOUBLE)
 		// {
-			
+
 		// }
-		sh->p_index ++;
+		sh->p_index++;
 	}
 
 	print_tokens(sh->token_lst);

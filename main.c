@@ -19,7 +19,11 @@ int main(int ac, char **av)
 	(void)av;
 
 	t_sh sh;
-
+	if (ac != 1)
+	{
+		ft_putstr_fd("Erreur: nombre d'arguments \n", 2);
+		exit(FAILURE);
+	}
 	ft_prompt_init(&sh);
 	
 	return (0);
