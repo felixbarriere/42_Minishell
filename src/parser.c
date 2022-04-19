@@ -15,7 +15,7 @@
 #include "../include/minishell_f.h"
 #include "../include/minishell_s.h"
 
-char *string_token_quote(t_sh *sh, char *prompt)
+char	*string_token_quote(t_sh *sh, char *prompt)
 {
 	char *str;
 	int j = 0;
@@ -28,7 +28,7 @@ char *string_token_quote(t_sh *sh, char *prompt)
 	return (str);
 }
 
-char *string_token(t_sh *sh, char *prompt)
+char	*string_token(t_sh *sh, char *prompt)
 {
 	char *str;
 	int j = 0;
@@ -48,9 +48,9 @@ char *string_token(t_sh *sh, char *prompt)
 
 // ajoute le bon token à la liste chainée des tokens sh->token_lst
 // fonction a separer en plusieurs sous fonctions (tokenize string, tokenize separators...)
-void tokenizer(t_sh *sh)
+void	tokenizer(t_sh *sh)
 {
-	char *str_cmd;
+	char	*str_cmd;
 
 	str_cmd = NULL;
 	if (sh->prompt[sh->p_index] == PIPE)
@@ -99,7 +99,7 @@ void tokenizer(t_sh *sh)
 	}
 }
 
-int ft_is_separator(t_sh *sh, int i)
+int	ft_is_separator(t_sh *sh, int i)
 {
 	if ((sh->prompt[i] >= 9 && sh->prompt[i] <= 13) || sh->prompt[i] == 32)
 		return (BLANK);
@@ -121,7 +121,7 @@ int ft_is_separator(t_sh *sh, int i)
 
 // la fonction "find_state" permet de definir si on se trouve
 // dans une quote ou non.
-void ft_find_quote_state(t_sh *sh, int i)
+void	ft_find_quote_state(t_sh *sh, int i)
 {
 	if (sh->prompt[i] == '\'' && sh->state_quote == DEFAULT)
 		sh->state_quote = SIMPLE;
@@ -133,7 +133,7 @@ void ft_find_quote_state(t_sh *sh, int i)
 		sh->state_quote = DEFAULT;
 }
 
-int ft_is_quote_ok(t_sh *sh)
+int	ft_is_quote_ok(t_sh *sh)
 {
 	int i;
 
@@ -148,10 +148,10 @@ int ft_is_quote_ok(t_sh *sh)
 	return (SUCCESS);
 }
 
-void lexer(t_sh *sh)
+void	lexer(t_sh *sh)
 {
-	int type;
-	int start;
+	int	type;
+	int	start;
 
 	type = 0;
 	start = 0;
