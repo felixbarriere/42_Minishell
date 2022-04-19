@@ -6,6 +6,8 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <stdlib.h>
+#include <signal.h>
+#include <sys/signal.h>
 
 #include "../libft/libft.h"
 #include "minishell_d.h"

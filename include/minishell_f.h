@@ -15,6 +15,8 @@ void	ft_init_values(t_sh *sh);
 void	ft_prompt_start(t_sh *sh);
 void	ft_prompt_init(t_sh *sh);
 
+/****** SIGNALS ******/
+void	ft_signals_orchestrator(void);
 
 /****** PARSER UTILS ******/
 int	is_in_charset(char c);

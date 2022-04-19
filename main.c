@@ -10,10 +10,9 @@ void	ft_init_values(t_sh *sh)
 	sh->p_index = 0;
 	sh->lenght = 0;
 	sh->state_quote = DEFAULT;
-	
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	(void)ac;
 	(void)av;
@@ -24,7 +23,9 @@ int main(int ac, char **av)
 		ft_putstr_fd("Erreur: nombre d'arguments \n", 2);
 		exit(FAILURE);
 	}
+	ft_signals_orchestrator();
 	ft_prompt_init(&sh);
+	
 	
 	return (0);
 }
