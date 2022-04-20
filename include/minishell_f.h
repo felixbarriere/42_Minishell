@@ -11,6 +11,9 @@
 /****** MAIN ******/
 void	ft_init_values(t_sh *sh);
 
+/****** ENV *******/
+char	**ft_init_env(void);
+
 /****** PROMPT ******/
 void	ft_prompt_start(t_sh *sh);
 void	ft_prompt_init(t_sh *sh);

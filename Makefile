@@ -5,7 +5,8 @@ src/parser_utils.c\
 src/parser.c\
 src/prompt.c\
 src/lists.c\
-src/signals.c
+src/signals.c\
+src/env.c
 
 OBJS = ${SRCS:.c=.o}
 INCS	=	-I ./includes -I ./libft/includes
