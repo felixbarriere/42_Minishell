@@ -20,6 +20,7 @@ typedef struct s_token
 /* structure principale du programe */
 typedef struct s_sh
 {
+	char	**env;
 	t_token	*token_lst;
 	char	*prompt;
 	int		p_index;
