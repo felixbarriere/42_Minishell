@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/04/19 15:57:31 by marvin           ###   ########.fr       */
+/*   Updated: 2022/04/22 14:15:24 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*string_token_quote(t_sh *sh, char *prompt)
 
 	while (prompt[j])
 		j++;
-	str = ft_strdup(prompt, j);
+	str = ft_strndup(prompt, j);
 	if (j > 0)
 		sh->p_index += j - 1;
 	return (str);
@@ -40,7 +40,7 @@ char	*string_token(t_sh *sh, char *prompt)
 			break;
 		j++;
 	}
-	str = ft_strdup(prompt, j);
+	str = ft_strndup(prompt, j);
 	if (j > 0)
 		sh->p_index += j - 1;
 	return (str);
