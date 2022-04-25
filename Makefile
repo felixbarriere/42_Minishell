@@ -3,6 +3,7 @@ NAME =		minishell
 SRCS	=	main.c\
 src/parser_utils.c\
 src/parser.c\
+src/quotes.c\
 src/prompt.c\
 src/lists.c\
 src/signals.c\

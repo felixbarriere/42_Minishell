@@ -14,6 +14,7 @@ typedef enum token_type
 	DOUBLE_RED_RIGHT,
 	BLANK,
 	END,
+	STR,
 	STR_SIMPLE,
 	STR_DOUBLE,
 	CMD,
