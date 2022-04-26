@@ -26,7 +26,12 @@ int	is_in_charset(char c);
 int	is_only_space(char *str);
 int	ft_parse_red(t_sh *sh);
 
+/****** QUOTES ******/
+int	ft_is_quote_ok(t_sh *sh);
+void	ft_find_quote_state(t_sh *sh, int i);
+
 /****** PARSER  ******/
+void	process_redirect_token(t_sh *sh);
 char 	*string_token(t_sh *sh, char *prompt);
 void	tokenizer(t_sh *sh);
 void 	lexer(t_sh *sh);
