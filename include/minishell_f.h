@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell_f.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
+/*   Updated: 2022/04/27 15:36:12 by ccalas           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_F_H
 # define MINISHELL_F_H
 
@@ -23,6 +35,7 @@ void	ft_signals_orchestrator(void);
 
 /****** PARSER UTILS ******/
 int		is_in_charset(char c);
+// int		is_in_charset(char c, const char *charset);
 int		is_only_space(char *str);
 int		ft_parse_red(t_sh *sh);
 

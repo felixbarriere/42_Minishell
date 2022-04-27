@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell_d.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
+/*   Updated: 2022/04/27 15:36:03 by ccalas           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_D_H
 # define MINISHELL_D_H
 
@@ -13,6 +25,10 @@
 
 # ifndef SUCCESS
 #  define SUCCESS 0
+# endif
+
+# ifndef CHARSET_SEP
+#  define CHARSET_SEP "<>|"
 # endif
 
 # ifndef CHARSET_SPACE_TABS

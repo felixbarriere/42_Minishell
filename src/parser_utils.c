@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/04/13 16:19:03 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/04/27 15:11:03 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,20 @@ int	is_in_charset(char c)
 		return (1);
 	return (0);
 }
+
+// int	is_in_charset(char c, const char *charset)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (charset[i])
+// 	{
+// 		if (c == charset[i])
+// 			return (FAILURE);
+// 		i++;
+// 	}
+// 	return (SUCCESS);
+// }
 
 int	is_only_space(char *str)
 {

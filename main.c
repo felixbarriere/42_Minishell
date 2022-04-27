@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 18:08:23 by marvin            #+#    #+#             */
-/*   Updated: 2022/04/27 13:43:25 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/04/27 14:33:54 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,8 @@ int	main(int ac, char **av)
 	}
 	ft_signals_orchestrator();
 	ft_prompt_init(&sh);
+
+	// penser a free la liste chainee
+	
 	return (0);
 }
