@@ -7,7 +7,8 @@ src/quotes.c\
 src/prompt.c\
 src/lists.c\
 src/signals.c\
-src/env.c
+src/env.c\
+src/init.c\
 
 OBJS = ${SRCS:.c=.o}
 INCS	=	-I ./includes -I ./libft/includes

@@ -15,6 +15,10 @@
 #  define SUCCESS 0
 # endif
 
+# ifndef CHARSET_SPACE_TABS
+#  define CHARSET_SPACE_TABS " \n\v\t\f\r"
+# endif
+
 /****** COLORS *******/
 # ifndef YELLOW
 #  define YELLOW "\033[0;33m"

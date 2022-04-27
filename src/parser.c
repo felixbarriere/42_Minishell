@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/04/25 16:50:27 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/04/27 13:24:43 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@
 
 char	*string_token(t_sh *sh, char *prompt)
 {
-	char *str;
-	int j = 0;
-
+	char	*temp;
+	char	*str;
+	int		j;
+	
+	j = 0;
 	while (prompt[j])
 	{
 		if (is_in_charset(prompt[j]) && sh->state_quote == DEFAULT)
@@ -27,7 +29,9 @@ char	*string_token(t_sh *sh, char *prompt)
 		j++;
 		ft_find_quote_state(sh, j);
 	}
-	str = ft_strndup(prompt, j);
+	temp = ft_strndup(prompt, j);
+	str = ft_strtrim(temp, CHARSET_SPACE_TABS);
+	free (temp);
 	if (j > 0)
 		sh->p_index += j - 1;
 	return (str);
@@ -75,6 +79,7 @@ void	tokenizer(t_sh *sh)
 			sh->token_lst = add_back_token(sh->token_lst, STR, str);
 	}
 }
+
 void	lexer(t_sh *sh)
 {
 	if (ft_is_quote_ok(sh) != 0)

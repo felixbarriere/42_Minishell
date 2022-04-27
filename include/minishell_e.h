@@ -15,8 +15,6 @@ typedef enum token_type
 	BLANK,
 	END,
 	STR,
-	STR_SIMPLE,
-	STR_DOUBLE,
 	CMD,
 } t_token_type;
 
