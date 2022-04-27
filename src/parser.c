@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/04/27 15:11:53 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/04/27 17:35:47 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,32 @@ char	*string_token(t_sh *sh, char *prompt)
 	char *temp;
 	int j = 0;
 
+	printf("|%s|\n", prompt);
 	while (prompt[j])
 	{
-		if (is_in_charset(prompt[j]) && sh->state_quote == DEFAULT)
+		if (prompt[j] && prompt[j] == '\"')
+		{
+			j++;
+			while(prompt[j] && prompt[j] != '\"')
+				j++;
+		}
+		if (prompt[j] && prompt[j] == '\'')
+		{
+			j++;
+			while(prompt[j] && prompt[j] != '\'')
+				j++;
+		}
+		if (is_in_charset(prompt[j]))
 			break;
 		j++;
-		ft_find_quote_state(sh, j);
 	}
 	temp = ft_strndup(prompt, j);
 	str = ft_strtrim(temp, CHARSET_SPACE_TABS);
 	free (temp);
 	if (j > 0)
 		sh->p_index += j - 1;
+
+	printf("|%d|\n", j);
 	return (str);
 }
 
@@ -60,10 +74,7 @@ void	tokenizer(t_sh *sh)
 	char	*str;
 
 	str = NULL;
-	
-	// on verifie si on entre ou sort des quotes
-	ft_find_quote_state(sh, sh->p_index);
-	
+	//verifier si le state quote est utile 
 	if (sh->state_quote == DEFAULT && is_in_charset(sh->prompt[sh->p_index]))
 	{
 		if (sh->prompt[sh->p_index] == PIPE)
