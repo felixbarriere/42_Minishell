@@ -27,7 +27,7 @@ int	is_only_space(char *str);
 int	ft_parse_red(t_sh *sh);
 
 /****** QUOTES ******/
-int	ft_is_quote_ok(t_sh *sh);
+int		ft_is_quote_ok(t_sh *sh);
 void	ft_find_quote_state(t_sh *sh, int i);
 
 /****** PARSER  ******/
