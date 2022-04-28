@@ -19,6 +19,7 @@ void	ft_prompt_init(t_sh *sh)
 		sh->lenght = ft_strlen(sh->prompt);
 		
 		lexer(sh); //analyse lexicale de la commande
+		
 		ft_init_values(sh);
 	}
 }

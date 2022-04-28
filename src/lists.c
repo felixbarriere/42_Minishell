@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:18:11 by ccalas            #+#    #+#             */
-/*   Updated: 2022/04/27 13:33:48 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/04/28 15:12:54 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ t_token	*create_token(t_token_type type, char *value)
 	elem->type = type;
 	elem->value = value;
 	elem->next = NULL;
+	//TEST
+	elem->prev = NULL;
 	return (elem);
 }
 
@@ -36,7 +38,6 @@ t_token	*add_back_token(t_token *list, t_token_type type, char *value)
 	new = create_token(type, value);
 	if (!new)
 		return NULL;
-
 	if (!list)
 		return (new);
 	else
@@ -45,6 +46,8 @@ t_token	*add_back_token(t_token *list, t_token_type type, char *value)
 		while (tmp->next)
 			tmp = tmp->next;
 		tmp->next = new;
+		//TEST
+		new->prev = tmp;
 	}
 	return (list);
 }
@@ -55,6 +58,8 @@ void print_tokens(t_token *li)
 	{
 		printf("[%s] ", li->value);
 		printf("[Type : %d]\n", li->type);
+		// printf("[precedent = %s]\n", li->prev->value);
+		// printf("[suivant = %s]\n", li->next->value);
 		li = li->next;
 	}
 	printf("\n");

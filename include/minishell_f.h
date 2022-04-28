@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/04/27 15:36:12 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/04/28 14:06:28 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ void	process_redirect_token(t_sh *sh);
 char 	*string_token(t_sh *sh, char *prompt);
 void	tokenizer(t_sh *sh);
 void 	lexer(t_sh *sh);
+
+/****** ERROR_SEP  ******/
+int	check_error_sep(t_token *token_lst);
 
 /****** LISTS  ******/
 void	ft_set_null_free_elem(t_token *elem);

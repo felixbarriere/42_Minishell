@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/04/27 17:35:47 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/04/28 15:09:31 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ char	*string_token(t_sh *sh, char *prompt)
 	char *temp;
 	int j = 0;
 
-	printf("|%s|\n", prompt);
 	while (prompt[j])
 	{
 		if (prompt[j] && prompt[j] == '\"')
@@ -45,10 +44,10 @@ char	*string_token(t_sh *sh, char *prompt)
 	free (temp);
 	if (j > 0)
 		sh->p_index += j - 1;
-
-	printf("|%d|\n", j);
 	return (str);
 }
+
+
 
 void	process_redirect_token(t_sh *sh)
 {
@@ -103,6 +102,7 @@ void	lexer(t_sh *sh)
 		tokenizer(sh);
 		sh->p_index++;
 	}
+	// check_error_sep(sh->token_lst);
 	print_tokens(sh->token_lst);
 	printf("list length=%d\n", list_length(sh->token_lst));
 }

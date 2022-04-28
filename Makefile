@@ -9,6 +9,7 @@ src/lists.c\
 src/signals.c\
 src/env.c\
 src/init.c\
+src/error_sep.c
 
 OBJS = ${SRCS:.c=.o}
 INCS	=	-I ./includes -I ./libft/includes
