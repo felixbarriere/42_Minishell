@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/04/28 15:09:31 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/04/29 15:08:26 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,20 +51,20 @@ char	*string_token(t_sh *sh, char *prompt)
 
 void	process_redirect_token(t_sh *sh)
 {
-	if (sh->prompt[sh->p_index] == RED_LEFT && sh->prompt[sh->p_index + 1] == RED_LEFT)
+	if (sh->prompt[sh->p_index] == R_LEFT && sh->prompt[sh->p_index + 1] == R_LEFT)
 	{
-		sh->token_lst = add_back_token(sh->token_lst, DOUBLE_RED_LEFT, "<<");
+		sh->token_lst = add_back_token(sh->token_lst, DR_LEFT, "<<");
 		sh->p_index++;
 	}
-	else if (sh->prompt[sh->p_index] == RED_RIGHT && sh->prompt[sh->p_index + 1] == RED_RIGHT)
+	else if (sh->prompt[sh->p_index] == R_RIGHT && sh->prompt[sh->p_index + 1] == R_RIGHT)
 	{
-		sh->token_lst = add_back_token(sh->token_lst, DOUBLE_RED_RIGHT, ">>");
+		sh->token_lst = add_back_token(sh->token_lst, DR_RIGHT, ">>");
 		sh->p_index++;
 	}
-	else if (sh->prompt[sh->p_index] == RED_LEFT)
-		sh->token_lst = add_back_token(sh->token_lst, RED_LEFT, "<");
-	else if (sh->prompt[sh->p_index] == RED_RIGHT)
-		sh->token_lst = add_back_token(sh->token_lst, RED_RIGHT, ">");
+	else if (sh->prompt[sh->p_index] == R_LEFT)
+		sh->token_lst = add_back_token(sh->token_lst, R_LEFT, "<");
+	else if (sh->prompt[sh->p_index] == R_RIGHT)
+		sh->token_lst = add_back_token(sh->token_lst, R_RIGHT, ">");
 }
 
 // ajoute le bon token à la liste chainée des tokens sh->token_lst
@@ -97,12 +97,10 @@ void	lexer(t_sh *sh)
 	}
 	while (sh->prompt[sh->p_index])
 	{
-	
-		printf("QUOTE %d\n", sh->state_quote);
 		tokenizer(sh);
 		sh->p_index++;
 	}
-	// check_error_sep(sh->token_lst);
+	check_error_sep(sh->token_lst);
 	print_tokens(sh->token_lst);
 	printf("list length=%d\n", list_length(sh->token_lst));
 }
@@ -117,13 +115,13 @@ int	ft_is_separator(t_sh *sh, int i)
 	else if (sh->prompt[i] == '|')
 		return (PIPE);
 	else if (sh->prompt[i] == '<' && sh->prompt[i + 1] == '<')
-		return (DOUBLE_RED_LEFT);
+		return);
 	else if (sh->prompt[i] == '>' && sh->prompt[i + 1] == '>')
-		return (DOUBLE_RED_RIGHT);
+		return (DOUBLE_R_RIGHT);
 	else if (sh->prompt[i] == '<')
-		return (RED_LEFT);
+		return (R_LEFT);
 	else if (sh->prompt[i] == '>')
-		return (RED_RIGHT);
+		return (R_RIGHT);
 	else if (sh->prompt[i] == '\0')
 		return (END);
 	else

@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/04/27 15:36:27 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/04/29 14:31:51 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <stdlib.h>
 #include <signal.h>
 #include <sys/signal.h>
+#include <stdbool.h>
 
 #include "../libft/libft.h"
 #include "minishell_d.h"

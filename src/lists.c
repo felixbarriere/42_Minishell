@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:18:11 by ccalas            #+#    #+#             */
-/*   Updated: 2022/04/28 15:12:54 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/04/29 14:43:21 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,13 @@ void print_tokens(t_token *li)
 {
 	while(li != NULL)
 	{
+		printf("\n");
 		printf("[%s] ", li->value);
 		printf("[Type : %d]\n", li->type);
-		// printf("[precedent = %s]\n", li->prev->value);
-		// printf("[suivant = %s]\n", li->next->value);
+		if (li->prev)
+			printf("[precedent = %s]", li->prev->value);
+		if  (li->next)
+			printf("[suivant = %s]", li->next->value);
 		li = li->next;
 	}
 	printf("\n");
