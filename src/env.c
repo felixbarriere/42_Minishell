@@ -22,6 +22,6 @@ char	**ft_init_env(void)
 	env = malloc(sizeof(char *));
 	if (!env)
 		return (NULL);
-	printf("my env function\n");
+	printf("\n");
 	return (env);
 }
