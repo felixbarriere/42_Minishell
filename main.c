@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 18:08:23 by marvin            #+#    #+#             */
-/*   Updated: 2022/05/03 15:13:17 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/03 17:17:34 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "include/minishell_f.h"
 #include "include/minishell_s.h"
 
-int	main(int ac, char **av)
+int	main(int ac, char **av, char **env)
 {
 	(void)ac;
 	(void)av;
@@ -27,7 +27,7 @@ int	main(int ac, char **av)
 		exit(EXIT_FAILURE);
 	}
 	ft_signals_orchestrator();
-	ft_prompt_init(&sh);
+	ft_prompt_init(&sh, env);
 
 	// penser a free la liste chainee
 	
