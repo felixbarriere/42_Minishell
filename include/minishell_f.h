@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/03 15:13:54 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/03 17:10:26 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@
 /**************** FUNCTIONS ****************/
 
 /****** MAIN ******/
-void	ft_init_values(t_sh *sh);
+void	ft_init_values(t_sh *sh, char **env);
 
 /****** ENV *******/
-char	**ft_init_env(void);
+char	**ft_init_env(char **env);
 
 /****** PROMPT ******/
 void	ft_prompt_start(t_sh *sh);
-void	ft_prompt_init(t_sh *sh);
+void	ft_prompt_init(t_sh *sh, char **env);
 
 /****** SIGNALS ******/
 void	ft_signals_orchestrator(void);
