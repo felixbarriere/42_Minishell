@@ -1,15 +1,16 @@
 NAME =		minishell
 
 SRCS	=	main.c\
-src/parser_utils.c\
-src/parser.c\
-src/quotes.c\
+src/lexer/parser_utils.c\
+src/lexer/parser.c\
+src/lexer/quotes.c\
 src/prompt.c\
 src/lists.c\
 src/signals.c\
 src/env.c\
 src/init.c\
-src/error_sep.c
+src/error_sep/error_sep.c\
+src/error_sep/error_sep2.c\
 
 OBJS = ${SRCS:.c=.o}
 INCS	=	-I ./includes -I ./libft/includes

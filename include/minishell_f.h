@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/04/28 14:06:28 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/03 15:13:54 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,18 @@ char 	*string_token(t_sh *sh, char *prompt);
 void	tokenizer(t_sh *sh);
 void 	lexer(t_sh *sh);
 
-/****** ERROR_SEP  ******/
+/****** ERROR_SEP ******/
+bool	is_type(t_token* current, t_token_type type);
 int	check_error_sep(t_token *token_lst);
+int	check_error_sep_0(t_token *token_lst);
+int	check_error_sep_1(t_token *token_lst);
+int	check_error_sep_2(t_token *token_lst);
+int	check_error_sep_3(t_token *token_lst);
+
+/****** ERROR_SEP2 ******/
+int	check_error_sep_4(t_token *token_lst);
+int	check_error_sep_5(t_token *token_lst);
+int	check_error_sep_6(t_token *token_lst);
 
 /****** LISTS  ******/
 void	ft_set_null_free_elem(t_token *elem);

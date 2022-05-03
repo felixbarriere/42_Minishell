@@ -6,14 +6,14 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/02 11:08:23 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/03 14:38:14 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
-#include "../include/minishell_d.h"
-#include "../include/minishell_f.h"
-#include "../include/minishell_s.h"
+#include "../../include/minishell.h"
+#include "../../include/minishell_d.h"
+#include "../../include/minishell_f.h"
+#include "../../include/minishell_s.h"
 
 int	is_in_charset(char c)
 {
