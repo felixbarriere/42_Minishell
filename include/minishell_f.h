@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/03 15:13:54 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/04 14:21:18 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,16 @@ void 	lexer(t_sh *sh);
 
 /****** ERROR_SEP ******/
 bool	is_type(t_token* current, t_token_type type);
-int	check_error_sep(t_token *token_lst);
-int	check_error_sep_0(t_token *token_lst);
-int	check_error_sep_1(t_token *token_lst);
-int	check_error_sep_2(t_token *token_lst);
-int	check_error_sep_3(t_token *token_lst);
+int		check_error_sep(t_token *token_lst);
+int		check_error_sep_0(t_token *token_lst);
+int		check_error_sep_1(t_token *token_lst);
+int		check_error_sep_2(t_token *token_lst);
+int		check_error_sep_3(t_token *token_lst);
 
 /****** ERROR_SEP2 ******/
-int	check_error_sep_4(t_token *token_lst);
-int	check_error_sep_5(t_token *token_lst);
-int	check_error_sep_6(t_token *token_lst);
+int		check_error_sep_4(t_token *token_lst);
+int		check_error_sep_5(t_token *token_lst);
+int		check_error_sep_6(t_token *token_lst);
 
 /****** LISTS  ******/
 void	ft_set_null_free_elem(t_token *elem);
@@ -69,5 +69,8 @@ t_token *create_token(t_token_type type, char *value);
 t_token *add_back_token(t_token *list, t_token_type type, char *value);
 void	print_tokens(t_token *li);
 int		list_length(t_token *li);
+void	clear_list(t_token *li);
+t_token *pop_front_list(t_token *li);
+bool 	is_empty_list(t_token *li);
 
 #endif

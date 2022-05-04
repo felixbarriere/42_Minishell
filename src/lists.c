@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:18:11 by ccalas            #+#    #+#             */
-/*   Updated: 2022/04/29 14:43:21 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/04 12:09:50 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,73 @@ void	ft_set_null_free_list(t_token **a_list)
 		ft_set_null_free_elem(*a_list);
 		*a_list = tmp;
 	}
+}
+
+/*---------------------------------------------------------------------*/
+
+/* Retourne une nouvelle Liste
+* @return Une liste vide
+*/
+t_token *new_list(void)
+{
+	return NULL;
+}
+
+
+/**
+* Vérifie si une List est vide
+* @param li La liste à tester
+* @return true si elle est vide, faux sinon
+*/
+bool is_empty_list(t_token  *li)
+{
+	if(li == NULL)
+		return true;
+
+	return false;
+}
+
+/*---------------------------------------------------------------------*/
+
+/**
+* Supprime un entier de la tête de la Liste
+* @param li La liste
+* @return La liste sans l'élément retiré
+*/
+t_token *pop_front_list(t_token *li)
+{
+	t_token *element;
+
+	element = malloc(sizeof(*element));
+
+	if(element == NULL)
+	{
+		fprintf(stderr, "Erreur : probleme allocation dynamique.\n");
+		exit(EXIT_FAILURE);
+	}
+
+	if(is_empty_list(li))
+		return (new_list());
+
+	element = li->next;
+
+	free(li);
+	li = NULL;
+	return (element);
+}
+
+/*---------------------------------------------------------------------*/
+
+/**
+* Supprime tous les éléments d'une Liste
+* @param li La liste
+* @return Une Liste vide
+*/
+void clear_list(t_token *li)
+{
+	if(is_empty_list(li))
+		return ;
+
+	while(li != NULL)
+		li = pop_front_list(li);
 }
