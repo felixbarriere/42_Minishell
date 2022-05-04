@@ -37,3 +37,12 @@ char	**ft_init_env(char **env)
 	env_cpy[i] = NULL;
 	return (env_cpy);
 }
+
+
+// env_cpy[i][key];
+
+// env_cpy[i][valeur];
+
+// ARG="hello";
+
+// $ARG
