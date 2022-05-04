@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/04 17:50:14 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/04 18:31:32 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,11 @@ void	tokenizer(t_sh *sh)
 {
 	char	*str;
 	char	*dollar;
+	char	**dollar_content;
+	int	i;
 
 	str = NULL;
+	i = 0;
 	//verifier si le state quote est utile 
 	if (sh->state_quote == DEFAULT && is_in_charset(sh->prompt[sh->p_index]))
 	{
@@ -83,8 +86,16 @@ void	tokenizer(t_sh *sh)
 	else if (sh->state_quote == DEFAULT && sh->prompt[sh->p_index] == '$')
 	{
 		dollar = string_token(sh, &sh->prompt[sh->p_index]);
-		if (!is_only_space(dollar))
-			sh->token_lst = add_back_token(sh->token_lst, DOLLAR, dollar);	
+		dollar_content = ft_split(dollar, ' ');
+		expander(dollar, dollar_content);
+		// if (!is_only_space(dollar))
+		// 	sh->token_lst = add_back_token(sh->token_lst, DOLLAR, dollar);	
+
+		// while(dollar_content[i] != NULL)
+		// {
+		// 	printf("%s", dollar_content[i]);
+		// 	i++;
+		// }
 	}
 	else 
 	{
