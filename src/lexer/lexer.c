@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/03 14:38:21 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/04 17:50:14 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ char	*string_token(t_sh *sh, char *prompt)
 	return (str);
 }
 
-
-
 void	process_redirect_token(t_sh *sh)
 {
 	if (sh->prompt[sh->p_index] == R_LEFT && sh->prompt[sh->p_index + 1] == R_LEFT)
@@ -71,6 +69,7 @@ void	process_redirect_token(t_sh *sh)
 void	tokenizer(t_sh *sh)
 {
 	char	*str;
+	char	*dollar;
 
 	str = NULL;
 	//verifier si le state quote est utile 
@@ -81,13 +80,20 @@ void	tokenizer(t_sh *sh)
 		else
 			process_redirect_token(sh);
 	}
-	else
+	else if (sh->state_quote == DEFAULT && sh->prompt[sh->p_index] == '$')
+	{
+		dollar = string_token(sh, &sh->prompt[sh->p_index]);
+		if (!is_only_space(dollar))
+			sh->token_lst = add_back_token(sh->token_lst, DOLLAR, dollar);	
+	}
+	else 
 	{
 		str = string_token(sh, &sh->prompt[sh->p_index]);
 		if (!is_only_space(str))
 			sh->token_lst = add_back_token(sh->token_lst, STR, str);
 	}
 }
+
 void	lexer(t_sh *sh)
 {
 	if (ft_is_quote_ok(sh) != 0)

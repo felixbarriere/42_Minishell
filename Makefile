@@ -1,8 +1,8 @@
 NAME =		minishell
 
 SRCS	=	main.c\
-src/lexer/parser_utils.c\
-src/lexer/parser.c\
+src/lexer/lexer_utils.c\
+src/lexer/lexer.c\
 src/lexer/quotes.c\
 src/prompt.c\
 src/lists.c\
