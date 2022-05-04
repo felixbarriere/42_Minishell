@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:18:11 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/03 15:13:24 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/03 17:43:53 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,18 @@
 #include "../include/minishell_f.h"
 #include "../include/minishell_s.h"
 
-void	ft_init_values(t_sh *sh)
+void	ft_init_values(t_sh *sh, char **env)
 {
 	sh->token_lst = NULL;
 	sh->prompt = NULL;
 	sh->p_index = 0;
 	sh->lenght = 0;
 	sh->state_quote = DEFAULT;
-	sh->env = ft_init_env();
+	sh->env = ft_init_env(env);
+	// test env: 
+	// int i = 0;
+	// while(sh->env[i])
+	// {
+	// 	printf("%s\n", sh->env[i++]);
+	// }
 }

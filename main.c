@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 18:08:23 by marvin            #+#    #+#             */
-/*   Updated: 2022/05/04 12:19:33 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/04 14:32:36 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "include/minishell_f.h"
 #include "include/minishell_s.h"
 
-int	main(int ac, char **av)
+int	main(int ac, char **av, char **env)
 {
 	(void)ac;
 	(void)av;
@@ -26,8 +26,8 @@ int	main(int ac, char **av)
 		ft_putstr_fd("Erreur: nombre d'arguments\n", 2);
 		exit(EXIT_FAILURE);
 	}
-	// ft_signals_orchestrator();
-	ft_prompt_init(&sh);
+	ft_signals_orchestrator();
+	ft_prompt_init(&sh, env);
 
 	// penser a free la liste chainee
 	clear_list(sh.token_lst);

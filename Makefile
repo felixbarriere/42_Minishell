@@ -7,7 +7,7 @@ src/lexer/quotes.c\
 src/prompt.c\
 src/lists.c\
 src/signals.c\
-src/env.c\
+src/env/env.c\
 src/init.c\
 src/error_sep/error_sep.c\
 src/error_sep/error_sep2.c\

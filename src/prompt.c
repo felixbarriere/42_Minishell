@@ -15,14 +15,15 @@ void ft_prompt_start(t_sh *sh)
 	add_history(sh->prompt);
 }
 
-void	ft_prompt_init(t_sh *sh)
+void	ft_prompt_init(t_sh *sh, char **env)
 {
-	ft_init_values(sh);
+	ft_init_values(sh, env);
 	while (1)
 	{
 		ft_prompt_start(sh); //générer un prompt avec readline() et enregistrer la commande tapée
 		sh->lenght = ft_strlen(sh->prompt);
 		lexer(sh); //analyse lexicale de la commande
-		ft_init_values(sh);
+		
+		ft_init_values(sh, env);
 	}
 }
