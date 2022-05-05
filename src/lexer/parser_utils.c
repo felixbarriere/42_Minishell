@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expander.c                                         :+:      :+:    :+:   */
+/*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/05 14:39:11 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/03 14:38:14 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,22 @@
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
 
-// expander(t_sh *sh, char *dollar)
-// {
-// 	sh->env	
-// }
+int	is_in_charset(char c)
+{
+	if (c == '|' || c == '<' || c == '>')
+		return (1);
+	return (0);
+}
 
-//aller dans sh->env.
-// dans le char **, parser chaque str et regarder la cle (avant '=');
-// comparer avec dollar
-// si la variable existe, return un char** de la valeur.
-// test git
+int	is_only_space(char *str)
+{
+	int i = 0;
+
+	while (str[i])
+	{
+		if (str[i] != ' ')
+			return (0);
+		i++;
+	}
+	return (1);
+}

@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/04 17:42:02 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/05 14:48:55 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef enum token_type
 	DR_RIGHT,
 	DOLLAR,
 	BLANK,
+	ENV,
 	END,
 	STR,
 	CMD,
