@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/03 14:38:14 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/05 18:33:35 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ int	is_in_charset(char c)
 
 int	is_only_space(char *str)
 {
-	int i = 0;
-
+	int i;
+	
+	i = 0;
 	while (str[i])
 	{
 		if (str[i] != ' ')

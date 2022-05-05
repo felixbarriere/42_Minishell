@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/05 14:21:29 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/05 18:28:32 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	lexer(t_sh *sh)
 		ft_putstr_fd("quotes unclosed\n", 2);
 		return ;
 	}
-	while (sh->prompt[sh->p_index])
+	while (sh->prompt[sh->p_index]) 
 	{
 		tokenizer(sh);
 		sh->p_index++;
