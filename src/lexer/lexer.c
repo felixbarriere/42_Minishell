@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/04 18:31:32 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/05 18:28:32 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ void	process_redirect_token(t_sh *sh)
 void	tokenizer(t_sh *sh)
 {
 	char	*str;
-	char	*dollar;
-	char	**dollar_content;
+	// char	*dollar;
+	// char	**dollar_content;
 	int	i;
 
 	str = NULL;
@@ -83,11 +83,11 @@ void	tokenizer(t_sh *sh)
 		else
 			process_redirect_token(sh);
 	}
-	else if (sh->state_quote == DEFAULT && sh->prompt[sh->p_index] == '$')
-	{
-		dollar = string_token(sh, &sh->prompt[sh->p_index]);
-		dollar_content = ft_split(dollar, ' ');
-		expander(dollar, dollar_content);
+	// else if (sh->state_quote == DEFAULT && sh->prompt[sh->p_index] == '$')
+	// {
+	// 	dollar = string_token(sh, &sh->prompt[sh->p_index]);
+	// 	dollar_content = ft_split(dollar, ' ');
+	// 	expander(dollar, dollar_content);
 		// if (!is_only_space(dollar))
 		// 	sh->token_lst = add_back_token(sh->token_lst, DOLLAR, dollar);	
 
@@ -96,7 +96,7 @@ void	tokenizer(t_sh *sh)
 		// 	printf("%s", dollar_content[i]);
 		// 	i++;
 		// }
-	}
+	// }
 	else 
 	{
 		str = string_token(sh, &sh->prompt[sh->p_index]);
@@ -112,7 +112,7 @@ void	lexer(t_sh *sh)
 		ft_putstr_fd("quotes unclosed\n", 2);
 		return ;
 	}
-	while (sh->prompt[sh->p_index])
+	while (sh->prompt[sh->p_index]) 
 	{
 		tokenizer(sh);
 		sh->p_index++;
