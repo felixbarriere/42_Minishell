@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:18:11 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/04 12:09:50 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/06 14:45:27 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ void	ft_set_null_free_list(t_token **a_list)
 }
 
 /*---------------------------------------------------------------------*/
-
 /* Retourne une nouvelle Liste
 * @return Une liste vide
 */
@@ -128,7 +127,6 @@ bool is_empty_list(t_token  *li)
 }
 
 /*---------------------------------------------------------------------*/
-
 /**
 * Supprime un entier de la tête de la Liste
 * @param li La liste
@@ -157,7 +155,6 @@ t_token *pop_front_list(t_token *li)
 }
 
 /*---------------------------------------------------------------------*/
-
 /**
 * Supprime tous les éléments d'une Liste
 * @param li La liste

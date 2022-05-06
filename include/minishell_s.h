@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/05 15:09:57 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/06 12:13:59 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include "minishell_f.h"
 #include "minishell_e.h"
 
-
+/**************** STRUCTURES ****************/
 /* liste chaînée. Chaque token représente un caractère tokenisé, chaîné au token précédent / suivant
  */
 typedef struct s_token
@@ -51,7 +51,5 @@ typedef struct s_sh
 	int		lenght;
 	int		state_quote;
 } t_sh;
-
-
 
 #endif

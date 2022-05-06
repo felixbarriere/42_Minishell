@@ -38,6 +38,6 @@ void	ft_signals_orchestrator(void)
 {
 	signal(SIGQUIT, SIG_IGN);			/**** on ignore "ctrl_\" ****/
 	signal(SIGINT, ft_signal_handler);  /**** on gère "ctrl_C" ****/
-	 signal(SIGSEGV, ft_signal_handler);	/**** on gère "ctrl_D" ****/
+	// signal(SIGSEGV, ft_signal_handler);	/**** on gère "ctrl_D" ****/
 }
 

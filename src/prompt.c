@@ -19,6 +19,7 @@ void ft_prompt_start(t_sh *sh)
 void	ft_prompt_init(t_sh *sh, char **env_init)
 {
 	ft_init_values(sh, env_init);
+	ft_init_env(env_init, sh);
 	while (1)
 	{
 		ft_prompt_start(sh); //générer un prompt avec readline() et enregistrer la commande tapée

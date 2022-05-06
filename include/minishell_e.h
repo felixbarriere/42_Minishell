@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/05 14:48:55 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/06 12:14:15 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "minishell.h"
 # include "minishell_d.h"
 # include "minishell_f.h"
+
+/**************** ENUMERATIONS ****************/
 
 typedef enum token_type
 {

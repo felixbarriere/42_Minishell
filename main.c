@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 18:08:23 by marvin            #+#    #+#             */
-/*   Updated: 2022/05/04 14:32:36 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/06 15:13:44 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 
 	t_sh sh;
+	ft_memset(&sh, 0, sizeof(t_sh));
 	if (ac != 1)
 	{
-		ft_putstr_fd("Erreur: nombre d'arguments\n", 2);
+		ft_putstr_fd("Error: wrong's args number\n", 2);
 		exit(EXIT_FAILURE);
 	}
 	ft_signals_orchestrator();
@@ -31,6 +32,5 @@ int	main(int ac, char **av, char **env)
 
 	// penser a free la liste chainee
 	clear_list(sh.token_lst);
-	
 	return (0);
 }
