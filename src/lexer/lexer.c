@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/04/29 15:08:26 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/05 18:28:32 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
-#include "../include/minishell_d.h"
-#include "../include/minishell_f.h"
-#include "../include/minishell_s.h"
+#include "../../include/minishell.h"
+#include "../../include/minishell_d.h"
+#include "../../include/minishell_f.h"
+#include "../../include/minishell_s.h"
 
 char	*string_token(t_sh *sh, char *prompt)
 {
@@ -47,8 +47,6 @@ char	*string_token(t_sh *sh, char *prompt)
 	return (str);
 }
 
-
-
 void	process_redirect_token(t_sh *sh)
 {
 	if (sh->prompt[sh->p_index] == R_LEFT && sh->prompt[sh->p_index + 1] == R_LEFT)
@@ -71,8 +69,12 @@ void	process_redirect_token(t_sh *sh)
 void	tokenizer(t_sh *sh)
 {
 	char	*str;
+	// char	*dollar;
+	// char	**dollar_content;
+	int	i;
 
 	str = NULL;
+	i = 0;
 	//verifier si le state quote est utile 
 	if (sh->state_quote == DEFAULT && is_in_charset(sh->prompt[sh->p_index]))
 	{
@@ -81,13 +83,28 @@ void	tokenizer(t_sh *sh)
 		else
 			process_redirect_token(sh);
 	}
-	else
+	// else if (sh->state_quote == DEFAULT && sh->prompt[sh->p_index] == '$')
+	// {
+	// 	dollar = string_token(sh, &sh->prompt[sh->p_index]);
+	// 	dollar_content = ft_split(dollar, ' ');
+	// 	expander(dollar, dollar_content);
+		// if (!is_only_space(dollar))
+		// 	sh->token_lst = add_back_token(sh->token_lst, DOLLAR, dollar);	
+
+		// while(dollar_content[i] != NULL)
+		// {
+		// 	printf("%s", dollar_content[i]);
+		// 	i++;
+		// }
+	// }
+	else 
 	{
 		str = string_token(sh, &sh->prompt[sh->p_index]);
 		if (!is_only_space(str))
 			sh->token_lst = add_back_token(sh->token_lst, STR, str);
 	}
 }
+
 void	lexer(t_sh *sh)
 {
 	if (ft_is_quote_ok(sh) != 0)
@@ -95,7 +112,7 @@ void	lexer(t_sh *sh)
 		ft_putstr_fd("quotes unclosed\n", 2);
 		return ;
 	}
-	while (sh->prompt[sh->p_index])
+	while (sh->prompt[sh->p_index]) 
 	{
 		tokenizer(sh);
 		sh->p_index++;

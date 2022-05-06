@@ -1,44 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_e.h                                      :+:      :+:    :+:   */
+/*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/06 12:14:15 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/04 17:11:58 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_E_H
-# define MINISHELL_E_H
+#include "../../include/minishell.h"
+#include "../../include/minishell_d.h"
+#include "../../include/minishell_f.h"
+#include "../../include/minishell_s.h"
 
-# include "minishell.h"
-# include "minishell_d.h"
-# include "minishell_f.h"
-
-/**************** ENUMERATIONS ****************/
-
-typedef enum token_type
+int	is_in_charset(char c)
 {
-	PIPE = '|',
-	R_LEFT = '<',
-	R_RIGHT = '>',
-	DR_LEFT,
-	DR_RIGHT,
-	DOLLAR,
-	BLANK,
-	ENV,
-	END,
-	STR,
-	CMD,
-}	t_token_type;
+	if (c == '|' || c == '<' || c == '>' || c == ' ')
+		return (1);
+	return (0);
+}
 
-typedef enum quote_type
+int	is_only_space(char *str)
 {
-	DEFAULT,
-	SIMPLE = '\'',
-	DOUBLE = '\"',
-}	t_quote_type;
+	int i = 0;
 
-#endif
+	while (str[i])
+	{
+		if (str[i] != ' ')
+			return (0);
+		i++;
+	}
+	return (1);
+}

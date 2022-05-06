@@ -1,21 +1,23 @@
 NAME =		minishell
 
 SRCS	=	main.c\
-src/parser_utils.c\
-src/parser.c\
-src/quotes.c\
+src/lexer/lexer_utils.c\
+src/lexer/lexer.c\
+src/lexer/quotes.c\
 src/prompt.c\
 src/lists.c\
 src/signals.c\
-src/env.c\
+src/env/env.c\
 src/init.c\
-src/error_sep.c
+src/error_sep/error_sep.c\
+src/error_sep/error_sep2.c\
+src/parser/expander.c
 
 OBJS = ${SRCS:.c=.o}
 INCS	=	-I ./includes -I ./libft/includes
 LIBC	=	libft/libft.a
 CC		=	clang
-CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror -fsanitize=address -g3
 RM		=	rm -rf
 SYSTEM	=	${shell uname}
 
