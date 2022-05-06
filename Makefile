@@ -17,7 +17,7 @@ OBJS = ${SRCS:.c=.o}
 INCS	=	-I ./includes -I ./libft/includes
 LIBC	=	libft/libft.a
 CC		=	clang
-CFLAGS	=	-Wall -Wextra -Werror -fsanitize=address -g3
+CFLAGS	=	-Wall -Wextra -Werror #-fsanitize=address -g3
 RM		=	rm -rf
 SYSTEM	=	${shell uname}
 

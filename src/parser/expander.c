@@ -15,10 +15,21 @@
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
 
-// expander(t_sh *sh, char *dollar)
-// {
-// 	sh->env	
-// }
+char *expander(t_env *env_lst, char *dollar)
+{
+    t_env   *tmp;
+
+    tmp = env_lst;
+	while (env_lst->next)
+    {
+        if (!ft_strcmp(env_lst->key, dollar))
+        {
+            return (env_lst->value);
+        }
+        env_lst = env_lst->next;
+    }
+    return (NULL);
+}
 
 //aller dans sh->env.
 // dans le char **, parser chaque str et regarder la cle (avant '=');
