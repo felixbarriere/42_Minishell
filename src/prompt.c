@@ -7,7 +7,6 @@ void ft_prompt_start(t_sh *sh)
 {
 	// ajouter une gestion d'erreur (check_exit);
 	sh->prompt = readline("➜ minishell ");
-	// regler envoi chaine NULL ou space_only
 	if ( !sh->prompt || !ft_strcmp(sh->prompt, "exit"))
 	{
 		clear_list(sh->token_lst);
@@ -28,5 +27,6 @@ void	ft_prompt_init(t_sh *sh, char **env_init)
 			lexer(sh); //analyse lexicale de la commande
 		
 		ft_init_values(sh, env_init);
+		// ft_init_env(env_init, sh);
 	}
 }
