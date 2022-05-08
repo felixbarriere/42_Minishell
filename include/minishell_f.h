@@ -51,6 +51,7 @@ void	process_redirect_token(t_sh *sh);
 char 	*string_token(t_sh *sh, char *prompt);
 void	tokenizer(t_sh *sh);
 void 	lexer(t_sh *sh);
+char    *expander(t_sh *sh, char *dollar);
 
 /******** ERROR_SEP ********/
 bool	is_type(t_token* current, t_token_type type);

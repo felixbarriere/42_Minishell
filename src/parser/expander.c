@@ -15,18 +15,25 @@
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
 
-char *expander(t_env *env_lst, char *dollar)
+char *expander(t_sh *sh, char *dollar)
 {
     t_env   *tmp;
+    // (void)dollar;
 
-    tmp = env_lst;
-	while (env_lst->next)
+    tmp = NULL;
+    tmp = sh->env_lst;
+	while (tmp->next)
     {
-        if (!ft_strcmp(env_lst->key, dollar))
+        if (ft_strcmp(tmp->key, dollar) == 0)
         {
-            return (env_lst->value);
+            printf("%s\n", tmp->value);
+            return (tmp->value);
         }
-        env_lst = env_lst->next;
+        // else 
+        // {
+        //     return("\n\n");  //attention comportement different si $var est seul ou non 
+        // }
+        tmp = tmp->next;
     }
     return (NULL);
 }

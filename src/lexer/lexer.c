@@ -69,11 +69,14 @@ void	process_redirect_token(t_sh *sh)
 void	tokenizer(t_sh *sh)
 {
 	char	*str;
-	// char	*dollar;
-	// char	**dollar_content;
-	int	i;
+	char	*dollar;
+	char	*dollar_content;
+	char	*test_value;
+	int		i;
+	t_env	*tmp;
 
 	str = NULL;
+	tmp = NULL;
 	i = 0;
 	//verifier si le state quote est utile 
 	if (sh->state_quote == DEFAULT && is_in_charset(sh->prompt[sh->p_index]))
@@ -83,20 +86,24 @@ void	tokenizer(t_sh *sh)
 		else
 			process_redirect_token(sh);
 	}
-	// else if (sh->state_quote == DEFAULT && sh->prompt[sh->p_index] == '$')
-	// {
-	// 	dollar = string_token(sh, &sh->prompt[sh->p_index]);
-	// 	dollar_content = ft_split(dollar, ' ');
-	// 	expander(dollar, dollar_content);
+	else if (sh->state_quote == DEFAULT && sh->prompt[sh->p_index] == '$')
+	{
+		dollar = string_token(sh, &sh->prompt[sh->p_index]);
+		dollar_content = ft_strtrim(dollar, "$\"|\'");
+		// tmp = sh->env_lst;
+		// while (tmp->next != NULL)
+		// {
+		// 	printf("%s \n", tmp->key);
+		// 	tmp = tmp->next;
+		// }
+		
+		test_value = expander(sh, dollar_content);
+		// printf("%s", test_value);
+
 		// if (!is_only_space(dollar))
 		// 	sh->token_lst = add_back_token(sh->token_lst, DOLLAR, dollar);	
 
-		// while(dollar_content[i] != NULL)
-		// {
-		// 	printf("%s", dollar_content[i]);
-		// 	i++;
-		// }
-	// }
+	}
 	else 
 	{
 		str = string_token(sh, &sh->prompt[sh->p_index]);
