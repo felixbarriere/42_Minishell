@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/06 12:13:20 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/09 18:05:26 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	ft_signals_orchestrator(void);
 int		is_in_charset(char c);
 int		is_only_space(char *str);
 int		ft_parse_red(t_sh *sh);
+int		contains_$(char *str);
 
 /******** QUOTES ********/
 int		ft_is_quote_ok(t_sh *sh);

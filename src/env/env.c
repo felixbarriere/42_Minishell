@@ -70,7 +70,7 @@ void	orchestrate_env_token(char *env_init, t_sh *sh, int index)
 	
 	sh->env_lst = add_back_env_token(sh->env_lst, value, key, index, env_init);
 	// printf("%p\n", sh->env_lst);
-	// free(key_value);
+	free(key_value);
 	// Est ce necessaire de free key et value ?
 }
  
@@ -91,8 +91,8 @@ void	ft_init_env(char **env_init, t_sh *sh)
 	// while (tmp!= NULL)
 	// {
 	// 	printf("\n");
-	// 	// printf("KEY : [%s] ", tmp->key);
-	// 	// printf("VALUE : [%s] ", tmp->value);
+	// 	printf("KEY : [%s] ", tmp->key);
+	// 	printf("VALUE : [%s] ", tmp->value);
 	// 	// printf("FULL : [%s] \n", tmp->full);
 	// 	// printf("[Type : %d]\n", sh->env_lst->type);
 	// 	tmp = tmp->next;

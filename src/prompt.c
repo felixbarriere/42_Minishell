@@ -25,8 +25,8 @@ void	ft_prompt_init(t_sh *sh, char **env_init)
 		sh->lenght = ft_strlen(sh->prompt);
 		if (!is_only_space(sh->prompt))
 			lexer(sh); //analyse lexicale de la commande
-		
+		// ft_memset(&sh, 0, sizeof(t_sh));
 		ft_init_values(sh, env_init);
-		// ft_init_env(env_init, sh);
+		ft_init_env(env_init, sh);
 	}
 }

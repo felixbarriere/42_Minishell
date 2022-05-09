@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/05 18:28:32 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/09 18:15:15 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,40 @@
 #include "../../include/minishell_d.h"
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
+
+char	*string_token_2(t_sh *sh, char *prompt)
+{
+	char *str;
+	char *temp;
+	int j = 0;
+
+	while (prompt[j])
+	{
+		if (prompt[j] && prompt[j] == '\"')
+		{
+			j++;
+			while(prompt[j] && prompt[j] != '\"')
+				j++;
+		}
+		if (prompt[j] && prompt[j] == '\'')
+		{
+			j++;
+			while(prompt[j] && prompt[j] != '\'')
+				j++;
+		}
+		if (is_in_charset(prompt[j]))
+			break;
+		j++;
+	}
+	temp = ft_strndup(prompt, j);
+	str = ft_strtrim(temp, CHARSET_SPACE_TABS);
+	// printf("%s\n", temp);
+	free (temp);
+	if (j > 0)
+		sh->p_index += j - 1;
+	return (str);
+}
+
 
 char	*string_token(t_sh *sh, char *prompt)
 {
@@ -41,6 +75,7 @@ char	*string_token(t_sh *sh, char *prompt)
 	}
 	temp = ft_strndup(prompt, j);
 	str = ft_strtrim(temp, CHARSET_SPACE_TABS);
+	// printf("%s\n", temp);
 	free (temp);
 	if (j > 0)
 		sh->p_index += j - 1;
@@ -65,6 +100,48 @@ void	process_redirect_token(t_sh *sh)
 		sh->token_lst = add_back_token(sh->token_lst, R_RIGHT, ">");
 }
 
+char	*isolate_dollar_in_quote(char *str)
+{
+	int i;
+	int	j;
+	int k;
+	char *dollar = NULL;
+
+	i = 0;
+	j = 0;
+	k = 0;
+	while (str[i])
+	{
+		if (str[i] == '$')
+		{
+			
+			while (str[i] != ' ' && str[i] != '\"')
+			{
+				j++;
+				i++;
+			}
+			i = (i - j);
+			dollar = malloc(sizeof(char) * (j + 1));
+			if (!dollar)
+				return NULL;
+			while (j > 0)
+			{
+				dollar[k] = str[i];
+				k++;
+				i++;
+				j--;
+			}
+			dollar[k] = '\0';
+			break ;
+		}
+		i++;
+	}	
+	return (dollar);
+	printf("STR = %s\n", str);
+	printf("DOLLAR = %s\n", dollar);	
+}
+
+
 // ajoute le bon token à la liste chainée des tokens sh->token_lst
 void	tokenizer(t_sh *sh)
 {
@@ -72,13 +149,16 @@ void	tokenizer(t_sh *sh)
 	char	*dollar;
 	char	*dollar_content;
 	char	*test_value;
+	char	*dollar2;
+	char	*dollar_content2;
+	char	*test_value2;
+	char	**test;
 	int		i;
-	t_env	*tmp;
 
 	str = NULL;
-	tmp = NULL;
 	i = 0;
-	//verifier si le state quote est utile 
+	ft_find_quote_state(sh, sh->p_index);
+	printf("state_quote: %d\n", sh->state_quote);
 	if (sh->state_quote == DEFAULT && is_in_charset(sh->prompt[sh->p_index]))
 	{
 		if (sh->prompt[sh->p_index] == PIPE)
@@ -86,27 +166,34 @@ void	tokenizer(t_sh *sh)
 		else
 			process_redirect_token(sh);
 	}
-	else if (sh->state_quote == DEFAULT && sh->prompt[sh->p_index] == '$')
+	else if ((sh->state_quote == DOUBLE || sh->state_quote == DEFAULT ) 
+			&& sh->prompt[sh->p_index] == '$')
 	{
 		dollar = string_token(sh, &sh->prompt[sh->p_index]);
 		dollar_content = ft_strtrim(dollar, "$\"|\'");
-		// tmp = sh->env_lst;
-		// while (tmp->next != NULL)
-		// {
-		// 	printf("%s \n", tmp->key);
-		// 	tmp = tmp->next;
-		// }
-		
 		test_value = expander(sh, dollar_content);
-		// printf("%s", test_value);
-
-		// if (!is_only_space(dollar))
-		// 	sh->token_lst = add_back_token(sh->token_lst, DOLLAR, dollar);	
-
+		test = ft_split (test_value, ' ');
+		i = 0;
+		while (test[i])
+		{
+			if (!is_only_space(dollar))
+				sh->token_lst = add_back_token(sh->token_lst, DOLLAR, test[i]);
+			i++;
+		}
 	}
 	else 
 	{
 		str = string_token(sh, &sh->prompt[sh->p_index]);
+		
+		if (str[0] == '\"' && contains_$(str))
+		{
+			printf("LA\n");
+			dollar2 = isolate_dollar_in_quote(str);
+			dollar_content2 = ft_strtrim(dollar2, "$\"|\'");
+			test_value2 = expander(sh, dollar_content2);
+			printf("dollar2 : %s\n", dollar2);
+			printf("Test value 2 %s\n", test_value2);
+		}
 		if (!is_only_space(str))
 			sh->token_lst = add_back_token(sh->token_lst, STR, str);
 	}

@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/05 14:39:11 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/09 14:28:31 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ char *expander(t_sh *sh, char *dollar)
     t_env   *tmp;
     // (void)dollar;
 
-    tmp = NULL;
+    // tmp = NULL;
     tmp = sh->env_lst;
-	while (tmp->next)
+	while (tmp != NULL)
     {
         if (ft_strcmp(tmp->key, dollar) == 0)
         {
-            printf("%s\n", tmp->value);
+        // printf("%s\n", tmp->value);
             return (tmp->value);
         }
         // else 
