@@ -177,7 +177,7 @@ void	tokenizer(t_sh *sh)
 		while (test[i])
 		{
 			if (!is_only_space(dollar))
-				sh->token_lst = add_back_token(sh->token_lst, DOLLAR, test[i]);
+				sh->token_lst = add_back_token(sh->token_lst, STR, test[i]);
 			i++;
 		}
 	}
