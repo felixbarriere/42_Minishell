@@ -22,19 +22,24 @@ char *expander(t_sh *sh, char *dollar)
 
     // tmp = NULL;
     tmp = sh->env_lst;
+    printf("LA\n");
 	while (tmp != NULL)
     {
-        if (ft_strcmp(tmp->key, dollar) == 0)
+        if (tmp->key && (ft_strcmp(tmp->key, dollar) == 0))
         {
+            printf("ICI\n");
         // printf("%s\n", tmp->value);
             return (tmp->value);
         }
-        // else 
-        // {
-        //     return("\n\n");  //attention comportement different si $var est seul ou non 
-        // }
+        else 
+        {
+            printf("test");
+            // return (NULL);
+            // return("\n\n");  //attention comportement different si $var est seul ou non 
+        }
         tmp = tmp->next;
     }
+    
     return (NULL);
 }
 

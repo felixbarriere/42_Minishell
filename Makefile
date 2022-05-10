@@ -2,6 +2,7 @@ NAME =		minishell
 
 SRCS	=	main.c\
 src/lexer/lexer_utils.c\
+src/lexer/lexer_dollar.c\
 src/lexer/lexer.c\
 src/lexer/quotes.c\
 src/prompt.c\
@@ -11,13 +12,13 @@ src/env/env.c\
 src/init.c\
 src/error_sep/error_sep.c\
 src/error_sep/error_sep2.c\
-src/parser/expander.c
+src/parser/expander.c\
 
 OBJS = ${SRCS:.c=.o}
 INCS	=	-I ./includes -I ./libft/includes
 LIBC	=	libft/libft.a
 CC		=	clang
-CFLAGS	=	-Wall -Wextra -Werror #-fsanitize=address -g3
+CFLAGS	=	-Wall -Wextra -Werror -fsanitize=address -g3
 RM		=	rm -rf
 SYSTEM	=	${shell uname}
 

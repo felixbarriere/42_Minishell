@@ -67,11 +67,11 @@ int	check_error_sep_2(t_token *token_lst)
 
 int	check_error_sep(t_token *token_lst)
 {
-		if (check_error_sep_5(token_lst) == FAILURE)
-			return (FAILURE);
 	while(token_lst)
 	{
-		if (check_error_sep_0(token_lst) == FAILURE)
+		if (check_error_sep_5(token_lst) == FAILURE)
+			return (FAILURE);
+		else if (check_error_sep_0(token_lst) == FAILURE)
 			return (FAILURE);
 		else if (check_error_sep_6(token_lst) == FAILURE)
 			return (FAILURE);

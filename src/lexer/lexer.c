@@ -15,40 +15,6 @@
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
 
-char	*string_token_2(t_sh *sh, char *prompt)
-{
-	char *str;
-	char *temp;
-	int j = 0;
-
-	while (prompt[j])
-	{
-		if (prompt[j] && prompt[j] == '\"')
-		{
-			j++;
-			while(prompt[j] && prompt[j] != '\"')
-				j++;
-		}
-		if (prompt[j] && prompt[j] == '\'')
-		{
-			j++;
-			while(prompt[j] && prompt[j] != '\'')
-				j++;
-		}
-		if (is_in_charset(prompt[j]))
-			break;
-		j++;
-	}
-	temp = ft_strndup(prompt, j);
-	str = ft_strtrim(temp, CHARSET_SPACE_TABS);
-	// printf("%s\n", temp);
-	free (temp);
-	if (j > 0)
-		sh->p_index += j - 1;
-	return (str);
-}
-
-
 char	*string_token(t_sh *sh, char *prompt)
 {
 	char *str;
@@ -75,7 +41,11 @@ char	*string_token(t_sh *sh, char *prompt)
 	}
 	temp = ft_strndup(prompt, j);
 	str = ft_strtrim(temp, CHARSET_SPACE_TABS);
-	// printf("%s\n", temp);
+	if (str == NULL)
+	{
+		printf("str = NULL");
+		return (NULL);
+	}
 	free (temp);
 	if (j > 0)
 		sh->p_index += j - 1;
@@ -100,48 +70,6 @@ void	process_redirect_token(t_sh *sh)
 		sh->token_lst = add_back_token(sh->token_lst, R_RIGHT, ">");
 }
 
-char	*isolate_dollar_in_quote(char *str)
-{
-	int i;
-	int	j;
-	int k;
-	char *dollar = NULL;
-
-	i = 0;
-	j = 0;
-	k = 0;
-	while (str[i])
-	{
-		if (str[i] == '$')
-		{
-			
-			while (str[i] != ' ' && str[i] != '\"')
-			{
-				j++;
-				i++;
-			}
-			i = (i - j);
-			dollar = malloc(sizeof(char) * (j + 1));
-			if (!dollar)
-				return NULL;
-			while (j > 0)
-			{
-				dollar[k] = str[i];
-				k++;
-				i++;
-				j--;
-			}
-			dollar[k] = '\0';
-			break ;
-		}
-		i++;
-	}	
-	return (dollar);
-	printf("STR = %s\n", str);
-	printf("DOLLAR = %s\n", dollar);	
-}
-
-
 // ajoute le bon token à la liste chainée des tokens sh->token_lst
 void	tokenizer(t_sh *sh)
 {
@@ -155,10 +83,10 @@ void	tokenizer(t_sh *sh)
 	char	**test;
 	int		i;
 
-	str = NULL;
+	// str = NULL;
+	// test= NULL;
 	i = 0;
 	ft_find_quote_state(sh, sh->p_index);
-	printf("state_quote: %d\n", sh->state_quote);
 	if (sh->state_quote == DEFAULT && is_in_charset(sh->prompt[sh->p_index]))
 	{
 		if (sh->prompt[sh->p_index] == PIPE)
@@ -172,13 +100,19 @@ void	tokenizer(t_sh *sh)
 		dollar = string_token(sh, &sh->prompt[sh->p_index]);
 		dollar_content = ft_strtrim(dollar, "$\"|\'");
 		test_value = expander(sh, dollar_content);
-		test = ft_split (test_value, ' ');
-		i = 0;
-		while (test[i])
+		if (test_value != NULL)
 		{
-			if (!is_only_space(dollar))
-				sh->token_lst = add_back_token(sh->token_lst, STR, test[i]);
-			i++;
+			printf("test_value ; %s\n", test_value);
+			test = ft_split (test_value, ' ');
+			i = 0;
+			printf("test[i] : %s\n", test[i]);
+			while (test[i])
+			{
+				if (test[i] && !is_only_space(test[i]))
+					sh->token_lst = add_back_token(sh->token_lst, STR, test[i]);
+				i++;
+			}
+			// free(test);
 		}
 	}
 	else 
@@ -211,6 +145,7 @@ void	lexer(t_sh *sh)
 		tokenizer(sh);
 		sh->p_index++;
 	}
+	printf("LEXER\n");
 	check_error_sep(sh->token_lst);
 	print_tokens(sh->token_lst);
 	printf("list length=%d\n", list_length(sh->token_lst));
