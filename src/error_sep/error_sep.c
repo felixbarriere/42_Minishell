@@ -20,15 +20,13 @@ int	check_error_sep_0(t_token *token_lst)
 		|| (is_type(token_lst, R_LEFT) && is_type(token_lst->next, PIPE))
 		|| (is_type(token_lst, PIPE) && is_type(token_lst->next, PIPE)))
 	{
-		// printf("ERROR 0\n");
-		// printf("syntax error near unexpected token  `|'\n");
+		printf("syntax error near unexpected token  `|'\n");
 		return (FAILURE);
 	}
 	else if (is_type(token_lst->prev, DR_RIGHT) && is_type(token_lst, PIPE)
 			&& is_type(token_lst->next, PIPE)) 
 	{
-		// printf("ERROR 0 bis\n");
-		// printf("syntax error near unexpected token  `||'\n");
+		printf("syntax error near unexpected token  `||'\n");
 		return (FAILURE);
 	}
 	return (SUCCESS);

@@ -44,7 +44,7 @@ int		ft_parse_red(t_sh *sh);
 int		contains_$(char *str);
 
 /******** LEXER_DOLLAR ********/
-char	*isolate_dollar_in_quote(char *str);
+char	*isolate_dollar_in_quote(char *str, t_sh *sh);
 
 /******** QUOTES ********/
 int		ft_is_quote_ok(t_sh *sh);

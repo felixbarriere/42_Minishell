@@ -33,7 +33,7 @@ char *expander(t_sh *sh, char *dollar)
         }
         else 
         {
-            printf("test");
+            // printf("test");
             // return (NULL);
             // return("\n\n");  //attention comportement different si $var est seul ou non 
         }

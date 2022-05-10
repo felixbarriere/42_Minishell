@@ -77,16 +77,13 @@ void	tokenizer(t_sh *sh)
 	char	*dollar;
 	char	*dollar_content;
 	char	*test_value;
-	char	*dollar2;
-	char	*dollar_content2;
-	char	*test_value2;
 	char	**test;
 	int		i;
 
 	// str = NULL;
 	// test= NULL;
 	i = 0;
-	ft_find_quote_state(sh, sh->p_index);
+	// ft_find_quote_state(sh, sh->p_index);
 	if (sh->state_quote == DEFAULT && is_in_charset(sh->prompt[sh->p_index]))
 	{
 		if (sh->prompt[sh->p_index] == PIPE)
@@ -122,11 +119,7 @@ void	tokenizer(t_sh *sh)
 		if (str[0] == '\"' && contains_$(str))
 		{
 			printf("LA\n");
-			dollar2 = isolate_dollar_in_quote(str);
-			dollar_content2 = ft_strtrim(dollar2, "$\"|\'");
-			test_value2 = expander(sh, dollar_content2);
-			printf("dollar2 : %s\n", dollar2);
-			printf("Test value 2 %s\n", test_value2);
+			str = isolate_dollar_in_quote(str, sh);
 		}
 		if (!is_only_space(str))
 			sh->token_lst = add_back_token(sh->token_lst, STR, str);
@@ -145,7 +138,6 @@ void	lexer(t_sh *sh)
 		tokenizer(sh);
 		sh->p_index++;
 	}
-	printf("LEXER\n");
 	check_error_sep(sh->token_lst);
 	print_tokens(sh->token_lst);
 	printf("list length=%d\n", list_length(sh->token_lst));
