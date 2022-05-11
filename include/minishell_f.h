@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/09 18:05:26 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/11 16:14:59 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,15 @@ void	ft_prompt_init(t_sh *sh, char **env_init);
 /******** SIGNALS ********/
 void	ft_signals_orchestrator(void);
 
-/******** PARSER UTILS ********/
+/******** LEXER UTILS ********/
 int		is_in_charset(char c);
 int		is_only_space(char *str);
 int		ft_parse_red(t_sh *sh);
 int		contains_$(char *str);
+char	*ft_strjoin_char(char *s1, char c);
 
 /******** LEXER_DOLLAR ********/
-char	*isolate_dollar_in_quote(char *str, t_sh *sh);
+char	*dollar_in_quote(char *str, t_sh *sh);
 
 /******** QUOTES ********/
 int		ft_is_quote_ok(t_sh *sh);

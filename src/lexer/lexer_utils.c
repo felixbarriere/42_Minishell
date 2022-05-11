@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/09 18:11:36 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/11 16:15:22 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,33 @@ int	is_only_space(char *str)
 		i++;
 	}
 	return (1);
+}
+
+char	*ft_strjoin_char(char *s1, char c)
+{
+	char	*dest;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	if (!s1)
+	{
+		s1 = malloc(sizeof(char) * 1);
+		s1[0] = '\0';
+	}
+	// if (s1 == NULL)
+	// 	return (NULL);
+	dest = ft_calloc(sizeof(char), (ft_strlen(s1) + 2));
+	if (!dest)
+		return (NULL);
+	while (s1[i] != '\0')
+	{
+		dest[i] = s1[i];
+		i++;
+	}
+	dest[i] = c;
+	i++;
+	dest[i] = '\0';
+	return (dest);
 }
