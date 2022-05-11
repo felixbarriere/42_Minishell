@@ -118,7 +118,6 @@ void	tokenizer(t_sh *sh)
 		
 		if (str[0] == '\"' && contains_$(str))
 		{
-			printf("LA\n");
 			str = dollar_in_quote(str, sh);
 		}
 		if (!is_only_space(str))

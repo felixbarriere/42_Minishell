@@ -22,12 +22,10 @@ char *expander(t_sh *sh, char *dollar)
 
     // tmp = NULL;
     tmp = sh->env_lst;
-    printf("LA\n");
 	while (tmp != NULL)
     {
         if (tmp->key && (ft_strcmp(tmp->key, dollar) == 0))
         {
-            printf("ICI\n");
         // printf("%s\n", tmp->value);
             return (tmp->value);
         }
