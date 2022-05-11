@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/09 18:15:15 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/11 14:52:30 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	tokenizer(t_sh *sh)
 		if (str[0] == '\"' && contains_$(str))
 		{
 			printf("LA\n");
-			str = isolate_dollar_in_quote(str, sh);
+			str = dollar_in_quote(str, sh);
 		}
 		if (!is_only_space(str))
 			sh->token_lst = add_back_token(sh->token_lst, STR, str);
