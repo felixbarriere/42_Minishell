@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/16 10:35:30 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/16 13:34:37 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,16 +74,9 @@ void	process_redirect_token(t_sh *sh)
 void	tokenizer(t_sh *sh)
 {
 	char	*str;
-	char	*dollar;
-	char	*dollar_content;
-	char	*test_value;
-	char	**test;
-	int		i;
+	char	*key;
+	char	*value;
 
-	// str = NULL;
-	// test= NULL;
-	i = 0;
-	// ft_find_quote_state(sh, sh->p_index);
 	if (sh->state_quote == DEFAULT && is_in_charset(sh->prompt[sh->p_index]))
 	{
 		if (sh->prompt[sh->p_index] == PIPE)
@@ -94,32 +87,16 @@ void	tokenizer(t_sh *sh)
 	else if ((sh->state_quote == DOUBLE || sh->state_quote == DEFAULT ) 
 			&& sh->prompt[sh->p_index] == '$')
 	{
-		dollar = string_token(sh, &sh->prompt[sh->p_index]);
-		dollar_content = ft_strtrim(dollar, "$\"|\'");
-		test_value = expander(sh, dollar_content);
-		if (test_value != NULL)
-		{
-			printf("test_value ; %s\n", test_value);
-			test = ft_split (test_value, ' ');
-			i = 0;
-			printf("test[i] : %s\n", test[i]);
-			while (test[i])
-			{
-				if (test[i] && !is_only_space(test[i]))
-					sh->token_lst = add_back_token(sh->token_lst, STR, test[i]);
-				i++;
-			}
-			// free(test);
-		}
+		key = get_key_dollar(sh->prompt, sh->p_index);
+		sh->p_index = sh->p_index + ft_strlen(key) - 1;
+		value = get_value_dollar(sh, key);
+		sh->token_lst = add_back_token(sh->token_lst, STR, value);
 	}
 	else 
 	{
 		str = string_token(sh, &sh->prompt[sh->p_index]);
-		
 		if (str[0] == '\"' && contains_$(str))
-		{
 			str = dollar_in_quote(str, sh);
-		}
 		if (!is_only_space(str))
 			sh->token_lst = add_back_token(sh->token_lst, STR, str);
 	}
