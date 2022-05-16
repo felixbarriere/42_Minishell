@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/16 11:14:18 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/16 13:41:51 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,10 @@ char	*isolate_dollar_in_quote_2(char *str, t_sh *sh)
 		{
 			key = get_key_dollar(str, i);
 			value = get_value_dollar(sh, key);
-			if (value == NULL)
-				i = i + ft_strlen(key) - 1;
-			else
-			{
+			if (value != NULL)
 				str_wip = ft_strjoin(str_wip, value);
-				i = i + ft_strlen(key) - 1;
-			}
+			i = i + ft_strlen(key) - 1;
+			
 		}
 		else
 			str_wip = ft_strjoin_char(str_wip, str[i]);

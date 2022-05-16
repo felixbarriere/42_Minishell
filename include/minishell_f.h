@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/16 10:40:00 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/16 13:40:30 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		ft_parse_red(t_sh *sh);
 int		contains_$(char *str);
 char	*ft_strjoin_char(char *s1, char c);
 
-/******** LEXER_DOLLAR ********/
+/******** LEXER_DOLLAR_IN_QUOTES ********/
 char	*get_key_dollar_2(char *str, int i, int j);
 char	*get_key_dollar(char *str, int i);
 char	*get_value_dollar(t_sh	*sh, char *key);
