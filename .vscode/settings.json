@@ -3,6 +3,7 @@
 		"minishell.h": "c",
 		"minishell_d.h": "c",
 		"minishell_f.h": "c",
-		"minishell_s.h": "c"
+		"minishell_s.h": "c",
+		"type_traits": "c"
 	}
 }

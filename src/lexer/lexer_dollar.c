@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/12 14:37:00 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/16 11:14:18 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ char	*get_key_dollar(char *str, int i)
 	{
 		j++;
 		i++;
-		if (str[i] == '$')
+		if (str[i] == '$' || str[i] < 48 || (str[i] > 57 && str[i] < 65)
+			|| (str[i] > 90 && str[i] < 95) || (str[i] > 95 && str[i] < 97)
+			|| str[i] > 122)
 			break ;
 	}
 	i = (i - j);
@@ -66,11 +68,12 @@ char	*get_value_dollar(t_sh	*sh, char *key)
 char	*isolate_dollar_in_quote_2(char *str, t_sh *sh)
 {
 	int		i;
+	char	*key;
 	char	*value;
 	char	*str_wip;
-	char	*key;
 
 	i = 0;
+	str_wip = NULL;
 	while (str[i] != '\0')
 	{
 		if (str[i] == '$')
@@ -95,7 +98,6 @@ char	*isolate_dollar_in_quote_2(char *str, t_sh *sh)
 char	*dollar_in_quote(char *str, t_sh *sh)
 {
 	char	*str_wip;
-
 	str_wip = isolate_dollar_in_quote_2(str, sh);
 	return (str_wip);
 }
@@ -134,5 +136,4 @@ char *get_value_dollar(t_sh	*sh, char *str, int i)
 	value = expander(sh, key_trim);
 
 	return (value);
-}
-*/
+}*/
