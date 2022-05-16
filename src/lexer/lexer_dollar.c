@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/16 13:41:51 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/16 13:58:32 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ char	*dollar_in_quote(char *str, t_sh *sh)
 {
 	char	*str_wip;
 	str_wip = isolate_dollar_in_quote_2(str, sh);
+	
 	return (str_wip);
 }
 
