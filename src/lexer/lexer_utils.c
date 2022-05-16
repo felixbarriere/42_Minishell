@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/11 16:15:22 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/16 14:28:11 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ char	*ft_strjoin_char(char *s1, char c)
 		dest[i] = s1[i];
 		i++;
 	}
-	dest[i] = c;
+	if (c != 34)
+		dest[i] = c;
 	i++;
 	dest[i] = '\0';
 	return (dest);
