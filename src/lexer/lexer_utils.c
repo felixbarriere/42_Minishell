@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/16 14:28:11 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/16 16:20:39 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,23 @@ int	contains_$(char *str)
 	while (str[i])
 	{
 		if (str[i] == '$')
-			return (1);
+			return (SUCCESS);
 		i++;
 	}
-	return (0);
+	return (FAILURE);
+}
+
+int	contains_quotes(char *str)
+{
+	int	i;
+	i = 0;
+	while (str[i] != '\0' && str[i] != '\'')
+	{
+		if (str[i] == '\"')
+			return (SUCCESS);
+		i++;
+	}
+	return (FAILURE);
 }
 
 int	is_in_charset(char c)

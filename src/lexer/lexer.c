@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/16 14:15:55 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/16 16:20:32 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,9 @@ char	*string_token(t_sh *sh, char *prompt)
 
 void	process_redirect_token(t_sh *sh)
 {
-	if (sh->prompt[sh->p_index] == R_LEFT && sh->prompt[sh->p_index + 1] == R_LEFT)
+	if (sh->prompt[sh->p_index] == PIPE)
+		sh->token_lst = add_back_token(sh->token_lst, PIPE, "|");
+	else if (sh->prompt[sh->p_index] == R_LEFT && sh->prompt[sh->p_index + 1] == R_LEFT)
 	{
 		sh->token_lst = add_back_token(sh->token_lst, DR_LEFT, "<<");
 		sh->p_index++;
@@ -70,24 +72,13 @@ void	process_redirect_token(t_sh *sh)
 		sh->token_lst = add_back_token(sh->token_lst, R_RIGHT, ">");
 }
 
-int	str_contain_dollar(char *str)
-{
-	int	i;
-	i = 0;
-	while (str[i] != '\0' && str[i] != '\'')
-	{
-		if (str[i] == '$')
-			return (SUCCESS);
-		i++;
-	}
-	return (FAILURE);
-}
+
 
 // ajoute le bon token à la liste chainée des tokens sh->token_lst
 void	tokenizer(t_sh *sh)
 {
 	char	*str;
-	// char	*str_wip;
+	char	*str_wip = NULL;
 	char	*key;
 	char	*value;
 
@@ -109,16 +100,38 @@ void	tokenizer(t_sh *sh)
 	else 
 	{
 		str = string_token(sh, &sh->prompt[sh->p_index]);
-		if (str[0] == '\"' && contains_$(str))
+		if (str[0] == '\"' && contains_$(str) == SUCCESS)
+		{
 			str = dollar_in_quote(str, sh);
-		if (str_contain_dollar(str) == SUCCESS)
-			str = dollar_in_quote(str, sh);
-		if (!is_only_space(str))
+			if (!is_only_space(str))
 			sh->token_lst = add_back_token(sh->token_lst, STR, str);
+			
+		}
+		else if (contains_$(str) == SUCCESS)
+		{
+			str = dollar_in_quote(str, sh);
+			if (!is_only_space(str))
+			sh->token_lst = add_back_token(sh->token_lst, STR, str);
+		}
+		else if (contains_quotes(str)  == SUCCESS)
+		{
+			int i = 0;
+			while (str[i] != '\0')
+			{
+				str_wip = ft_strjoin_char(str_wip, str[i]);
+				i++;
+			}
+			if (!is_only_space(str))
+				sh->token_lst = add_back_token(sh->token_lst, STR, str_wip);
+		}
+		else
+		{
+			if (!is_only_space(str))
+			sh->token_lst = add_back_token(sh->token_lst, STR, str);
+		}
+		
 	}
 }
-
-
 
 void	lexer(t_sh *sh)
 {
