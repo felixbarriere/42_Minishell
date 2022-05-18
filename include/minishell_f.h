@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/16 16:21:06 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/17 16:46:27 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int		is_only_space(char *str);
 int		ft_parse_red(t_sh *sh);
 int		contains_$(char *str);
 int		contains_quotes(char *str);
+int		contains_first_squote(char *str);
+int		how_many_squote(char *str);
 char	*ft_strjoin_char(char *s1, char c);
 
 /******** LEXER_DOLLAR_IN_QUOTES ********/

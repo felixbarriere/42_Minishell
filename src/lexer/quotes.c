@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/03 14:38:23 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/18 16:50:25 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,3 +43,5 @@ int	ft_is_quote_ok(t_sh *sh)
 		return (FAILURE);
 	return (SUCCESS);
 }
+
+

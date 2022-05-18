@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/16 16:20:32 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/18 17:12:29 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ char	*string_token(t_sh *sh, char *prompt)
 			while(prompt[j] && prompt[j] != '\"')
 				j++;
 		}
-		if (prompt[j] && prompt[j] == '\'')
+		else if (prompt[j] && prompt[j] == '\'')
 		{
 			j++;
 			while(prompt[j] && prompt[j] != '\'')
 				j++;
 		}
-		if (is_in_charset(prompt[j]))
+		else if (is_in_charset(prompt[j]))
 			break;
 		j++;
 	}
@@ -49,6 +49,7 @@ char	*string_token(t_sh *sh, char *prompt)
 	free (temp);
 	if (j > 0)
 		sh->p_index += j - 1;
+
 	return (str);
 }
 
@@ -72,66 +73,219 @@ void	process_redirect_token(t_sh *sh)
 		sh->token_lst = add_back_token(sh->token_lst, R_RIGHT, ">");
 }
 
+char	*ft_strjoin_char_2(char *s1, char c, char take_out)
+{
+	char	*dest;
+	int		i;
+	int		j;
 
+	i = 0;
+	j = 0;
+	if (!s1)
+	{
+		s1 = malloc(sizeof(char) * 1);
+		s1[0] = '\0';
+	}
+	// if (s1 == NULL)
+	// 	return (NULL);
+	dest = ft_calloc(sizeof(char), (ft_strlen(s1) + 2));
+	if (!dest)
+		return (NULL);
+	while (s1[i] != '\0')
+	{
+		dest[i] = s1[i];
+		i++;
+	}
+	if (take_out != c)
+		dest[i] = c;
+	i++;
+	dest[i] = '\0';
+	return (dest);
+}
+
+char	*squote_manager(char *str, int *idx)
+{
+	char	*new_str;
+	
+	new_str = NULL;
+	(*idx)++;
+	while (str[(*idx)] != '\0' && str[(*idx)] != '\'')
+	{
+		new_str = ft_strjoin_char_2(new_str, str[(*idx)], 39);
+		(*idx)++;
+	}
+	return (new_str);
+}
+
+char	*dquote_dollar_manager(char *str, int *idx, t_sh *sh)
+{
+	char	*key;
+	char	*value;
+	char	*new_str;
+
+	new_str = NULL;
+	key = get_key_dollar(str, (*idx));
+	value = get_value_dollar(sh, key);
+	(*idx) = (*idx) + ft_strlen(key);
+	return (value);
+}
+
+char	*dquote_manager(char *str, int *idx, t_sh *sh)
+{
+	char	*new_str;
+	char	*value;
+	
+	new_str = NULL;
+	(*idx)++;
+	while (str[(*idx)] != '\0' && str[(*idx)] != '\"')
+	{
+		printf("INDEX STR = %d\n", *idx);
+		if (str[(*idx)] == '$')
+		{
+			value = dquote_dollar_manager(str, idx, sh);
+			if (value != NULL)
+			{
+				new_str = ft_strjoin(new_str, value);
+				printf("INDEX STR dans IF = %d\n", *idx);
+			}
+			continue;
+		}
+		new_str = ft_strjoin_char_2(new_str, str[(*idx)], 34);
+		(*idx)++;
+	}
+	return (new_str);
+}
+
+char	*noquote_dollar_manager(char *str, int *idx, t_sh *sh)
+{
+	char	*key;
+	char	*value;
+
+	key = get_key_dollar(str, (*idx ));
+	value = get_value_dollar(sh, key);
+	(*idx) = (*idx) + ft_strlen(key);
+	if (value != NULL)
+		return (value);
+	return (NULL);
+}
+
+char	*quotes_manager(char *str, int *idx, t_sh *sh)
+{
+	char	*new_str;
+	
+	new_str = NULL;
+	
+	if (str[(*idx)] == '\'')
+		new_str = squote_manager(str, idx);
+	else if (str[(*idx)] == '\"')
+		new_str = dquote_manager(str, idx, sh);
+	return (new_str);
+}
+
+int	token_str(t_sh *sh)
+{
+	char 	*str;
+	char 	*new_str;
+	char	*temp;
+	char	*quote;
+	char	*dollar;
+	int		idx = 0;
+	int		len;
+
+	len = 0;
+	temp = NULL;
+	new_str = NULL;
+	dollar = NULL;
+	quote = NULL;
+	str = string_token(sh, &sh->prompt[sh->p_index]);
+	len = ft_strlen(str);
+	printf("\nSTR EN COURS = %s\n", str);
+	while(str[idx])
+	{
+		if (str[idx] == '\"' || str[idx] == '\'')
+		{
+			 // retourne une chaine sans quote et change le $ ou pas
+			temp = quotes_manager(str, &idx, sh);
+			printf("TEMP = %s\n", temp);
+			printf("INDEX = %d\n", idx);
+			// join la chaine
+			new_str = ft_strjoin(new_str, temp);
+			printf("QUOTE = %s\n", new_str);
+
+		}
+		else if (str[idx] == '$')
+		{
+			// dollar_manager(); // retourne une chaine avec la valeur du dollar
+			dollar = noquote_dollar_manager(str, &idx, sh);
+			printf("DOLLAR = %s\n", dollar);
+			// join valeur du dollar
+			new_str = ft_strjoin(new_str, dollar);
+			printf("LEN = %d\nIdX = %d\n", len, idx);
+			// Prendre notre chaine depuis idx et verifier qu'il n'y a pas d'espace 
+			// Si oui - creer un token jusqu'a l'espace puis supprimer
+			//
+			continue;
+		}
+		else
+			new_str = ft_strjoin_char(new_str, str[idx]);
+		printf("new_str = %s\n", new_str);
+		
+		if (idx < len)
+			idx++;
+	}
+	sh->token_lst = add_back_token(sh->token_lst, STR, new_str);
+	return (len);
+}
 
 // ajoute le bon token à la liste chainée des tokens sh->token_lst
 void	tokenizer(t_sh *sh)
 {
-	char	*str;
-	char	*str_wip = NULL;
-	char	*key;
-	char	*value;
+	// char	*str;
+	// char	*str_wip = NULL;
+	// char	*key;
+	// char	*value;
 
-	if (sh->state_quote == DEFAULT && is_in_charset(sh->prompt[sh->p_index]))
+	while(sh->prompt[sh->p_index])
 	{
-		if (sh->prompt[sh->p_index] == PIPE)
-			sh->token_lst = add_back_token(sh->token_lst, PIPE, "|");
-		else
-			process_redirect_token(sh);
-	}
-	else if ((sh->state_quote == DOUBLE || sh->state_quote == DEFAULT ) 
-			&& sh->prompt[sh->p_index] == '$')
-	{
-		key = get_key_dollar(sh->prompt, sh->p_index);
-		sh->p_index = sh->p_index + ft_strlen(key) - 1;
-		value = get_value_dollar(sh, key);
-		sh->token_lst = add_back_token(sh->token_lst, STR, value);
-	}
-	else 
-	{
-		str = string_token(sh, &sh->prompt[sh->p_index]);
-		if (str[0] == '\"' && contains_$(str) == SUCCESS)
+		// printf("p_index = %d\n", sh->p_index);
+		while(sh->prompt[sh->p_index] && sh->prompt[sh->p_index] == ' ')
+			sh->p_index++;
+		if (is_in_charset(sh->prompt[sh->p_index]))
 		{
-			str = dollar_in_quote(str, sh);
-			if (!is_only_space(str))
-			sh->token_lst = add_back_token(sh->token_lst, STR, str);
-			
+			if (sh->prompt[sh->p_index] == PIPE)
+				sh->token_lst = add_back_token(sh->token_lst, PIPE, "|");
+			else
+				process_redirect_token(sh);
 		}
-		else if (contains_$(str) == SUCCESS)
+		else if (sh->prompt[sh->p_index])
 		{
-			str = dollar_in_quote(str, sh);
-			if (!is_only_space(str))
-			sh->token_lst = add_back_token(sh->token_lst, STR, str);
+			// int i = 0;
+			token_str(sh);
+			// sh->p_index += i;
 		}
-		else if (contains_quotes(str)  == SUCCESS)
-		{
-			int i = 0;
-			while (str[i] != '\0')
-			{
-				str_wip = ft_strjoin_char(str_wip, str[i]);
-				i++;
-			}
-			if (!is_only_space(str))
-				sh->token_lst = add_back_token(sh->token_lst, STR, str_wip);
-		}
-		else
-		{
-			if (!is_only_space(str))
-			sh->token_lst = add_back_token(sh->token_lst, STR, str);
-		}
-		
+		sh->p_index++;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 void	lexer(t_sh *sh)
 {
@@ -140,11 +294,11 @@ void	lexer(t_sh *sh)
 		ft_putstr_fd("quotes unclosed\n", 2);
 		return ;
 	}
-	while (sh->prompt[sh->p_index]) 
-	{
-		tokenizer(sh);
-		sh->p_index++;
-	}
+	// while (sh->prompt[sh->p_index]) 
+	// {
+	tokenizer(sh);
+	// 	sh->p_index++;
+	// }
 	check_error_sep(sh->token_lst);
 	print_tokens(sh->token_lst);
 	printf("list length=%d\n", list_length(sh->token_lst));
