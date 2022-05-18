@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/16 16:20:39 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/17 16:46:03 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,39 @@ int	contains_quotes(char *str)
 	{
 		if (str[i] == '\"')
 			return (SUCCESS);
+		i++;
+	}
+	return (FAILURE);
+}
+
+int	how_many_squote(char *str)
+{
+	int	i;
+	int j;
+	
+	i = 0;
+	j = 0;	
+	
+	while (str[i] != '\0')
+	{
+		if (str[i] == '\'')
+			j++;	
+		i++;
+	}
+	return (i);
+}
+
+int	contains_first_squote(char *str)
+{
+	int	i;
+	i = 0;
+	
+	while (str[i] != '\0')
+	{
+		if (str[i] == '\'')
+			return (SUCCESS);
+		else if (str[i] == '\"')
+			return (FAILURE);
 		i++;
 	}
 	return (FAILURE);
@@ -84,8 +117,7 @@ char	*ft_strjoin_char(char *s1, char c)
 		dest[i] = s1[i];
 		i++;
 	}
-	if (c != 34)
-		dest[i] = c;
+	dest[i] = c;
 	i++;
 	dest[i] = '\0';
 	return (dest);
