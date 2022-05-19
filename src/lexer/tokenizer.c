@@ -149,30 +149,42 @@ int	token_str(t_sh *sh)
 			 int j = 0;
 			value_dollar_split = ft_split(dollar_value, ' ');
 			while (value_dollar_split[j])
+			{
+				// printf("dollar_str: %s\n", value_dollar_split[j]);
 				j++;
+
+			}
 			if (j > 1)
 			{
-				new_str = ft_strjoin(new_str, value_dollar_split[0]);
-				sh->token_lst = add_back_token(sh->token_lst, STR, new_str);
+				printf("test1\n");
+				new_str = ft_strjoin(new_str, value_dollar_split[i]);
+				// sh->token_lst = add_back_token(sh->token_lst, STR, new_str);
 				while (value_dollar_split[i + 1])
 				{
 					sh->token_lst = add_back_token(sh->token_lst, STR, new_str);
+					printf("dollar_str: %s\n", value_dollar_split[i]);
 					i++;
+					new_str = ft_strdup(value_dollar_split[i]);
 				}
-				
+				new_str = ft_strdup(value_dollar_split[i]);
+				// break;
 			}
 			else
+			{
+				printf("test2\n");
 				new_str = ft_strjoin(new_str, value_dollar_split[0]);
+			}
 
 			//////////////////////////////////////////////////////////////
 			/* join valeur du dollar */
-			new_str = join_dollar_value(str, new_str, dollar_value, idx);
+			// new_str = join_dollar_value(str, new_str, dollar_value, idx);
+			printf("new_str = %s\n", new_str);
 			// printf("LEN = %d\nIdX = %d\n", len, idx);
 			continue;
 		}
 		else
 			new_str = ft_strjoin_char(new_str, str[idx]);
-		printf("new_str = %s\n", new_str);
+		printf("new_str2 = %s\n", new_str);
 		if (idx < len) //protection sans doute plus necessaire a cause du continue 
 			idx++;
 	}
