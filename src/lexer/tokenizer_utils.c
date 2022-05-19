@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quotes_token_utils.c                               :+:      :+:    :+:   */
+/*   tokenizer_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/19 10:43:53 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/19 14:10:27 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ char	*dquote_dollar_manager(char *str, int *idx, t_sh *sh)
 
 	new_str = NULL;
 	key = get_key_dollar(str, (*idx));
+	printf("KEY = %s\n", key);
 	value = get_value_dollar(sh, key);
 	(*idx) = (*idx) + ft_strlen(key);
 	return (value);
@@ -89,6 +90,7 @@ char	*noquote_dollar_manager(char *str, int *idx, t_sh *sh)
 	char	*value;
 
 	key = get_key_dollar(str, (*idx ));
+	printf("KEY = %s\n", key);
 	value = get_value_dollar(sh, key);
 	(*idx) = (*idx) + ft_strlen(key);
 	if (value != NULL)
