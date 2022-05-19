@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/19 15:10:17 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/19 18:11:04 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,9 @@ char	*join_dollar_value(char *str, char *new_str, char *dollar_value, int idx)
 	return(new_str);
 }
 
+
+
+
 int	token_str(t_sh *sh)
 {
 	char 	*str;
@@ -99,8 +102,7 @@ int	token_str(t_sh *sh)
 	char	*dollar_value;
 	int		idx;
 	int		len;
-	// char	**value_dollar_split = NULL;
-	// int		str_len = 0;
+	char	**value_dollar_split = NULL;
 
 	idx = 0;
 	len = 0;
@@ -116,44 +118,55 @@ int	token_str(t_sh *sh)
 		{
 			/* retourne une chaine sans quote et change le $ ou pas */
 			temp = quotes_manager(str, &idx, sh);
-			// printf("TEMP = %s\n", temp);
-			// printf("INDEX = %d\n", idx);
 			/* join la chaine */
 			new_str = ft_strjoin(new_str, temp);
-			// printf("QUOTE = %s\n", new_str);
 		}
 		else if (str[idx] == '$')
 		{
-			/* calcul la taille de la str avant le new expand */
-			// str_len = ft_strlen(new_str);
-			// printf("LEN = %d\n", str_len);
-			
 			/* dollar_manager(); retourne une chaine avec la valeur du dollar */
 			dollar_value = noquote_dollar_manager(str, &idx, sh);
 			printf("DOLLAR = %s\n", dollar_value);
 			
-			/*
-			Prendre notre chaine depuis idx et verifier qu'il n'y a pas d'espace 
-			Si oui - creer un token jusqu'a l'espace puis supprimer
+			//////////////////////////////////////////////////////////////
+			//  * 
+			//  * 
+			//  *	ft_dollar_out_of_quotes (**new_str , dollar)
+			//  *
+			//  * split(dollar)
+			//  * if (strslen(strs) > 1)
+			//  * {
+			//  * 		join (new_str + strs[0]) -> token
+			//  * 		while(strs[i + 1])
+			//  * 			token;
+			//  *		new_str = strs[end];
+			//  * }
+			//  * 	else
+			//  * 	new_str = join(new_str + strs[0]);
+			//  * 
+
 			
-			si espace dans la valeur faire un split
-			*/
-			// value_dollar_split = ft_split(dollar_value, ' ');
-			// int i = 0;
-			// while (value_dollar_split[i])
-			// {
-			// 	printf("SPLIT = %s\n", value_dollar_split[i]);
-			// 	i++;
-			// }
-			
+			 int i = 0;
+			 int j = 0;
+			value_dollar_split = ft_split(dollar_value, ' ');
+			while (value_dollar_split[j])
+				j++;
+			if (j > 1)
+			{
+				new_str = ft_strjoin(new_str, value_dollar_split[0]);
+				sh->token_lst = add_back_token(sh->token_lst, STR, new_str);
+				while (value_dollar_split[i + 1])
+				{
+					sh->token_lst = add_back_token(sh->token_lst, STR, new_str);
+					i++;
+				}
+				
+			}
+			else
+				new_str = ft_strjoin(new_str, value_dollar_split[0]);
+
+			//////////////////////////////////////////////////////////////
 			/* join valeur du dollar */
 			new_str = join_dollar_value(str, new_str, dollar_value, idx);
-			/*
-			if (ft_strcmp(dollar_value, "$") != 0)
-				new_str = ft_strjoin(new_str, dollar_value);
-			else if (ft_strcmp(dollar_value, "$") == 0 && (str[idx] != '\'' && str[idx] != '\"'))
-				new_str = ft_strjoin(new_str, dollar_value);
-			*/
 			// printf("LEN = %d\nIdX = %d\n", len, idx);
 			continue;
 		}
@@ -167,7 +180,10 @@ int	token_str(t_sh *sh)
 	return (len);
 }
 
-// ajoute le bon token à la liste chainée des tokens sh->token_lst
+
+/* 
+Ajoute le bon token à la liste chainée des tokens sh->token_lst
+*/
 void	tokenizer(t_sh *sh)
 {
 	while(sh->prompt[sh->p_index])
@@ -189,3 +205,4 @@ void	tokenizer(t_sh *sh)
 		sh->p_index++;
 	}
 }
+

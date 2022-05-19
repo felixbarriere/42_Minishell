@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/19 14:14:44 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/19 15:32:37 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ char	*get_value_dollar(t_sh	*sh, char *key)
 	char	*key_trim;
 	char	*value;
 
-	printf("KEY Value $ = %s\n", key);
 	if (ft_strcmp(key, "$") == 0)
 		value = ("$");
 	else
@@ -68,7 +67,6 @@ char	*get_value_dollar(t_sh	*sh, char *key)
 		key_trim = ft_strtrim(key, "$\"|\'");
 		value = expander(sh, key_trim);
 	}
-	printf("VALUE %s\n", value);
 	return (value);
 }
 
