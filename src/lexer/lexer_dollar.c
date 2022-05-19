@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/17 16:45:45 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/19 14:14:44 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,19 @@ char	*get_value_dollar(t_sh	*sh, char *key)
 	char	*key_trim;
 	char	*value;
 
-	key_trim = ft_strtrim(key, "$\"|\'");
-	value = expander(sh, key_trim);
+	printf("KEY Value $ = %s\n", key);
+	if (ft_strcmp(key, "$") == 0)
+		value = ("$");
+	else
+	{
+		key_trim = ft_strtrim(key, "$\"|\'");
+		value = expander(sh, key_trim);
+	}
+	printf("VALUE %s\n", value);
 	return (value);
 }
 
+/*
 char	*isolate_dollar_in_quote_2(char *str, t_sh *sh)
 {
 	int		i;
@@ -99,39 +107,4 @@ char	*dollar_in_quote(char *str, t_sh *sh)
 	
 	return (str_wip);
 }
-
-/*
-char *get_value_dollar(t_sh	*sh, char *str, int i)
-{
-	int		j;
-	int		k;
-	char	*key;
-	char 	*key_trim;
-	char	*value;
-	
-	j = 0;
-	while (str[i] != ' ' && str[i] != '\"')
-	{
-		j++;
-		i++;
-		if (str[i] == '$')
-			break ;
-	}
-	i = (i - j);
-	key = ft_calloc((j + 1), sizeof(char));
-	if (!key)
-		return NULL;
-	k = 0;
-	while (j > 0 && str[i])
-	{
-		key[k] = str[i];
-		k++;
-		i++;
-		j--;
-	}
-	key[k] = '\0';
-	key_trim = ft_strtrim(key, "$\"|\'");
-	value = expander(sh, key_trim);
-
-	return (value);
-}*/
+*/
