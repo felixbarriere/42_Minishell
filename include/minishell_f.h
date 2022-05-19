@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/17 16:46:27 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/19 11:06:54 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,43 @@ void	ft_prompt_init(t_sh *sh, char **env_init);
 /******** SIGNALS ********/
 void	ft_signals_orchestrator(void);
 
+/******** LEXER ********/
+void	lexer(t_sh *sh);
+
+/******** TOKENIZER ********/
+int		len_to_dup(char *prompt);
+char	*string_token(t_sh *sh, char *prompt);
+void	process_redirect_token(t_sh *sh);
+int		token_str(t_sh *sh);
+void	tokenizer(t_sh *sh);
+
+/******** TOKENIZER_UTILS ********/
+char	*squote_manager(char *str, int *idx);
+char	*dquote_dollar_manager(char *str, int *idx, t_sh *sh);
+char	*dquote_manager(char *str, int *idx, t_sh *sh);
+char	*quotes_manager(char *str, int *idx, t_sh *sh);
+char	*noquote_dollar_manager(char *str, int *idx, t_sh *sh);
+
 /******** LEXER UTILS ********/
+int		contains_quotes(char *str);
 int		is_in_charset(char c);
 int		is_only_space(char *str);
-int		ft_parse_red(t_sh *sh);
-int		contains_$(char *str);
-int		contains_quotes(char *str);
-int		contains_first_squote(char *str);
-int		how_many_squote(char *str);
 char	*ft_strjoin_char(char *s1, char c);
+char	*ft_strjoin_char_takeout(char *s1, char c, char take_out);
+
+int		ft_parse_red(t_sh *sh); // DANS LA MAUVAISE SECTION
+
+// int		contains_$(char *str);
+// int		contains_first_squote(char *str);
+// int		how_many_squote(char *str);
 
 /******** LEXER_DOLLAR_IN_QUOTES ********/
 char	*get_key_dollar_2(char *str, int i, int j);
 char	*get_key_dollar(char *str, int i);
 char	*get_value_dollar(t_sh	*sh, char *key);
-char	*isolate_dollar_in_quote_2(char *str, t_sh *sh);
-char	*dollar_in_quote(char *str, t_sh *sh);
+
+// char	*isolate_dollar_in_quote_2(char *str, t_sh *sh);
+// char	*dollar_in_quote(char *str, t_sh *sh);
 
 /******** QUOTES ********/
 int		ft_is_quote_ok(t_sh *sh);

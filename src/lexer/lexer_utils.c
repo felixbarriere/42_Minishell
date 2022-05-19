@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/17 16:46:03 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/19 11:08:40 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,6 @@
 #include "../../include/minishell_d.h"
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
-
-int	contains_$(char *str)
-{
-	int i = 0;
-
-	while (str[i])
-	{
-		if (str[i] == '$')
-			return (SUCCESS);
-		i++;
-	}
-	return (FAILURE);
-}
 
 int	contains_quotes(char *str)
 {
@@ -36,39 +23,6 @@ int	contains_quotes(char *str)
 	{
 		if (str[i] == '\"')
 			return (SUCCESS);
-		i++;
-	}
-	return (FAILURE);
-}
-
-int	how_many_squote(char *str)
-{
-	int	i;
-	int j;
-	
-	i = 0;
-	j = 0;	
-	
-	while (str[i] != '\0')
-	{
-		if (str[i] == '\'')
-			j++;	
-		i++;
-	}
-	return (i);
-}
-
-int	contains_first_squote(char *str)
-{
-	int	i;
-	i = 0;
-	
-	while (str[i] != '\0')
-	{
-		if (str[i] == '\'')
-			return (SUCCESS);
-		else if (str[i] == '\"')
-			return (FAILURE);
 		i++;
 	}
 	return (FAILURE);
@@ -122,3 +76,79 @@ char	*ft_strjoin_char(char *s1, char c)
 	dest[i] = '\0';
 	return (dest);
 }
+
+char	*ft_strjoin_char_takeout(char *s1, char c, char take_out)
+{
+	char	*dest;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	if (!s1)
+	{
+		s1 = malloc(sizeof(char) * 1);
+		s1[0] = '\0';
+	}
+	dest = ft_calloc(sizeof(char), (ft_strlen(s1) + 2));
+	if (!dest)
+		return (NULL);
+	while (s1[i] != '\0')
+	{
+		dest[i] = s1[i];
+		i++;
+	}
+	if (take_out != c)
+		dest[i] = c;
+	i++;
+	dest[i] = '\0';
+	return (dest);
+}
+
+/*
+int	contains_$(char *str)
+{
+	int i = 0;
+
+	while (str[i])
+	{
+		if (str[i] == '$')
+			return (SUCCESS);
+		i++;
+	}
+	return (FAILURE);
+}
+
+int	how_many_squote(char *str)
+{
+	int	i;
+	int j;
+	
+	i = 0;
+	j = 0;	
+	
+	while (str[i] != '\0')
+	{
+		if (str[i] == '\'')
+			j++;	
+		i++;
+	}
+	return (i);
+}
+
+int	contains_first_squote(char *str)
+{
+	int	i;
+	i = 0;
+	
+	while (str[i] != '\0')
+	{
+		if (str[i] == '\'')
+			return (SUCCESS);
+		else if (str[i] == '\"')
+			return (FAILURE);
+		i++;
+	}
+	return (FAILURE);
+}
+*/
