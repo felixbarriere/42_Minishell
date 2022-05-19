@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/19 14:10:27 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/19 15:32:16 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ char	*dquote_dollar_manager(char *str, int *idx, t_sh *sh)
 
 	new_str = NULL;
 	key = get_key_dollar(str, (*idx));
-	printf("KEY = %s\n", key);
 	value = get_value_dollar(sh, key);
 	(*idx) = (*idx) + ft_strlen(key);
 	return (value);
@@ -54,15 +53,11 @@ char	*dquote_manager(char *str, int *idx, t_sh *sh)
 	(*idx)++;
 	while (str[(*idx)] != '\0' && str[(*idx)] != '\"')
 	{
-		printf("INDEX STR = %d\n", *idx);
 		if (str[(*idx)] == '$')
 		{
 			value = dquote_dollar_manager(str, idx, sh);
 			if (value != NULL)
-			{
 				new_str = ft_strjoin(new_str, value);
-				printf("INDEX STR dans IF = %d\n", *idx);
-			}
 			continue;
 		}
 		new_str = ft_strjoin_char_takeout(new_str, str[(*idx)], 34);
@@ -90,7 +85,6 @@ char	*noquote_dollar_manager(char *str, int *idx, t_sh *sh)
 	char	*value;
 
 	key = get_key_dollar(str, (*idx ));
-	printf("KEY = %s\n", key);
 	value = get_value_dollar(sh, key);
 	(*idx) = (*idx) + ft_strlen(key);
 	if (value != NULL)
