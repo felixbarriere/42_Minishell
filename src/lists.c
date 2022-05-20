@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lists.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:18:11 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/09 14:53:56 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/20 18:25:23 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,11 @@ t_token *new_list(void)
 	return NULL;
 }
 
+t_env *new_list_env(void)
+{
+	return NULL;
+}
+
 
 /**
 * Vérifie si une List est vide
@@ -119,6 +124,14 @@ t_token *new_list(void)
 * @return true si elle est vide, faux sinon
 */
 bool is_empty_list(t_token  *li)
+{
+	if(li == NULL)
+		return true;
+
+	return false;
+}
+
+bool is_empty_list_env(t_env  *li)
 {
 	if(li == NULL)
 		return true;
@@ -167,4 +180,35 @@ void clear_list(t_token *li)
 
 	while(li != NULL)
 		li = pop_front_list(li);
+}
+
+t_env *pop_front_list_env(t_env *li)
+{
+	t_env *element;
+
+	element = malloc(sizeof(*element));
+
+	if(element == NULL)
+	{
+		fprintf(stderr, "Erreur : probleme allocation dynamique.\n");
+		exit(EXIT_FAILURE);
+	}
+
+	if(is_empty_list_env(li))
+		return (new_list_env());
+
+	element = li->next;
+
+	free(li);
+	li = NULL;
+	return (element);
+}
+
+void clear_list_env(t_env *li)
+{
+	if(is_empty_list_env(li))
+		return ;
+
+	while(li != NULL)
+		li = pop_front_list_env(li);
 }

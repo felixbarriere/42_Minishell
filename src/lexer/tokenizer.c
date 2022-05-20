@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/19 18:11:04 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/20 18:26:34 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,6 @@ char	*join_dollar_value(char *str, char *new_str, char *dollar_value, int idx)
 		new_str = ft_strjoin(new_str, dollar_value);
 	return(new_str);
 }
-
-
-
 
 int	token_str(t_sh *sh)
 {

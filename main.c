@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 18:08:23 by marvin            #+#    #+#             */
-/*   Updated: 2022/05/06 15:13:44 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/20 18:25:44 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,13 @@ int	main(int ac, char **av, char **env)
 	ft_signals_orchestrator();
 	ft_prompt_init(&sh, env);
 
+	// ft_free_2(sh.env_lst->key);
+	// ft_free_2(sh.env_lst->value);
+	// ft_free_2(sh.env_lst->full);
+	// ft_free_3(sh.env_lst); // attention car clear_list free deja.
 	// penser a free la liste chainee
+	printf("test_leaks\n");
+	clear_list_env(sh.env_lst);
 	clear_list(sh.token_lst);
 	return (0);
 }

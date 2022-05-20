@@ -50,6 +50,8 @@ t_env	*add_back_env_token(t_env *list, char *value, char *key, int index, char *
 			tmp = tmp->next;
 		tmp->next = new;
 	}
+	// free(new);
+	// free(tmp);
 	return (list);
 }
 
@@ -70,7 +72,8 @@ void	orchestrate_env_token(char *env_init, t_sh *sh, int index)
 	
 	sh->env_lst = add_back_env_token(sh->env_lst, value, key, index, env_init);
 	// printf("%p\n", sh->env_lst);
-	free(key_value);
+	ft_free(key_value);
+
 	// Est ce necessaire de free key et value ?
 }
  
