@@ -11,6 +11,7 @@ src/prompt.c\
 src/lists.c\
 src/signals.c\
 src/env/env.c\
+src/env/env_utils.c\
 src/init.c\
 src/error_sep/error_sep.c\
 src/error_sep/error_sep2.c\
@@ -20,7 +21,7 @@ OBJS = ${SRCS:.c=.o}
 INCS	=	-I ./includes -I ./libft/includes
 LIBC	=	libft/libft.a
 CC		=	clang
-CFLAGS	=	-Wall -Wextra -Werror # -fsanitize=address -g3
+CFLAGS	=	-Wall -Wextra -Werror -fsanitize=address -g3
 RM		=	rm -rf
 SYSTEM	=	${shell uname}
 

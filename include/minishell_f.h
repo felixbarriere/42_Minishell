@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_f.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/19 11:06:54 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/20 18:21:45 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,15 @@ void	ft_init_values(t_sh *sh, char **env);
 /******** INIT ********/
 void	ft_init_env_values(t_env *env);
 
-/******** ENV ********/
+/*********** ENV ***********/
 // t_env	*ft_init_env(char **env_init, t_sh *sh);
 void	ft_init_env(char **env_init, t_sh *sh);
+
+/******** ENV_UTILS ********/
+void    ft_free(char **str);
+void    ft_free_2(char *str);
+void	ft_free_3(t_env *list);
+
 
 /******** PROMPT ********/
 void	ft_prompt_start(t_sh *sh);
@@ -109,5 +115,7 @@ int		list_length(t_token *li);
 void	clear_list(t_token *li);
 t_token *pop_front_list(t_token *li);
 bool 	is_empty_list(t_token *li);
+void    clear_list_env(t_env *li);
+t_env   *pop_front_list_env(t_env *li);
 
 #endif
