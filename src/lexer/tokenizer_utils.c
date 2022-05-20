@@ -58,6 +58,7 @@ char	*dquote_manager(char *str, int *idx, t_sh *sh)
 			value = dquote_dollar_manager(str, idx, sh);
 			if (value != NULL)
 				new_str = ft_strjoin(new_str, value);
+			printf("VALUE NULL: %s\n", value);
 			continue;
 		}
 		new_str = ft_strjoin_char_takeout(new_str, str[(*idx)], 34);

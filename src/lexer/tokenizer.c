@@ -123,42 +123,29 @@ int	token_str(t_sh *sh)
 		}
 		else if (str[idx] == '$')
 		{
+			int i;
+			int j;
+
+			i = 0;
+			j = 0;
 			/* dollar_manager(); retourne une chaine avec la valeur du dollar */
 			dollar_value = noquote_dollar_manager(str, &idx, sh);
-			printf("DOLLAR = %s\n", dollar_value);
-			
-			//////////////////////////////////////////////////////////////
-			//  * 
-			//  * 
-			//  *	ft_dollar_out_of_quotes (**new_str , dollar)
-			//  *
-			//  * split(dollar)
-			//  * if (strslen(strs) > 1)
-			//  * {
-			//  * 		join (new_str + strs[0]) -> token
-			//  * 		while(strs[i + 1])
-			//  * 			token;
-			//  *		new_str = strs[end];
-			//  * }
-			//  * 	else
-			//  * 	new_str = join(new_str + strs[0]);
-			//  * 
-
-			
-			 int i = 0;
-			 int j = 0;
+			// printf("DOLLAR = %s\n", dollar_value);
+			if (!dollar_value)
+			{
+				printf("VALUE NULL: %s\n", dollar_value);
+				new_str = ft_strjoin(new_str, temp);
+				break;
+			}
 			value_dollar_split = ft_split(dollar_value, ' ');
 			while (value_dollar_split[j])
 			{
-				// printf("dollar_str: %s\n", value_dollar_split[j]);
 				j++;
-
 			}
 			if (j > 1)
 			{
 				printf("test1\n");
 				new_str = ft_strjoin(new_str, value_dollar_split[i]);
-				// sh->token_lst = add_back_token(sh->token_lst, STR, new_str);
 				while (value_dollar_split[i + 1])
 				{
 					sh->token_lst = add_back_token(sh->token_lst, STR, new_str);
@@ -167,19 +154,13 @@ int	token_str(t_sh *sh)
 					new_str = ft_strdup(value_dollar_split[i]);
 				}
 				new_str = ft_strdup(value_dollar_split[i]);
-				// break;
 			}
 			else
 			{
 				printf("test2\n");
 				new_str = ft_strjoin(new_str, value_dollar_split[0]);
 			}
-
-			//////////////////////////////////////////////////////////////
-			/* join valeur du dollar */
-			// new_str = join_dollar_value(str, new_str, dollar_value, idx);
 			printf("new_str = %s\n", new_str);
-			// printf("LEN = %d\nIdX = %d\n", len, idx);
 			continue;
 		}
 		else
