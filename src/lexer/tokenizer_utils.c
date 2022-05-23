@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer_utils.c                                  :+:      :+:    :+:   */
+/*   tokenizer_utils_2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/19 15:32:16 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/23 13:47:07 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,80 +15,87 @@
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
 
-/* FONCTIONS UTILES POUR LES QUOTES ET $ DANS LES QUOTES */
-
-char	*squote_manager(char *str, int *idx)
+int	len_to_dup(char *prompt)
 {
-	char	*new_str;
-	
-	new_str = NULL;
-	(*idx)++;
-	while (str[(*idx)] != '\0' && str[(*idx)] != '\'')
+	int	j;
+
+	j = 0;
+	while (prompt[j])
 	{
-		new_str = ft_strjoin_char_takeout(new_str, str[(*idx)], 39);
-		(*idx)++;
-	}
-	return (new_str);
-}
-
-char	*dquote_dollar_manager(char *str, int *idx, t_sh *sh)
-{
-	char	*key;
-	char	*value;
-	char	*new_str;
-
-	new_str = NULL;
-	key = get_key_dollar(str, (*idx));
-	value = get_value_dollar(sh, key);
-	(*idx) = (*idx) + ft_strlen(key);
-	return (value);
-}
-
-char	*dquote_manager(char *str, int *idx, t_sh *sh)
-{
-	char	*new_str;
-	char	*value;
-	
-	new_str = NULL;
-	(*idx)++;
-	while (str[(*idx)] != '\0' && str[(*idx)] != '\"')
-	{
-		if (str[(*idx)] == '$')
+		if (prompt[j] && prompt[j] == '\"')
 		{
-			value = dquote_dollar_manager(str, idx, sh);
-			if (value != NULL)
-				new_str = ft_strjoin(new_str, value);
-			printf("VALUE NULL: %s\n", value);
-			continue;
+			j++;
+			while(prompt[j] && prompt[j] != '\"')
+				j++;
 		}
-		new_str = ft_strjoin_char_takeout(new_str, str[(*idx)], 34);
-		(*idx)++;
+		else if (prompt[j] && prompt[j] == '\'')
+		{
+			j++;
+			while(prompt[j] && prompt[j] != '\'')
+				j++;
+		}
+		else if (is_in_charset(prompt[j]))
+			break;
+		j++;
 	}
-	return (new_str);
+	return (j);
 }
 
-char	*quotes_manager(char *str, int *idx, t_sh *sh)
+char	*string_token(t_sh *sh, char *prompt)
 {
-	char	*new_str;
-	
-	new_str = NULL;
-	
-	if (str[(*idx)] == '\'')
-		new_str = squote_manager(str, idx);
-	else if (str[(*idx)] == '\"')
-		new_str = dquote_manager(str, idx, sh);
-	return (new_str);
+	char *str;
+	char *temp;
+	int j;
+
+	j = len_to_dup(prompt);
+	temp = ft_strndup(prompt, j);
+	str = ft_strtrim(temp, CHARSET_SPACE_TABS);
+	if (str == NULL)
+	{
+		printf("str = NULL");
+		return (NULL);
+	}
+	free (temp);
+	if (j > 0)
+		sh->p_index += j - 1;
+	return (str);
 }
 
-char	*noquote_dollar_manager(char *str, int *idx, t_sh *sh)
+char	*join_dollar_value(char *str, char *new_str, char *dollar_value, int idx)
 {
-	char	*key;
-	char	*value;
+	
+	if (ft_strcmp(dollar_value, "$") != 0)
+		new_str = ft_strjoin(new_str, dollar_value);
+	else if (ft_strcmp(dollar_value, "$") == 0 && (str[idx] != '\'' && str[idx] != '\"'))
+		new_str = ft_strjoin(new_str, dollar_value);
+	return(new_str);
+}
 
-	key = get_key_dollar(str, (*idx ));
-	value = get_value_dollar(sh, key);
-	(*idx) = (*idx) + ft_strlen(key);
-	if (value != NULL)
-		return (value);
-	return (NULL);
+char	*severals_wds_value(t_sh *sh, char *dollar_value, char	*new_str)
+{
+	int 	i;
+	int 	j;
+	char	**value_dollar_split;
+
+	i = 0;
+	j = 0;
+	value_dollar_split = NULL;
+
+	value_dollar_split = ft_split(dollar_value, ' ');
+	while (value_dollar_split[j])
+		j++;
+	if (j > 1)
+	{
+		new_str = ft_strjoin(new_str, value_dollar_split[i]);
+		while (value_dollar_split[i + 1])
+		{
+			sh->token_lst = add_back_token(sh->token_lst, STR, new_str);
+			i++;
+			new_str = ft_strdup(value_dollar_split[i]);
+		}
+		new_str = ft_strdup(value_dollar_split[i]);
+	}
+	else
+		new_str = ft_strjoin(new_str, value_dollar_split[0]);
+	return (new_str);
 }

@@ -4,6 +4,7 @@ SRCS	=	main.c\
 src/lexer/lexer_utils.c\
 src/lexer/lexer_dollar.c\
 src/lexer/tokenizer.c\
+src/lexer/tokenizer_utils_quotes.c\
 src/lexer/tokenizer_utils.c\
 src/lexer/lexer.c\
 src/lexer/quotes.c\
