@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/19 11:08:40 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/25 12:47:33 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ char	*ft_strjoin_char(char *s1, char c)
 	dest[i] = c;
 	i++;
 	dest[i] = '\0';
+	free(s1);
 	return (dest);
 }
 
@@ -102,6 +103,7 @@ char	*ft_strjoin_char_takeout(char *s1, char c, char take_out)
 		dest[i] = c;
 	i++;
 	dest[i] = '\0';
+	free(s1);
 	return (dest);
 }
 

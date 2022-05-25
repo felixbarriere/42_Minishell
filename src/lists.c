@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:18:11 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/24 18:03:55 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/05/25 16:11:05 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,28 +80,7 @@ int list_length(t_token *li)
 	return size;
 }
 
-void	ft_set_null_free_elem(t_token *elem)
-{
-	if (!elem)
-		return ;
-	elem->value = NULL;
-	elem->next = NULL;
-	free(elem);
-}
 
-void	ft_set_null_free_list(t_token **a_list)
-{
-	t_token	*tmp;
-
-	if (!(*a_list))
-		return ;
-	while (*a_list)
-	{
-		tmp = (*a_list)->next;
-		ft_set_null_free_elem(*a_list);
-		*a_list = tmp;
-	}
-}
 
 /*---------------------------------------------------------------------*/
 /* Retourne une nouvelle Liste
@@ -139,63 +118,33 @@ bool is_empty_list_env(t_env  *li)
 	return false;
 }
 
-/*---------------------------------------------------------------------*/
-/**
-* Supprime un entier de la tête de la Liste
-* @param li La liste
-* @return La liste sans l'élément retiré
-*/
-t_token *pop_front_list(t_token *li)
+
+
+void	ft_set_null_free_elem_2(t_token *elem)
 {
-	t_token *element;
+	// if (!elem)
+	// 	return ;
+	// elem->value = NULL;
+	// elem->next = NULL;
 
-	element = malloc(sizeof(*element));
-
-	if(element == NULL)
-	{
-		fprintf(stderr, "Erreur : probleme allocation dynamique.\n");
-		exit(EXIT_FAILURE);
-	}
-
-	if(is_empty_list(li))
-		return (new_list());
-
-	element = li->next;
-
-	free(li);
-	li = NULL;
-	return (element);
+	free(elem->value);
+	free(elem);
 }
 
-/*---------------------------------------------------------------------*/
-/**
-* Supprime tous les éléments d'une Liste
-* @param li La liste
-* @return Une Liste vide
-*/
-void clear_list(t_token *li)
+void	clear_list(t_token *a_list)
 {
-	if(is_empty_list(li))
-		return ;
+		t_token	*tmp;
 
-	while(li != NULL)
-		li = pop_front_list(li);
+	// if (!(a_list))
+	// 	return ;
+	while (a_list)
+	{
+		tmp = (a_list)->next;
+		ft_set_null_free_elem_2(a_list);
+		a_list = tmp;
+	}
 }
 
-t_env *pop_front_list_env(t_env *li)
-{
-	t_env *element;
-
-	element = malloc(sizeof(*element));
-
-	if(element == NULL)
-	{
-		fprintf(stderr, "Erreur : probleme allocation dynamique.\n");
-		exit(EXIT_FAILURE);
-	}
-
-	if(is_empty_list_env(li))
-		return (new_list_env());
 
 	element = li->next;
 	free(li->key);
@@ -206,11 +155,89 @@ t_env *pop_front_list_env(t_env *li)
 	return (element);
 }
 
-void clear_list_env(t_env *li)
+void	clear_list_env(t_env *a_list)
 {
-	if(is_empty_list_env(li))
-		return ;
+	t_env	*tmp;
 
-	while(li != NULL)
-		li = pop_front_list_env(li);
+	// if (!(a_list))
+	// 	return ;
+	while (a_list)
+	{
+		tmp = (a_list)->next;
+		ft_set_null_free_elem(a_list);
+		a_list = tmp;
+	}
 }
+// /*---------------------------------------------------------------------*/
+// /**
+// * Supprime un entier de la tête de la Liste
+// * @param li La liste
+// * @return La liste sans l'élément retiré
+// */
+// t_token *pop_front_list(t_token *li)
+// {
+// 	t_token *element;
+
+// 	element = malloc(sizeof(*element));
+
+// 	if(element == NULL)
+// 	{
+// 		fprintf(stderr, "Erreur : probleme allocation dynamique.\n");
+// 		exit(EXIT_FAILURE);
+// 	}
+
+// 	if(is_empty_list(li))
+// 		return (new_list());
+
+// 	element = li->next;
+
+// 	free(li);
+// 	li = NULL;
+// 	return (element);
+// }
+
+// /*---------------------------------------------------------------------*/
+// /**
+// * Supprime tous les éléments d'une Liste
+// * @param li La liste
+// * @return Une Liste vide
+// */
+// void clear_list(t_token *li)
+// {
+// 	if(is_empty_list(li))
+// 		return ;
+
+// 	while(li != NULL)
+// 		li = pop_front_list(li);
+// }
+
+// t_env *pop_front_list_env(t_env *li)
+// {
+// 	t_env *element;
+
+// 	element = malloc(sizeof(*element));
+
+// 	if(element == NULL)
+// 	{
+// 		fprintf(stderr, "Erreur : probleme allocation dynamique.\n");
+// 		exit(EXIT_FAILURE);
+// 	}
+
+// 	if(is_empty_list_env(li))
+// 		return (new_list_env());
+
+// 	element = li->next;
+
+// 	free(li);
+// 	li = NULL;
+// 	return (element);
+// }
+
+// void clear_list_env(t_env *li)
+// {
+// 	if(is_empty_list_env(li))
+// 		return ;
+
+// 	while(li != NULL)
+// 		li = pop_front_list_env(li);
+// }

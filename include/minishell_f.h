@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/23 13:51:40 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/25 12:04:04 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,16 +110,17 @@ int		check_error_sep_5(t_token *token_lst);
 int		check_error_sep_6(t_token *token_lst);
 
 /******** LISTS  ********/
-void	ft_set_null_free_elem(t_token *elem);
-void	ft_set_null_free_list(t_token **a_list);
+
+void	ft_set_null_free_elem(t_env *elem);
 t_token *create_token(t_token_type type, char *value);
 t_token *add_back_token(t_token *list, t_token_type type, char *value);
 void	print_tokens(t_token *li);
 int		list_length(t_token *li);
-void	clear_list(t_token *li);
+void	clear_list(t_token *a_li);
 t_token *pop_front_list(t_token *li);
 bool 	is_empty_list(t_token *li);
-void    clear_list_env(t_env *li);
+void    clear_list_env(t_env *a_li);
 t_env   *pop_front_list_env(t_env *li);
+void	ft_set_null_free_elem_2(t_token *elem);
 
 #endif

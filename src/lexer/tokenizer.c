@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/23 13:47:05 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/25 13:09:05 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,11 @@ int	token_str(t_sh *sh)
 			{
 				printf("VALUE NULL: %s\n", dollar_value);
 				new_str = ft_strjoin(new_str, temp);
+				free(dollar_value);
 				break;
 			}
 			new_str = severals_wds_value(sh, dollar_value, new_str);
+			free(dollar_value);
 			printf("new_str = %s\n", new_str);
 			continue;
 		}
@@ -83,6 +85,8 @@ int	token_str(t_sh *sh)
 			idx++;
 	}
 	sh->token_lst = add_back_token(sh->token_lst, STR, new_str);
+	///// FREE NEW_STR ?
+	free(str);
 	return (len);
 }
 

@@ -11,6 +11,8 @@ void ft_prompt_start(t_sh *sh)
 	{
 		// clear_list(sh->token_lst);
 		// clear_list_env(sh->env_lst);
+		// clear_list_env(sh->env_lst);
+		clear_list(sh->token_lst);
 		exit(0);
 	}
 	add_history(sh->prompt);
@@ -26,8 +28,7 @@ void	ft_prompt_init(t_sh *sh, char **env_init)
 		sh->lenght = ft_strlen(sh->prompt);
 		if (!is_only_space(sh->prompt))
 			lexer(sh); //analyse lexicale de la commande
-		// ft_memset(&sh, 0, sizeof(t_sh));
+		clear_list(sh->token_lst);
 		ft_init_values(sh, env_init);
-		ft_init_env(env_init, sh);
 	}
 }
