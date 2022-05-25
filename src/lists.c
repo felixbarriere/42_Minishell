@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:18:11 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/20 18:25:23 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/05/24 18:03:55 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,7 +198,9 @@ t_env *pop_front_list_env(t_env *li)
 		return (new_list_env());
 
 	element = li->next;
-
+	free(li->key);
+	free(li->value);
+	free(li->full);
 	free(li);
 	li = NULL;
 	return (element);
