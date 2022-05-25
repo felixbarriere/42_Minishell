@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 16:53:47 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/05/20 18:12:30 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/05/25 12:53:12 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void    ft_free(char **str)
         // printf("str: %s, adress: %p\n", str[i], str[i]);
         i++;
     }
+	free (str[i]);
     free(str);
     str = NULL;
 }
