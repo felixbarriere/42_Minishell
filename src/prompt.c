@@ -9,8 +9,6 @@ void ft_prompt_start(t_sh *sh)
 	sh->prompt = readline("➜ minishell ");
 	if ( !sh->prompt || !ft_strcmp(sh->prompt, "exit"))
 	{
-		// clear_list(sh->token_lst);
-		// clear_list_env(sh->env_lst);
 		// clear_list_env(sh->env_lst);
 		clear_list(sh->token_lst);
 		exit(0);

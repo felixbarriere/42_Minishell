@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/25 12:55:56 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/25 17:32:34 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char	*severals_wds_value(t_sh *sh, char *dollar_value, char	*new_str)
 
 	i = 0;
 	j = 0;
-	value_dollar_split = NULL;
+	// value_dollar_split = NULL;
 
 	value_dollar_split = ft_split(dollar_value, ' ');
 	while (value_dollar_split[j])
@@ -94,15 +94,15 @@ char	*severals_wds_value(t_sh *sh, char *dollar_value, char	*new_str)
 		{
 			sh->token_lst = add_back_token(sh->token_lst, STR, new_str);
 			i++;
-			free(new_str);
+			// free(new_str);
 			new_str = ft_strdup(value_dollar_split[i]);
 		}
-		free(new_str);
+		// free(new_str);
 		new_str = ft_strdup(value_dollar_split[i]);
 	}
 	else
 		new_str = ft_strjoin(new_str, value_dollar_split[0]);
 	///// A FREE ??
-	ft_free(value_dollar_split);
+	free(value_dollar_split);
 	return (new_str);
 }
