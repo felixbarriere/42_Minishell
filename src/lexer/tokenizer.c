@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/25 13:09:05 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/25 17:41:58 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ int	token_str(t_sh *sh)
 			temp = quotes_manager(str, &idx, sh);
 			/* join la chaine */
 			new_str = ft_strjoin(new_str, temp);
+			// FREE TEMP ?
+			// free(temp);
 		}
 		else if (str[idx] == '$')
 		{
@@ -74,22 +76,23 @@ int	token_str(t_sh *sh)
 				break;
 			}
 			new_str = severals_wds_value(sh, dollar_value, new_str);
-			free(dollar_value);
+			if (ft_strcmp(dollar_value, "$"))
+				free(dollar_value);
 			printf("new_str = %s\n", new_str);
 			continue;
 		}
 		else
 			new_str = ft_strjoin_char(new_str, str[idx]);
 		printf("new_str2 = %s\n", new_str);
-		if (idx < len) //protection sans doute plus necessaire a cause du continue 
+		// if (idx < len) //protection sans doute plus necessaire a cause du continue 
 			idx++;
 	}
 	sh->token_lst = add_back_token(sh->token_lst, STR, new_str);
 	///// FREE NEW_STR ?
+	
 	free(str);
 	return (len);
 }
-
 
 /* 
 Ajoute le bon token à la liste chainée des tokens sh->token_lst
