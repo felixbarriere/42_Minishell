@@ -6,7 +6,11 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/05/25 11:41:36 by ccalas           ###   ########.fr       */
+=======
+/*   Updated: 2022/05/23 13:51:40 by ccalas           ###   ########.fr       */
+>>>>>>> 5d0753018a1fe9f1a70ac1feb097c840120b85b2
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +51,17 @@ void	ft_signals_orchestrator(void);
 void	lexer(t_sh *sh);
 
 /******** TOKENIZER ********/
-int		len_to_dup(char *prompt);
-char	*string_token(t_sh *sh, char *prompt);
 void	process_redirect_token(t_sh *sh);
 int		token_str(t_sh *sh);
 void	tokenizer(t_sh *sh);
 
 /******** TOKENIZER_UTILS ********/
+int		len_to_dup(char *prompt);
+char	*string_token(t_sh *sh, char *prompt);
+char	*join_dollar_value(char *str, char *new_str, char *dollar_value, int idx);
+char	*severals_wds_value(t_sh *sh, char *dollar_value, char	*new_str);
+
+/******** TOKENIZER_UTILS_QUOTES ********/
 char	*squote_manager(char *str, int *idx);
 char	*dquote_dollar_manager(char *str, int *idx, t_sh *sh);
 char	*dquote_manager(char *str, int *idx, t_sh *sh);
