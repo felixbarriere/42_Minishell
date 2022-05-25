@@ -17,6 +17,7 @@
 
 static void ft_signal_handler(int signal)
 {
+	extern t_sh	g_sh;
 	if (signal == SIGINT)
 	{
 		/* créer un système de définition d'erreurs à renvoyer */
@@ -30,6 +31,8 @@ static void ft_signal_handler(int signal)
 		/* créer un système de définition d'erreurs à renvoyer */
 		write(1, "exit\n", 6);
 		// a free
+		clear_list_env(g_sh.env_lst);
+		clear_list(g_sh.token_lst);
 		exit(0);
 	}
 }

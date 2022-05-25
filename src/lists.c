@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:18:11 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/25 11:42:09 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/25 13:04:59 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void	ft_set_null_free_elem_2(t_token *elem)
 	// elem->value = NULL;
 	// elem->next = NULL;
 
-
+	free(elem->value);
 	free(elem);
 }
 

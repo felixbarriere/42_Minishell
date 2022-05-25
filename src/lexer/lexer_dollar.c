@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/19 15:32:37 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/25 13:10:14 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ char	*get_value_dollar(t_sh	*sh, char *key)
 	{
 		key_trim = ft_strtrim(key, "$\"|\'");
 		value = expander(sh, key_trim);
+		free(key_trim);
 	}
 	return (value);
 }
