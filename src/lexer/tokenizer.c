@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/25 17:41:58 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/05/26 14:58:16 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,11 @@ int	token_str(t_sh *sh)
 			{
 				printf("VALUE NULL: %s\n", dollar_value);
 				new_str = ft_strjoin(new_str, temp);
+				printf("new_str = %s\n", new_str);
 				free(dollar_value);
 				break;
 			}
+			printf("VALUE : %s\n", dollar_value);
 			new_str = severals_wds_value(sh, dollar_value, new_str);
 			if (ft_strcmp(dollar_value, "$"))
 				free(dollar_value);

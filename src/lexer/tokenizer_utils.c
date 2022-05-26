@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/26 14:36:03 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/26 15:37:12 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,10 @@ char	*severals_wds_value(t_sh *sh, char *dollar_value, char	*new_str)
 		{
 			sh->token_lst = add_back_token(sh->token_lst, STR, new_str);
 			i++;
-			free(new_str);
+			// free(new_str);
 			new_str = ft_strdup(value_dollar_split[i]);
 		}
-		free(new_str);
+		// free(new_str);
 		new_str = ft_strdup(value_dollar_split[i]);
 	}
 	else
