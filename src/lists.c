@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lists.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:18:11 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/25 13:04:59 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/25 17:20:04 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,21 +122,23 @@ bool is_empty_list_env(t_env  *li)
 
 void	ft_set_null_free_elem_2(t_token *elem)
 {
-	// if (!elem)
-	// 	return ;
-	// elem->value = NULL;
-	// elem->next = NULL;
-
-	free(elem->value);
+	if (!elem)
+		return ;
+	printf("%s\n", elem->value);
+	printf("ADRESS = %p\n", elem->value);
+	if (ft_strcmp(elem->value, "<<") && ft_strcmp(elem->value, ">>") 
+		&& ft_strcmp(elem->value, "<") && ft_strcmp(elem->value, ">") 
+		&& ft_strcmp(elem->value, "|"))
+		free(elem->value);
 	free(elem);
 }
 
 void	clear_list(t_token *a_list)
 {
-		t_token	*tmp;
+	t_token	*tmp;
 
-	// if (!(a_list))
-	// 	return ;
+	if (!(a_list))
+		return ;
 	while (a_list)
 	{
 		tmp = (a_list)->next;
@@ -144,8 +146,6 @@ void	clear_list(t_token *a_list)
 		a_list = tmp;
 	}
 }
-
-
 
 void	ft_set_null_free_elem(t_env *elem)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer_utils_quotes.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/25 13:21:57 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/25 16:34:46 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ char	*dquote_manager(char *str, int *idx, t_sh *sh)
 		new_str = ft_strjoin_char_takeout(new_str, str[(*idx)], 34);
 		(*idx)++;
 	}
+	// free (value);
 	return (new_str);
 }
 
