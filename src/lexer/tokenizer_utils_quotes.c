@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/25 16:34:46 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/05/26 15:45:36 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ char	*dquote_dollar_manager(char *str, int *idx, t_sh *sh)
 	key = get_key_dollar(str, (*idx));
 	value = get_value_dollar(sh, key);
 	(*idx) = (*idx) + ft_strlen(key);
+	// free(key);
 	return (value);
 }
 
@@ -89,7 +90,7 @@ char	*noquote_dollar_manager(char *str, int *idx, t_sh *sh)
 	key = get_key_dollar(str, (*idx ));
 	value = get_value_dollar(sh, key);
 	(*idx) = (*idx) + ft_strlen(key);
-	free(key);
+	// free(key);
 	if (value != NULL)
 		return (value);
 	return (NULL);

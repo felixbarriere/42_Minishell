@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/25 17:32:34 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/05/26 15:50:32 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*string_token(t_sh *sh, char *prompt)
 		printf("str = NULL");
 		return (NULL);
 	}
-	free (temp);
+	// free (temp);
 	if (j > 0)
 		sh->p_index += j - 1;
 	return (str);
@@ -103,6 +103,6 @@ char	*severals_wds_value(t_sh *sh, char *dollar_value, char	*new_str)
 	else
 		new_str = ft_strjoin(new_str, value_dollar_split[0]);
 	///// A FREE ??
-	free(value_dollar_split);
+	// free(value_dollar_split);
 	return (new_str);
 }

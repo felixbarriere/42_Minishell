@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/25 17:41:58 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/05/26 15:46:11 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,12 @@ int	token_str(t_sh *sh)
 			{
 				printf("VALUE NULL: %s\n", dollar_value);
 				new_str = ft_strjoin(new_str, temp);
-				free(dollar_value);
+				// free(dollar_value);
 				break;
 			}
 			new_str = severals_wds_value(sh, dollar_value, new_str);
 			if (ft_strcmp(dollar_value, "$"))
-				free(dollar_value);
+				// free(dollar_value);
 			printf("new_str = %s\n", new_str);
 			continue;
 		}
@@ -90,7 +90,7 @@ int	token_str(t_sh *sh)
 	sh->token_lst = add_back_token(sh->token_lst, STR, new_str);
 	///// FREE NEW_STR ?
 	
-	free(str);
+	// free(str);
 	return (len);
 }
 
