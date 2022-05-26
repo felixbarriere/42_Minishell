@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer_utils_quotes.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/25 16:34:46 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/05/26 14:41:38 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ char	*dquote_dollar_manager(char *str, int *idx, t_sh *sh)
 	key = get_key_dollar(str, (*idx));
 	value = get_value_dollar(sh, key);
 	(*idx) = (*idx) + ft_strlen(key);
+	free (key);
 	return (value);
 }
 
@@ -58,13 +59,11 @@ char	*dquote_manager(char *str, int *idx, t_sh *sh)
 			value = dquote_dollar_manager(str, idx, sh);
 			if (value != NULL)
 				new_str = ft_strjoin(new_str, value);
-			printf("VALUE NULL: %s\n", value);
 			continue;
 		}
 		new_str = ft_strjoin_char_takeout(new_str, str[(*idx)], 34);
 		(*idx)++;
 	}
-	// free (value);
 	return (new_str);
 }
 
