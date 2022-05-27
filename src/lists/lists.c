@@ -6,14 +6,14 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:18:11 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/25 17:20:04 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/05/27 17:57:03 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
-#include "../include/minishell_d.h"
-#include "../include/minishell_f.h"
-#include "../include/minishell_s.h"
+#include "../../include/minishell.h"
+#include "../../include/minishell_d.h"
+#include "../../include/minishell_f.h"
+#include "../../include/minishell_s.h"
 
 t_token	*create_token(t_token_type type, char *value)
 {
@@ -25,19 +25,18 @@ t_token	*create_token(t_token_type type, char *value)
 	elem->type = type;
 	elem->value = value;
 	elem->next = NULL;
-	//TEST
 	elem->prev = NULL;
 	return (elem);
 }
 
 t_token	*add_back_token(t_token *list, t_token_type type, char *value)
 {
-	t_token *new;
+	t_token	*new;
 	t_token	*tmp;
 
 	new = create_token(type, value);
 	if (!new)
-		return NULL;
+		return (NULL);
 	if (!list)
 		return (new);
 	else
@@ -46,15 +45,14 @@ t_token	*add_back_token(t_token *list, t_token_type type, char *value)
 		while (tmp->next)
 			tmp = tmp->next;
 		tmp->next = new;
-		//TEST
 		new->prev = tmp;
 	}
 	return (list);
 }
 
-void print_tokens(t_token *li)
+void	print_tokens(t_token *li)
 {
-	while(li != NULL)
+	while (li != NULL)
 	{
 		printf("\n");
 		printf("[%s] ", li->value);
@@ -68,111 +66,19 @@ void print_tokens(t_token *li)
 	printf("\n");
 }
 
-int list_length(t_token *li)
+int	list_length(t_token *li)
 {
-	int size = 0;
+	int	size;
 
-	while(li != NULL)
+	size = 0;
+	while (li != NULL)
 	{
 		size++;
 		li = li->next;
 	}
-	return size;
+	return (size);
 }
 
-
-
-/*---------------------------------------------------------------------*/
-/* Retourne une nouvelle Liste
-* @return Une liste vide
-*/
-t_token *new_list(void)
-{
-	return NULL;
-}
-
-t_env *new_list_env(void)
-{
-	return NULL;
-}
-
-
-/**
-* Vérifie si une List est vide
-* @param li La liste à tester
-* @return true si elle est vide, faux sinon
-*/
-bool is_empty_list(t_token  *li)
-{
-	if(li == NULL)
-		return true;
-
-	return false;
-}
-
-bool is_empty_list_env(t_env  *li)
-{
-	if(li == NULL)
-		return true;
-
-	return false;
-}
-
-
-
-void	ft_set_null_free_elem_2(t_token *elem)
-{
-	if (!elem)
-		return ;
-	printf("%s\n", elem->value);
-	printf("ADRESS = %p\n", elem->value);
-	if (ft_strcmp(elem->value, "<<") && ft_strcmp(elem->value, ">>") 
-		&& ft_strcmp(elem->value, "<") && ft_strcmp(elem->value, ">") 
-		&& ft_strcmp(elem->value, "|"))
-		free(elem->value);
-	free(elem);
-}
-
-void	clear_list(t_token *a_list)
-{
-	t_token	*tmp;
-
-	if (!(a_list))
-		return ;
-	while (a_list)
-	{
-		tmp = (a_list)->next;
-		ft_set_null_free_elem_2(a_list);
-		a_list = tmp;
-	}
-}
-
-void	ft_set_null_free_elem(t_env *elem)
-{
-	// if (!elem)
-	// 	return ;
-	// elem->value = NULL;
-	// elem->next = NULL;
-	free(elem->key);
-	free(elem->value);
-	free(elem->full);
-
-	free(elem);
-}
-
-void	clear_list_env(t_env *a_list)
-{
-	t_env	*tmp;
-
-	// if (!(a_list))
-	// 	return ;
-	while (a_list)
-	{
-		tmp = (a_list)->next;
-		ft_set_null_free_elem(a_list);
-		a_list = tmp;
-	}
-}
 // /*---------------------------------------------------------------------*/
 // /**
 // * Supprime un entier de la tête de la Liste
