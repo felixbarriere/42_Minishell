@@ -52,11 +52,8 @@ char	*string_token(t_sh *sh, char *prompt)
 	temp = ft_strndup(prompt, j);
 	str = ft_strtrim(temp, CHARSET_SPACE_TABS);
 	if (str == NULL)
-	{
-		printf("str = NULL");
 		return (NULL);
-	}
-	// free (temp);
+	free (temp);
 	if (j > 0)
 		sh->p_index += j - 1;
 	return (str);
@@ -98,12 +95,13 @@ char	*severals_wds_value(t_sh *sh, char *dollar_value, char	*new_str)
 			// free(new_str);
 			new_str = ft_strdup(value_dollar_split[i]);
 		}
-		// free(new_str);
+		// if (!value_dollar_split[i + 1])
+			free(new_str);
 		new_str = ft_strdup(value_dollar_split[i]);
 	}
 	else
 		new_str = ft_strjoin(new_str, value_dollar_split[0]);
 	///// A FREE ??
-	// free(value_dollar_split);
+	ft_free(value_dollar_split);
 	return (new_str);
 }
