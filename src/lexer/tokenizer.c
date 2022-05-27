@@ -62,6 +62,12 @@ int	token_str(t_sh *sh)
 		}
 		else if (str[idx] == '$')
 		{
+			/* dollar_manager(); retourne une chaine avec la valeur du dollar */
+			if (str[idx + 1] == '\'' || str[idx + 1] == '\"')
+			{
+				idx++;
+				continue ;
+			}
 			dollar_value = noquote_dollar_manager(str, &idx, sh);
 			printf("VALUE : %s\n", dollar_value);
 			if (dollar_value != NULL)
@@ -73,7 +79,8 @@ int	token_str(t_sh *sh)
 			new_str = ft_strjoin_char(new_str, str[idx]);
 		idx++;
 	}
-	sh->token_lst = add_back_token(sh->token_lst, STR, new_str);
+	if (new_str != NULL)
+		sh->token_lst = add_back_token(sh->token_lst, STR, new_str);
 	free(str);
 	return (idx);
 }
