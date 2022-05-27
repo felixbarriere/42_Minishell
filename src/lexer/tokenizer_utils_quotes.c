@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/27 14:43:02 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/27 17:07:14 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 char	*squote_manager(char *str, int *idx)
 {
 	char	*new_str;
-	
+
 	new_str = NULL;
 	(*idx)++;
 	while (str[(*idx)] != '\0' && str[(*idx)] != '\'')
@@ -49,7 +49,7 @@ char	*dquote_manager(char *str, int *idx, t_sh *sh)
 {
 	char	*new_str;
 	char	*value;
-	
+
 	new_str = NULL;
 	(*idx)++;
 	while (str[(*idx)] != '\0' && str[(*idx)] != '\"')
@@ -59,7 +59,7 @@ char	*dquote_manager(char *str, int *idx, t_sh *sh)
 			value = dquote_dollar_manager(str, idx, sh);
 			if (value != NULL)
 				new_str = ft_strjoin(new_str, value);
-			continue;
+			continue ;
 		}
 		new_str = ft_strjoin_char_takeout(new_str, str[(*idx)], 34);
 		(*idx)++;
@@ -70,9 +70,8 @@ char	*dquote_manager(char *str, int *idx, t_sh *sh)
 char	*quotes_manager(char *str, int *idx, t_sh *sh)
 {
 	char	*new_str;
-	
+
 	new_str = NULL;
-	
 	if (str[(*idx)] == '\'')
 		new_str = squote_manager(str, idx);
 	else if (str[(*idx)] == '\"')
@@ -85,7 +84,7 @@ char	*noquote_dollar_manager(char *str, int *idx, t_sh *sh)
 	char	*key;
 	char	*value;
 
-	key = get_key_dollar(str, (*idx ));
+	key = get_key_dollar(str, (*idx));
 	value = get_value_dollar(sh, key);
 	(*idx) = (*idx) + ft_strlen(key);
 	free(key);
