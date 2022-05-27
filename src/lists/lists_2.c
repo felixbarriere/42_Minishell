@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expander.c                                         :+:      :+:    :+:   */
+/*   lists_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/27 18:09:23 by fbarrier         ###   ########.fr       */
+/*   Created: 2022/05/27 17:51:18 by fbarrier          #+#    #+#             */
+/*   Updated: 2022/05/27 17:58:28 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,29 @@
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
 
-char	*expander(t_sh *sh, char *dollar)
+bool	is_empty_list(t_token *li)
 {
-	t_env	*tmp;
+	if (li == NULL)
+		return (true);
+	return (false);
+}
 
-	tmp = sh->env_lst;
-	while (tmp != NULL)
-	{
-		if (tmp->key && (ft_strcmp(tmp->key, dollar) == 0))
-		{
-			return (tmp->value);
-		}
-		tmp = tmp->next;
-	}
-	return (NULL);
+bool	is_empty_list_env(t_env *li)
+{
+	if (li == NULL)
+		return (true);
+	return (false);
+}
+
+void	ft_set_null_free_elem_2(t_token *elem)
+{
+	if (!elem)
+		return ;
+	printf("%s\n", elem->value);
+	printf("ADRESS = %p\n", elem->value);
+	if (ft_strcmp(elem->value, "<<") && ft_strcmp(elem->value, ">>")
+		&& ft_strcmp(elem->value, "<") && ft_strcmp(elem->value, ">")
+		&& ft_strcmp(elem->value, "|"))
+		free(elem->value);
+	free(elem);
 }

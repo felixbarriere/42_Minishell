@@ -15,12 +15,12 @@
 #include "../include/minishell_f.h"
 #include "../include/minishell_s.h"
 
-static void ft_signal_handler(int signal)
+static void	ft_signal_handler(int signal)
 {
 	extern t_sh	g_sh;
+
 	if (signal == SIGINT)
 	{
-		/* créer un système de définition d'erreurs à renvoyer */
 		write(1, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
@@ -28,9 +28,7 @@ static void ft_signal_handler(int signal)
 	}
 	else if (signal == SIGSEGV)
 	{
-		/* créer un système de définition d'erreurs à renvoyer */
 		write(1, "exit\n", 6);
-		// a free
 		clear_list_env(g_sh.env_lst);
 		clear_list(g_sh.token_lst);
 		exit(0);
@@ -39,8 +37,6 @@ static void ft_signal_handler(int signal)
 
 void	ft_signals_orchestrator(void)
 {
-	signal(SIGQUIT, SIG_IGN);			/**** on ignore "ctrl_\" ****/
-	signal(SIGINT, ft_signal_handler);  /**** on gère "ctrl_C" ****/
-	// signal(SIGSEGV, ft_signal_handler);	/**** on gère "ctrl_D" ****/
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, ft_signal_handler);
 }
-

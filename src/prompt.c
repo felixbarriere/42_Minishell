@@ -1,15 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   prompt.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/27 17:43:57 by fbarrier          #+#    #+#             */
+/*   Updated: 2022/05/27 17:43:59 by fbarrier         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 #include "../include/minishell_d.h"
 #include "../include/minishell_f.h"
 #include "../include/minishell_s.h"
 
-void ft_prompt_start(t_sh *sh)
+void	ft_prompt_start(t_sh *sh)
 {
-	// ajouter une gestion d'erreur (check_exit);
 	sh->prompt = readline("➜ minishell ");
-	if ( !sh->prompt || !ft_strcmp(sh->prompt, "exit"))
+	if (!sh->prompt || !ft_strcmp(sh->prompt, "exit"))
 	{
-		// clear_list_env(sh->env_lst);
 		clear_list(sh->token_lst);
 		exit(0);
 	}
@@ -22,10 +32,10 @@ void	ft_prompt_init(t_sh *sh, char **env_init)
 	ft_init_env(env_init, sh);
 	while (1)
 	{
-		ft_prompt_start(sh); //générer un prompt avec readline() et enregistrer la commande tapée
+		ft_prompt_start(sh);
 		sh->lenght = ft_strlen(sh->prompt);
 		if (!is_only_space(sh->prompt))
-			lexer(sh); //analyse lexicale de la commande
+			lexer(sh);
 		clear_list(sh->token_lst);
 		ft_init_values(sh, env_init);
 	}
