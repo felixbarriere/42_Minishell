@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/27 15:10:46 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/27 16:00:22 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,11 @@ int	token_str(t_sh *sh)
 		else if (str[idx] == '$')
 		{
 			/* dollar_manager(); retourne une chaine avec la valeur du dollar */
+			if (str[idx + 1] == '\'' || str[idx + 1] == '\"')
+			{
+				idx++;
+				continue ;
+			}
 			dollar_value = noquote_dollar_manager(str, &idx, sh);
 			// if (!dollar_value)
 			// {
@@ -90,7 +95,8 @@ int	token_str(t_sh *sh)
 		// if (idx < len) //protection sans doute plus necessaire a cause du continue 
 			idx++;
 	}
-	sh->token_lst = add_back_token(sh->token_lst, STR, new_str);
+	if (new_str != NULL)
+		sh->token_lst = add_back_token(sh->token_lst, STR, new_str);
 	free(str);
 	
 	return (len);
