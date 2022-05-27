@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/26 17:55:52 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/27 15:10:46 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,10 @@ int	token_str(t_sh *sh)
 			/* retourne une chaine sans quote et change le $ ou pas */
 			temp = quotes_manager(str, &idx, sh);
 			/* join la chaine */
-			new_str = ft_strjoin(new_str, temp);
+			if (temp != NULL)
+				new_str = ft_strjoin(new_str, temp);
 			// FREE TEMP ?
-			// free(temp);
+			free(temp);
 		}
 		else if (str[idx] == '$')
 		{
@@ -78,7 +79,7 @@ int	token_str(t_sh *sh)
 			printf("VALUE : %s\n", dollar_value);
 			if (dollar_value != NULL)
 				new_str = severals_wds_value(sh, dollar_value, new_str);
-			if (ft_strcmp(dollar_value, "$"))
+			// if (ft_strcmp(dollar_value, "$"))
 				// free(dollar_value);
 			printf("new_str = %s\n", new_str);
 			continue;
@@ -90,9 +91,8 @@ int	token_str(t_sh *sh)
 			idx++;
 	}
 	sh->token_lst = add_back_token(sh->token_lst, STR, new_str);
-	///// FREE NEW_STR ?
+	free(str);
 	
-	// free(str);
 	return (len);
 }
 
