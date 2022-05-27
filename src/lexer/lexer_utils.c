@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/25 16:39:36 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/05/27 17:09:51 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 int	contains_quotes(char *str)
 {
 	int	i;
+
 	i = 0;
 	while (str[i] != '\0' && str[i] != '\'')
 	{
@@ -37,8 +38,9 @@ int	is_in_charset(char c)
 
 int	is_only_space(char *str)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	while (str[i])
 	{
 		if (str[i] != ' ')
@@ -61,8 +63,6 @@ char	*ft_strjoin_char(char *s1, char c)
 		s1 = malloc(sizeof(char) * 1);
 		s1[0] = '\0';
 	}
-	// if (s1 == NULL)
-	// 	return (NULL);
 	dest = ft_calloc(sizeof(char), (ft_strlen(s1) + 2));
 	if (!dest)
 		return (NULL);

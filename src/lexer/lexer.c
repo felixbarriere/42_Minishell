@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/26 14:29:34 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/27 17:05:41 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	lexer(t_sh *sh)
 	print_tokens(sh->token_lst);
 	printf("list length=%d\n", list_length(sh->token_lst));
 }
-
 
 // A retravailler en dictionnaire par la suite
 /*

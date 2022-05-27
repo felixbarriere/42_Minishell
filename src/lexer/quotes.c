@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/19 10:39:57 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/27 17:05:28 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_find_quote_state(t_sh *sh, int i)
 
 int	ft_is_quote_ok(t_sh *sh)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (sh->prompt[i])
@@ -43,4 +43,3 @@ int	ft_is_quote_ok(t_sh *sh)
 		return (FAILURE);
 	return (SUCCESS);
 }
-

@@ -26,17 +26,17 @@ int	len_to_dup(char *prompt)
 		if (prompt[j] && prompt[j] == '\"')
 		{
 			j++;
-			while(prompt[j] && prompt[j] != '\"')
+			while (prompt[j] && prompt[j] != '\"')
 				j++;
 		}
 		else if (prompt[j] && prompt[j] == '\'')
 		{
 			j++;
-			while(prompt[j] && prompt[j] != '\'')
+			while (prompt[j] && prompt[j] != '\'')
 				j++;
 		}
 		else if (is_in_charset(prompt[j]))
-			break;
+			break ;
 		j++;
 	}
 	return (j);
@@ -44,9 +44,9 @@ int	len_to_dup(char *prompt)
 
 char	*string_token(t_sh *sh, char *prompt)
 {
-	char *str;
-	char *temp;
-	int j;
+	char	*str;
+	char	*temp;
+	int		j;
 
 	j = len_to_dup(prompt);
 	temp = ft_strndup(prompt, j);
@@ -59,29 +59,25 @@ char	*string_token(t_sh *sh, char *prompt)
 	return (str);
 }
 
-char	*join_dollar_value(char *str, char *new_str, char *dollar_value, int idx)
+char	*join_dollar_value(char *str, char *new_str,
+			char *dollar_value, int idx)
 {
-	
 	if (ft_strcmp(dollar_value, "$") != 0)
 		new_str = ft_strjoin(new_str, dollar_value);
-	else if (ft_strcmp(dollar_value, "$") == 0 && (str[idx] != '\'' && str[idx] != '\"'))
+	else if (ft_strcmp(dollar_value, "$") == 0
+		&& (str[idx] != '\'' && str[idx] != '\"'))
 		new_str = ft_strjoin(new_str, dollar_value);
-		
-	///// FREE $VALUE ?
-	// free (dollar_value);
-	return(new_str);
+	return (new_str);
 }
 
 char	*severals_wds_value(t_sh *sh, char *dollar_value, char	*new_str)
 {
-	int 	i;
-	int 	j;
+	int		i;
+	int		j;
 	char	**value_dollar_split;
 
 	i = 0;
 	j = 0;
-	// value_dollar_split = NULL;
-
 	value_dollar_split = ft_split(dollar_value, ' ');
 	while (value_dollar_split[j])
 		j++;
@@ -92,16 +88,13 @@ char	*severals_wds_value(t_sh *sh, char *dollar_value, char	*new_str)
 		{
 			sh->token_lst = add_back_token(sh->token_lst, STR, new_str);
 			i++;
-			// free(new_str);
 			new_str = ft_strdup(value_dollar_split[i]);
 		}
-		// if (!value_dollar_split[i + 1])
-			free(new_str);
+		free(new_str);
 		new_str = ft_strdup(value_dollar_split[i]);
 	}
 	else
 		new_str = ft_strjoin(new_str, value_dollar_split[0]);
-	///// A FREE ??
 	ft_free(value_dollar_split);
 	return (new_str);
 }
