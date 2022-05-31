@@ -117,6 +117,7 @@ int		check_error_sep_6(t_token *token_lst);
 
 
 /******** LISTS  ********/
+int		ft_lstlast_dr_left(t_token *lst);
 void	ft_set_null_free_elem(t_env *elem);
 t_token *create_token(t_token_type type, char *value);
 t_token *add_back_token(t_token *list, t_token_type type, char *value);
