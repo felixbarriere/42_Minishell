@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/27 17:20:29 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/31 15:59:48 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,33 +51,43 @@ int	token_str(t_sh *sh)
 	dollar_value = NULL;
 	str = string_token(sh, &sh->prompt[sh->p_index]);
 	printf("\nSTR EN COURS = %s\n", str);
-	while (str[idx])
+	if (ft_lstlast_dr_left(sh->token_lst) == SUCCESS)
 	{
-		if (str[idx] == '\"' || str[idx] == '\'')
+		if (str != NULL)
+			sh->token_lst = add_back_token(sh->token_lst, LIMITER, str);
+		return (idx);
+	}
+	else
+	{
+		while (str[idx])
 		{
-			temp = quotes_manager(str, &idx, sh);
-			if (temp != NULL)
-				new_str = ft_strjoin(new_str, temp);
-			free(temp);
-		}
-		else if (str[idx] == '$')
-		{
-			/* dollar_manager(); retourne une chaine avec la valeur du dollar */
-			if (str[idx + 1] == '\'' || str[idx + 1] == '\"')
+			if (str[idx] == '\"' || str[idx] == '\'')
 			{
-				idx++;
+				temp = quotes_manager(str, &idx, sh);
+				if (temp != NULL)
+					new_str = ft_strjoin(new_str, temp);
+				free(temp);
+			}
+			else if (str[idx] == '$')
+			{
+				/* dollar_manager(); retourne une chaine avec la valeur du dollar */
+				if (str[idx + 1] == '\'' || str[idx + 1] == '\"')
+				{
+					idx++;
+					continue ;
+				}
+				dollar_value = noquote_dollar_manager(str, &idx, sh);
+				printf("VALUE : %s\n", dollar_value);
+				if (dollar_value != NULL)
+					new_str = severals_wds_value(sh, dollar_value, new_str);
+				printf("new_str = %s\n", new_str);
 				continue ;
 			}
-			dollar_value = noquote_dollar_manager(str, &idx, sh);
-			printf("VALUE : %s\n", dollar_value);
-			if (dollar_value != NULL)
-				new_str = severals_wds_value(sh, dollar_value, new_str);
-			printf("new_str = %s\n", new_str);
-			continue ;
+			else
+				new_str = ft_strjoin_char(new_str, str[idx]);
+			idx++;
 		}
-		else
-			new_str = ft_strjoin_char(new_str, str[idx]);
-		idx++;
+		
 	}
 	if (new_str != NULL)
 		sh->token_lst = add_back_token(sh->token_lst, STR, new_str);

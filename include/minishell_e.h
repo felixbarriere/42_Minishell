@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/09 15:15:11 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/31 15:59:33 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef enum token_type
 	ENV,
 	END,
 	STR,
+	LIMITER,
 	CMD,
 }	t_token_type;
 
