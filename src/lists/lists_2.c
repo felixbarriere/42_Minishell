@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:51:18 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/05/27 17:58:28 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/05/30 16:09:47 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	ft_set_null_free_elem_2(t_token *elem)
 {
 	if (!elem)
 		return ;
-	printf("%s\n", elem->value);
-	printf("ADRESS = %p\n", elem->value);
+	// printf("%s\n", elem->value);
+	// printf("ADRESS = %p\n", elem->value);
 	if (ft_strcmp(elem->value, "<<") && ft_strcmp(elem->value, ">>")
 		&& ft_strcmp(elem->value, "<") && ft_strcmp(elem->value, ">")
 		&& ft_strcmp(elem->value, "|"))
