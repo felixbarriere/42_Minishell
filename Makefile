@@ -12,6 +12,7 @@ src/prompt.c\
 src/lists/lists.c\
 src/lists/lists_2.c\
 src/lists/lists_3.c\
+src/pipes/pipe_creation.c\
 src/signals.c\
 src/env/env.c\
 src/env/env_utils.c\

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/27 17:20:29 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/30 16:45:50 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,10 @@ int	token_str(t_sh *sh)
 				continue ;
 			}
 			dollar_value = noquote_dollar_manager(str, &idx, sh);
-			printf("VALUE : %s\n", dollar_value);
+			// printf("VALUE : %s\n", dollar_value);
 			if (dollar_value != NULL)
 				new_str = severals_wds_value(sh, dollar_value, new_str);
-			printf("new_str = %s\n", new_str);
+			// printf("new_str = %s\n", new_str);
 			continue ;
 		}
 		else
@@ -106,65 +106,3 @@ void	tokenizer(t_sh *sh)
 		sh->p_index++;
 	}
 }
-
-
-// AU CAS OU  AVANT NORME
-
-// int	token_str(t_sh *sh)
-// {
-// 	char 	*str;
-// 	char 	*new_str;
-// 	char	*temp;
-// 	char	*dollar_value;
-// 	int		idx;
-// 	int		len;
-
-// 	idx = 0;
-// 	temp = NULL;
-// 	new_str = NULL;
-// 	dollar_value = NULL;
-// 	str = string_token(sh, &sh->prompt[sh->p_index]);
-// 	len = ft_strlen(str);
-// 	printf("\nSTR EN COURS = %s\n", str);
-// 	while(str[idx])
-// 	{
-// 		if (str[idx] == '\"' || str[idx] == '\'')
-// 		{
-// 			/* retourne une chaine sans quote et change le $ ou pas */
-// 			temp = quotes_manager(str, &idx, sh);
-// 			/* join la chaine */
-// 			if (temp != NULL)
-// 				new_str = ft_strjoin(new_str, temp);
-// 			// FREE TEMP ?
-// 			free(temp);
-// 		}
-// 		else if (str[idx] == '$')
-// 		{
-// 			/* dollar_manager(); retourne une chaine avec la valeur du dollar */
-// 			dollar_value = noquote_dollar_manager(str, &idx, sh);
-// 			// if (!dollar_value)
-// 			// {
-// 			// 	printf("VALUE NULL: %s\n", dollar_value);
-// 			// 	new_str = ft_strjoin(new_str, temp);
-// 			// 	// free(dollar_value);
-// 			// 	break;
-// 			// }
-// 			printf("VALUE : %s\n", dollar_value);
-// 			if (dollar_value != NULL)
-// 				new_str = severals_wds_value(sh, dollar_value, new_str);
-// 			// if (ft_strcmp(dollar_value, "$"))
-// 				// free(dollar_value);
-// 			printf("new_str = %s\n", new_str);
-// 			continue;
-// 		}
-// 		else
-// 			new_str = ft_strjoin_char(new_str, str[idx]);
-// 		printf("new_str2 = %s\n", new_str);
-// 		// if (idx < len) //protection sans doute plus necessaire a cause du continue 
-// 			idx++;
-// 	}
-// 	sh->token_lst = add_back_token(sh->token_lst, STR, new_str);
-// 	free(str);
-	
-// 	return (len);
-// }
