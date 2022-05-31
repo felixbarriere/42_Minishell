@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lists.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:18:11 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/27 17:57:03 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/05/31 15:57:30 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,24 @@ int	list_length(t_token *li)
 	return (size);
 }
 
+int	ft_lstlast_dr_left(t_token *lst)
+{
+	if (!lst)
+		return (FAILURE);
+	while (lst)
+	{
+		if (lst->next == NULL)
+		{
+			if (lst->type == DR_LEFT)
+			{
+			printf("TOKEN TYPE = %u et TOKEN VALUE = %s\n", lst->type, lst->value);	
+				return (SUCCESS);
+			}
+		}
+		lst = lst->next;
+	}
+	return (FAILURE);
+}
 // /*---------------------------------------------------------------------*/
 // /**
 // * Supprime un entier de la tête de la Liste

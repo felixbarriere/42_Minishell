@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/25 16:04:33 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/05/31 15:57:54 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ int		check_error_sep_6(t_token *token_lst);
 
 /******** LISTS  ********/
 
+int		ft_lstlast_dr_left(t_token *lst);
 void	ft_set_null_free_elem(t_env *elem);
 t_token *create_token(t_token_type type, char *value);
 t_token *add_back_token(t_token *list, t_token_type type, char *value);
