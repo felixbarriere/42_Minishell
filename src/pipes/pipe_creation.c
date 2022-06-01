@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:17:44 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/01 17:24:35 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/01 18:10:33 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,22 @@
 #include "../../include/minishell_d.h"
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
+
+void	print_pipe_tokens(t_pipe *li)
+{
+	while (li != NULL)
+	{
+		printf("\n");
+		if (li->token != NULL)
+			printf("[%s] ", li->token->value);
+		// if (li->prev)
+		// 	printf("[precedent = %s]", li->prev->value);
+		// if  (li->next)
+		// 	printf("[suivant = %s]", li->next->value);
+		li = li->next;
+	}
+	printf("\n");
+}
 
 t_pipe	*create_pipe_token(void)
 {
@@ -63,68 +79,20 @@ void	pipe_creation(t_sh *sh)
 
 	token_start = sh->token_lst;
 	sh->pipe_lst = add_back_pipe_token(sh->pipe_lst);
-	
 	pipe_start = sh->pipe_lst;
-
 	while (sh->token_lst != NULL)
 	{
-		if (sh->token_lst != NULL && sh->token_lst->type != PIPE)
+		if (sh->token_lst->type != PIPE)
 		{
 			sh->pipe_lst->token = add_back_token(sh->pipe_lst->token, sh->token_lst->type, sh->token_lst->value);
 			sh->token_lst = sh->token_lst->next;
-			// (*pipe_lst)->token = (*pipe_lst)->token->next;  //pas obligatoire si add back
 		}
-		else 
+		else
 		{			
 			sh->pipe_lst = add_back_pipe_token(sh->pipe_lst);
-			if (sh->token_lst != NULL)
-				sh->token_lst = sh->token_lst->next;
+			sh->token_lst = sh->token_lst->next;
 		}
 	}
 	sh->pipe_lst = pipe_start;
 	sh->token_lst = token_start;
-	// printf("pipe final: %s\n", pipe_start->token->value);
-	// printf("token final: %s\n", token_start->value);
 }
-
-
-
-// void	pipe_creation(t_token **token_lst,t_pipe **pipe_lst, t_pipe **pipe_start, t_token **token_start)
-// {	
-// 	int	i = 0;
-// 	*pipe_lst = add_back_pipe_token(*pipe_lst);
-	
-// 	*pipe_start = *pipe_lst;
-
-// 	while (*token_lst != NULL)
-// 	{
-		
-
-// 		if ((*token_lst) != NULL && (*token_lst)->type != PIPE)
-// 		{
-// 			printf("TOKEN IN PIPE %d\n", i);
-// 			// (*pipe_lst)->token = *token_lst;
-
-// 			(*pipe_lst)->token = add_back_token((*pipe_lst)->token, (*token_lst)->type, (*token_lst)->value);
-
-// 			printf("token inter: %s\n", (*token_lst)->value);			
-// 			*token_lst = (*token_lst)->next;
-// 			// (*pipe_lst)->token = (*pipe_lst)->token->next;  //pas obligatoire si add back
-// 		}
-
-// 		else 
-// 		{
-// 			printf("PIPE_LIST %d\n", i);
-			
-// 			*pipe_lst = add_back_pipe_token(*pipe_lst);
-// 			if (*token_lst != NULL)
-// 			*token_lst = (*token_lst)->next;
-// 			i++;
-// 		}
-// 	}
-// 	*pipe_lst = *pipe_start;
-// 	*token_lst = *token_start;
-// 	// printf("pipe final: %s\n", (*pipe_lst)->cmd);
-// 	printf("pipe final: %s\n", (*pipe_start)->token->value);
-// 	printf("token final: %s\n", (*token_start)->value);
-// }
