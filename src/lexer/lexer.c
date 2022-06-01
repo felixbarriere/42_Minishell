@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
 /*   Updated: 2022/06/01 17:19:01 by fbarrier         ###   ########.fr       */
@@ -47,6 +47,7 @@ void	lexer(t_sh *sh)
 	// token_start = sh->token_lst;
 	
 	check_error_sep(sh->token_lst);
+	get_commands(sh->token_lst);
 	print_tokens(sh->token_lst);
 
 	pipe_creation(sh);
