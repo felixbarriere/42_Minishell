@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/01 17:19:01 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/01 18:10:56 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,7 @@
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
 
-void	print_pipe_tokens(t_pipe *li)
-{
-	while (li != NULL)
-	{
-		printf("\n");
-		printf("[%s] ", li->token->value);
-		// if (li->prev)
-		// 	printf("[precedent = %s]", li->prev->value);
-		// if  (li->next)
-		// 	printf("[suivant = %s]", li->next->value);
-		li = li->next;
-	}
-	printf("\n");
-}
+
 
 void	lexer(t_sh *sh)
 {
