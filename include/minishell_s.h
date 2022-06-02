@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/31 21:00:28 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/02 17:48:02 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_pipe
 /* structure principale du programe */
 typedef struct s_sh
 {
+	char	**path;
 	t_env	*env_lst;
 	t_pipe	*pipe_lst;
 	int		e_index;

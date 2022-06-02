@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:43:57 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/02 15:33:21 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/02 17:48:39 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	ft_prompt_init(t_sh *sh, char **env_init)
 {
 	ft_init_values(sh, env_init);
 	ft_init_env(env_init, sh);
+	get_path(sh);
+
 	while (1)
 	{
 		ft_prompt_start(sh);
