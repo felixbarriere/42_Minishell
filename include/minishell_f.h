@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/02 14:09:02 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/02 14:46:58 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,8 @@ char    *expander(t_sh *sh, char *dollar);
 
 /******** GET_COMMANDS ********/
 void	get_commands(t_token *lst);
-
+void	get_commands1(t_sh *sh);
+// void	get_commands1(t_pipe *lst);
 
 /******** PIPE_CREATION ********/
 void	pipe_creation(t_sh *sh);
