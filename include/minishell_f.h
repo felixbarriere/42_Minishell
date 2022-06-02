@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/01 18:10:49 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/02 11:39:52 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,5 +132,7 @@ bool 	is_empty_list(t_token *li);
 void    clear_list_env(t_env *a_li);
 t_env   *pop_front_list_env(t_env *li);
 void	ft_set_null_free_elem_2(t_token *elem);
+void	ft_set_null_free_elem_pipe(t_pipe *elem);
+void	clear_list_pipe(t_pipe *a_list);
 
 #endif
