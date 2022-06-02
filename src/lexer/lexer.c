@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/01 18:10:56 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/02 16:07:48 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include "../../include/minishell_d.h"
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
-
-
 
 void	lexer(t_sh *sh)
 {
@@ -34,18 +32,17 @@ void	lexer(t_sh *sh)
 	// token_start = sh->token_lst;
 	
 	check_error_sep(sh->token_lst);
-	get_commands(sh->token_lst);
 	print_tokens(sh->token_lst);
 
 	pipe_creation(sh);
-	print_tokens(sh->token_lst);
-	print_pipe_tokens(sh->pipe_lst);
-
-	// print_tokens(sh->token_lst);
-	// print_tokens(sh->pipe_lst->next->next->token);
-	// sh->pipe_lst = sh->pipe_lst->next; //a enlever apres;
-	// print_pipe_tokens(sh->pipe_lst);
-
+	
+	get_commands1(sh);
+	printf("*********************\n");
+	while (sh->pipe_lst)
+	{
+		print_tokens(sh->pipe_lst->token);
+		sh->pipe_lst = sh->pipe_lst->next;
+	}
 	// print_tokens(sh->pipe_lst->token);
 	// printf("list length=%d\n", list_length(sh->token_lst));
 }

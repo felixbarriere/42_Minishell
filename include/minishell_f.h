@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/02 11:39:52 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/02 14:46:58 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ char    *expander(t_sh *sh, char *dollar);
 
 /******** GET_COMMANDS ********/
 void	get_commands(t_token *lst);
+void	get_commands1(t_sh *sh);
+// void	get_commands1(t_pipe *lst);
 /******** PIPE_CREATION ********/
 void	pipe_creation(t_sh *sh);
 // void	pipe_creation(t_token **token_lst,t_pipe **pipe_lst, t_pipe **pipe_start, t_token **token_start);

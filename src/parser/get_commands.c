@@ -3,7 +3,6 @@
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
 
-
 void	get_commands_args(t_token *lst)
 {
 	if (!lst)
@@ -27,11 +26,11 @@ void	get_commands_args(t_token *lst)
 
 void	get_commands(t_token *lst)
 {
-	int	counter;
-
-	counter = 0;
+	t_token	*temp = lst;
 	if (!lst)
 		return ;
+	printf("-----AVANT------\n");
+	print_tokens(temp);
 	while (lst)
 	{
 		if (lst->type == R_LEFT)
@@ -44,4 +43,20 @@ void	get_commands(t_token *lst)
 			get_commands_args(lst);
 		lst = lst->next;
 	}
+	lst = temp;
+	printf("------APRES-----\n");
+	print_tokens(lst);
+}
+
+void	get_commands1(t_sh *sh)
+{
+	t_pipe	*temp = sh->pipe_lst;
+	if (!sh->pipe_lst)
+		return ;
+	while (sh->pipe_lst)
+	{
+		get_commands(sh->pipe_lst->token);
+		sh->pipe_lst = sh->pipe_lst->next;
+	}
+	sh->pipe_lst = temp;
 }
