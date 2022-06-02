@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:18:11 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/02 15:55:49 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/02 17:47:24 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	ft_init_values(t_sh *sh, char **env)
 	(void)env;
 	sh->token_lst = NULL;
 	sh->prompt = NULL;
+	// sh->path = NULL;
 	sh->p_index = 0;
 	sh->e_index = 0;
 	sh->lenght = 0;

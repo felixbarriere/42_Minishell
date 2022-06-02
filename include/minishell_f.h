@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/02 14:46:58 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/02 17:35:46 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	ft_init_env_values(t_env *env);
 /*********** ENV ***********/
 // t_env	*ft_init_env(char **env_init, t_sh *sh);
 void	ft_init_env(char **env_init, t_sh *sh);
+void	get_path(t_sh *sh);
+
 
 
 /******** ENV_UTILS ********/
