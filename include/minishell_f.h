@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_f.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/02 11:39:52 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/02 14:09:02 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,15 @@
 /******** MAIN ********/
 void	ft_init_values(t_sh *sh, char **env);
 
+
 /******** INIT ********/
 void	ft_init_env_values(t_env *env);
+
 
 /*********** ENV ***********/
 // t_env	*ft_init_env(char **env_init, t_sh *sh);
 void	ft_init_env(char **env_init, t_sh *sh);
+
 
 /******** ENV_UTILS ********/
 void    ft_free(char **str);
@@ -97,12 +100,16 @@ void	tokenizer(t_sh *sh);
 void 	lexer(t_sh *sh);
 char    *expander(t_sh *sh, char *dollar);
 
+
 /******** GET_COMMANDS ********/
 void	get_commands(t_token *lst);
+
+
 /******** PIPE_CREATION ********/
 void	pipe_creation(t_sh *sh);
 // void	pipe_creation(t_token **token_lst,t_pipe **pipe_lst, t_pipe **pipe_start, t_token **token_start);
 void	print_pipe_tokens(t_pipe *li);
+
 
 /******** ERROR_SEP ********/
 bool	is_type(t_token* current, t_token_type type);
