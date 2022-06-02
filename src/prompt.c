@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:43:57 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/02 12:08:05 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/02 15:33:21 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	ft_prompt_start(t_sh *sh)
 	if (!sh->prompt || !ft_strcmp(sh->prompt, "exit"))
 	{
 		clear_list(sh->token_lst);
+		clear_list_pipe(sh->pipe_lst);
 		exit(0);
 	}
 	add_history(sh->prompt);

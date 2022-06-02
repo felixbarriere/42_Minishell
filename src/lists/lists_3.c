@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lists_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:54:27 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/02 12:10:27 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/02 15:58:16 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,22 @@ void	clear_list(t_token *a_list)
 
 void	ft_set_null_free_elem_pipe(t_pipe *elem)
 {
-	free(elem->token);
-	free(elem->cmd);
-	free(elem);
+	t_token	*tmp;
+
+	if (!(elem))
+		return ;
+	while (elem->token)
+	{
+		tmp = (elem->token)->next;
+		// free(elem->token->value);
+		free(elem->token);
+		elem->token = tmp;
+	}
+	// free(elem->token->value);
+	// free(elem->token);
+	// clear_list(elem->token);
+	// free(elem->cmd);
+	// free(elem);
 }
 
 void	clear_list_pipe(t_pipe *a_list)
@@ -75,10 +88,14 @@ void	clear_list_pipe(t_pipe *a_list)
 
 	if (!(a_list))
 		return ;
+	free(a_list->cmd);
 	while (a_list)
 	{
 		tmp = (a_list)->next;
+		// free(a_list);
 		ft_set_null_free_elem_pipe(a_list);
+		// clear_list(a_list->token);
+		free(a_list);
 		a_list = tmp;
 	}
 }
