@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_creation.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:17:44 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/02 15:25:58 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/03 15:50:02 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ t_pipe	*create_pipe_token(void)
 	if (!elem)
 		return (NULL);
 	elem->cmd = NULL;
-	elem->options = NULL;
 	elem->file = NULL;
 	elem->token = NULL;
 	elem->prev = NULL;

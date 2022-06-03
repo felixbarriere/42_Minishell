@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/31 17:18:20 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/03 18:37:51 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,16 @@ int	token_str(t_sh *sh)
 	return (idx);
 }
 
+int	ft_strlen2(const char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	return (i);
+}
+
 /* 
 Ajoute le bon token à la liste chainée des tokens sh->token_lst
 */
@@ -102,7 +112,7 @@ void	tokenizer(t_sh *sh)
 	while (sh->prompt[sh->p_index])
 	{
 		while (sh->prompt[sh->p_index] && sh->prompt[sh->p_index] == ' ')
-			sh->p_index++;
+				sh->p_index++;
 		if (is_in_charset(sh->prompt[sh->p_index]))
 		{
 			if (sh->prompt[sh->p_index] == PIPE)
@@ -112,6 +122,8 @@ void	tokenizer(t_sh *sh)
 		}
 		else if (sh->prompt[sh->p_index])
 			token_str(sh);
+		if (ft_strlen2(sh->prompt) <= sh->p_index)
+			break ;
 		sh->p_index++;
 	}
 }
