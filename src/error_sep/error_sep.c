@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_sep.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 18:20:05 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/05/27 18:24:19 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/03 18:40:03 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	check_error_sep_0(t_token *token_lst)
 	if ((is_type(token_lst->prev, R_RIGHT) && is_type(token_lst, PIPE)
 			&& is_type(token_lst->next, PIPE))
 		|| (is_type(token_lst, R_LEFT) && is_type(token_lst->next, PIPE))
+		|| (is_type(token_lst, R_RIGHT) && is_type(token_lst->next, PIPE))
 		|| (is_type(token_lst, PIPE) && is_type(token_lst->next, PIPE)))
 	{
 		printf("syntax error near unexpected token  `|'\n");

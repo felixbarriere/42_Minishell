@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lists_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:54:27 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/03 12:13:16 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/03 18:10:41 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,9 @@ void	ft_set_null_free_elem_pipe(t_pipe *elem)
 
 	if (!(elem))
 		return ;
+	free (elem->args);
+	free (elem->cmd);
+	free (elem->limiter);
 	while (elem->token)
 	{
 		tmp = (elem->token)->next;
@@ -80,7 +83,6 @@ void	clear_list_pipe(t_pipe *a_list)
 
 	if (!(a_list))
 		return ;
-	free(a_list->cmd);
 	while (a_list)
 	{
 		tmp = (a_list)->next;
