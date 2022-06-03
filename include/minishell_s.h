@@ -58,6 +58,7 @@ typedef struct s_pipe
 /* structure principale du programe */
 typedef struct s_sh
 {
+	char	**path;
 	t_env	*env_lst;
 	t_pipe	*pipe_lst;
 	int		e_index;

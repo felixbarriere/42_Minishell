@@ -31,6 +31,8 @@ void	ft_init_env_values(t_env *env);
 /*********** ENV ***********/
 // t_env	*ft_init_env(char **env_init, t_sh *sh);
 void	ft_init_env(char **env_init, t_sh *sh);
+void	get_path(t_sh *sh);
+
 
 
 /******** ENV_UTILS ********/

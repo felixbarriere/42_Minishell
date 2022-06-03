@@ -17,26 +17,18 @@
 
 void	lexer(t_sh *sh)
 {
-	// t_pipe 	*pipe_start;
-	// t_token	*token_start;
-
-	// pipe_start = sh->pipe_lst;
-
 	if (ft_is_quote_ok(sh) != 0)
 	{
 		ft_putstr_fd("quotes unclosed\n", 2);
 		return ;
 	}
 	tokenizer(sh);
-	// pipe_start = sh->pipe_lst;
-	// token_start = sh->token_lst;
 	
 	check_error_sep(sh->token_lst);
 	print_tokens(sh->token_lst);
-
 	pipe_creation(sh);
-	
 	get_commands1(sh);
+
 	printf("*********************\n");
 	while (sh->pipe_lst)
 	{
