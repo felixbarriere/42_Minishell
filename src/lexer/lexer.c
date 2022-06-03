@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/02 17:30:52 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/03 15:06:56 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,14 @@ void	lexer(t_sh *sh)
 	pipe_creation(sh);
 	get_commands1(sh);
 
-	print_tokens(sh->pipe_lst->token);
+	printf("*********************\n");
+	while (sh->pipe_lst)
+	{
+		print_tokens(sh->pipe_lst->token);
+		sh->pipe_lst = sh->pipe_lst->next;
+	}
 
-
-
+	
+	// print_tokens(sh->pipe_lst->token);
+	// printf("list length=%d\n", list_length(sh->token_lst));
 }
