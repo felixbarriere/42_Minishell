@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_f.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
 /*   Updated: 2022/06/03 12:13:57 by fbarrier         ###   ########.fr       */
@@ -104,8 +104,9 @@ char    *expander(t_sh *sh, char *dollar);
 
 
 /******** GET_COMMANDS ********/
-void	get_commands(t_token *lst);
 void	get_commands1(t_sh *sh);
+// void	get_commands(t_token *lst);
+// void	get_commands1(t_sh *sh);
 // void	get_commands1(t_pipe *lst);
 
 /******** PIPE_CREATION ********/
