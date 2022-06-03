@@ -80,41 +80,4 @@ void	ft_init_env(char **env_init, t_sh *sh)
 		orchestrate_env_token(env_init[i], sh, i);
 		i++;
 	}
-	// tmp = sh->env_lst;
-	// while (tmp!= NULL)
-	// {
-	// 	printf("\n");
-	// 	printf("KEY : [%s] ", tmp->key);
-	// 	printf("VALUE : [%s] ", tmp->value);
-	// 	// printf("FULL : [%s] \n", tmp->full);
-	// 	// printf("[Type : %d]\n", sh->env_lst->type);
-	// 	tmp = tmp->next;
-	// }
 }
-
-// t_env	*ft_init_env(char **env_init, t_sh *sh)
-// {
-// 	int		i;
-
-// 	if (!env_init)
-// 		return (NULL);
-// 	i = 0;
-// 	sh->env_lst = malloc(sizeof(t_env));
-// 	if (!sh->env_lst)
-// 		return (NULL);
-// 	while (env_init[i])
-// 	{
-// 		orchestrate_env_token(env_init[i], sh, i);
-// 		i++;
-// 	}
-// 	while (sh->env_lst != NULL)
-// 	{
-// 		printf("\n");
-// 		printf("KEY : [%s] ", sh->env_lst->key);
-// 		printf("VALUE : [%s] ", sh->env_lst->value);
-// 		printf("FULL : [%s] ", sh->env_lst->full);
-// 		printf("[Type : %d]\n", sh->env_lst->type);
-// 		sh->env_lst = sh->env_lst->next;
-// 	}
-// 	return (sh->env_lst);
-// }
