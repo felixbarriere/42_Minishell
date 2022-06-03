@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:54:27 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/02 15:58:16 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/03 12:13:16 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ void	ft_set_null_free_elem_2(t_token *elem)
 {
 	if (!elem)
 		return ;
-	// printf("%s\n", elem->value);
-	// printf("ADRESS = %p\n", elem->value);
 	if (ft_strcmp(elem->value, "<<") && ft_strcmp(elem->value, ">>")
 		&& ft_strcmp(elem->value, "<") && ft_strcmp(elem->value, ">")
 		&& ft_strcmp(elem->value, "|"))
@@ -71,15 +69,9 @@ void	ft_set_null_free_elem_pipe(t_pipe *elem)
 	while (elem->token)
 	{
 		tmp = (elem->token)->next;
-		// free(elem->token->value);
 		free(elem->token);
 		elem->token = tmp;
 	}
-	// free(elem->token->value);
-	// free(elem->token);
-	// clear_list(elem->token);
-	// free(elem->cmd);
-	// free(elem);
 }
 
 void	clear_list_pipe(t_pipe *a_list)
@@ -92,9 +84,7 @@ void	clear_list_pipe(t_pipe *a_list)
 	while (a_list)
 	{
 		tmp = (a_list)->next;
-		// free(a_list);
 		ft_set_null_free_elem_pipe(a_list);
-		// clear_list(a_list->token);
 		free(a_list);
 		a_list = tmp;
 	}

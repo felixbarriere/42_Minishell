@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:18:11 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/02 17:47:24 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/03 11:51:46 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_init_values(t_sh *sh, char **env)
 	sh->e_index = 0;
 	sh->lenght = 0;
 	sh->state_quote = DEFAULT;
-
+	// sh->path = NULL;
 	sh->pipe_lst = ft_calloc(1, sizeof(t_pipe));
 	if (!sh->pipe_lst)
 		return ;

@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:43:57 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/02 17:48:39 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/03 12:03:49 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	ft_prompt_start(t_sh *sh)
 	{
 		clear_list(sh->token_lst);
 		clear_list_pipe(sh->pipe_lst);
+		ft_free(sh->path);
 		exit(0);
 	}
 	add_history(sh->prompt);

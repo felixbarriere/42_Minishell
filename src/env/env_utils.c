@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 16:53:47 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/02 17:59:29 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/03 15:20:15 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,31 +45,19 @@ void	ft_free_3(t_env *list)
 	{
 		tmp = list->next;
 		free(list);
-		// free(list->key);
-		// free(list->value);
-		// free(list->full);
 		list = tmp;
 	}
 }
 
 void	get_path(t_sh	*sh)
 {
-	// char *path_to_split;
-	int i = 0;
-	
-	while (sh->env_lst)
+	t_env	*temp;
+
+	temp = sh->env_lst;
+	while (temp)
 	{
-		if (!ft_strcmp(sh->env_lst->key, "PATH"))
-		{
-			printf("success\n");
-			// path_to_split = ft_strdup();
-			sh->path = ft_split(sh->env_lst->value, ':');
-		}
-		sh->env_lst = sh->env_lst->next;
+		if (!ft_strcmp(temp->key, "PATH"))
+			sh->path = ft_split(temp->value, ':');
+		temp = temp->next;
 	}
-	// while(sh->path[i])
-	// {
-	// 	printf("%s\n",sh->path[i]);
-	// 	i++;
-	// }
 }
