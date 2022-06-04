@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:54:27 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/03 18:10:41 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/04 15:37:59 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,18 @@ void	clear_list(t_token *a_list)
 void	ft_set_null_free_elem_pipe(t_pipe *elem)
 {
 	t_token	*tmp;
+	int		i;
 
 	if (!(elem))
 		return ;
-	free (elem->args);
+	i = 0;
+	if (elem->args)
+	{
+		while (elem->args[i])
+			free(elem->args[i++]);
+		free(elem->args[i]);
+		free (elem->args);
+	}
 	free (elem->cmd);
 	free (elem->limiter);
 	while (elem->token)

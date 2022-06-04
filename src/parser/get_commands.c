@@ -107,7 +107,8 @@ void	update_args(t_pipe **pipe_lst)
 	{
 		if (token->type == CMD || token->type == ARG)
 		{
-			(*pipe_lst)->args[i] = ft_strndup(token->value, ft_strlen(token->value));
+			(*pipe_lst)->args[i] = ft_strdup(token->value);
+			// ft_strndup(token->value, ft_strlen(token->value));
 			if (!(*pipe_lst)->args[i])
 				return ;
 			i++;	
@@ -146,8 +147,8 @@ void	get_commands(t_token *lst, t_sh *sh)
 	t_token	*temp = lst;
 	if (!lst)
 		return ;
-	// printf("-----AVANT------\n");
-	// print_tokens(temp);
+	printf("-----AVANT------\n");
+	print_tokens(temp);
 	while (lst)
 	{
 		if (lst->type == R_LEFT)
@@ -163,8 +164,8 @@ void	get_commands(t_token *lst, t_sh *sh)
 		lst = lst->next;
 	}
 	lst = temp;
-	// printf("------APRES-----\n");
-	// print_tokens(lst);
+	printf("------APRES-----\n");
+	print_tokens(lst);
 	update_args(&sh->pipe_lst);
 }
 
@@ -178,15 +179,14 @@ void	get_commands1(t_sh *sh)
 		get_commands(sh->pipe_lst->token, sh);
 		sh->pipe_lst = sh->pipe_lst->next;
 	}
-	// printf("*********************\n");
-	// int i = 0;
-	// printf("COMMAND = %s\n", temp->cmd);
-	// while (temp->args[i] != NULL)
-	// {
-	// 	printf("ARG = %s\n", temp->args[i]);
-	// 	i++;
-	// }
-
+	printf("*********************\n");
+	int i = 0;
+	printf("COMMAND = %s\n", temp->cmd);
+	while (temp->args[i] != NULL)
+	{
+		printf("ARG = %s\n", temp->args[i]);
+		i++;
+	}
 	sh->pipe_lst = temp;
 
 }
