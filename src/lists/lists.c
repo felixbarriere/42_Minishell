@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:18:11 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/03 12:13:48 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/04 19:32:53 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,7 @@ int	ft_lstlast_dr_left(t_token *lst)
 		if (lst->next == NULL)
 		{
 			if (lst->type == DR_LEFT)
-			{
-			printf("TOKEN TYPE = %u et TOKEN VALUE = %s\n", lst->type, lst->value);	
 				return (SUCCESS);
-			}
 		}
 		lst = lst->next;
 	}

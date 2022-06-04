@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 18:08:23 by marvin            #+#    #+#             */
-/*   Updated: 2022/06/04 15:34:22 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/04 19:39:50 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 
-	// t_sh sh;
 	ft_memset(&g_sh, 0, sizeof(t_sh));
 	if (ac != 1)
 	{

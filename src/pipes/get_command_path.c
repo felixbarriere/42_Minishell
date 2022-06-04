@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:27:17 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/03 16:48:58 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/04 19:15:27 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ char	*ft_strjoin_path(char *s1, char *s2)
 		i++;
 	}
 	dest[i] = '\0';
-	// free(s1);
-	// free(s2);
 	return (dest);
 }
 
@@ -57,21 +55,18 @@ char	*command_line(char **path, char *cmd)
 {
 	char	*path_slash;
 	char	*path_complete;
-	// int		*cmd_bin;
-	// (void)cmd;
 	int		i;
 
 	path_slash = NULL;
 	path_complete = NULL;
 	i = 0;
-	while (path[i])
+	while (path[i] && cmd != NULL)
 	{
 		path_slash = ft_strjoin_path(path[i], "/");
-		path_complete = ft_strjoin_path(path_slash, cmd); //a free
-		printf("path complete: %s\n", path_complete);
+		path_complete = ft_strjoin_path(path_slash, cmd);
+		free(path_slash);
 		if (access(path_complete, F_OK) == 0)
 			return (path_complete);
-		free(path_slash);
 		free(path_complete);
 		i++;
 	}
@@ -80,15 +75,16 @@ char	*command_line(char **path, char *cmd)
 
 void	get_command_path(t_sh	*sh)
 {
-	int	i;
-	// (void)sh;
-	// data->cmd = command_line(data->cmd_binaries, data->cmd_av[0]);
+	int		i;
+	t_pipe	*temp;
+
+	temp = sh->pipe_lst;
 	i = 0;
-	while(sh->pipe_lst)
+	while (sh->pipe_lst)
 	{
 		sh->pipe_lst->cmd_verified = command_line(sh->path, sh->pipe_lst->cmd);
 		printf("cmd_verified: %s\n", sh->pipe_lst->cmd_verified);
 		sh->pipe_lst = sh->pipe_lst->next;
 	}
-	// printf("commande complete: %s\n", sh->pipe_lst->cmd_verified);
+	sh->pipe_lst = temp;
 }

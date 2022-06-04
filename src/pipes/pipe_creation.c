@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_creation.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:17:44 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/03 15:50:02 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/04 19:33:45 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,6 @@ void	print_pipe_tokens(t_pipe *li)
 		printf("\n");
 		if (li->token != NULL)
 			printf("[%s] ", li->token->value);
-		// if (li->prev)
-		// 	printf("[precedent = %s]", li->prev->value);
-		// if  (li->next)
-		// 	printf("[suivant = %s]", li->next->value);
 		li = li->next;
 	}
 	printf("\n");
@@ -52,7 +48,6 @@ t_pipe	*add_back_pipe_token(t_pipe *pipe_lst)
 	t_pipe	*tmp;
 
 	tmp = NULL;
-	// (void)value;
 	new = create_pipe_token();
 	if (!new)
 		return (NULL);
@@ -66,14 +61,12 @@ t_pipe	*add_back_pipe_token(t_pipe *pipe_lst)
 		tmp->next = new;
 		new->prev = tmp;
 	}
-	// free(new);
-	// free(tmp);
 	return (tmp);
 }
 
 void	pipe_creation(t_sh *sh)
 {	
-	t_pipe 	*pipe_start;
+	t_pipe	*pipe_start;
 	t_token	*token_start;
 
 	token_start = sh->token_lst;
@@ -83,7 +76,8 @@ void	pipe_creation(t_sh *sh)
 	{
 		if (sh->token_lst->type != PIPE)
 		{
-			sh->pipe_lst->token = add_back_token(sh->pipe_lst->token, sh->token_lst->type, sh->token_lst->value);
+			sh->pipe_lst->token = add_back_token(sh->pipe_lst->token,
+					sh->token_lst->type, sh->token_lst->value);
 			sh->token_lst = sh->token_lst->next;
 		}
 		else

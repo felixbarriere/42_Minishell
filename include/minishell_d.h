@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_d.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/04/27 15:36:03 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/04 19:26:02 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_D_H
 # define MINISHELL_D_H
 
-#include "minishell.h"
-#include "minishell_f.h"
-#include "minishell_s.h"
-#include "minishell_e.h"
+# include "minishell.h"
+# include "minishell_f.h"
+# include "minishell_s.h"
+# include "minishell_e.h"
 
 /****************** MACROS ******************/
 # ifndef FAILURE

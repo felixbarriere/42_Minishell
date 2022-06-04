@@ -6,20 +6,21 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/03 15:46:52 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/04 19:25:43 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_S_H
 # define MINISHELL_S_H
 
-#include "minishell.h"
-#include "minishell_d.h"
-#include "minishell_f.h"
-#include "minishell_e.h"
+# include "minishell.h"
+# include "minishell_d.h"
+# include "minishell_f.h"
+# include "minishell_e.h"
 
 /**************** STRUCTURES ****************/
-/* liste chaînée. Chaque token représente un caractère tokenisé, chaîné au token précédent / suivant
+/* liste chaînée. Chaque token représente un caractère tokenisé, 
+chaîné au token précédent / suivant
  */
 typedef struct s_token
 {
@@ -27,7 +28,7 @@ typedef struct s_token
 	char			*value;
 	struct s_token	*prev;
 	struct s_token	*next;
-} t_token;
+}	t_token;
 
 /* liste chainee representant les variables d'environnement */
 typedef struct s_env
@@ -36,9 +37,9 @@ typedef struct s_env
 	char			*full;
 	char			*key;
 	char			*value;
-	int				index; //?
+	int				index;
 	struct s_env	*next;
-} t_env;
+}	t_env;
 
 /* liste chainee representant les commandes autours des pipes */
 typedef struct s_pipe
@@ -51,10 +52,10 @@ typedef struct s_pipe
 	char			**args;
 	int				input;
 	int				output;
-	char			*file; //?
+	char			*file;
 	struct s_pipe	*prev;
 	struct s_pipe	*next;
-} t_pipe;
+}	t_pipe;
 
 /* structure principale du programe */
 typedef struct s_sh
@@ -68,6 +69,6 @@ typedef struct s_sh
 	int		p_index;
 	int		lenght;
 	int		state_quote;
-} t_sh;
+}	t_sh;
 
 #endif

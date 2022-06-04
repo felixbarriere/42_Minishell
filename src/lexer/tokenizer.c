@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/03 18:37:51 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/04 19:35:25 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int	token_str(t_sh *sh)
 	new_str = NULL;
 	dollar_value = NULL;
 	str = string_token(sh, &sh->prompt[sh->p_index]);
-	printf("\nSTR EN COURS = %s\n", str);
 	if (ft_lstlast_dr_left(sh->token_lst) == SUCCESS)
 	{
 		if (str != NULL)
@@ -70,17 +69,14 @@ int	token_str(t_sh *sh)
 			}
 			else if (str[idx] == '$')
 			{
-				/* dollar_manager(); retourne une chaine avec la valeur du dollar */
 				if (str[idx + 1] == '\'' || str[idx + 1] == '\"')
 				{
 					idx++;
 					continue ;
 				}
 				dollar_value = noquote_dollar_manager(str, &idx, sh);
-				printf("VALUE : %s\n", dollar_value);
 				if (dollar_value != NULL)
 					new_str = severals_wds_value(sh, dollar_value, new_str);
-				printf("new_str = %s\n", new_str);
 				continue ;
 			}
 			else
@@ -104,9 +100,6 @@ int	ft_strlen2(const char *s)
 	return (i);
 }
 
-/* 
-Ajoute le bon token à la liste chainée des tokens sh->token_lst
-*/
 void	tokenizer(t_sh *sh)
 {
 	while (sh->prompt[sh->p_index])
