@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lists_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:51:18 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/02 11:35:45 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/04 19:32:31 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 #include "../../include/minishell_d.h"
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
-
-t_token	*new_list(void)
-{
-	return (NULL);
-}
 
 t_env	*new_list_env(void)
 {
@@ -37,4 +32,45 @@ bool	is_empty_list_env(t_env *li)
 	if (li == NULL)
 		return (true);
 	return (false);
+}
+
+void	ft_set_null_free_elem_pipe(t_pipe *elem)
+{
+	t_token	*tmp;
+	int		i;
+
+	if (!(elem))
+		return ;
+	i = 0;
+	if (elem->args)
+	{
+		while (elem->args[i])
+			free(elem->args[i++]);
+		free(elem->args[i]);
+		free (elem->args);
+	}
+	free (elem->cmd);
+	free (elem->limiter);
+	free (elem->cmd_verified);
+	while (elem->token)
+	{
+		tmp = (elem->token)->next;
+		free(elem->token);
+		elem->token = tmp;
+	}
+}
+
+void	clear_list_pipe(t_pipe *a_list)
+{
+	t_pipe	*tmp;
+
+	if (!(a_list))
+		return ;
+	while (a_list)
+	{
+		tmp = (a_list)->next;
+		ft_set_null_free_elem_pipe(a_list);
+		free(a_list);
+		a_list = tmp;
+	}
 }

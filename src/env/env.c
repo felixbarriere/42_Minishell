@@ -48,8 +48,6 @@ t_env	*add_back_env_token(t_env *list, char *value, char *key, int index)
 			tmp = tmp->next;
 		tmp->next = new;
 	}
-	// free(new);
-	// free(tmp);
 	return (list);
 }
 
