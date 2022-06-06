@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/04 19:24:29 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/04 20:05:38 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,5 +130,8 @@ t_env	*pop_front_list_env(t_env *li);
 void	ft_set_null_free_elem_2(t_token *elem);
 void	ft_set_null_free_elem_pipe(t_pipe *elem);
 void	clear_list_pipe(t_pipe *a_list);
+
+/******** EXECUTION ********/
+void	execution(t_sh	*sh, char **env_init);
 
 #endif
