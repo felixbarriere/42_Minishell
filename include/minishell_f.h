@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_f.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/04 19:24:29 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/06 11:07:15 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,8 @@ void	tokenizer(t_sh *sh);
 void	lexer(t_sh *sh);
 char	*expander(t_sh *sh, char *dollar);
 
-/******** GET_COMMANDS ********/
-void	get_commands1(t_sh *sh);
-// void	get_commands(t_token *lst);
-// void	get_commands1(t_sh *sh);
-// void	get_commands1(t_pipe *lst);
+/******** GET_COMMAND_TYPE ********/
+void	get_commands_type(t_sh *sh);
 
 /******** GET_COMMANDS_PATH ********/
 void	get_command_path(t_sh *sh);

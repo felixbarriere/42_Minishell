@@ -14,6 +14,7 @@ src/lists/lists_2.c\
 src/lists/lists_3.c\
 src/pipes/pipe_creation.c\
 src/pipes/get_command_path.c\
+src/pipes/get_command_type.c\
 src/signals.c\
 src/env/env.c\
 src/env/env_utils.c\
@@ -21,7 +22,6 @@ src/init.c\
 src/error_sep/error_sep.c\
 src/error_sep/error_sep2.c\
 src/parser/expander.c\
-src/parser/get_commands.c\
 
 OBJS = ${SRCS:.c=.o}
 INCS	=	-I ./includes -I ./libft/includes
