@@ -128,4 +128,7 @@ void	ft_set_null_free_elem_2(t_token *elem);
 void	ft_set_null_free_elem_pipe(t_pipe *elem);
 void	clear_list_pipe(t_pipe *a_list);
 
+/******** EXECUTION ********/
+void	execution(t_sh	*sh, char **env_init);
+
 #endif

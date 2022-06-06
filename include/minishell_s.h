@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/04 19:25:43 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/06 18:46:10 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ typedef struct s_pipe
 	int				input;
 	int				output;
 	char			*file;
+	int				infile;
+	int				outfile;
 	struct s_pipe	*prev;
 	struct s_pipe	*next;
 }	t_pipe;
@@ -60,6 +62,9 @@ typedef struct s_pipe
 /* structure principale du programe */
 typedef struct s_sh
 {
+	pid_t	pid1;
+	pid_t	pid2;
+	int		pipefd[2];
 	char	**path;
 	t_env	*env_lst;
 	t_pipe	*pipe_lst;
