@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_commands.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 19:28:11 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/04 19:31:08 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/06 11:05:24 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	update_args(t_pipe **pipe_lst)
 	return ;
 }
 
-void	get_commands_args(t_token *lst, t_sh *sh)
+void	find_type_args(t_token *lst, t_sh *sh)
 {
 	(void)sh;
 	if (!lst)
@@ -77,7 +77,7 @@ void	get_commands_args(t_token *lst, t_sh *sh)
 	}
 }
 
-void	get_commands(t_token *lst, t_sh *sh)
+void	find_type(t_token *lst, t_sh *sh)
 {
 	t_token	*temp;
 
@@ -95,7 +95,7 @@ void	get_commands(t_token *lst, t_sh *sh)
 		else if (lst->type == LIMITER)
 			sh->pipe_lst->limiter = ft_strdup(lst->value);
 		else if (lst->type == STR)
-			get_commands_args(lst, sh);
+			find_type_args(lst, sh);
 		lst = lst->next;
 	}
 	lst = temp;
@@ -104,7 +104,7 @@ void	get_commands(t_token *lst, t_sh *sh)
 	update_args(&sh->pipe_lst);
 }
 
-void	get_commands1(t_sh *sh)
+void	get_commands_type(t_sh *sh)
 {
 	t_pipe	*temp;
 	int		i;
@@ -114,7 +114,7 @@ void	get_commands1(t_sh *sh)
 		return ;
 	while (sh->pipe_lst)
 	{
-		get_commands(sh->pipe_lst->token, sh);
+		find_type(sh->pipe_lst->token, sh);
 		sh->pipe_lst = sh->pipe_lst->next;
 	}
 	i = 0;
