@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:43:57 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/09 15:49:17 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/09 17:24:19 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ void	ft_prompt_init(t_sh *sh, char **env_init)
 		sh->lenght = ft_strlen(sh->prompt);
 		if (!is_only_space(sh->prompt))
 			lexer(sh);		
-		printf("isbuiltin: %d\n", sh->pipe_lst->is_builtin);
-		execution(sh, env_init);
+		execution(sh->pipe_lst, env_init);
 		clear_list(sh->token_lst);
 		clear_list_pipe(sh->pipe_lst);
 		ft_init_values(sh, env_init);
