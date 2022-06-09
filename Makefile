@@ -23,6 +23,7 @@ src/init.c\
 src/error_sep/error_sep.c\
 src/error_sep/error_sep2.c\
 src/parser/expander.c\
+src/builtins/index.c
 
 OBJS = ${SRCS:.c=.o}
 INCS	=	-I ./includes -I ./libft/includes

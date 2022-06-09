@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_f.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/06 11:07:15 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/09 16:15:15 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,5 +130,6 @@ void	clear_list_pipe(t_pipe *a_list);
 
 /******** EXECUTION ********/
 void	execution(t_sh	*sh, char **env_init);
+void	index_builtins(t_pipe	*pipe);
 
 #endif

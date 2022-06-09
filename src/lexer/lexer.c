@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/09 15:13:12 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/09 16:26:56 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,23 @@
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
 
-void	is_builtin(t_sh	*sh)
+void	is_builtin(t_pipe	*pipe)
 {
 	t_pipe	*pipe_start;
 
-	pipe_start = sh->pipe_lst;
-	while (sh->pipe_lst)
+	pipe_start = pipe;
+	while (pipe)
 	{
-		if (!ft_strcmp(sh->prompt, "echo") || !ft_strcmp(sh->prompt, "cd") ||
-			!ft_strcmp(sh->prompt, "pwd") || !ft_strcmp(sh->prompt, "export") ||
-			!ft_strcmp(sh->prompt, "unset") || !ft_strcmp(sh->prompt, "env") ||
-			!ft_strcmp(sh->prompt, "exit"))
+			printf("cmd: %s\n", pipe->cmd);
+		if (!ft_strcmp(pipe->cmd, "echo") || !ft_strcmp(pipe->cmd, "cd") ||
+			!ft_strcmp(pipe->cmd, "pwd") || !ft_strcmp(pipe->cmd, "export") ||
+			!ft_strcmp(pipe->cmd, "unset") || !ft_strcmp(pipe->cmd, "env"))
 			{
-				sh->pipe_lst->is_builtin = 1;	
+				pipe->is_builtin = 1;	
 			}		
-		sh->pipe_lst = sh->pipe_lst->next;
+		pipe = pipe->next;
 	}
-	sh->pipe_lst = pipe_start;
+	pipe = pipe_start;
 }
 
 void	lexer(t_sh *sh)
@@ -47,6 +47,7 @@ void	lexer(t_sh *sh)
 	pipe_creation(sh);
 	get_commands_type(sh);
 	get_command_path(sh);
-	// is_builtin(sh);
+	is_builtin(sh->pipe_lst);
+
 	printf("*********************\n");
 }
