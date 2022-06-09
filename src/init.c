@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:18:11 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/04 19:27:22 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/09 15:14:28 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	ft_init_values(t_sh *sh, char **env)
 	sh->pipe_lst->args = NULL;
 	sh->pipe_lst->file = NULL;
 	sh->pipe_lst->token = NULL;
+	// sh->pipe_lst->is_builtin = 0;
 	sh->pipe_lst->prev = NULL;
 	sh->pipe_lst->next = NULL;
 }

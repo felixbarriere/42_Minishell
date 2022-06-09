@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:43:57 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/04 20:05:30 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/09 15:09:15 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	ft_prompt_init(t_sh *sh, char **env_init)
 		sh->lenght = ft_strlen(sh->prompt);
 		if (!is_only_space(sh->prompt))
 			lexer(sh);
+		printf("cmd3: %s\n", sh->pipe_lst->cmd_verified);
+		
 		execution(sh, env_init);
 		clear_list(sh->token_lst);
 		clear_list_pipe(sh->pipe_lst);

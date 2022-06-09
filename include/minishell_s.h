@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/06 18:46:10 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/09 14:39:25 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_pipe
 	char			*file;
 	int				infile;
 	int				outfile;
+	int				is_builtin;
 	struct s_pipe	*prev;
 	struct s_pipe	*next;
 }	t_pipe;
