@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:12:23 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/09 18:07:57 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/09 18:12:32 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,16 @@ void	cd_command(t_pipe	*pipe)
 
 	// char cwd[256];
 	// int	cd;
+	int	i;
+
+	i = 0;
+	while (cwd[i])
+		i++;
+	while (cwd[i] != '/')
+	{
+		//delete char ('/' inclu);
+	}
+
 
 	// if (getcwd(cwd, sizeof(cwd)) == NULL)
 	// 	write (2, "error pwd\n", 10);
