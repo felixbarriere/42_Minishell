@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/09 16:15:15 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/09 17:24:34 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,9 @@ void	ft_set_null_free_elem_pipe(t_pipe *elem);
 void	clear_list_pipe(t_pipe *a_list);
 
 /******** EXECUTION ********/
-void	execution(t_sh	*sh, char **env_init);
+void	execution(t_pipe	*pipe_lst, char **env_init);
 void	index_builtins(t_pipe	*pipe);
+void	cd_command(t_pipe	*pipe);
+void	pwd_command(t_pipe	*pipe);
 
 #endif

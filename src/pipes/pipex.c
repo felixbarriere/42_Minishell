@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 19:59:52 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/09 17:04:23 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/09 17:30:46 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
 
-void	pipe_exec(t_sh *sh, t_pipe	*pipe, char **env_init)
+void	pipe_exec(t_pipe	*pipe, char **env_init)
 {
 	pid_t	pid;
-	(void)sh;
+	// (void)sh;
 
+	printf("commande: %s\n", pipe->cmd_verified);
 	if (pipe->is_builtin == 1)
 	{
 		index_builtins(pipe);
@@ -38,16 +39,18 @@ void	pipe_exec(t_sh *sh, t_pipe	*pipe, char **env_init)
 	}
 }
 
-void	execution(t_sh	*sh, char **env_init)
+void	execution(t_pipe	*pipe, char **env_init)
 {
 	t_pipe	*pipe_start;
 
-	pipe_start = sh->pipe_lst;
-	while (sh->pipe_lst)
+	pipe_start = pipe;
+	while (pipe->cmd != NULL)
 	{
-		if (sh->pipe_lst->cmd_verified != NULL)
-			pipe_exec(sh, sh->pipe_lst, env_init);
-		sh->pipe_lst = sh->pipe_lst->next;
+		if (pipe->cmd_verified != NULL || pipe->is_builtin == 1)
+			pipe_exec(pipe, env_init);
+		else
+			write (2, "command not found\n", 19);
+		pipe = pipe->next;
 	}
-	sh->pipe_lst = pipe_start;
+	pipe = pipe_start;
 }

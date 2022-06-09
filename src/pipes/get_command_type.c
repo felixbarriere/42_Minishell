@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_commands.c                                     :+:      :+:    :+:   */
+/*   get_command_type.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 19:28:11 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/06 11:05:24 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/09 17:20:39 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,6 @@ void	get_commands_type(t_sh *sh)
 		sh->pipe_lst = sh->pipe_lst->next;
 	}
 	i = 0;
-	printf("COMMAND = %s\n", temp->cmd);
 	while (temp->args[i] != NULL)
 	{
 		printf("ARG = %s\n", temp->args[i]);

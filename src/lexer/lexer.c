@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/09 16:26:56 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/09 17:19:41 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	is_builtin(t_pipe	*pipe)
 	pipe_start = pipe;
 	while (pipe)
 	{
-			printf("cmd: %s\n", pipe->cmd);
 		if (!ft_strcmp(pipe->cmd, "echo") || !ft_strcmp(pipe->cmd, "cd") ||
 			!ft_strcmp(pipe->cmd, "pwd") || !ft_strcmp(pipe->cmd, "export") ||
 			!ft_strcmp(pipe->cmd, "unset") || !ft_strcmp(pipe->cmd, "env"))
