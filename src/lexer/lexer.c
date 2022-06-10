@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/09 17:19:41 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/10 13:50:40 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	lexer(t_sh *sh)
 	print_tokens(sh->token_lst);
 	pipe_creation(sh);
 	get_commands_type(sh);
+	update_command(sh);
 	get_command_path(sh);
 	is_builtin(sh->pipe_lst);
 

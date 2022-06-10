@@ -1,3 +1,4 @@
+
 NAME =		minishell
 
 SRCS	=	main.c\
@@ -16,6 +17,9 @@ src/pipes/pipe_creation.c\
 src/pipes/get_command_path.c\
 src/pipes/pipex.c\
 src/pipes/get_command_type.c\
+src/pipes/redirections.c\
+src/pipes/heredoc.c\
+src/pipes/heredoc2.c\
 src/signals.c\
 src/env/env.c\
 src/env/env_utils.c\

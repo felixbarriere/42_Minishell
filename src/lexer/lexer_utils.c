@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/27 17:09:51 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/08 11:44:02 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,20 +107,10 @@ char	*ft_strjoin_char_takeout(char *s1, char c, char take_out)
 	return (dest);
 }
 
+
+
+
 /*
-int	contains_$(char *str)
-{
-	int i = 0;
-
-	while (str[i])
-	{
-		if (str[i] == '$')
-			return (SUCCESS);
-		i++;
-	}
-	return (FAILURE);
-}
-
 int	how_many_squote(char *str)
 {
 	int	i;
