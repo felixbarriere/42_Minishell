@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/07 15:58:33 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/09 14:39:25 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,9 @@ typedef struct s_pipe
 	int				heredoc_mode;
 	char			*limiter_name;
 	char			*file;
+	int				infile;
+	int				outfile;
+	int				is_builtin;
 	struct s_pipe	*prev;
 	struct s_pipe	*next;
 }	t_pipe;
@@ -63,6 +66,9 @@ typedef struct s_pipe
 /* structure principale du programe */
 typedef struct s_sh
 {
+	pid_t	pid1;
+	pid_t	pid2;
+	int		pipefd[2];
 	char	**path;
 	t_env	*env_lst;
 	t_pipe	*pipe_lst;

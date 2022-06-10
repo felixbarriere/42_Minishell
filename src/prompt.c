@@ -77,6 +77,7 @@ void	ft_prompt_init(t_sh *sh, char **env_init)
 		// 	continue ;
 		// }
 		// print_parser_result(sh);
+		execution(sh->pipe_lst, env_init);
 		clear_list(sh->token_lst);
 		clear_list_pipe(sh->pipe_lst);
 		ft_init_values(sh, env_init);

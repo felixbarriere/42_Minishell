@@ -21,6 +21,7 @@
 # include <signal.h>
 #include <fcntl.h>
 # include <sys/signal.h>
+# include <sys/wait.h>
 # include <stdbool.h>
 # include <unistd.h>
 

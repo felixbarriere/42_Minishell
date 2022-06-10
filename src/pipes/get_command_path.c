@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:27:17 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/04 19:15:27 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/09 17:20:27 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ void	get_command_path(t_sh	*sh)
 	while (sh->pipe_lst)
 	{
 		sh->pipe_lst->cmd_verified = command_line(sh->path, sh->pipe_lst->cmd);
-		printf("cmd_verified: %s\n", sh->pipe_lst->cmd_verified);
 		sh->pipe_lst = sh->pipe_lst->next;
 	}
 	sh->pipe_lst = temp;

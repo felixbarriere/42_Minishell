@@ -36,6 +36,7 @@ void	ft_init_values(t_sh *sh, char **env)
 	sh->pipe_lst->args = NULL;
 	sh->pipe_lst->file = NULL;
 	sh->pipe_lst->token = NULL;
+	// sh->pipe_lst->is_builtin = 0;
 	sh->pipe_lst->prev = NULL;
 	sh->pipe_lst->next = NULL;
 }
