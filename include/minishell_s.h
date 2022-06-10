@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_s.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/04 19:25:43 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/07 15:58:33 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,9 @@ typedef struct s_pipe
 	char			**args;
 	int				input;
 	int				output;
+	int				append_mode;
+	int				heredoc_mode;
+	char			*limiter_name;
 	char			*file;
 	struct s_pipe	*prev;
 	struct s_pipe	*next;
@@ -68,6 +71,7 @@ typedef struct s_sh
 	char	*prompt;
 	int		p_index;
 	int		lenght;
+	int		error;
 	int		state_quote;
 }	t_sh;
 

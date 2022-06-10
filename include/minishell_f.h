@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/06 11:07:15 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/08 11:38:45 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,21 @@ void	lexer(t_sh *sh);
 char	*expander(t_sh *sh, char *dollar);
 
 /******** GET_COMMAND_TYPE ********/
+void	update_command(t_sh *sh);
 void	get_commands_type(t_sh *sh);
+
+/******** REDIRECTIONS ********/
+int	update_fdout(t_pipe **pipe_lst);
+int	update_fdin(t_pipe **pipe_lst);
+
+/******** HEREDOC ********/
+int		contains_any_quotes(char *str);
+char	*trim_quotes(char **value, int *i, int *j);
+char	*process_quotes_limiter(char **value);
+int		heredoc(char *limiter, t_pipe **pipe_lst);
+
+/******** HEREDOC_2 ********/
+char	*read_heredoc(t_pipe **pipe_lst, int quotes, char *limiter);
 
 /******** GET_COMMANDS_PATH ********/
 void	get_command_path(t_sh *sh);

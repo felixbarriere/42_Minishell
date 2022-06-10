@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:18:11 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/04 19:27:22 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/10 14:08:28 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ void	ft_init_values(t_sh *sh, char **env)
 	sh->pipe_lst = ft_calloc(1, sizeof(t_pipe));
 	if (!sh->pipe_lst)
 		return ;
+	sh->pipe_lst->input = 0;
+	sh->pipe_lst->output = 1;
+	sh->pipe_lst->append_mode = 0;
+	sh->pipe_lst->heredoc_mode = 0;
 	sh->pipe_lst->cmd = NULL;
 	sh->pipe_lst->limiter = NULL;
 	sh->pipe_lst->args = NULL;

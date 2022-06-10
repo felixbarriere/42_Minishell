@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 18:08:23 by marvin            #+#    #+#             */
-/*   Updated: 2022/06/04 19:39:50 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/10 13:57:18 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include "include/minishell_s.h"
 
 t_sh	g_sh;
+
+
 
 int	main(int ac, char **av, char **env)
 {
@@ -32,5 +34,7 @@ int	main(int ac, char **av, char **env)
 	ft_prompt_init(&g_sh, env);
 	clear_list_env(g_sh.env_lst);
 	clear_list(g_sh.token_lst);
+	// if (g_sh.error == 1)
+	// 	return (1);
 	return (0);
 }
