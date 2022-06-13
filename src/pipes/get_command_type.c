@@ -164,7 +164,6 @@ void	update_command(t_sh *sh)
 		sh->pipe_lst = sh->pipe_lst->next;
 	}
 	printf("COMMAND UPDATE = %s\n", temp->cmd);
-	int	i = 0;
 	printf("COMMAND = %s\n", temp->cmd);
 	while (temp->args[i] != NULL)
 	{

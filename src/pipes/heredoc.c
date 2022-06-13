@@ -105,7 +105,7 @@ int	init_heredoc(t_pipe **pipe_lst)
 
 int	is_limiter(char **temp, char **limiter)
 {
-	if (!strncmp(*temp, *limiter, ft_strlen(*limiter)) && ft_strlen(*temp) == ft_strlen(*limiter))
+	if (!ft_strncmp(*temp, *limiter, ft_strlen(*limiter)) && ft_strlen(*temp) == ft_strlen(*limiter))
 	{
 		ft_free_null_str(temp);
 		return (SUCCESS);

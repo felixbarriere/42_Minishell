@@ -35,9 +35,7 @@ char	*dquote_dollar_manager(char *str, int *idx, t_sh *sh)
 {
 	char	*key;
 	char	*value;
-	char	*new_str;
 
-	new_str = NULL;
 	key = get_key_dollar(str, (*idx));
 	value = get_value_dollar(sh, key);
 	(*idx) = (*idx) + ft_strlen(key);

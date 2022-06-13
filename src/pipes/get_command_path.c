@@ -75,11 +75,9 @@ char	*command_line(char **path, char *cmd)
 
 void	get_command_path(t_sh	*sh)
 {
-	int		i;
 	t_pipe	*temp;
 
 	temp = sh->pipe_lst;
-	i = 0;
 	while (sh->pipe_lst)
 	{
 		sh->pipe_lst->cmd_verified = command_line(sh->path, sh->pipe_lst->cmd);

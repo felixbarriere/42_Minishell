@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 18:08:23 by marvin            #+#    #+#             */
-/*   Updated: 2022/06/13 16:40:20 by marvin           ###   ########.fr       */
+/*   Updated: 2022/06/13 16:53:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ int	main(int ac, char **av, char **env)
 {
 	(void)ac;
 	(void)av;
-	// (void)env;
 
-	printf("test\n");
 	ft_memset(&g_sh, 0, sizeof(t_sh));
 	if (ac != 1)
 	{
