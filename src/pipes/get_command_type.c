@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_command_type.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 19:28:11 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/10 14:06:33 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/13 16:14:21 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,6 @@ void	update_command(t_sh *sh)
 	printf("COMMAND UPDATE = %s\n", temp->cmd);
 	int	i = 0;
 	printf("COMMAND = %s\n", temp->cmd);
-	int i = 0;
 	while (temp->args[i] != NULL)
 	{
 		printf("ARG = %s\n", temp->args[i]);

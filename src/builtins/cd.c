@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:12:23 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/09 18:12:32 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/13 16:30:36 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	cd_command(t_pipe	*pipe)
 	if (pipe->token->next != NULL)
 		printf("options_2: %s\n", pipe->token->next->value); //fonctionne
 
-	// char cwd[256];
+	char cwd[256];
 	// int	cd;
 	int	i;
 
