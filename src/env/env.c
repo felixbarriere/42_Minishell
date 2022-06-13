@@ -53,12 +53,10 @@ t_env	*add_back_env_token(t_env *list, char *value, char *key, int index)
 
 void	orchestrate_env_token(char *env_init, t_sh *sh, int index)
 {
-	int		i;
 	char	*key;
 	char	*value;
 	char	**key_value;
 
-	i = 0;
 	key_value = ft_split (env_init, '=');
 	key = key_value[0];
 	value = key_value[1];

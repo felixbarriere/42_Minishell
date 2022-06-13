@@ -30,15 +30,15 @@ void	cd_command(t_pipe	*pipe)
 
 	// char cwd[256];
 	// int	cd;
-	int	i;
+	// int	i;
 
-	i = 0;
-	while (cwd[i])
-		i++;
-	while (cwd[i] != '/')
-	{
-		//delete char ('/' inclu);
-	}
+	// i = 0;
+	// while (cwd[i])
+	// 	i++;
+	// while (cwd[i] != '/')
+	// {
+	// 	//delete char ('/' inclu);
+	// }
 
 
 	// if (getcwd(cwd, sizeof(cwd)) == NULL)

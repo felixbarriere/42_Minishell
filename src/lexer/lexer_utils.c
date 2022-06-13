@@ -54,10 +54,8 @@ char	*ft_strjoin_char(char *s1, char c)
 {
 	char	*dest;
 	int		i;
-	int		j;
 
 	i = 0;
-	j = 0;
 	if (!s1)
 	{
 		s1 = malloc(sizeof(char) * 1);
@@ -82,10 +80,8 @@ char	*ft_strjoin_char_takeout(char *s1, char c, char take_out)
 {
 	char	*dest;
 	int		i;
-	int		j;
 
 	i = 0;
-	j = 0;
 	if (!s1)
 	{
 		s1 = malloc(sizeof(char) * 1);
