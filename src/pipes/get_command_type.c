@@ -144,7 +144,6 @@ void	get_commands_type(t_sh *sh)
 
 void	update_command(t_sh *sh)
 {
-	// get_commands_type(sh);
 	t_pipe *temp;
 
 	temp = sh->pipe_lst;
@@ -158,13 +157,12 @@ void	update_command(t_sh *sh)
 		if (update_fdout(&sh->pipe_lst))
 			sh->error = 1;
 		if (update_fdin(&sh->pipe_lst))
-		{
 			sh->error = 1;
-		}
 		sh->pipe_lst = sh->pipe_lst->next;
 	}
 	int i = 0;
 	printf("COMMAND UPDATE = %s\n", temp->cmd);
+
 	printf("COMMAND = %s\n", temp->cmd);
 	while (temp->args[i] != NULL)
 	{

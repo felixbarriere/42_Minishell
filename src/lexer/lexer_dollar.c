@@ -39,7 +39,6 @@ char	*get_key_dollar(char *str, int i)
 {
 	int		j;
 	char	*key;
-
 	j = 0;
 	while (str[i] != ' ' && str[i] != '\"' && str[i] != '\'')
 	{
