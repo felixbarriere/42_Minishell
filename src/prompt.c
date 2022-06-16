@@ -70,12 +70,13 @@ void	ft_prompt_init(t_sh *sh, char **env_init)
 		sh->lenght = ft_strlen(sh->prompt);
 		if (!is_only_space(sh->prompt))
 			lexer(sh);
-		// if (sh->error)
-		// {
-		// 	clear_list(sh->token_lst);
-		// 	clear_list_pipe(sh->pipe_lst);
-		// 	continue ;
-		// }
+		if (sh->error)
+		{
+			clear_list(sh->token_lst);
+			clear_list_pipe(sh->pipe_lst);
+			ft_init_values(sh, env_init);
+			continue ;
+		}
 		// print_parser_result(sh);
 		execution(sh->pipe_lst, env_init);
 		clear_list(sh->token_lst);
