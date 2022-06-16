@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:43:57 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/13 16:39:52 by marvin           ###   ########.fr       */
+/*   Updated: 2022/06/13 17:16:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,24 +63,24 @@ void	ft_prompt_init(t_sh *sh, char **env_init)
 {
 	ft_init_values(sh, env_init);
 	ft_init_env(env_init, sh);
-	// get_path(sh);
-	// while (1)
-	// {
-	// 	ft_prompt_start(sh);
-	// 	sh->lenght = ft_strlen(sh->prompt);
-	// 	if (!is_only_space(sh->prompt))
-	// 		lexer(sh);
-	// 	// if (sh->error)
-	// 	// {
-	// 	// 	clear_list(sh->token_lst);
-	// 	// 	clear_list_pipe(sh->pipe_lst);
-	// 	// 	continue ;
-	// 	// }
-	// 	// print_parser_result(sh);
-	// 	execution(sh->pipe_lst, env_init);
-	// 	clear_list(sh->token_lst);
-	// 	clear_list_pipe(sh->pipe_lst);
-	// 	ft_init_values(sh, env_init);
-	// }
+	get_path(sh);
+	while (1)
+	{
+		ft_prompt_start(sh);
+		sh->lenght = ft_strlen(sh->prompt);
+		if (!is_only_space(sh->prompt))
+			lexer(sh);
+		// if (sh->error)
+		// {
+		// 	clear_list(sh->token_lst);
+		// 	clear_list_pipe(sh->pipe_lst);
+		// 	continue ;
+		// }
+		// print_parser_result(sh);
+		execution(sh->pipe_lst, env_init);
+		clear_list(sh->token_lst);
+		clear_list_pipe(sh->pipe_lst);
+		ft_init_values(sh, env_init);
+	}
 
 }
