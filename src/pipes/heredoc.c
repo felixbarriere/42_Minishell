@@ -3,46 +3,26 @@
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
 
-char	*trim_quotes(char **value, int *i, int *j)
-{
-	char	*s1;
-	char	*s2;
-
-	s1 = NULL;
-	s2 = NULL;
-	s1 = ft_strndup(&(*value)[*j], *i - *j);
-	*i = *i + 1;
-	*j = *i;
-	while ((*value)[*i] && (*value)[*i] != '\'' &&  (*value)[*i] != '\"')
-		*i = *i + 1;
-	if ((*value)[*i] == '\'' || (*value)[*i] == '\"')
-		s2 = ft_strndup(&(*value)[*j], *i - *j);
-	*j = *i + 1;
-	printf("JOIN 2 = %s\n", ft_strjoin_2(&s1, &s2));
-	return (ft_strjoin_2(&s1, &s2));
-}
-
 char	*process_quotes_limiter(char **value)
 {
-	char	*str;
-	char	*temp;
+	char	*new;
 	int		i;
-	int		j;
 
 	i = 0;
-	j = 0;
-	str = NULL;
-	while ((*value)[i] != '\0')
+	new = NULL;
+	printf("VALUE = %s\n", (*value));
+	while ((*value)[i])
 	{
-		if ((*value[i] == '\'' || (*value)[i] == '\"'))
-		{
-			temp = trim_quotes(value, &i, &j);
-			str = ft_strjoin_2(&str, &temp);
-		}
+		if ((*value)[i] == '\"')
+			new = ft_strjoin_char_takeout(new, (*value)[i], 34);
+		else if ((*value)[i] == '\'')
+			new = ft_strjoin_char_takeout(new, (*value)[i], 39);
+		else
+			new = ft_strjoin_char(new, (*value)[i]);
 		i++;
 	}
-	temp = ft_strndup(&(*value)[i], i - j);
-	return (ft_strjoin_2(&str, &temp));
+	printf("NEW = %s\n", new);
+	return (new);
 }
 
 int	contains_any_quotes(char *str)
@@ -50,22 +30,24 @@ int	contains_any_quotes(char *str)
 	int	i;
 
 	i = 0;
-	while (str[i] != '\0')
+	while (str[i])
 	{
-		if (str[i] == '\"' || str[i] == '\'')
-			return (SUCCESS);
+		if (str[i] == '\'' || str[i] == '\"')
+			return (1);
 		i++;
 	}
-	return (FAILURE);
+	return (0);
 }
 
 void	process_limiter(char **limiter, int *quotes)
 {
-	if (contains_any_quotes(*limiter) == SUCCESS)
+	if (contains_any_quotes(*limiter))
 	{
 		(*limiter) = process_quotes_limiter(limiter);
 		(*quotes) = 1;
 	}
+	printf("DELIMINATOR PROCES = %s\n", (*limiter));
+	printf("QUOTE PROCES = %d\n", (*quotes));
 }
 
 char	*filename(void)
@@ -87,7 +69,6 @@ char	*filename(void)
 		i++;
 	}
 	printf("FILENAME 2 = %s\n", filename);
-	free (nbr); // ?
 	close(file_exists);
 	return (filename);
 }
@@ -105,7 +86,8 @@ int	init_heredoc(t_pipe **pipe_lst)
 
 int	is_limiter(char **temp, char **limiter)
 {
-	if (!ft_strncmp(*temp, *limiter, ft_strlen(*limiter)) && ft_strlen(*temp) == ft_strlen(*limiter))
+	if (!ft_strncmp(*temp, *limiter, ft_strlen(*limiter))
+		&& ft_strlen(*temp) == ft_strlen(*limiter))
 	{
 		ft_free_null_str(temp);
 		return (SUCCESS);
@@ -120,6 +102,7 @@ int	heredoc(char *limiter, t_pipe **pipe_lst)
 	int		quotes;
 
 	quotes = 0;
+	printf("LIMITER = %s\n", limiter);
 	process_limiter(&limiter, &quotes);
 	if (init_heredoc(pipe_lst))
 		return (1);
@@ -130,12 +113,95 @@ int	heredoc(char *limiter, t_pipe **pipe_lst)
 		if (!temp)
 			return (1);
 		if (is_limiter(&temp, &limiter) == SUCCESS)
+		{
+			printf("ICI LIMITER\n");
 			break ;
+		}	
 		if (i > 0)
 			ft_putstr_fd("\n", (*pipe_lst)->input);
 		ft_putstr_fd(temp, (*pipe_lst)->input);
+		printf("FREE TEMP\n");
 		ft_free_null_str(&temp);
+		ft_free_null_str(&limiter);
 		i++;
 	}
 	return (0);
 }
+
+// char	*ft_strjoin_char_takeout2(char *s1, char c, char take_out, char take_out2)
+// {
+// 	char	*dest;
+// 	int		i;
+
+// 	i = 0;
+// 	if (!s1)
+// 	{
+// 		s1 = malloc(sizeof(char) * 1);
+// 		s1[0] = '\0';
+// 	}
+// 	dest = ft_calloc(sizeof(char), (ft_strlen(s1) + 2));
+// 	if (!dest)
+// 		return (NULL);
+// 	while (s1[i] != '\0')
+// 	{
+// 		dest[i] = s1[i];
+// 		i++;
+// 	}
+// 	if (take_out != c && take_out2 != c)
+// 		dest[i] = c;
+// 	i++;
+// 	dest[i] = '\0';
+// 	free(s1);
+// 	return (dest);
+// }
+
+
+// char	*trim_quotes(char **value, int *i, int *j)
+// {
+// 	char	*s1;
+// 	char	*s2;
+
+// 	s1 = NULL;
+// 	s2 = NULL;
+// 	s1 = ft_strndup(&(*value)[*j], *i - *j);
+// 	*i = *i + 1;
+// 	*j = *i;
+// 	while ((*value)[*i] && (*value)[*i] != '\'' &&  (*value)[*i] != '\"')
+// 		*i = *i + 1;
+// 	if ((*value)[*i] == '\'' || (*value)[*i] == '\"')
+// 		s2 = ft_strndup(&(*value)[*j], *i - *j);
+// 	*j = *i + 1;
+// 	printf("AVANT I = %d, J = %d\n", (*i), (*j));
+	
+// 	return (ft_strjoin_2(&s1, &s2));
+// }
+
+
+
+// char	*process_quotes_limiter(char **value)
+// {
+// 	char	*str;
+// 	char	*temp;
+// 	int		i;
+// 	int		j;
+
+// 	i = 0;
+// 	j = 0;
+// 	str = NULL;
+// 	while ((*value)[i])
+// 	{
+// 		if ((*value[i] == DOUBLE || (*value)[i] == SIMPLE))
+// 		{
+// 			temp = trim_quotes(value, &i, &j);
+// 			printf("TEMP = %s\n", temp);
+	
+// 			str = ft_strjoin_2(&str, &temp);
+// 		}
+// 		i++;
+// 		printf("I = %d, J = %d\n", i, j);
+// 	}
+// 	temp = ft_strndup2(&(*value)[j], i - j);
+// 	return (ft_strjoin_2(&str, &temp));
+// }
+
+
