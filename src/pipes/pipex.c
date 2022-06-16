@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 19:59:52 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/09 17:30:46 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/15 13:40:33 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,9 @@ void	pipe_exec(t_pipe	*pipe, char **env_init)
 	pid_t	pid;
 	// (void)sh;
 
-	printf("commande: %s\n", pipe->cmd_verified);
 	if (pipe->is_builtin == 1)
 	{
 		index_builtins(pipe);
-		printf("not build yet!\n"); //si exit ou ctrl-D, reste parfois dans le minishell
 	}
 	else
 	{
@@ -43,6 +41,8 @@ void	execution(t_pipe	*pipe, char **env_init)
 {
 	t_pipe	*pipe_start;
 
+
+	printf("commande: %s\n", pipe->cmd_verified);
 	pipe_start = pipe;
 	while (pipe->cmd != NULL)
 	{

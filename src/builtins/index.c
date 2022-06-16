@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   index.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 16:12:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/09 17:27:25 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/15 13:57:51 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@
 
 void	index_builtins(t_pipe	*pipe)
 {
-	// printf("commande: %s\n", pipe->cmd);
 	if (!ft_strcmp(pipe->cmd, "cd"))
 		cd_command(pipe);
 	else if (!ft_strcmp(pipe->cmd, "pwd"))
 		pwd_command(pipe);
+	else if (!ft_strcmp(pipe->cmd, "echo"))
+		echo_command(pipe);
 }

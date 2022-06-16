@@ -15,16 +15,40 @@
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
 
+char	*ft_strdup_env(char *src)
+{
+	char	*dest;
+	int		i;
+
+	i = 0;
+	dest = malloc(sizeof(char) * ft_strlen(src) + 1);
+	if (!dest)
+		return (NULL);
+	// dest = src;
+	while (src[i] != '\0')
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
+
 t_env	*create_env_token(char *value, char *key, int index)
 {
 	t_env	*elem;
+	// (void)value;
+	// (void)key;
+	// (void)index;
 
+	elem = NULL;
 	elem = ft_calloc(1, sizeof(t_env));
 	if (!elem)
 		return (NULL);
 	elem->type = ENV;
 	elem->key = ft_strdup(key);
-	elem->value = ft_strdup(value);
+	// elem->value = ft_strdup_env(value);
+	elem->value = value; // a changer !
 	elem->index = index;
 	elem->next = NULL;
 	return (elem);
@@ -57,7 +81,7 @@ void	orchestrate_env_token(char *env_init, t_sh *sh, int index)
 	char	*value;
 	char	**key_value;
 
-	key_value = ft_split (env_init, '=');
+	key_value = ft_split (env_init, '='); //attention si value contient un "="
 	key = key_value[0];
 	value = key_value[1];
 	sh->env_lst = add_back_env_token(sh->env_lst, value, key, index);
