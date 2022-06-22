@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/27 15:48:41 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/22 17:30:39 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,25 @@ char	*get_key_dollar(char *str, int i)
 	int		j;
 	char	*key;
 	j = 0;
+
 	while (str[i] != ' ' && str[i] != '\"' && str[i] != '\'')
 	{
 		j++;
 		i++;
-		if (str[i] == '$' || str[i] < 48 || (str[i] > 57 && str[i] < 65)
-			|| (str[i] > 90 && str[i] < 95) || (str[i] > 95 && str[i] < 97)
-			|| str[i] > 122)
+		printf("STR[i] = %c\n", str[i]);
+		if (str[i] == '?')
+		{
+			key = get_key_dollar_2(str, i, j);
+			return (key);
+		}
+		if (str[i] == '$' || str[i] < 48
+			|| (str[i] > 57 && str[i] < 65) || (str[i] > 90 && str[i] < 95)
+			|| (str[i] > 95 && str[i] < 97)	|| str[i] > 122)
 			break ;
 	}
 	i = (i - j);
 	key = get_key_dollar_2(str, i, j);
+	
 	return (key);
 }
 
@@ -61,12 +69,15 @@ char	*get_value_dollar(t_sh	*sh, char *key)
 
 	if (ft_strcmp(key, "$") == 0)
 		value = ("$");
+	else if (ft_strcmp(key, "?") == 0)
+		value = ft_itoa(sh->exit);
 	else
 	{
 		key_trim = ft_strtrim(key, "$\"|\'");
 		value = expander(sh, key_trim);
 		free(key_trim);
 	}
+	printf("VALUE = %s\n", value);
 	return (value);
 }
 

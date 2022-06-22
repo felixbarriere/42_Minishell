@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lists_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:54:27 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/04 19:32:16 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/22 18:18:16 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	ft_set_null_free_elem_2(t_token *elem)
 {
 	if (!elem)
 		return ;
+
 	if (ft_strcmp(elem->value, "<<") && ft_strcmp(elem->value, ">>")
 		&& ft_strcmp(elem->value, "<") && ft_strcmp(elem->value, ">")
 		&& ft_strcmp(elem->value, "|"))

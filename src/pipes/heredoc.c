@@ -3,6 +3,8 @@
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
 
+	extern t_sh	g_sh;
+
 char	*process_quotes_limiter(char **value)
 {
 	char	*new;
@@ -12,14 +14,14 @@ char	*process_quotes_limiter(char **value)
 	new = NULL;
 	while ((*value)[i])
 	{
-		if ((*value)[i] == '\"')
-			new = ft_strjoin_char_takeout(new, (*value)[i], 34);
-		else if ((*value)[i] == '\'')
-			new = ft_strjoin_char_takeout(new, (*value)[i], 39);
+		printf("VALUE[i] = %c\n", (*value)[i]);
+		if ((*value)[i] == '\"' || (*value)[i] == '\'')
+			i++;
 		else
 			new = ft_strjoin_char(new, (*value)[i]);
 		i++;
 	}
+
 	return (new);
 }
 
@@ -44,6 +46,8 @@ void	process_limiter(char **limiter, int *quotes)
 		(*limiter) = process_quotes_limiter(limiter);
 		(*quotes) = 1;
 	}
+	else
+		(*limiter) = ft_strdup(*limiter);
 	printf("DELIMINATOR PROCES = %s\n", (*limiter));
 	printf("QUOTE PROCES = %d\n", (*quotes));
 }
@@ -100,6 +104,7 @@ int	heredoc(char *limiter, t_pipe **pipe_lst)
 	int		quotes;
 
 	quotes = 0;
+	printf("LIMITER = %s\n", limiter);
 	process_limiter(&limiter, &quotes);
 	if (init_heredoc(pipe_lst))
 		return (1);
@@ -117,6 +122,8 @@ int	heredoc(char *limiter, t_pipe **pipe_lst)
 		ft_free_null_str(&temp);
 		i++;
 	}
+	free(limiter);
+	// close() et reopen 
 	return (0);
 }
 
