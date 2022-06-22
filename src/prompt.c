@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:43:57 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/22 14:27:38 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/22 18:46:32 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	ft_prompt_start(t_sh *sh)
 void	ft_prompt_init(t_sh *sh, char **env_init)
 {
 	ft_init_values(sh, env_init);
+	sh->exit = 0;
 	ft_init_env(env_init, sh);
 	get_path(sh);
 	while (1)
@@ -70,12 +71,13 @@ void	ft_prompt_init(t_sh *sh, char **env_init)
 		sh->lenght = ft_strlen(sh->prompt);
 		if (!is_only_space(sh->prompt))
 			lexer(sh);
-		printf("sh->error = %d\n", sh->error);
+		// printf("sh->error = %d\n", sh->error);
 		if (sh->error)
 		{
 			clear_list(sh->token_lst);
 			clear_list_pipe(sh->pipe_lst);
 			ft_init_values(sh, env_init);
+			sh->exit = 0;
 			continue ;
 		}
 		// print_parser_result(sh);

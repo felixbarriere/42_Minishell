@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/27 17:07:14 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/22 17:28:37 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,10 @@ char	*noquote_dollar_manager(char *str, int *idx, t_sh *sh)
 
 	key = get_key_dollar(str, (*idx));
 	value = get_value_dollar(sh, key);
-	(*idx) = (*idx) + ft_strlen(key);
+	if (ft_strcmp(key, "?") == 0)
+		(*idx) = (*idx) + ft_strlen(key) + 1;
+	else
+		(*idx) = (*idx) + ft_strlen(key);
 	free(key);
 	if (value != NULL)
 		return (value);

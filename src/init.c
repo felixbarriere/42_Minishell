@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:18:11 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/22 14:59:59 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/22 17:35:53 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	ft_init_values(t_sh *sh, char **env)
 	sh->e_index = 0;
 	sh->lenght = 0;
 	sh->error = 0;
-	sh->exit = 0;
 	sh->state_quote = DEFAULT;
 	sh->pipe_lst = ft_calloc(1, sizeof(t_pipe));
 	if (!sh->pipe_lst)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/04 19:35:25 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/22 17:33:16 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int	token_str(t_sh *sh)
 				dollar_value = noquote_dollar_manager(str, &idx, sh);
 				if (dollar_value != NULL)
 					new_str = severals_wds_value(sh, dollar_value, new_str);
+				free(dollar_value);
 				continue ;
 			}
 			else

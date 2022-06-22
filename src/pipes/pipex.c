@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 19:59:52 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/22 15:36:49 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/22 18:39:27 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ void	pipe_exec(t_pipe	*pipe, char **env_init)
 		}
 		else
 			wait(NULL) ;
+		// A VERIFIER
+		if ((0 < waitpid(pid, &g_sh.exit, 0)) && (WIFEXITED(g_sh.exit)))
+			g_sh.exit = WEXITSTATUS (g_sh.exit);
 	}
-	// A VERIFIER
-	if ((0 < waitpid(pid, &g_sh.exit, 0)) && (WIFEXITED(g_sh.exit)))
-		g_sh.exit = WEXITSTATUS (g_sh.exit);
 }
 
 void	execution(t_sh	*sh, char **env_init)
