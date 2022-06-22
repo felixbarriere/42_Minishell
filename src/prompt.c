@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:43:57 by fbarrier          #+#    #+#             */
 /*   Updated: 2022/06/22 18:46:32 by ccalas           ###   ########.fr       */
@@ -87,5 +87,4 @@ void	ft_prompt_init(t_sh *sh, char **env_init)
 		clear_list_pipe(sh->pipe_lst);
 		ft_init_values(sh, env_init);
 	}
-
 }
