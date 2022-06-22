@@ -75,6 +75,7 @@ char	*filename(void)
 
 int	init_heredoc(t_pipe **pipe_lst)
 {
+	ft_free_null_str(&(*pipe_lst)->limiter_name);
 	(*pipe_lst)->limiter_name = filename();
 	printf("FILENAME = %s\n", (*pipe_lst)->limiter_name);
 	(*pipe_lst)->heredoc_mode = 1;
@@ -122,9 +123,9 @@ int	heredoc(char *limiter, t_pipe **pipe_lst)
 		ft_putstr_fd(temp, (*pipe_lst)->input);
 		printf("FREE TEMP\n");
 		ft_free_null_str(&temp);
-		ft_free_null_str(&limiter);
 		i++;
 	}
+		ft_free_null_str(&limiter);
 	return (0);
 }
 
