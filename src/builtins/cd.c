@@ -15,6 +15,8 @@
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
 
+extern t_sh	g_sh;
+
 void	change_pwd(t_sh	*sh, char *path)
 {
 	t_env	*start;
@@ -34,7 +36,6 @@ void	change_pwd(t_sh	*sh, char *path)
 	printf("pwd_value2: %s\n", sh->env_lst->value);
 	sh->env_lst = start;
 }
-
 
 void	change_old_pwd(t_sh	*sh, char *old_path)
 {
@@ -56,7 +57,7 @@ void	change_old_pwd(t_sh	*sh, char *old_path)
 	sh->env_lst = start;
 }
 
-void	cd_command(t_sh	*sh)
+void	cd_command(t_pipe	*pipe)
 {
 	char	*wrong_path;
 	char	old_path[256];
@@ -72,6 +73,7 @@ void	cd_command(t_sh	*sh)
 		{
 			wrong_path = sh->pipe_lst->token->next->value;
 			ft_putstr_fd("cd: no such file or directory: ", 2);
+			g_sh.exit = 1;
 			ft_putstr_fd(wrong_path, 2);
 			ft_putchar_fd('\n', 2);
 		}
@@ -85,5 +87,7 @@ void	cd_command(t_sh	*sh)
 	}
 	else 
 		ft_putstr_fd("cd: no path\n", 2);
+
 	// attention cd >> fait quitter le pg malgre la gestion d'erreur. (ok car gestion dans la partie tokens)
+	getcwd(path, sizeof(path));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_command_type.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 19:28:11 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/13 16:58:30 by marvin           ###   ########.fr       */
+/*   Updated: 2022/06/22 15:39:46 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,11 @@ int	is_cmd(t_token *lst, t_sh *sh)
 	temp = lst;
 	while (lst)
 	{
-		if (!sh->pipe_lst->cmd)
-			return (1);
+		if (lst->type == CMD)
+		{
+			if (!sh->pipe_lst->cmd)
+				return (1);
+		}
 		lst = lst->next;
 	}
 	lst = temp;
@@ -116,13 +119,11 @@ void	find_type(t_token *lst, t_sh *sh)
 	lst = temp;
 	printf("------APRES-----\n");
 	print_tokens(lst);
-	// update_args(&sh->pipe_lst);
 }
 
 void	get_commands_type(t_sh *sh)
 {
 	t_pipe	*temp;
-	// int		i;
 
 	temp = sh->pipe_lst;
 	if (!sh->pipe_lst)
@@ -132,13 +133,6 @@ void	get_commands_type(t_sh *sh)
 		find_type(sh->pipe_lst->token, sh);
 		sh->pipe_lst = sh->pipe_lst->next;
 	}
-	// i = 0;
-	// printf("COMMAND = %s\n", temp->cmd);
-	// while (temp->args[i] != NULL)
-	// {
-	// 	printf("ARG = %s\n", temp->args[i]);
-	// 	i++;
-	// }
 	sh->pipe_lst = temp;
 }
 
@@ -147,22 +141,20 @@ void	update_command(t_sh *sh)
 	t_pipe *temp;
 
 	temp = sh->pipe_lst;
-	printf("OUPUT WAY BEFORE = %d\n", sh->pipe_lst->output);
+	// printf("OUPUT WAY BEFORE = %d\n", sh->pipe_lst->output);
 	while (sh->pipe_lst)
 	{
-		if (is_cmd(sh->token_lst, sh))
+		if (is_cmd(sh->token_lst, sh) == 1)
 			sh->error = 1;
-		if (update_args(&sh->pipe_lst))
+		if (update_args(&sh->pipe_lst) == 1)
 			sh->error = 1;
-		if (update_fdout(&sh->pipe_lst))
+		if (update_fdout(&sh->pipe_lst) == 1)
 			sh->error = 1;
-		if (update_fdin(&sh->pipe_lst))
+		if (update_fdin(&sh->pipe_lst) == 1)
 			sh->error = 1;
 		sh->pipe_lst = sh->pipe_lst->next;
 	}
 	int i = 0;
-	printf("COMMAND UPDATE = %s\n", temp->cmd);
-
 	printf("COMMAND = %s\n", temp->cmd);
 	while (temp->args[i] != NULL)
 	{

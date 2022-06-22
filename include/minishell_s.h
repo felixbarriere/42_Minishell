@@ -78,6 +78,7 @@ typedef struct s_sh
 	int		p_index;
 	int		lenght;
 	int		error;
+	int		exit;
 	int		state_quote;
 }	t_sh;
 
