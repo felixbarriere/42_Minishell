@@ -10,7 +10,6 @@ char	*process_quotes_limiter(char **value)
 
 	i = 0;
 	new = NULL;
-	printf("VALUE = %s\n", (*value));
 	while ((*value)[i])
 	{
 		if ((*value)[i] == '\"')
@@ -21,7 +20,6 @@ char	*process_quotes_limiter(char **value)
 			new = ft_strjoin_char(new, (*value)[i]);
 		i++;
 	}
-	printf("NEW = %s\n", new);
 	return (new);
 }
 
@@ -68,7 +66,6 @@ char	*filename(void)
 		file_exists = open(filename, O_RDONLY);
 		i++;
 	}
-	printf("FILENAME 2 = %s\n", filename);
 	close(file_exists);
 	return (filename);
 }
@@ -103,7 +100,6 @@ int	heredoc(char *limiter, t_pipe **pipe_lst)
 	int		quotes;
 
 	quotes = 0;
-	printf("LIMITER = %s\n", limiter);
 	process_limiter(&limiter, &quotes);
 	if (init_heredoc(pipe_lst))
 		return (1);
@@ -114,18 +110,13 @@ int	heredoc(char *limiter, t_pipe **pipe_lst)
 		if (!temp)
 			return (1);
 		if (is_limiter(&temp, &limiter) == SUCCESS)
-		{
-			printf("ICI LIMITER\n");
 			break ;
-		}	
 		if (i > 0)
 			ft_putstr_fd("\n", (*pipe_lst)->input);
 		ft_putstr_fd(temp, (*pipe_lst)->input);
-		printf("FREE TEMP\n");
 		ft_free_null_str(&temp);
 		i++;
 	}
-		ft_free_null_str(&limiter);
 	return (0);
 }
 

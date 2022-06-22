@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 18:20:05 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/03 18:40:03 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/22 14:52:21 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include "../../include/minishell_d.h"
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
+
+extern t_sh	g_sh;
 
 bool	is_type(t_token *current, t_token_type type)
 {
@@ -33,12 +35,14 @@ int	check_error_sep_0(t_token *token_lst)
 		|| (is_type(token_lst, PIPE) && is_type(token_lst->next, PIPE)))
 	{
 		printf("syntax error near unexpected token  `|'\n");
+		g_sh.exit = 2;
 		return (FAILURE);
 	}
 	else if (is_type(token_lst->prev, DR_RIGHT) && is_type(token_lst, PIPE)
 		&& is_type(token_lst->next, PIPE))
 	{
 		printf("syntax error near unexpected token  `||'\n");
+		g_sh.exit = 2;
 		return (FAILURE);
 	}
 	return (SUCCESS);
@@ -51,6 +55,7 @@ int	check_error_sep_1(t_token *token_lst)
 		|| (is_type(token_lst, DR_LEFT) && is_type(token_lst->next, R_LEFT))
 		|| (is_type(token_lst, R_RIGHT) && is_type(token_lst->next, R_LEFT)))
 	{
+		g_sh.exit = 2;
 		ft_putstr_fd("syntax error near unexpected token `<'\n", 2);
 		return (FAILURE);
 	}
@@ -64,6 +69,7 @@ int	check_error_sep_2(t_token *token_lst)
 		|| (is_type(token_lst, R_RIGHT) && is_type(token_lst->next, R_RIGHT))
 		|| (is_type(token_lst, DR_RIGHT) && is_type(token_lst->next, R_RIGHT)))
 	{
+		g_sh.exit = 2;
 		ft_putstr_fd("syntax error near unexpected token `>'\n", 2);
 		return (FAILURE);
 	}

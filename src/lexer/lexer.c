@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/10 13:50:40 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/22 15:38:13 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,11 @@ void	lexer(t_sh *sh)
 		return ;
 	}
 	tokenizer(sh);
-	check_error_sep(sh->token_lst);
+	if (check_error_sep(sh->token_lst) == FAILURE)
+	{
+		sh->error = 1;
+		return ;
+	}
 	print_tokens(sh->token_lst);
 	pipe_creation(sh);
 	get_commands_type(sh);

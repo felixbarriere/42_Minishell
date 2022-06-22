@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_sep2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 18:25:05 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/05/27 18:26:22 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/22 14:52:56 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
 
+extern t_sh	g_sh;
+
 int	check_error_sep_3(t_token *token_lst)
 {
 	if ((is_type(token_lst, R_LEFT) && is_type(token_lst->next, DR_LEFT))
@@ -22,6 +24,7 @@ int	check_error_sep_3(t_token *token_lst)
 		|| (is_type(token_lst, R_RIGHT) && is_type(token_lst->next, DR_LEFT))
 		|| (is_type(token_lst, DR_RIGHT) && is_type(token_lst->next, DR_LEFT)))
 	{
+		g_sh.exit = 2;
 		ft_putstr_fd("syntax error near unexpected token `<<'\n", 2);
 		return (FAILURE);
 	}
@@ -35,6 +38,7 @@ int	check_error_sep_4(t_token *token_lst)
 		|| (is_type(token_lst, R_RIGHT) && is_type(token_lst->next, DR_RIGHT))
 		|| (is_type(token_lst, DR_RIGHT) && is_type(token_lst->next, DR_RIGHT)))
 	{
+		g_sh.exit = 2;
 		ft_putstr_fd("syntax error near unexpected token `>>'\n", 2);
 		return (FAILURE);
 	}
@@ -52,12 +56,14 @@ int	check_error_sep_5(t_token *token_lst)
 		|| (is_type(token_lst->prev, BLANK) && is_type(token_lst, DR_RIGHT)
 			&& is_type(token_lst->next, BLANK)))
 	{
+		g_sh.exit = 2;
 		ft_putstr_fd("syntax error near unexpected token `newline'\n", 2);
 		return (FAILURE);
 	}
 	else if (is_type(token_lst->prev, BLANK) && is_type(token_lst, PIPE)
 		&& is_type(token_lst->next, BLANK))
 	{
+		g_sh.exit = 2;
 		ft_putstr_fd("syntax error near unexpected token `|'", 2);
 		return (FAILURE);
 	}
@@ -76,6 +82,7 @@ int	check_error_sep_6(t_token *token_lst)
 			&& is_type(token_lst->next, BLANK))
 		|| (is_type(token_lst, R_LEFT) && is_type(token_lst->next, BLANK)))
 	{
+		g_sh.exit = 2;
 		ft_putstr_fd("syntax error near unexpected token `newline'\n", 2);
 		return (FAILURE);
 	}
