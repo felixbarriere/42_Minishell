@@ -47,8 +47,7 @@ t_env	*create_env_token(char *value, char *key, int index)
 		return (NULL);
 	elem->type = ENV;
 	elem->key = ft_strdup(key);
-	// elem->value = ft_strdup_env(value);
-	elem->value = value; // a changer !
+	elem->value = ft_strdup(value);
 	elem->index = index;
 	elem->next = NULL;
 	return (elem);
