@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 19:59:52 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/15 13:40:33 by marvin           ###   ########.fr       */
+/*   Updated: 2022/06/22 15:30:29 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
 
+extern t_sh	g_sh;
+
 void	pipe_exec(t_pipe	*pipe, char **env_init)
 {
-	pid_t	pid;
+	pid_t	pid = 0;
 	// (void)sh;
 
 	if (pipe->is_builtin == 1)
@@ -35,6 +37,9 @@ void	pipe_exec(t_pipe	*pipe, char **env_init)
 		else
 			wait(NULL) ;
 	}
+	// A VERIFIER
+	if ((0 < waitpid(pid, &g_sh.exit, 0)) && (WIFEXITED(g_sh.exit)))
+		g_sh.exit = WEXITSTATUS (g_sh.exit);
 }
 
 void	execution(t_pipe	*pipe, char **env_init)
@@ -49,7 +54,10 @@ void	execution(t_pipe	*pipe, char **env_init)
 		if (pipe->cmd_verified != NULL || pipe->is_builtin == 1)
 			pipe_exec(pipe, env_init);
 		else
+		{
 			write (2, "command not found\n", 19);
+			g_sh.exit = 127;
+		}
 		pipe = pipe->next;
 	}
 	pipe = pipe_start;
