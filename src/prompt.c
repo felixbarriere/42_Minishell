@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:43:57 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/13 17:16:53 by marvin           ###   ########.fr       */
+/*   Updated: 2022/06/22 14:25:42 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	ft_prompt_init(t_sh *sh, char **env_init)
 		sh->lenght = ft_strlen(sh->prompt);
 		if (!is_only_space(sh->prompt))
 			lexer(sh);
+		printf("sh->error = %d\n", sh->error);
 		if (sh->error)
 		{
 			clear_list(sh->token_lst);

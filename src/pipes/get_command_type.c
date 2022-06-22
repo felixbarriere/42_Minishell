@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_command_type.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 19:28:11 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/13 16:58:30 by marvin           ###   ########.fr       */
+/*   Updated: 2022/06/22 14:41:04 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,11 @@ int	is_cmd(t_token *lst, t_sh *sh)
 	temp = lst;
 	while (lst)
 	{
-		if (!sh->pipe_lst->cmd)
-			return (1);
+		if (lst->type == CMD)
+		{
+			if (!sh->pipe_lst->cmd)
+				return (1);
+		}
 		lst = lst->next;
 	}
 	lst = temp;
@@ -150,13 +153,13 @@ void	update_command(t_sh *sh)
 	printf("OUPUT WAY BEFORE = %d\n", sh->pipe_lst->output);
 	while (sh->pipe_lst)
 	{
-		if (is_cmd(sh->token_lst, sh))
+		if (is_cmd(sh->token_lst, sh) == 1)
 			sh->error = 1;
-		if (update_args(&sh->pipe_lst))
+		if (update_args(&sh->pipe_lst) == 1)
 			sh->error = 1;
-		if (update_fdout(&sh->pipe_lst))
+		if (update_fdout(&sh->pipe_lst) == 1)
 			sh->error = 1;
-		if (update_fdin(&sh->pipe_lst))
+		if (update_fdin(&sh->pipe_lst) == 1)
 			sh->error = 1;
 		sh->pipe_lst = sh->pipe_lst->next;
 	}
