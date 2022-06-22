@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_f.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/15 13:50:06 by marvin           ###   ########.fr       */
+/*   Updated: 2022/06/22 17:56:27 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	get_path(t_sh *sh);
 void	ft_free(char **str);
 void	ft_free_2(char *str);
 void	ft_free_3(t_env *list);
+char	*ft_strjoin_char_2(char *s1, char c);
 
 /******** PROMPT ********/
 void	ft_prompt_start(t_sh *sh);
@@ -143,10 +144,11 @@ void	ft_set_null_free_elem_pipe(t_pipe *elem);
 void	clear_list_pipe(t_pipe *a_list);
 
 /******** EXECUTION ********/
-void	execution(t_pipe	*pipe_lst, char **env_init);
-void	index_builtins(t_pipe	*pipe);
-void	cd_command(t_pipe	*pipe);
+void	execution(t_sh	*sh, char **env_init);
+void	index_builtins(t_sh	*sh);
+void	cd_command(t_sh	*sh);
 void	pwd_command(t_pipe	*pipe);
 void	echo_command(t_pipe	*pipe);
+void	env_command(t_sh	*sh);
 
 #endif

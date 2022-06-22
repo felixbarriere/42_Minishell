@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   index.c                                            :+:      :+:    :+:   */
+/*   env_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/09 16:12:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/22 15:58:55 by fbarrier         ###   ########.fr       */
+/*   Created: 2022/06/22 15:55:51 by fbarrier          #+#    #+#             */
+/*   Updated: 2022/06/22 16:05:06 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,19 @@
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
 
-void	index_builtins(t_sh	*sh)
+void	env_command(t_sh	*sh)
 {
-	if (!ft_strcmp(sh->pipe_lst->cmd, "cd"))
-		cd_command(sh);
-	else if (!ft_strcmp(sh->pipe_lst->cmd, "pwd"))
-		pwd_command(sh->pipe_lst);
-	else if (!ft_strcmp(sh->pipe_lst->cmd, "echo"))
-		echo_command(sh->pipe_lst);
-	else if (!ft_strcmp(sh->pipe_lst->cmd, "env"))
-		env_command(sh);
+	t_env	*start;
+
+	start = sh->env_lst;
+	while (sh->env_lst != NULL)
+	{
+		ft_putstr_fd(sh->env_lst->key, 1);
+		ft_putchar_fd('=', 1);
+		ft_putstr_fd(sh->env_lst->value, 1);
+		ft_putchar_fd('\n', 1);
+		sh->env_lst = sh->env_lst->next;
+	}
+	sh->env_lst = start;
 }
+

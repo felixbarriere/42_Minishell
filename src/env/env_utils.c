@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 16:53:47 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/04 19:09:20 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/22 18:29:46 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,30 @@ void	get_path(t_sh	*sh)
 			sh->path = ft_split(temp->value, ':');
 		temp = temp->next;
 	}
+}
+
+char	*ft_strjoin_char_2(char *s1, char c)
+{
+	char	*dest;
+	int		i;
+
+	i = 0;
+	if (!s1)
+	{
+		s1 = malloc(sizeof(char) * 1);
+		s1[0] = '\0';
+	}
+	dest = ft_calloc(sizeof(char), (ft_strlen(s1) + 2));
+	if (!dest)
+		return (NULL);
+	while (s1[i] != '\0')
+	{
+		dest[i] = s1[i];
+		i++;
+	}
+	dest[i] = c;
+	i++;
+	dest[i] = '\0';
+	free(s1);
+	return (dest);
 }

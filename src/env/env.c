@@ -78,12 +78,36 @@ void	orchestrate_env_token(char *env_init, t_sh *sh, int index)
 {
 	char	*key;
 	char	*value;
+	char	*value_2;
 	char	**key_value;
+	int		i;
 
+
+	i = 2;
+	value_2 = NULL;
 	key_value = ft_split (env_init, '='); //attention si value contient un "="
 	key = key_value[0];
 	value = key_value[1];
+	if (key_value[2] != NULL)
+	{
+		// printf("key= %s\n", key);
+		// printf("plusieur str\n");
+		value_2 = ft_strdup(value);
+		while (key_value[i])
+		{
+			value_2 = ft_strjoin_char_2(value_2, '=');
+			value_2 = ft_strjoin(value_2, key_value[i]);
+			// free(key_value[i]);
+			i++;
+		}
+		value = ft_strdup(value_2);
+		free(value_2);
+		// printf("value: %s\n", value);
+	}
+
 	sh->env_lst = add_back_env_token(sh->env_lst, value, key, index);
+	if (key_value[2] != NULL)
+		free(value);
 	ft_free(key_value);
 }
 
