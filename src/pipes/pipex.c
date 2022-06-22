@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 19:59:52 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/15 13:40:33 by marvin           ###   ########.fr       */
+/*   Updated: 2022/06/22 15:36:49 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,42 +15,41 @@
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
 
-void	pipe_exec(t_pipe	*pipe, char **env_init)
+void	pipe_exec(t_sh	*sh, char **env_init)
 {
 	pid_t	pid;
 	// (void)sh;
 
-	if (pipe->is_builtin == 1)
+	if (sh->pipe_lst->is_builtin == 1)
 	{
-		index_builtins(pipe);
+		index_builtins(sh);
 	}
 	else
 	{
 		pid = fork();
 		if (pid == 0)
 		{	
-			if (execve(pipe->cmd_verified, pipe->args, env_init) == -1)
-				printf("error execve\n");	
+			if (execve(sh->pipe_lst->cmd_verified, sh->pipe_lst->args, env_init) == -1)
+				ft_putstr_fd("error execve\n", 2);
 		}
 		else
 			wait(NULL) ;
 	}
 }
 
-void	execution(t_pipe	*pipe, char **env_init)
+void	execution(t_sh	*sh, char **env_init)
 {
 	t_pipe	*pipe_start;
 
-
-	printf("commande: %s\n", pipe->cmd_verified);
-	pipe_start = pipe;
-	while (pipe->cmd != NULL)
+	printf("commande: %s\n", sh->pipe_lst->cmd_verified);
+	pipe_start = sh->pipe_lst;
+	while (sh->pipe_lst->cmd != NULL)
 	{
-		if (pipe->cmd_verified != NULL || pipe->is_builtin == 1)
-			pipe_exec(pipe, env_init);
+		if (sh->pipe_lst->cmd_verified != NULL || sh->pipe_lst->is_builtin == 1)
+			pipe_exec(sh, env_init);
 		else
 			write (2, "command not found\n", 19);
-		pipe = pipe->next;
+		sh->pipe_lst = sh->pipe_lst->next;
 	}
-	pipe = pipe_start;
+	sh->pipe_lst = pipe_start;
 }
