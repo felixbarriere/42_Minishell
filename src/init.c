@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:18:11 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/22 17:35:53 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/22 20:26:11 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 void	ft_init_values(t_sh *sh, char **env)
 {
 	(void)env;
+	// sh->env = NULL;  //malloc?
+	// dup_env_array(sh, env);
 	sh->token_lst = NULL;
 	sh->prompt = NULL;
 	sh->p_index = 0;
