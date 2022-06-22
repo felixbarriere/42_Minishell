@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 19:59:52 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/22 15:36:49 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/22 18:52:20 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 extern t_sh	g_sh;
 
-void	pipe_exec(t_pipe	*pipe, char **env_init)
+void	pipe_exec(t_sh *sh, char **env_init)
 {
 	pid_t	pid = 0;
 	// (void)sh;

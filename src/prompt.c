@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:43:57 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/22 14:27:38 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/22 18:51:23 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	ft_prompt_init(t_sh *sh, char **env_init)
 			continue ;
 		}
 		// print_parser_result(sh);
-		execution(sh->pipe_lst, env_init);
+		execution(sh, env_init);
 		printf("Le code de retour est %d\n",sh->exit);
 		clear_list(sh->token_lst);
 		clear_list_pipe(sh->pipe_lst);

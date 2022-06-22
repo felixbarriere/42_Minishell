@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:12:23 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/22 15:41:01 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/22 18:53:05 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	change_old_pwd(t_sh	*sh, char *old_path)
 	sh->env_lst = start;
 }
 
-void	cd_command(t_pipe	*pipe)
+void	cd_command(t_sh *sh)
 {
 	char	*wrong_path;
 	char	old_path[256];
