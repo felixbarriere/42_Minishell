@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:43:57 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/22 19:02:35 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/22 20:27:39 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,34 @@
 // 	}
 // }
 
+void	dup_env_array(t_sh *sh, char **env)
+{
+	int	i;
+
+	i = 0;
+	while (env[i] != NULL)
+		i++;
+	sh->env = malloc (sizeof(char *) * (i + 1));
+	if (!sh->env)
+		return ;
+	i = 0;
+	while (env[i] != NULL)
+	{
+		sh->env[i] = ft_strdup(env[i]);
+		// free(env[i]);
+		i++;
+	}
+	sh->env[i] = NULL;
+	// free(env);
+}
+
 void	ft_prompt_start(t_sh *sh)
 {
 	sh->prompt = readline("➜ minishell ");
 	if (!sh->prompt || !ft_strcmp(sh->prompt, "exit"))
 	{
 		ft_free(sh->path);
+		ft_free(sh->env);
 		clear_list(sh->token_lst);
 		clear_list_pipe(sh->pipe_lst);
 		exit(0);
@@ -61,9 +83,11 @@ void	ft_prompt_start(t_sh *sh)
 
 void	ft_prompt_init(t_sh *sh, char **env_init)
 {
+	dup_env_array(sh, env_init);
+	printf("test array env: %s\n", sh->env[3]);
 	ft_init_values(sh, env_init);
 	sh->exit = 0;
-	ft_init_env(env_init, sh);
+	ft_init_env(sh->env, sh);
 	get_path(sh);
 	while (1)
 	{
@@ -81,10 +105,10 @@ void	ft_prompt_init(t_sh *sh, char **env_init)
 			continue ;
 		}
 		// print_parser_result(sh);
-		execution(sh, env_init);
+		execution(sh, sh->env);
 		printf("Le code de retour est %d\n",sh->exit);
 		clear_list(sh->token_lst);
 		clear_list_pipe(sh->pipe_lst);
-		ft_init_values(sh, env_init);
+		ft_init_values(sh, sh->env);
 	}
 }

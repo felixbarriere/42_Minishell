@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:12:23 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/22 18:53:05 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/22 19:47:12 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,21 @@
 #include "../../include/minishell_s.h"
 
 extern t_sh	g_sh;
+
+void	change_old_pwd_array(t_sh	*sh)
+{
+	int	i=0;
+	while(sh->env[i])
+	{
+		if (!ft_strncmp(sh->env[i], "PWD", 3))
+		{
+			printf("char ** PWD: %s\n", sh->env[i]);
+			free(sh->env[i]);
+		}
+		i++;
+	}
+}
+
 
 void	change_pwd(t_sh	*sh, char *path)
 {
@@ -34,6 +49,7 @@ void	change_pwd(t_sh	*sh, char *path)
 	}
 	printf("pwd_key2: %s\n", sh->env_lst->key);
 	printf("pwd_value2: %s\n", sh->env_lst->value);
+	change_old_pwd_array(sh);
 	sh->env_lst = start;
 }
 
@@ -52,8 +68,8 @@ void	change_old_pwd(t_sh	*sh, char *old_path)
 		}
 		sh->env_lst = sh->env_lst->next;
 	}
-	printf("old_pwd_key2: %s\n", sh->env_lst->key);
-	printf("old_pwd_value2: %s\n", sh->env_lst->value);
+	// printf("old_pwd_key2: %s\n", sh->env_lst->key);
+	// printf("old_pwd_value2: %s\n", sh->env_lst->value);
 	sh->env_lst = start;
 }
 
@@ -68,7 +84,6 @@ void	cd_command(t_sh *sh)
 	printf("options: %s\n", sh->pipe_lst->options); //comment retrouver les options? token?
 	if (sh->pipe_lst->token->next != NULL)
 	{
-		printf("options_2: %s\n", sh->pipe_lst->token->next->value); //fonctionne
 		if (chdir(sh->pipe_lst->token->next->value) == -1)
 		{
 			wrong_path = sh->pipe_lst->token->next->value;
@@ -80,14 +95,10 @@ void	cd_command(t_sh *sh)
 		else
 		{
 			getcwd(path, sizeof(path));
-			printf("path: %s\n", path);
 			change_old_pwd(sh, old_path);
 			change_pwd(sh, path);
 		}
 	}
 	else 
 		ft_putstr_fd("cd: no path\n", 2);
-
-	// attention cd >> fait quitter le pg malgre la gestion d'erreur. (ok car gestion dans la partie tokens)
-	getcwd(path, sizeof(path));
 }
