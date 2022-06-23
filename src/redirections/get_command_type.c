@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 19:28:11 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/22 17:46:41 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/23 11:53:18 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,32 +54,9 @@ int	update_args(t_pipe **pipe_lst)
 	return (0);
 }
 
-void	find_type_args(t_token *lst, t_sh *sh)
-{
-	(void)sh;
-	if (!lst)
-		return ;
-	while (lst)
-	{
-		if (lst->type == STR)
-		{
-			lst->type = CMD;
-			sh->pipe_lst->cmd = ft_strdup(lst->value);
-			break ;
-		}
-		lst = lst->next;
-	}
-	while (lst)
-	{
-		if (lst->type == STR)
-			lst->type = ARG;
-		lst = lst->next;
-	}
-}
-
 int	is_cmd(t_token *lst, t_sh *sh)
 {
-	t_token *temp;
+	t_token	*temp;
 
 	temp = lst;
 	while (lst)
@@ -95,53 +72,11 @@ int	is_cmd(t_token *lst, t_sh *sh)
 	return (0);
 }
 
-void	find_type(t_token *lst, t_sh *sh)
-{
-	t_token	*temp;
-
-	temp = lst;
-	if (!lst)
-		return ;
-	while (lst)
-	{
-		if (lst->type == R_LEFT)
-			lst->next->type = INPUT;
-		else if (lst->type == R_RIGHT)
-			lst->next->type = OUTPUT;
-		else if (lst->type == DR_RIGHT)
-			lst->next->type = APPEND;
-		else if (lst->type == LIMITER)
-			sh->pipe_lst->limiter = ft_strdup(lst->value);
-		else if (lst->type == STR)
-			find_type_args(lst, sh);
-		lst = lst->next;
-	}
-	lst = temp;
-	printf("------APRES-----\n");
-	print_tokens(lst);
-}
-
-void	get_commands_type(t_sh *sh)
+void	update_command(t_sh *sh)
 {
 	t_pipe	*temp;
 
 	temp = sh->pipe_lst;
-	if (!sh->pipe_lst)
-		return ;
-	while (sh->pipe_lst)
-	{
-		find_type(sh->pipe_lst->token, sh);
-		sh->pipe_lst = sh->pipe_lst->next;
-	}
-	sh->pipe_lst = temp;
-}
-
-void	update_command(t_sh *sh)
-{
-	t_pipe *temp;
-
-	temp = sh->pipe_lst;
-	// printf("OUPUT WAY BEFORE = %d\n", sh->pipe_lst->output);
 	while (sh->pipe_lst)
 	{
 		if (is_cmd(sh->token_lst, sh) == 1)
@@ -154,6 +89,7 @@ void	update_command(t_sh *sh)
 			sh->error = 1;
 		sh->pipe_lst = sh->pipe_lst->next;
 	}
+	//A SUPPRIMER ------------
 	int i = 0;
 	printf("COMMAND = %s\n", temp->cmd);
 	while (temp->args[i] != NULL)
@@ -162,4 +98,5 @@ void	update_command(t_sh *sh)
 		i++;
 	}
 	sh->pipe_lst = temp;
+	// ------------------------
 }

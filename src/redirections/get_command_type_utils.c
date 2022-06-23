@@ -1,0 +1,69 @@
+
+#include "../../include/minishell.h"
+#include "../../include/minishell_d.h"
+#include "../../include/minishell_f.h"
+#include "../../include/minishell_s.h"
+
+void	find_type_args(t_token *lst, t_sh *sh)
+{
+	(void)sh;
+	if (!lst)
+		return ;
+	while (lst)
+	{
+		if (lst->type == STR)
+		{
+			lst->type = CMD;
+			sh->pipe_lst->cmd = ft_strdup(lst->value);
+			break ;
+		}
+		lst = lst->next;
+	}
+	while (lst)
+	{
+		if (lst->type == STR)
+			lst->type = ARG;
+		lst = lst->next;
+	}
+}
+
+void	find_type(t_token *lst, t_sh *sh)
+{
+	t_token	*temp;
+
+	temp = lst;
+	if (!lst)
+		return ;
+	while (lst)
+	{
+		if (lst->type == R_LEFT)
+			lst->next->type = INPUT;
+		else if (lst->type == R_RIGHT)
+			lst->next->type = OUTPUT;
+		else if (lst->type == DR_RIGHT)
+			lst->next->type = APPEND;
+		else if (lst->type == LIMITER)
+			sh->pipe_lst->limiter = ft_strdup(lst->value);
+		else if (lst->type == STR)
+			find_type_args(lst, sh);
+		lst = lst->next;
+	}
+	lst = temp;
+	printf("------APRES-----\n");
+	print_tokens(lst);
+}
+
+void	get_commands_type(t_sh *sh)
+{
+	t_pipe	*temp;
+
+	temp = sh->pipe_lst;
+	if (!sh->pipe_lst)
+		return ;
+	while (sh->pipe_lst)
+	{
+		find_type(sh->pipe_lst->token, sh);
+		sh->pipe_lst = sh->pipe_lst->next;
+	}
+	sh->pipe_lst = temp;
+}

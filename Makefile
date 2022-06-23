@@ -16,10 +16,12 @@ src/lists/lists_3.c\
 src/pipes/pipe_creation.c\
 src/pipes/get_command_path.c\
 src/pipes/pipex.c\
-src/pipes/get_command_type.c\
-src/pipes/redirections.c\
-src/pipes/heredoc.c\
-src/pipes/heredoc2.c\
+src/redirections/get_command_type.c\
+src/redirections/get_command_type_utils.c\
+src/redirections/redirections.c\
+src/redirections/process_limiter.c\
+src/redirections/heredoc.c\
+src/redirections/heredoc2.c\
 src/signals.c\
 src/env/env.c\
 src/env/env_utils.c\
