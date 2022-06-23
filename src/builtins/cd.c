@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:12:23 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/23 12:00:23 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/23 16:10:37 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ extern t_sh	g_sh;
 
 void	change_old_pwd_array(t_sh	*sh, char *old_path)
 {
-	int	i=0;
+	int	i;
+	i = 0;
 	while(sh->env[i])
 	{
 		if (!ft_strncmp(sh->env[i], "OLDPWD", 6))
@@ -36,7 +37,9 @@ void	change_old_pwd_array(t_sh	*sh, char *old_path)
 
 void	change_pwd_array(t_sh	*sh, char *path)
 {
-	int	i=0;
+	int	i;
+	
+	i = 0;
 	while(sh->env[i])
 	{
 		if (!ft_strncmp(sh->env[i], "PWD", 3))
