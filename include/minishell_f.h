@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_f.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/22 17:56:27 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/23 11:18:42 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	update_command(t_sh *sh);
 void	get_commands_type(t_sh *sh);
 
 /******** REDIRECTIONS ********/
+int	open_fdin(char	*value, t_pipe **pipe_lst);
 int	update_fdout(t_pipe **pipe_lst);
 int	update_fdin(t_pipe **pipe_lst);
 

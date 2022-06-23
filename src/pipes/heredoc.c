@@ -123,7 +123,9 @@ int	heredoc(char *limiter, t_pipe **pipe_lst)
 		i++;
 	}
 	free(limiter);
-	// close() et reopen 
+	close((*pipe_lst)->input);
+	if (open_fdin((*pipe_lst)->limiter_name, pipe_lst))
+		return (1);
 	return (0);
 }
 
