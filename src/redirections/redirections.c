@@ -9,21 +9,23 @@ void	open_fdout(t_token *token, t_pipe **pipe_lst)
 	if (token->type == OUTPUT)
 	{
 		printf("OUPUT BEFORE = %d\n", (*pipe_lst)->output);
-		(*pipe_lst)->output = open(token->value, O_WRONLY | O_CREAT | O_TRUNC, 00644);
+		(*pipe_lst)->output = open(token->value, O_WRONLY
+				| O_CREAT | O_TRUNC, 00644);
 		(*pipe_lst)->append_mode = 0;
 		printf("TEST OPEN FDOUT\n");
 		printf("OUPUT = %d\n", (*pipe_lst)->output);
 	}
 	else
 	{
-		(*pipe_lst)->output = open(token->value, O_WRONLY | O_CREAT | O_APPEND, 00644);
+		(*pipe_lst)->output = open(token->value, O_WRONLY
+				| O_CREAT | O_APPEND, 00644);
 		(*pipe_lst)->append_mode = 1;
 	}
 }
 
 int	update_fdout(t_pipe **pipe_lst)
 {
-	t_token *temp;
+	t_token	*temp;
 
 	temp = (*pipe_lst)->token;
 	while (temp)
@@ -68,7 +70,7 @@ void	close_fdin(t_pipe **pipe_lst)
 
 int	update_fdin(t_pipe **pipe_lst)
 {
-	t_token *temp;
+	t_token	*temp;
 	int		error;
 
 	error = 0;
@@ -77,8 +79,6 @@ int	update_fdin(t_pipe **pipe_lst)
 	{
 		if (temp->type == INPUT || temp->type == LIMITER)
 		{
-		
-			 
 			if (temp->type == INPUT)
 				error = open_fdin(temp->value, pipe_lst);
 			else
