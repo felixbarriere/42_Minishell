@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_dollar.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/22 17:30:39 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/23 19:54:04 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*get_key_dollar(char *str, int i)
 	{
 		j++;
 		i++;
-		printf("STR[i] = %c\n", str[i]);
+		// printf("STR[i] = %c\n", str[i]);
 		if (str[i] == '?')
 		{
 			key = get_key_dollar_2(str, i, j);
