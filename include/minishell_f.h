@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/23 11:18:42 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/23 11:51:24 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,27 @@ void	tokenizer(t_sh *sh);
 void	lexer(t_sh *sh);
 char	*expander(t_sh *sh, char *dollar);
 
+
+/******** FILE REDIRECTIONS ********/
 /******** GET_COMMAND_TYPE ********/
 void	update_command(t_sh *sh);
+
+/******** GET_COMMAND_TYPE_UTILS ********/
+int		args_number(t_token *li);
+void	find_type_args(t_token *lst, t_sh *sh);
+void	find_type(t_token *lst, t_sh *sh);
 void	get_commands_type(t_sh *sh);
 
 /******** REDIRECTIONS ********/
-int	open_fdin(char	*value, t_pipe **pipe_lst);
-int	update_fdout(t_pipe **pipe_lst);
-int	update_fdin(t_pipe **pipe_lst);
+int		open_fdin(char	*value, t_pipe **pipe_lst);
+int		update_fdout(t_pipe **pipe_lst);
+int		update_fdin(t_pipe **pipe_lst);
+
+/******** PROCESS_LIMITER ********/
+char	*process_quotes_limiter(char **value);
+int		limiter_has_quotes(char *str);
+void	process_limiter(char **limiter, int *quotes);
+int		is_limiter(char **temp, char **limiter);
 
 /******** HEREDOC ********/
 int		contains_any_quotes(char *str);
@@ -108,6 +121,8 @@ int		heredoc(char *limiter, t_pipe **pipe_lst);
 /******** HEREDOC_2 ********/
 char	*read_heredoc(t_pipe **pipe_lst, int quotes, char *limiter);
 
+
+/******** FILE PIPES ********/
 /******** GET_COMMANDS_PATH ********/
 void	get_command_path(t_sh *sh);
 
