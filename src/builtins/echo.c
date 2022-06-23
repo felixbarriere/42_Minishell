@@ -39,4 +39,5 @@ void	echo_command(t_pipe	*pipe)
 		ft_putstr_fd("\n", 2);
 }
 
-// faire -n: 
+// attention plusieurs cas d'erreur avec $USER + autres args 
+// cas plusieur args pas gere
