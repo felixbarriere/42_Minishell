@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   index.c                                            :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/09 16:12:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/23 12:09:04 by fbarrier         ###   ########.fr       */
+/*   Created: 2022/06/23 12:08:45 by fbarrier          #+#    #+#             */
+/*   Updated: 2022/06/23 12:11:41 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,8 @@
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
 
-void	index_builtins(t_sh	*sh)
+void	export_command(t_sh *sh)
 {
-	if (!ft_strcmp(sh->pipe_lst->cmd, "cd"))
-		cd_command(sh);
-	else if (!ft_strcmp(sh->pipe_lst->cmd, "pwd"))
-		pwd_command(sh->pipe_lst);
-	else if (!ft_strcmp(sh->pipe_lst->cmd, "echo"))
-		echo_command(sh->pipe_lst);
-	else if (!ft_strcmp(sh->pipe_lst->cmd, "env"))
-		env_command(sh);
-	else if (!ft_strcmp(sh->pipe_lst->cmd, "export"))
-		export_command(sh);
+	(void)sh;
+	printf("commande export baby\n");
 }
