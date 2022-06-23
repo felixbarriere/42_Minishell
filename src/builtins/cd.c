@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:12:23 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/22 19:47:12 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/23 12:00:23 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,35 @@
 
 extern t_sh	g_sh;
 
-void	change_old_pwd_array(t_sh	*sh)
+void	change_old_pwd_array(t_sh	*sh, char *old_path)
+{
+	int	i=0;
+	while(sh->env[i])
+	{
+		if (!ft_strncmp(sh->env[i], "OLDPWD", 6))
+		{
+			// printf("char ** OLDPWD: %s\n", sh->env[i]);
+			free(sh->env[i]);
+			sh->env[i] = ft_strdup("OLDPWD=");
+			sh->env[i] = ft_strjoin(sh->env[i], old_path);
+			// printf("char ** OLDPWD2: %s\n", sh->env[i]);
+		}
+		i++;
+	}
+}
+
+void	change_pwd_array(t_sh	*sh, char *path)
 {
 	int	i=0;
 	while(sh->env[i])
 	{
 		if (!ft_strncmp(sh->env[i], "PWD", 3))
 		{
-			printf("char ** PWD: %s\n", sh->env[i]);
+			// printf("char ** PWD: %s\n", sh->env[i]);
 			free(sh->env[i]);
+			sh->env[i] = ft_strdup("PWD=");
+			sh->env[i] = ft_strjoin(sh->env[i], path);
+			// printf("char ** PWD2: %s\n", sh->env[i]);
 		}
 		i++;
 	}
@@ -47,9 +67,9 @@ void	change_pwd(t_sh	*sh, char *path)
 		}
 		sh->env_lst = sh->env_lst->next;
 	}
-	printf("pwd_key2: %s\n", sh->env_lst->key);
+	// printf("pwd_key2: %s\n", sh->env_lst->key);
 	printf("pwd_value2: %s\n", sh->env_lst->value);
-	change_old_pwd_array(sh);
+	change_pwd_array(sh, path);
 	sh->env_lst = start;
 }
 
@@ -69,7 +89,8 @@ void	change_old_pwd(t_sh	*sh, char *old_path)
 		sh->env_lst = sh->env_lst->next;
 	}
 	// printf("old_pwd_key2: %s\n", sh->env_lst->key);
-	// printf("old_pwd_value2: %s\n", sh->env_lst->value);
+	printf("old_pwd_value2: %s\n", sh->env_lst->value);
+	change_old_pwd_array(sh, old_path);
 	sh->env_lst = start;
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_f.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/23 11:51:24 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/23 12:09:34 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,5 +166,6 @@ void	cd_command(t_sh	*sh);
 void	pwd_command(t_pipe	*pipe);
 void	echo_command(t_pipe	*pipe);
 void	env_command(t_sh	*sh);
+void	export_command(t_sh *sh);
 
 #endif
