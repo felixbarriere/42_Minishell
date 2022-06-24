@@ -29,6 +29,19 @@ int	process_eof(char **temp, t_pipe **pipe_lst)
 	return (1);
 }
 
+int	contain_space(char	**value)
+{
+	int i = 0;
+	while ((*value)[i])
+	{
+		if ((*value)[i] == ' ')
+		{
+			return (i);
+		}
+		i++;
+	}
+	return (0);
+}
 char	*expand_env_in_heredoc(char **value)
 {
 	char	*new_str;
@@ -45,13 +58,16 @@ char	*expand_env_in_heredoc(char **value)
 		if ((*value)[idx] == '$')
 		{
 			dollar_value = noquote_dollar_manager((*value), &idx, &g_sh);
-			printf("DOLLAR VALUE = %s\n", dollar_value);
+			printf("DOLLAR VALUE = %s IDX = %d\n", dollar_value, idx);
 			if (dollar_value != NULL)
 				new_str = ft_strjoin(new_str, dollar_value);
 			continue ;
 		}
 		else
+		{
+			printf("ICI |||\n");
 			new_str = ft_strjoin_char(new_str, (*value)[idx]);
+		}
 		idx++;
 	}
 	return (new_str);

@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/22 17:30:39 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/24 18:12:47 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ char	*get_key_dollar(char *str, int i)
 	{
 		j++;
 		i++;
-		printf("STR[i] = %c\n", str[i]);
 		if (str[i] == '?')
 		{
 			key = get_key_dollar_2(str, i, j);
