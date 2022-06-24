@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:43:57 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/22 20:27:39 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/24 17:24:36 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	ft_prompt_init(t_sh *sh, char **env_init)
 			clear_list(sh->token_lst);
 			clear_list_pipe(sh->pipe_lst);
 			ft_init_values(sh, env_init);
-			sh->exit = 0;
+			// sh->exit = 0;
 			continue ;
 		}
 		// print_parser_result(sh);
