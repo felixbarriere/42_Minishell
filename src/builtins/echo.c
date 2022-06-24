@@ -61,3 +61,4 @@ void	echo_command(t_pipe	*pipe)
 }
 
 // attention plusieurs cas d'invalid read avec $USER + autres args 
+// ou lorsque plusieurs appels a $USER (a regarder dans le parsing).

@@ -38,14 +38,14 @@ char	*expand_env_in_heredoc(char **value)
 	idx = 0;
 	new_str = NULL;
 	dollar_value = NULL;
-	printf("CHAR *VALUE = %s\n", *value);
+	// printf("CHAR *VALUE = %s\n", *value);
 	while ((*value)[idx])
 	{
 		printf("VALUE[%d] = %c\n", idx, (*value)[idx]);
 		if ((*value)[idx] == '$')
 		{
 			dollar_value = noquote_dollar_manager((*value), &idx, &g_sh);
-			printf("DOLLAR VALUE = %s\n", dollar_value);
+			// printf("DOLLAR VALUE = %s\n", dollar_value);
 			if (dollar_value != NULL)
 				new_str = ft_strjoin(new_str, dollar_value);
 			continue ;

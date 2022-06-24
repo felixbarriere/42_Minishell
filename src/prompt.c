@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:43:57 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/24 14:44:25 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/24 18:21:29 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,26 @@ void	dup_env_array(t_sh *sh, char **env)
 void	ft_prompt_start(t_sh *sh)
 {
 	sh->prompt = readline("➜ minishell ");
-	if (!sh->prompt || !ft_strcmp(sh->prompt, "exit"))
-	{
-		ft_free(sh->path);
-		ft_free(sh->env);
-		clear_list(sh->token_lst);
-		clear_list_pipe(sh->pipe_lst);
-		exit(0);
-	}
+	// if (!sh->prompt || !ft_strncmp(sh->prompt, "exit", 4))
+	// {
+	// 	printf("test\n");
+
+	// 	if(sh->pipe_lst->token->next)
+	// 	{
+	// 		printf("arg present\n");
+	// 		// printf("==> %s\n", sh->pipe_lst->token->next->value);
+	// 	}
+	// 	// if(sh->pipe_lst->args[2])
+	// 	// {
+	// 	// 	printf("trop d'arg\n");
+	// 	// }
+		
+	// 	ft_free(sh->path);
+	// 	ft_free(sh->env);
+	// 	clear_list(sh->token_lst);
+	// 	clear_list_pipe(sh->pipe_lst);
+	// 	exit(0);
+	// }
 	add_history(sh->prompt);
 }
 
