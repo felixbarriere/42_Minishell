@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 19:59:52 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/22 19:02:30 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/24 14:46:42 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	execution(t_sh	*sh, char **env_init)
 {
 	t_pipe	*pipe_start;
 
-	printf("commande: %s\n", sh->pipe_lst->cmd_verified);
 	pipe_start = sh->pipe_lst;
 	while (sh->pipe_lst->cmd != NULL)
 	{
