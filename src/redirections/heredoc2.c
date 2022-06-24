@@ -51,7 +51,7 @@ char	*expand_env_in_heredoc(char **value)
 	idx = 0;
 	new_str = NULL;
 	dollar_value = NULL;
-	printf("CHAR *VALUE = %s\n", *value);
+	// printf("CHAR *VALUE = %s\n", *value);
 	while ((*value)[idx])
 	{
 		printf("VALUE[%d] = %c\n", idx, (*value)[idx]);
