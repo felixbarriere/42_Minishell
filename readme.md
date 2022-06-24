@@ -19,5 +19,4 @@ WIP
 - Unix-like pipes
 - Environment variables interpolation (sequence starting with $)
 - $? for last exit status
-- $_ for last binary executed
 - Ctrl+C, Ctrl+\ and Ctrl+D works like in bash
