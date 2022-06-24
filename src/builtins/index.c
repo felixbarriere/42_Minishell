@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 16:12:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/23 12:09:04 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/24 14:03:38 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,6 @@ void	index_builtins(t_sh	*sh)
 		env_command(sh);
 	else if (!ft_strcmp(sh->pipe_lst->cmd, "export"))
 		export_command(sh);
+	else if (!ft_strcmp(sh->pipe_lst->cmd, "unset"))
+		unset_command(sh);
 }

@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/23 14:35:54 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/24 12:48:22 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,5 +168,6 @@ void	pwd_command(t_pipe	*pipe);
 void	echo_command(t_pipe	*pipe);
 void	env_command(t_sh	*sh);
 void	export_command(t_sh *sh);
+void	unset_command(t_sh *sh);
 
 #endif

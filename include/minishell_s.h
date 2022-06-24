@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/22 19:32:42 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/24 14:02:31 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_env
 	char			*key;
 	char			*value;
 	int				index;
+	struct s_env	*prev;
 	struct s_env	*next;
 }	t_env;
 

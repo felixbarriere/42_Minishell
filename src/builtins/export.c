@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 12:08:45 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/23 17:52:04 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/24 11:23:45 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,17 +90,11 @@ void	add_array_export(t_sh *sh, char *value)
 
 void	export_command(t_sh *sh)
 {
-	// (void)sh;
-	// char	**key_value;
-	// char	*value;
-	// char	*key;
 	int		index;
 
 	index = 0;
-	printf("commande export baby\n");
 	if (sh->pipe_lst->token->next)
 	{
-		printf("==> %s\n", sh->pipe_lst->token->next->value);
 		if (contains_equal(sh->pipe_lst->token->next->value))
 		{
 			printf("contient un =\n");
