@@ -62,13 +62,13 @@ void	echo_command(t_pipe	*pipe)
 // 				ft_putstr_fd(to_print, 1);
 // 				ft_putchar_fd('\n', 1);
 // 			}
-// 		}
-// 		else
-// 		{
-// 			// printf("echo à imprimer: %s\n",  pipe->token->next->next->value);
-// 			to_print = pipe->token->next->next->value;
-// 			ft_putstr_fd(to_print, 1);
-// 		}
+		}
+		// else
+		// {
+		// 	// printf("echo à imprimer: %s\n",  pipe->token->next->next->value);
+		// 	to_print = pipe->token->next->next->value;
+		// 	ft_putstr_fd(to_print, 1);
+		// }
 	}
 	else
 		ft_putstr_fd("\n", 2);
