@@ -63,14 +63,15 @@ int	heredoc(char *limiter, t_pipe **pipe_lst)
 	while (1)
 	{
 		temp = read_heredoc(pipe_lst, quotes, limiter);
-		if (!temp)
-			return (1);
-		if (is_limiter(&temp, &limiter) == SUCCESS)
-			break ;
-		if (i > 0)
-			ft_putstr_fd("\n", (*pipe_lst)->input);
-		ft_putstr_fd(temp, (*pipe_lst)->input);
-		ft_free_null_str(&temp);
+		if (temp)
+		{
+			if (is_limiter(&temp, &limiter) == SUCCESS)
+				break ;
+			if (i > 0)
+				ft_putstr_fd("\n", (*pipe_lst)->input);
+			ft_putstr_fd(temp, (*pipe_lst)->input);
+			ft_free_null_str(&temp);
+		}
 		i++;
 	}
 	heredoc2(limiter, pipe_lst);

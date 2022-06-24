@@ -42,7 +42,7 @@ int	contain_space(char	**value)
 	}
 	return (0);
 }
-char	*expand_env_in_heredoc(char **value)
+char	*expand_env_in_heredoc(char *value)
 {
 	char	*new_str;
 	char	*dollar_value;
@@ -51,34 +51,28 @@ char	*expand_env_in_heredoc(char **value)
 	idx = 0;
 	new_str = NULL;
 	dollar_value = NULL;
-	printf("CHAR *VALUE = %s\n", *value);
-	while ((*value)[idx])
+	while (value[idx])
 	{
-		printf("VALUE[%d] = %c\n", idx, (*value)[idx]);
-		if ((*value)[idx] == '$')
+		if (value[idx] == '$')
 		{
-			dollar_value = noquote_dollar_manager((*value), &idx, &g_sh);
-			printf("DOLLAR VALUE = %s IDX = %d\n", dollar_value, idx);
+			dollar_value = noquote_dollar_manager(value, &idx, &g_sh);
 			if (dollar_value != NULL)
 				new_str = ft_strjoin(new_str, dollar_value);
 			continue ;
 		}
 		else
-		{
-			printf("ICI |||\n");
-			new_str = ft_strjoin_char(new_str, (*value)[idx]);
-		}
+			new_str = ft_strjoin_char(new_str, value[idx]);
 		idx++;
 	}
 	return (new_str);
 }
 
-char	*expand_heredoc(char **str)
+char	*expand_heredoc(char *str)
 {
 	char	*temp;
 
 	temp = expand_env_in_heredoc(str);
-	ft_free_null_str(str);
+	free (str);
 	return (temp);
 }
 
@@ -98,7 +92,7 @@ char	*read_heredoc(t_pipe **pipe_lst, int quotes, char *limiter)
 			&& ft_strlen(str) == ft_strlen(limiter))
 			return (str);
 		else if (contains_charset(str, '$') == SUCCESS)
-			str = expand_heredoc(&str);
+			str = expand_heredoc(str);
 	}
 	return (str);
 }
