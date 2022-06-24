@@ -23,7 +23,8 @@ char	*filename(void)
 		file_exists = open(filename, O_RDONLY);
 		i++;
 	}
-	close(file_exists);
+	if (file_exists != -1)
+		close(file_exists);
 	return (filename);
 }
 
