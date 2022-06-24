@@ -37,9 +37,6 @@ char	*ft_strdup_env(char *src)
 t_env	*create_env_token(char *value, char *key, int index)
 {
 	t_env	*elem;
-	// (void)value;
-	// (void)key;
-	// (void)index;
 
 	elem = NULL;
 	elem = ft_calloc(1, sizeof(t_env));
@@ -50,6 +47,7 @@ t_env	*create_env_token(char *value, char *key, int index)
 	elem->value = ft_strdup(value);
 	elem->index = index;
 	elem->next = NULL;
+	elem->prev = NULL;
 	return (elem);
 }
 
@@ -70,6 +68,7 @@ t_env	*add_back_env_token(t_env *list, char *value, char *key, int index)
 		while (tmp->next)
 			tmp = tmp->next;
 		tmp->next = new;
+		new->prev = tmp;
 	}
 	return (list);
 }

@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/24 16:14:55 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/24 18:28:46 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_env
 	char			*key;
 	char			*value;
 	int				index;
+	struct s_env	*prev;
 	struct s_env	*next;
 }	t_env;
 

@@ -34,6 +34,8 @@ src/builtins/cd.c\
 src/builtins/pwd.c\
 src/builtins/echo.c\
 src/builtins/env_cmd.c\
+src/builtins/export.c\
+src/builtins/unset.c\
 
 OBJS = ${SRCS:.c=.o}
 INCS	=	-I ./includes -I ./libft/includes
