@@ -49,7 +49,7 @@ void	find_type(t_token *lst, t_sh *sh)
 		lst = lst->next;
 	}
 	lst = temp;
-	printf("------APRES-----\n");
+	// printf("------APRES-----\n");
 	print_tokens(lst);
 }
 
