@@ -49,9 +49,12 @@ void	echo_command(t_pipe	*pipe)
 			i = 2;
 			while (pipe->args[i])
 			{
-				ft_putstr_fd(pipe->args[i], 1);
-				if (i + 1 < args_number)
-					ft_putchar_fd(' ', 1);
+				if (pipe->token->next->type == ARG)
+				{
+					ft_putstr_fd(pipe->args[i], 1);
+					if (i + 1 < args_number)
+						ft_putchar_fd(' ', 1);
+				}
 				i++;
 			}			
 // 			if (pipe->token->next->type == ARG)
