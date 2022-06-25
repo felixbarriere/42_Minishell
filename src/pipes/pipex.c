@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 19:59:52 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/24 19:18:58 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/25 17:18:33 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,15 @@ void	pipe_exec(t_sh *sh, char **env_init)
 {
 	pid_t	pid = 0;
 
+	printf("commande exec verified: %s\n",sh->pipe_lst->cmd_verified);
 	pid = fork();
 	if (pid == 0)
 	{	
 		if (execve(sh->pipe_lst->cmd_verified, sh->pipe_lst->args, env_init) == -1)
-			ft_putstr_fd("error execve\n", 2);
+		{
+			ft_putstr_fd("No such file or directory\n", 2);
+			// sortir du fork en cas d'erreur?
+		}	
 	}
 	else
 		wait(NULL);
