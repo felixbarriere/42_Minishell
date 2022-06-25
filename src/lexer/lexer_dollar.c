@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/24 19:00:27 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/25 14:11:18 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,43 +76,6 @@ char	*get_value_dollar(t_sh	*sh, char *key)
 		value = expander(sh, key_trim);
 		free(key_trim);
 	}
-	printf("VALUE = %s\n", value);
+	// printf("VALUE = %s\n", value);
 	return (value);
 }
-
-/*
-char	*isolate_dollar_in_quote_2(char *str, t_sh *sh)
-{
-	int		i;
-	char	*key;
-	char	*value;
-	char	*str_wip;
-
-	i = 0;
-	str_wip = NULL;
-	while (str[i] != '\0')
-	{
-		if (str[i] == '$')
-		{
-			key = get_key_dollar(str, i);
-			value = get_value_dollar(sh, key);
-			if (value != NULL)
-				str_wip = ft_strjoin(str_wip, value);
-			i = i + ft_strlen(key) - 1;
-			
-		}
-		else
-			str_wip = ft_strjoin_char(str_wip, str[i]);
-		i++;
-	}
-	return (str_wip);
-}
-
-char	*dollar_in_quote(char *str, t_sh *sh)
-{
-	char	*str_wip;
-	str_wip = isolate_dollar_in_quote_2(str, sh);
-	
-	return (str_wip);
-}
-*/

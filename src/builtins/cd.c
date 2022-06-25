@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:12:23 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/24 14:46:51 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/25 14:24:50 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	change_pwd_array(t_sh	*sh, char *path)
 		i++;
 	}
 }
-
 
 void	change_pwd(t_sh	*sh, char *path)
 {
@@ -124,5 +123,8 @@ void	cd_command(t_sh *sh)
 		}
 	}
 	else 
+	{
 		ft_putstr_fd("cd: no path\n", 2);
+		g_sh.exit = 1;
+	}
 }

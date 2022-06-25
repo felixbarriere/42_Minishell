@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 19:59:52 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/24 19:18:58 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/25 15:50:00 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,15 @@ void	reset_input_output(int cpy_input, int cpy_output, t_pipe *pipe_lst)
 	close(cpy_input);
 	close(cpy_output);
 	if (pipe_lst->input != 0)
+	{
+		printf("close input\n");
 		close (pipe_lst->input);
+	}
 	if (pipe_lst->output != 1)
+	{
+		printf("close input\n");
 		close (pipe_lst->output);
+	}
 }
 
 void	update_input_output(int *cpy_input, int *cpy_output, t_pipe *pipe_lst)
@@ -45,14 +51,29 @@ void	pipe_exec(t_sh *sh, char **env_init)
 	if (pid == 0)
 	{	
 		if (execve(sh->pipe_lst->cmd_verified, sh->pipe_lst->args, env_init) == -1)
+		{
 			ft_putstr_fd("error execve\n", 2);
+		}
 	}
 	else
+	{
+		if ((0 < waitpid(pid, &g_sh.exit, 0)) && (WIFEXITED(g_sh.exit)))
+		{
+			g_sh.exit = WEXITSTATUS(g_sh.exit);
+			printf("WEXIT = %d\n", g_sh.exit);
+		}
 		wait(NULL);
+		printf("ICI 2\n");
+	}
 	// A VERIFIER
 	if ((0 < waitpid(pid, &g_sh.exit, 0)) && (WIFEXITED(g_sh.exit)))
-		g_sh.exit = WEXITSTATUS (g_sh.exit);
-	close (pid);
+	{
+		g_sh.exit = WEXITSTATUS(g_sh.exit);
+		printf("WEXIT = %d\n", g_sh.exit);
+	}
+	if (pid == 0)
+		close (pid);
+	printf("pid close\n");
 }
 
 void	execution(t_sh	*sh, char **env_init)
@@ -62,6 +83,7 @@ void	execution(t_sh	*sh, char **env_init)
 	int	cpy_output;
 
 	pipe_start = sh->pipe_lst;
+	printf("INPUT = %d | OUPUT = %d\n", sh->pipe_lst->input, sh->pipe_lst->output);
 	while (sh->pipe_lst->cmd != NULL)
 	{
 		update_input_output(&cpy_input, &cpy_output, sh->pipe_lst);
@@ -79,50 +101,3 @@ void	execution(t_sh	*sh, char **env_init)
 	}
 	sh->pipe_lst = pipe_start;
 }
-
-
-
-// void	pipe_exec(t_sh *sh, char **env_init)
-// {
-// 	pid_t	pid = 0;
-// 	// (void)sh;
-
-// 	if (sh->pipe_lst->is_builtin == 1)
-// 	{
-// 		index_builtins(sh);
-// 	}
-// 	else
-// 	{
-// 		pid = fork();
-// 		if (pid == 0)
-// 		{	
-// 			if (execve(sh->pipe_lst->cmd_verified, sh->pipe_lst->args, env_init) == -1)
-// 				ft_putstr_fd("error execve\n", 2);
-// 		}
-// 		else
-// 			wait(NULL) ;
-// 		// A VERIFIER
-// 		if ((0 < waitpid(pid, &g_sh.exit, 0)) && (WIFEXITED(g_sh.exit)))
-// 			g_sh.exit = WEXITSTATUS (g_sh.exit);
-// 	}
-// }
-
-// void	execution(t_sh	*sh, char **env_init)
-// {
-// 	t_pipe	*pipe_start;
-
-// 	printf("commande: %s\n", sh->pipe_lst->cmd_verified);
-// 	pipe_start = sh->pipe_lst;
-// 	while (sh->pipe_lst->cmd != NULL)
-// 	{
-// 		if (sh->pipe_lst->cmd_verified != NULL || sh->pipe_lst->is_builtin == 1)
-// 			pipe_exec(sh, env_init);
-// 		else
-// 		{
-// 			write (2, "command not found\n", 19);
-// 			g_sh.exit = 127;
-// 		}
-//     sh->pipe_lst = sh->pipe_lst->next;
-// 	}
-// 	sh->pipe_lst = pipe_start;
-// }

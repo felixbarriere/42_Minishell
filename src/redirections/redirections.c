@@ -12,8 +12,8 @@ void	open_fdout(t_token *token, t_pipe **pipe_lst)
 		(*pipe_lst)->output = open(token->value, O_WRONLY
 				| O_CREAT | O_TRUNC, 00644);
 		(*pipe_lst)->append_mode = 0;
-		printf("TEST OPEN FDOUT\n");
-		printf("OUPUT = %d\n", (*pipe_lst)->output);
+		// printf("TEST OPEN FDOUT\n");
+		// printf("OUPUT = %d\n", (*pipe_lst)->output);
 	}
 	else
 	{
