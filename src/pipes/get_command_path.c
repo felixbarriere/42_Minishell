@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:27:17 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/25 17:11:20 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/25 18:46:47 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,26 +73,26 @@ char	*command_line(char **path, char *cmd)
 	return (NULL);
 }
 
-char	*delete_dot(char *cmd)
-{
-	int	i;
-	int	j;
-	char	*exec;
+// char	*delete_dot(char *cmd)
+// {
+// 	int	i;
+// 	int	j;
+// 	char	*exec;
 
-	i = 1;
-	j = 0;
-	exec = malloc(sizeof(char) * (ft_strlen(cmd))); // -1
-	if (!exec)
-		return (NULL);
-	while(cmd[i] != '\0')
-	{
-		exec[j] = cmd[i];
-		i++;
-		j++;
-	}
-	exec[j] = '\0';
-	return (exec);
-}
+// 	i = 1;
+// 	j = 0;
+// 	exec = malloc(sizeof(char) * (ft_strlen(cmd))); // -1
+// 	if (!exec)
+// 		return (NULL);
+// 	while(cmd[i] != '\0')
+// 	{
+// 		exec[j] = cmd[i];
+// 		i++;
+// 		j++;
+// 	}
+// 	exec[j] = '\0';
+// 	return (exec);
+// }
 
 char	*get_exec(char *cmd)
 {
@@ -102,7 +102,10 @@ char	*get_exec(char *cmd)
 
 	exec = NULL;
 	getcwd(path, sizeof(path));
-	exec = delete_dot(cmd);
+	printf("cmd: %s\n", cmd);
+	// exec = delete_dot(cmd);
+	exec = ft_substr(cmd, 1, ft_strlen(cmd) -1);
+	printf("exec: %s\n", exec);
 	exec_2 = ft_strjoin_path(path, exec);
 	free(exec);
 	return(exec_2);
