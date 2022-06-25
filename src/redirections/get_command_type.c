@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 19:28:11 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/23 11:53:18 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/25 14:09:14 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,13 @@ void	update_command(t_sh *sh)
 		sh->pipe_lst = sh->pipe_lst->next;
 	}
 	//A SUPPRIMER ------------
-	int i = 0;
-	printf("COMMAND = %s\n", temp->cmd);
-	while (temp->args[i] != NULL)
-	{
-		printf("ARG = %s\n", temp->args[i]);
-		i++;
-	}
-	sh->pipe_lst = temp;
+	// int i = 0;
+	// printf("COMMAND = %s\n", temp->cmd);
+	// while (temp->args[i] != NULL)
+	// {
+	// 	printf("ARG = %s\n", temp->args[i]);
+	// 	i++;
+	// }
 	// ------------------------
+	sh->pipe_lst = temp;
 }
