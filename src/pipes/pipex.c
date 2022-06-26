@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 19:59:52 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/25 17:18:33 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/26 14:47:59 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	execution(t_sh	*sh, char **env_init)
 	int	cpy_output;
 
 	pipe_start = sh->pipe_lst;
-	printf("INPUT = %d | OUPUT = %d\n", sh->pipe_lst->input, sh->pipe_lst->output);
+	// printf("INPUT = %d | OUPUT = %d\n", sh->pipe_lst->input, sh->pipe_lst->output);
 	while (sh->pipe_lst->cmd != NULL)
 	{
 		update_input_output(&cpy_input, &cpy_output, sh->pipe_lst);

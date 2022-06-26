@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/22 17:33:16 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/26 14:50:45 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	token_str(t_sh *sh)
 	{
 		while (str[idx])
 		{
+			// printf("test\n");
 			if (str[idx] == '\"' || str[idx] == '\'')
 			{
 				temp = quotes_manager(str, &idx, sh);
@@ -67,17 +68,21 @@ int	token_str(t_sh *sh)
 					new_str = ft_strjoin(new_str, temp);
 				free(temp);
 			}
+			
 			else if (str[idx] == '$')
 			{
+				// printf("test2\n");
 				if (str[idx + 1] == '\'' || str[idx + 1] == '\"')
 				{
 					idx++;
 					continue ;
 				}
 				dollar_value = noquote_dollar_manager(str, &idx, sh);
+				// printf("\ndollar_value: %s \n", dollar_value);
+				// printf("test3\n");
 				if (dollar_value != NULL)
 					new_str = severals_wds_value(sh, dollar_value, new_str);
-				free(dollar_value);
+				// free(dollar_value);  //a changer?
 				continue ;
 			}
 			else
