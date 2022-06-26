@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/26 16:09:42 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/26 16:49:01 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,7 @@ void	clear_list_pipe(t_pipe *a_list);
 void	execution(t_sh	*sh, char **env_init);
 void	index_builtins(t_sh	*sh);
 void	cd_command(t_sh	*sh);
+void	error_cd(char	*bad_dir);
 void	pwd_command(t_pipe	*pipe);
 void	echo_command(t_pipe	*pipe);
 void	env_command(t_sh	*sh);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   cd_2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/09 17:14:24 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/26 17:09:09 by fbarrier         ###   ########.fr       */
+/*   Created: 2022/06/26 16:47:49 by fbarrier          #+#    #+#             */
+/*   Updated: 2022/06/26 16:49:59 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,9 @@
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
 
-void	pwd_command(t_pipe	*pipe)
+void	error_cd(char	*bad_dir)
 {
-	char	cwd[256];
-
-	(void)pipe;
-	if (getcwd(cwd, sizeof(cwd)) == NULL)
-		write (2, "error pwd\n", 10);
-	else
-	{
-		ft_putstr_fd(cwd, 1);
-		ft_putchar_fd('\n', 1);
-	}
+	ft_putstr_fd("cd: no such file or directory: ", 2);
+	ft_putstr_fd(bad_dir, 2);
+	ft_putchar_fd('\n', 2);
 }

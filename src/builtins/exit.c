@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 18:19:33 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/24 19:04:11 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/26 16:37:22 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
 
-int		is_in_range(char	*str)
+int	is_in_range(char *str)
 {
 	int	i;
 
@@ -32,14 +32,14 @@ int		is_in_range(char	*str)
 
 void	exit_command(t_sh *sh)
 {
-	char *exit_nbr;
+	char	*exit_nbr;
 
-	if(sh->pipe_lst->token->next)
+	if (sh->pipe_lst->token->next)
 	{
 		exit_nbr = sh->pipe_lst->token->next->value;
-		if (exit_nbr && is_in_range(exit_nbr) && ft_atoi(exit_nbr) <= 255 
-				&& !sh->pipe_lst->token->next->next)
-			sh->exit = ft_atoi(exit_nbr);			
+		if (exit_nbr && is_in_range(exit_nbr) && ft_atoi(exit_nbr) <= 255
+			&& !sh->pipe_lst->token->next->next)
+			sh->exit = ft_atoi(exit_nbr);
 		else
 			ft_putstr_fd("exit: bad argument\n", 2);
 	}
