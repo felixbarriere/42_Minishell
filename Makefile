@@ -31,6 +31,7 @@ src/error_sep/error_sep2.c\
 src/parser/expander.c\
 src/builtins/index.c\
 src/builtins/cd.c\
+src/builtins/cd_2.c\
 src/builtins/pwd.c\
 src/builtins/echo.c\
 src/builtins/env_cmd.c\

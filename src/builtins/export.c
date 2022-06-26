@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 12:08:45 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/26 16:10:55 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/26 17:07:36 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	add_array_export(t_sh *sh, char *value)
 	int		i;
 
 	i = 0;
-	while(sh->env[i]) //fonction a part?
+	while (sh->env[i])
 		i++;
 	env_temp = malloc(sizeof(char *) * (i + 1));
 	if (!env_temp)
@@ -40,9 +40,6 @@ void	add_array_export(t_sh *sh, char *value)
 		sh->env[i] = ft_strdup(env_temp[i]);
 	sh->env[i++] = ft_strdup(value);
 	sh->env[i] = NULL;
-	// i = 0;
-	printf("array ===> %s\n", env_temp[i - 2]);
-	printf("array2 ===> %s\n", sh->env[i - 1]);
 	ft_free(env_temp);
 }
 
@@ -51,7 +48,7 @@ int	is_in_env(char	*key, t_env	*list)
 	t_env	*temp;
 
 	temp = list;
-	while(list != NULL)
+	while (list != NULL)
 	{
 		if (!ft_strcmp(key, list->key))
 		{
@@ -75,8 +72,6 @@ char	*get_value(char **key_value)
 	value = key_value[1];
 	if (key_value[2] != NULL)
 	{
-		// printf("key= %s\n", key);
-		// printf("plusieur str\n");
 		value_2 = ft_strdup(value);
 		while (key_value[i])
 		{
@@ -87,7 +82,6 @@ char	*get_value(char **key_value)
 		}
 		value = ft_strdup(value_2);
 		free(value_2);
-		// printf("value: %s\n", value);
 	}
 	return (value);
 }
@@ -97,7 +91,7 @@ void	update_value(t_env	*list, char	*value, char *key)
 	t_env	*temp;
 
 	temp = list;
-	while(list != NULL)
+	while (list != NULL)
 	{
 		if (!ft_strcmp(key, list->key))
 		{
@@ -119,7 +113,6 @@ void	export_command(t_sh *sh)
 	if (sh->pipe_lst->token->next && contains_equal(sh->pipe_lst->args[1]))
 	{
 		key_value = ft_split(sh->pipe_lst->token->next->value, '=');
-		
 		if (!is_in_env(key_value[0], sh->env_lst))
 		{
 			orchestrate_env_token(sh->pipe_lst->token->next->value, sh, index);
@@ -128,42 +121,12 @@ void	export_command(t_sh *sh)
 		else
 		{
 			value = get_value(key_value);
-			printf("value : %s\n", value);
 			update_value(sh->env_lst, value, key_value[0]);
 			if (key_value[2] != NULL)
 				free(value);
 		}
 		ft_free(key_value);
 	}
-	else if(!sh->pipe_lst->token->next)
+	else if (!sh->pipe_lst->token->next)
 		env_command(sh);
 }
-
-// si key existant, remplacer la valeur
-
-
-
-// char	**copy_array(t_sh *sh)
-// {
-// 	char	**env_temp;
-// 	int		i;
-
-// 	i = 0;
-// 	while(sh->env[i]) //fonction a part?
-// 		i++;
-// 	env_temp = malloc(sizeof(char *) * (i + 1));
-// 	if (!env_temp)
-// 		return (NULL);
-// 	i = 0;
-// 	while (sh->env[i])
-// 	{
-// 		env_temp[i] = ft_strdup(sh->env[i]);
-// 		i++;
-// 	}
-// 	env_temp[i] = NULL;
-
-
-// 	// ft_free(env_temp);
-
-// 	return(env_temp);
-// }

@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 15:55:51 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/24 12:44:30 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/26 16:29:49 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,3 @@ void	env_command(t_sh	*sh)
 	}
 	sh->env_lst = start;
 }
-

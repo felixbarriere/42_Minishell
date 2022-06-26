@@ -15,12 +15,42 @@
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
 
+void	print_args_2(char **args, int args_number, int type)
+{
+	int	i;
+
+	i = 2;
+	while (args[i])
+	{
+		if (type == ARG)
+		{
+			ft_putstr_fd(args[i], 1);
+			if (i + 1 < args_number)
+				ft_putchar_fd(' ', 1);
+		}
+		i++;
+	}
+}
+
+void	print_args(char **args, int args_number)
+{
+	int	i;
+
+	i = 1;
+	while (args[i])
+	{
+		ft_putstr_fd(args[i], 1);
+		if (i + 1 < args_number)
+			ft_putchar_fd(' ', 1);
+		i++;
+	}
+	ft_putchar_fd('\n', 1);
+}
+
 void	echo_command(t_pipe	*pipe)
 {
 	int	i;
 	int	args_number;
-
-	printf("commande: %s\n", pipe->cmd);
 
 	i = 0;
 	args_number = 0;
@@ -29,53 +59,13 @@ void	echo_command(t_pipe	*pipe)
 		args_number++;
 		i++;
 	}
-	printf("args_nbr: %d\n", args_number);
 	if (pipe->token->next != NULL)
 	{
 		if (ft_strcmp(pipe->token->next->value, "-n"))
-		{
-			i = 1;
-			while (pipe->args[i])
-			{
-				ft_putstr_fd(pipe->args[i], 1);
-				if (i + 1 < args_number)
-					ft_putchar_fd(' ', 1);
-				i++;
-			}
-			ft_putchar_fd('\n', 1);
-		}
+			print_args(pipe->args, args_number);
 		else
-		{
-			i = 2;
-			while (pipe->args[i])
-			{
-				if (pipe->token->next->type == ARG)
-				{
-					ft_putstr_fd(pipe->args[i], 1);
-					if (i + 1 < args_number)
-						ft_putchar_fd(' ', 1);
-				}
-				i++;
-			}			
-// 			if (pipe->token->next->type == ARG)
-// 			{
-// 				to_print = pipe->token->next->value;
-// 			// printf("commande: %s\n", pipe->token->value);
-// 			// printf("echo à imprimer: %s\n", pipe->token->next->value);
-// 				ft_putstr_fd(to_print, 1);
-// 				ft_putchar_fd('\n', 1);
-// 			}
-		}
-// 		else
-// 		{
-// 			// printf("echo à imprimer: %s\n",  pipe->token->next->next->value);
-// 			to_print = pipe->token->next->next->value;
-// 			ft_putstr_fd(to_print, 1);
-// 		}
+			print_args_2(pipe->args, args_number, pipe->token->next->type);
 	}
 	else
 		ft_putstr_fd("\n", 2);
 }
-
-// attention plusieurs cas d'invalid read avec $USER + autres args 
-// ou lorsque plusieurs appels a $USER (a regarder dans le parsing).
