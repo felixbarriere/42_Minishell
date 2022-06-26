@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:43:57 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/25 16:00:25 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/26 14:48:36 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,12 +102,12 @@ void	ft_prompt_init(t_sh *sh, char **env_init)
 	get_path(sh);
 	while (1)
 	{
-		printf("1 = sh->exit = %d\n", sh->exit);
+		// printf("1 = sh->exit = %d\n", sh->exit);
 		ft_prompt_start(sh);
 		sh->lenght = ft_strlen(sh->prompt);
 		if (!is_only_space(sh->prompt))
 			lexer(sh);
-		printf("2 = sh->exit = %d\n", sh->exit);
+		// printf("2 = sh->exit = %d\n", sh->exit);
 		if (sh->error)
 		{
 			clear_list(sh->token_lst);
@@ -118,9 +118,9 @@ void	ft_prompt_init(t_sh *sh, char **env_init)
 		if (!ft_strcmp(sh->pipe_lst->cmd, "echo"))
 			sh->exit = 0;
 		execution(sh, sh->env);
-		printf("Le code de retour est %d\n",sh->exit);
+		// printf("Le code de retour est %d\n",sh->exit);
 
-		printf("3 = sh->exit = %d\n", sh->exit);
+		// printf("3 = sh->exit = %d\n", sh->exit);
 		clear_list(sh->token_lst);
 		clear_list_pipe(sh->pipe_lst);
 		ft_init_values(sh, sh->env);

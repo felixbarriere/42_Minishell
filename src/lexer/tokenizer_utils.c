@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/05/26 14:36:03 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/26 14:45:50 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ char	*severals_wds_value(t_sh *sh, char *dollar_value, char	*new_str)
 
 	i = 0;
 	j = 0;
+	// printf("test4\n");
+	// printf("\ndollar_value2: %s \n", dollar_value);
 	value_dollar_split = ft_split(dollar_value, ' ');
 	while (value_dollar_split[j])
 		j++;
