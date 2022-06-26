@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 12:08:45 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/24 17:47:37 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/26 16:10:55 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,45 +14,6 @@
 #include "../../include/minishell_d.h"
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
-
-int	contains_equal(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '=')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-// char	**copy_array(t_sh *sh)
-// {
-// 	char	**env_temp;
-// 	int		i;
-
-// 	i = 0;
-// 	while(sh->env[i]) //fonction a part?
-// 		i++;
-// 	env_temp = malloc(sizeof(char *) * (i + 1));
-// 	if (!env_temp)
-// 		return (NULL);
-// 	i = 0;
-// 	while (sh->env[i])
-// 	{
-// 		env_temp[i] = ft_strdup(sh->env[i]);
-// 		i++;
-// 	}
-// 	env_temp[i] = NULL;
-
-
-// 	// ft_free(env_temp);
-
-// 	return(env_temp);
-// }
 
 void	add_array_export(t_sh *sh, char *value)
 {
@@ -169,7 +130,7 @@ void	export_command(t_sh *sh)
 			value = get_value(key_value);
 			printf("value : %s\n", value);
 			update_value(sh->env_lst, value, key_value[0]);
-			// if (key_value[2] != NULL)
+			if (key_value[2] != NULL)
 				free(value);
 		}
 		ft_free(key_value);
@@ -179,3 +140,30 @@ void	export_command(t_sh *sh)
 }
 
 // si key existant, remplacer la valeur
+
+
+
+// char	**copy_array(t_sh *sh)
+// {
+// 	char	**env_temp;
+// 	int		i;
+
+// 	i = 0;
+// 	while(sh->env[i]) //fonction a part?
+// 		i++;
+// 	env_temp = malloc(sizeof(char *) * (i + 1));
+// 	if (!env_temp)
+// 		return (NULL);
+// 	i = 0;
+// 	while (sh->env[i])
+// 	{
+// 		env_temp[i] = ft_strdup(sh->env[i]);
+// 		i++;
+// 	}
+// 	env_temp[i] = NULL;
+
+
+// 	// ft_free(env_temp);
+
+// 	return(env_temp);
+// }
