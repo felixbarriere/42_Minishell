@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:27:17 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/26 16:25:05 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/27 13:58:34 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,21 @@ char	*ft_strjoin_path(char *s1, char *s2)
 	return (dest);
 }
 
-char	*command_line(char **path, char *cmd)
+int	com_line_path(char **path, char *cmd)
+{
+	int		i;
+
+	i = 0;
+	while (path[i] && cmd != NULL)
+	{
+		if (access(cmd, F_OK) == 0)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+char	*com_line(char **path, char *cmd)
 {
 	char	*path_slash;
 	char	*path_complete;
@@ -67,32 +81,12 @@ char	*command_line(char **path, char *cmd)
 		free(path_slash);
 		if (access(path_complete, F_OK) == 0)
 			return (path_complete);
+		printf("path_complete: %s\n", path_complete);
 		free(path_complete);
 		i++;
 	}
 	return (NULL);
 }
-
-// char	*delete_dot(char *cmd)
-// {
-// 	int	i;
-// 	int	j;
-// 	char	*exec;
-
-// 	i = 1;
-// 	j = 0;
-// 	exec = malloc(sizeof(char) * (ft_strlen(cmd))); // -1
-// 	if (!exec)
-// 		return (NULL);
-// 	while(cmd[i] != '\0')
-// 	{
-// 		exec[j] = cmd[i];
-// 		i++;
-// 		j++;
-// 	}
-// 	exec[j] = '\0';
-// 	return (exec);
-// }
 
 char	*get_exec(char *cmd)
 {
@@ -117,14 +111,18 @@ void	get_command_path(t_sh	*sh)
 	char	*executable;
 
 	temp = sh->pipe_lst;
+	if (sh->pipe_lst->cmd == NULL)
+		return ;
 	while (sh->pipe_lst && sh->pipe_lst->next)
 	{
-		sh->pipe_lst->cmd_verified = command_line(sh->path, sh->pipe_lst->cmd);
+		if (com_line_path(sh->path, sh->pipe_lst->cmd) == 1)
+			sh->pipe_lst->cmd_verified = ft_strdup(sh->pipe_lst->cmd);
+		else
+			sh->pipe_lst->cmd_verified = com_line(sh->path, sh->pipe_lst->cmd);
 		if (sh->pipe_lst->cmd_verified == NULL)
 		{
 			if (ft_strncmp(sh->pipe_lst->cmd, "./", 2) == 0)
 			{
-				// sh->pipe_lst->cmd_verified = ft_strdup(sh->pipe_lst->cmd);
 				executable = get_exec(sh->pipe_lst->cmd);
 				sh->pipe_lst->cmd_verified = ft_strdup(executable);
 				free(executable);
@@ -134,3 +132,24 @@ void	get_command_path(t_sh	*sh)
 	}
 	sh->pipe_lst = temp;
 }
+
+// char	*delete_dot(char *cmd)
+// {
+// 	int	i;
+// 	int	j;
+// 	char	*exec;
+
+// 	i = 1;
+// 	j = 0;
+// 	exec = malloc(sizeof(char) * (ft_strlen(cmd))); // -1
+// 	if (!exec)
+// 		return (NULL);
+// 	while(cmd[i] != '\0')
+// 	{
+// 		exec[j] = cmd[i];
+// 		i++;
+// 		j++;
+// 	}
+// 	exec[j] = '\0';
+// 	return (exec);
+// }

@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 19:59:52 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/26 16:13:54 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/27 11:40:35 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ void	execution(t_sh	*sh, char **env_init)
 	int		cpy_output;
 
 	pipe_start = sh->pipe_lst;
+	printf("commande: %s\n",sh->pipe_lst->cmd);
+	printf("commande  verified: %s\n",sh->pipe_lst->cmd_verified);
 	// printf("INPUT = %d | OUPUT = %d\n", sh->pipe_lst->input, sh->pipe_lst->output);
 	while (sh->pipe_lst->cmd != NULL)
 	{
