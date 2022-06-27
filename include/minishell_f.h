@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_f.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/26 16:49:01 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/27 15:30:18 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*get_value_dollar(t_sh	*sh, char *key);
 
 /******** TOKENIZER ********/
 void	process_redirect_token(t_sh *sh);
-int		token_str(t_sh *sh);
+void	token_str(t_sh *sh);
 void	tokenizer(t_sh *sh);
 
 /******** TOKENIZER_UTILS ********/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/26 14:50:45 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/27 15:55:10 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,38 @@ void	process_redirect_token(t_sh *sh)
 		sh->token_lst = add_back_token(sh->token_lst, R_RIGHT, ">");
 }
 
-int	token_str(t_sh *sh)
+
+int	ft_token_part2(t_sh *sh, char *str)
+{
+	if (ft_lstlast_dr_left(sh->token_lst) == SUCCESS)
+	{
+		if (str != NULL)
+			sh->token_lst = add_back_token(sh->token_lst, LIMITER, str);
+		return (1);
+	}
+	return (0);
+}
+
+// void ft_token_part3(t_sh *sh, char *str, char *new_str, int *idx)
+// {
+// 	char	*dollar_value;
+	
+// 	dollar_value = NULL;
+// 	dollar_value = noquote_dollar_manager(str, &idx, sh);
+// 	if (dollar_value != NULL)
+// 		new_str = severals_wds_value(sh, dollar_value, new_str);
+// }
+
+void	token_str(t_sh *sh)
 {
 	char	*str;
 	char	*new_str;
 	char	*temp;
 	char	*dollar_value;
 	int		idx;
+	int		i;
 
+	i = 0;
 	idx = 0;
 	temp = NULL;
 	new_str = NULL;
@@ -54,7 +78,7 @@ int	token_str(t_sh *sh)
 	{
 		if (str != NULL)
 			sh->token_lst = add_back_token(sh->token_lst, LIMITER, str);
-		return (idx);
+		return ;
 	}
 	else
 	{
@@ -82,7 +106,8 @@ int	token_str(t_sh *sh)
 				// printf("test3\n");
 				if (dollar_value != NULL)
 					new_str = severals_wds_value(sh, dollar_value, new_str);
-				// free(dollar_value);  //a changer?
+				if (str[i + 1] == '?')
+					free(dollar_value);
 				continue ;
 			}
 			else
@@ -93,7 +118,6 @@ int	token_str(t_sh *sh)
 	if (new_str != NULL)
 		sh->token_lst = add_back_token(sh->token_lst, STR, new_str);
 	free(str);
-	return (idx);
 }
 
 int	ft_strlen2(const char *s)

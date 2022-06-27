@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/25 14:11:18 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/27 15:27:41 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ char	*get_key_dollar(char *str, int i)
 {
 	int		j;
 	char	*key;
-	j = 0;
 
+	j = 0;
 	while (str[i] != ' ' && str[i] != '\"' && str[i] != '\'')
 	{
 		j++;
@@ -52,12 +52,11 @@ char	*get_key_dollar(char *str, int i)
 		}
 		if (str[i] == '$' || str[i] < 48
 			|| (str[i] > 57 && str[i] < 65) || (str[i] > 90 && str[i] < 95)
-			|| (str[i] > 95 && str[i] < 97)	|| str[i] > 122)
+			|| (str[i] > 95 && str[i] < 97) || str[i] > 122)
 			break ;
 	}
 	i = (i - j);
 	key = get_key_dollar_2(str, i, j);
-	
 	return (key);
 }
 
@@ -76,6 +75,5 @@ char	*get_value_dollar(t_sh	*sh, char *key)
 		value = expander(sh, key_trim);
 		free(key_trim);
 	}
-	// printf("VALUE = %s\n", value);
 	return (value);
 }
