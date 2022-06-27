@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 12:08:45 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/26 17:07:36 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/27 20:07:35 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ void	export_command(t_sh *sh)
 				free(value);
 		}
 		ft_free(key_value);
+		get_path(sh);
 	}
 	else if (!sh->pipe_lst->token->next)
 		env_command(sh);

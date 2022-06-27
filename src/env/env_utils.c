@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 16:53:47 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/24 12:21:46 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/27 19:45:00 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,12 @@ void	get_path(t_sh	*sh)
 	while (temp)
 	{
 		if (!ft_strcmp(temp->key, "PATH"))
+		{
+			// printf("temp->value: %s\n", temp->value);
 			sh->path = ft_split(temp->value, ':');
+		}
+		// else
+		// 	sh->path = NULL;
 		temp = temp->next;
 	}
 }

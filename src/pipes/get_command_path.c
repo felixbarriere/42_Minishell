@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_command_path.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:27:17 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/27 13:58:34 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/27 19:39:52 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ char	*com_line(char **path, char *cmd)
 	i = 0;
 	while (path[i] && cmd != NULL)
 	{
+		printf("path[i]: %s\n", path[i]);
+
 		path_slash = ft_strjoin_path(path[i], "/");
 		path_complete = ft_strjoin_path(path_slash, cmd);
 		free(path_slash);

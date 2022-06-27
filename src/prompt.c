@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:43:57 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/26 14:48:36 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/27 20:02:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ void	ft_prompt_start(t_sh *sh)
 		// // {
 		// // 	printf("trop d'arg\n");
 		// // }
-		
-		ft_free(sh->path);
+		if (sh->path[0] )
+			ft_free(sh->path);
 		ft_free(sh->env);
 		clear_list(sh->token_lst);
 		clear_list_pipe(sh->pipe_lst);
