@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 16:53:47 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/28 11:31:19 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/28 15:31:08 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,14 @@ void	ft_free(char **str)
 	int	i;
 
 	i = 0;
-	// printf("hello\n");
 	while (str[i])
 	{
-		// printf("path avant :%s\n", str[i]);
 		free(str[i]);
-		// if (str[i] != NULL)
-			// printf("path apres :%s\n", str[i]);
 		i++;
 	}
 	free(str[i]);
-	// printf("hello1\n");
 	free(str);
-	// printf("hello2\n");
 	str = NULL;
-	// printf("hello3\n");
 }
 
 void	ft_free_2(char *str)
@@ -65,11 +58,8 @@ void	get_path(t_sh	*sh)
 	{
 		if (!ft_strcmp(temp->key, "PATH"))
 		{
-			// printf("temp->value: %s\n", temp->value);
 			sh->path = ft_split(temp->value, ':');
 		}
-		// else
-		// 	sh->path = NULL;
 		temp = temp->next;
 	}
 }

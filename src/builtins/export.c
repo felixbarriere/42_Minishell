@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 12:08:45 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/28 11:52:04 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/28 12:14:49 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,17 +105,15 @@ void	update_value(t_env	*list, char	*value, char *key)
 
 void	export_command(t_sh *sh)
 {
-	int		index; //possibilit2 de supprimer index si fction trop longue
 	char	**key_value;
 	char	*value;
 
-	index = 0;
 	if (sh->pipe_lst->token->next && contains_equal(sh->pipe_lst->args[1]))
 	{
 		key_value = ft_split(sh->pipe_lst->token->next->value, '=');
 		if (!is_in_env(key_value[0], sh->env_lst))
 		{
-			orchestrate_env_token(sh->pipe_lst->token->next->value, sh, index);
+			orchestrate_env_token(sh->pipe_lst->token->next->value, sh, 0);
 			add_array_export(sh, sh->pipe_lst->token->next->value);
 		}
 		else
