@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:27:17 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/28 11:41:29 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/28 15:54:14 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*ft_strjoin_path(char *s1, char *s2)
 	dest = ft_calloc(sizeof(char), (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!dest)
 		return (NULL);
-	while (s1[i] != '\0')
+	while (s1[i] != '\0') //externaliser les 2 whiles pour norminette
 	{
 		dest[i] = s1[i];
 		i++;
@@ -76,14 +76,11 @@ char	*com_line(char **path, char *cmd)
 	i = 0;
 	while (path[i] && cmd != NULL)
 	{
-		printf("path[i]: %s\n", path[i]);
-
 		path_slash = ft_strjoin_path(path[i], "/");
 		path_complete = ft_strjoin_path(path_slash, cmd);
 		free(path_slash);
 		if (access(path_complete, F_OK) == 0)
 			return (path_complete);
-		printf("path_complete: %s\n", path_complete);
 		free(path_complete);
 		i++;
 	}
@@ -99,12 +96,11 @@ char	*get_exec(char *cmd)
 	exec = NULL;
 	getcwd(path, sizeof(path));
 	printf("cmd: %s\n", cmd);
-	// exec = delete_dot(cmd);
 	exec = ft_substr(cmd, 1, ft_strlen(cmd) -1);
 	printf("exec: %s\n", exec);
 	exec_2 = ft_strjoin_path(path, exec);
 	free(exec);
-	return(exec_2);
+	return (exec_2);
 }
 
 void	get_command_path(t_sh	*sh)
@@ -134,24 +130,3 @@ void	get_command_path(t_sh	*sh)
 	}
 	sh->pipe_lst = temp;
 }
-
-// char	*delete_dot(char *cmd)
-// {
-// 	int	i;
-// 	int	j;
-// 	char	*exec;
-
-// 	i = 1;
-// 	j = 0;
-// 	exec = malloc(sizeof(char) * (ft_strlen(cmd))); // -1
-// 	if (!exec)
-// 		return (NULL);
-// 	while(cmd[i] != '\0')
-// 	{
-// 		exec[j] = cmd[i];
-// 		i++;
-// 		j++;
-// 	}
-// 	exec[j] = '\0';
-// 	return (exec);
-// }

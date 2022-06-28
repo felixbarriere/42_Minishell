@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:18:11 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/26 15:12:13 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/28 15:34:47 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 void	ft_init_values(t_sh *sh, char **env)
 {
 	(void)env;
-	// sh->env = NULL;  //malloc?
-	// dup_env_array(sh, env);
 	sh->token_lst = NULL;
 	sh->prompt = NULL;
 	sh->p_index = 0;
@@ -39,7 +37,6 @@ void	ft_init_values(t_sh *sh, char **env)
 	sh->pipe_lst->args = NULL;
 	sh->pipe_lst->file = NULL;
 	sh->pipe_lst->token = NULL;
-	// sh->pipe_lst->is_builtin = 0;
 	sh->pipe_lst->prev = NULL;
 	sh->pipe_lst->next = NULL;
 }

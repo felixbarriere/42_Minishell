@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_command_type_utils.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/28 15:36:40 by fbarrier          #+#    #+#             */
+/*   Updated: 2022/06/28 15:39:25 by fbarrier         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../include/minishell.h"
 #include "../../include/minishell_d.h"
@@ -49,7 +60,6 @@ void	find_type(t_token *lst, t_sh *sh)
 		lst = lst->next;
 	}
 	lst = temp;
-	// printf("------APRES-----\n");
 	print_tokens(lst);
 }
 
