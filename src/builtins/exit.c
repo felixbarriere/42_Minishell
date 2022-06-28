@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 18:19:33 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/27 20:02:02 by marvin           ###   ########.fr       */
+/*   Updated: 2022/06/28 11:42:29 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	exit_command(t_sh *sh)
 		else
 			ft_putstr_fd("exit: bad argument\n", 2);
 	}
-	if (sh->path[0] )
+	if (sh->path != NULL)
 	{
 		printf("sh->path existe\n");
 		ft_free(sh->path);

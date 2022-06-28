@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 11:18:45 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/27 19:58:46 by marvin           ###   ########.fr       */
+/*   Updated: 2022/06/28 11:37:09 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,27 @@ void	delete_env(t_env	*env_lst)
 	free(env_lst);
 }
 
-void	update_path(t_sh	*sh)
+void	update_path(t_sh *sh, char *key)
 {
-	t_env	*temp;
-
-	temp = sh->env_lst;
-	while (temp)
-	{
-		if (ft_strcmp(temp->key, "PATH"))
+	int	i = 0;
+		if (!ft_strcmp(key, "PATH"))
 		{
-			// printf("temp->value: %s\n", temp->value);
-			// sh->path = NULL;
-			temp = temp->next;
+			printf("test\n");
+			printf("path avant :%s\n", sh->path[0]);
+			while (sh->path[i])
+			{
+				free(sh->path[i]);
+				i++;
+			}
+			free(sh->path[i]);
+			free(sh->path);
+			sh->path = NULL;
+			if (sh->path)
+				printf("path avant :%s\n", sh->path[0]);
+			// ft_free(sh->path);
+			// if (sh->path[0] )
+			// 	printf("path apres :%s\n", sh->path[0]);
 		}
-		else
-			return ;
-	}
-	printf("test\n");
-	ft_free(sh->path);
-	printf("sh->path: %s\n", sh->path[1]);
 }
 
 void	unset_command(t_sh *sh)
@@ -57,8 +59,8 @@ void	unset_command(t_sh *sh)
 		{
 			if (!ft_strcmp(sh->pipe_lst->args[i], sh->env_lst->key))
 			{
+				update_path(sh, sh->env_lst->key);
 				delete_env(sh->env_lst);
-				update_path(sh);
 				break ;
 			}
 			sh->env_lst = sh->env_lst->next;
