@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/27 15:55:10 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/28 12:01:36 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	process_redirect_token(t_sh *sh)
 	else if (sh->prompt[sh->p_index] == R_RIGHT)
 		sh->token_lst = add_back_token(sh->token_lst, R_RIGHT, ">");
 }
-
 
 int	ft_token_part2(t_sh *sh, char *str)
 {
