@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 12:08:45 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/27 20:07:35 by marvin           ###   ########.fr       */
+/*   Updated: 2022/06/28 11:52:04 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	update_value(t_env	*list, char	*value, char *key)
 
 void	export_command(t_sh *sh)
 {
-	int		index;
+	int		index; //possibilit2 de supprimer index si fction trop longue
 	char	**key_value;
 	char	*value;
 
@@ -126,7 +126,8 @@ void	export_command(t_sh *sh)
 				free(value);
 		}
 		ft_free(key_value);
-		get_path(sh);
+		if (sh->path == NULL)
+			get_path(sh);
 	}
 	else if (!sh->pipe_lst->token->next)
 		env_command(sh);
