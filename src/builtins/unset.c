@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 11:18:45 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/26 16:35:52 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/28 11:37:09 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,29 @@ void	delete_env(t_env	*env_lst)
 	free(env_lst);
 }
 
+void	update_path(t_sh *sh, char *key)
+{
+	int	i = 0;
+		if (!ft_strcmp(key, "PATH"))
+		{
+			printf("test\n");
+			printf("path avant :%s\n", sh->path[0]);
+			while (sh->path[i])
+			{
+				free(sh->path[i]);
+				i++;
+			}
+			free(sh->path[i]);
+			free(sh->path);
+			sh->path = NULL;
+			if (sh->path)
+				printf("path avant :%s\n", sh->path[0]);
+			// ft_free(sh->path);
+			// if (sh->path[0] )
+			// 	printf("path apres :%s\n", sh->path[0]);
+		}
+}
+
 void	unset_command(t_sh *sh)
 {
 	t_env	*start;
@@ -36,6 +59,7 @@ void	unset_command(t_sh *sh)
 		{
 			if (!ft_strcmp(sh->pipe_lst->args[i], sh->env_lst->key))
 			{
+				update_path(sh, sh->env_lst->key);
 				delete_env(sh->env_lst);
 				break ;
 			}

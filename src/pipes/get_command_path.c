@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:27:17 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/27 13:58:34 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/28 11:41:29 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ char	*com_line(char **path, char *cmd)
 	i = 0;
 	while (path[i] && cmd != NULL)
 	{
+		printf("path[i]: %s\n", path[i]);
+
 		path_slash = ft_strjoin_path(path[i], "/");
 		path_complete = ft_strjoin_path(path_slash, cmd);
 		free(path_slash);
@@ -113,7 +115,7 @@ void	get_command_path(t_sh	*sh)
 	temp = sh->pipe_lst;
 	if (sh->pipe_lst->cmd == NULL)
 		return ;
-	while (sh->pipe_lst && sh->pipe_lst->next)
+	while (sh->path != NULL && sh->pipe_lst && sh->pipe_lst->next)
 	{
 		if (com_line_path(sh->path, sh->pipe_lst->cmd) == 1)
 			sh->pipe_lst->cmd_verified = ft_strdup(sh->pipe_lst->cmd);

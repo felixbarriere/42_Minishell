@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/25 14:12:29 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/06/27 15:26:06 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,11 @@ void	is_builtin(t_pipe	*pipe)
 	pipe_start = pipe;
 	while (pipe)
 	{
-		if (!ft_strcmp(pipe->cmd, "echo") || !ft_strcmp(pipe->cmd, "cd") ||
-			!ft_strcmp(pipe->cmd, "pwd") || !ft_strcmp(pipe->cmd, "export") ||
-			!ft_strcmp(pipe->cmd, "unset") || !ft_strcmp(pipe->cmd, "env") ||
-			!ft_strcmp(pipe->cmd, "exit"))
-			{
-				pipe->is_builtin = 1;	
-			}		
+		if (!ft_strcmp(pipe->cmd, "echo") || !ft_strcmp(pipe->cmd, "cd")
+			|| !ft_strcmp(pipe->cmd, "pwd") || !ft_strcmp(pipe->cmd, "export")
+			|| !ft_strcmp(pipe->cmd, "unset") || !ft_strcmp(pipe->cmd, "env")
+			|| !ft_strcmp(pipe->cmd, "exit"))
+				pipe->is_builtin = 1;
 		pipe = pipe->next;
 	}
 	pipe = pipe_start;
@@ -47,12 +45,9 @@ void	lexer(t_sh *sh)
 		sh->error = 1;
 		return ;
 	}
-	// print_tokens(sh->token_lst);
 	pipe_creation(sh);
 	get_commands_type(sh);
 	update_command(sh);
 	get_command_path(sh);
 	is_builtin(sh->pipe_lst);
-
-	printf("*********************\n");
 }

@@ -37,6 +37,27 @@ void	process_redirect_token(t_sh *sh)
 		sh->token_lst = add_back_token(sh->token_lst, R_RIGHT, ">");
 }
 
+int	ft_token_part2(t_sh *sh, char *str)
+{
+	if (ft_lstlast_dr_left(sh->token_lst) == SUCCESS)
+	{
+		if (str != NULL)
+			sh->token_lst = add_back_token(sh->token_lst, LIMITER, str);
+		return (1);
+	}
+	return (0);
+}
+
+// void ft_token_part3(t_sh *sh, char *str, char *new_str, int *idx)
+// {
+// 	char	*dollar_value;
+	
+// 	dollar_value = NULL;
+// 	dollar_value = noquote_dollar_manager(str, &idx, sh);
+// 	if (dollar_value != NULL)
+// 		new_str = severals_wds_value(sh, dollar_value, new_str);
+// }
+
 void	token_str(t_sh *sh)
 {
 	char	*str;

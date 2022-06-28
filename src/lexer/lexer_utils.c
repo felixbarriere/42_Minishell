@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/22 17:55:44 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/06/27 15:26:24 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,41 +102,3 @@ char	*ft_strjoin_char_takeout(char *s1, char c, char take_out)
 	free(s1);
 	return (dest);
 }
-
-
-
-
-/*
-int	how_many_squote(char *str)
-{
-	int	i;
-	int j;
-	
-	i = 0;
-	j = 0;	
-	
-	while (str[i] != '\0')
-	{
-		if (str[i] == '\'')
-			j++;	
-		i++;
-	}
-	return (i);
-}
-
-int	contains_first_squote(char *str)
-{
-	int	i;
-	i = 0;
-	
-	while (str[i] != '\0')
-	{
-		if (str[i] == '\'')
-			return (SUCCESS);
-		else if (str[i] == '\"')
-			return (FAILURE);
-		i++;
-	}
-	return (FAILURE);
-}
-*/
