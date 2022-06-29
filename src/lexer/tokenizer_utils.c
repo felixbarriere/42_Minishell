@@ -83,7 +83,7 @@ char	*severals_wds_value(t_sh *sh, char *dollar_value, char	*new_str)
 	if (j > 1)
 	{
 		new_str = ft_strjoin(new_str, value_dollar_split[i]);
-		while (value_dollar_split[i + 1])
+		while (value_dollar_split[i + 1]) // i++ pour norminette
 		{
 			sh->token_lst = add_back_token(sh->token_lst, STR, new_str);
 			i++;

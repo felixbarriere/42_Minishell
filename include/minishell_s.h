@@ -46,6 +46,9 @@ typedef struct s_env
 typedef struct s_pipe
 {
 	t_token			*token;
+		int fdin;
+	int fdout;
+	int	pid;
 	char			*cmd;
 	char			*cmd_verified;
 	char			*options;
