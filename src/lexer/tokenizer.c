@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/28 12:01:36 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/05 17:55:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,15 @@ void	token_str(t_sh *sh)
 	char	*str;			//creer une structure a part avec les variables + une fonction pour les init. creer la structure dans "tokenizer" 
 	char	*new_str;			//et l'envoyer en arg a token_str
 	char	*dollar_value;
+	char	*temp;
 	int		idx;
 
 	idx = 0;
+	temp = NULL;
 	new_str = NULL;
 	dollar_value = NULL;
 	str = string_token(sh, &sh->prompt[sh->p_index]);
+	// printf("string token: %s\n", )
 	if (ft_lstlast_dr_left(sh->token_lst) == SUCCESS)  //externaliser et renvoyer un int. if(fction()== 1), return ;
 	{
 		if (str != NULL)
@@ -91,7 +94,13 @@ void	token_str(t_sh *sh)
 	while (str[idx])
 	{
 		if (str[idx] == '\"' || str[idx] == '\'')
-			new_str = token_str_2(str, &idx, sh);
+		{
+			temp = quotes_manager(str, &idx, sh);
+			if (temp != NULL)
+				new_str = ft_strjoin(new_str, temp);
+			free(temp);
+		// new_str = token_str_2(str, &idx, sh); attention au cas export ls="ls -la" si on externalise 
+		}
 		else if (str[idx] == '$')
 		{
 			if (str[idx + 1] == '\'' || str[idx + 1] == '\"')
