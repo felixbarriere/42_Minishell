@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_limiter.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 15:36:31 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/28 15:36:32 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/06 11:56:29 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,13 @@ char	*process_quotes_limiter(char **value)
 
 	i = 0;
 	new = NULL;
+	printf("value: %c\n", (*value)[i]);
 	while ((*value)[i])
 	{
-		if ((*value)[i] == '\"' || (*value)[i] == '\'')
-			i++;
-		else
+		if (!((*value)[i] == '\"' || (*value)[i] == '\''))
+		{
 			new = ft_strjoin_char(new, (*value)[i]);
+		}
 		i++;
 	}
 	return (new);

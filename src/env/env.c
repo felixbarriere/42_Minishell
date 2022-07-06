@@ -98,7 +98,6 @@ void	orchestrate_env_token(char *env_init, t_sh *sh, int index)
 
 	key = get_key(env_init);
 	value = ft_substr(env_init, (ft_strlen(key) + 1), ft_strlen(env_init));
-	printf("value: %s\n", value);
 	sh->env_lst = add_back_env_token(sh->env_lst, value, key, index);
 	free(value);
 	free(key);
