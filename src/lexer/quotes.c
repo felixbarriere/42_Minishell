@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/27 15:24:47 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/06 17:13:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	ft_is_quote_ok(t_sh *sh)
 	i = 0;
 	while (sh->prompt[i])
 	{
-		printf("%c", sh->prompt[i]);
+		// printf("%c", sh->prompt[i]);
 		ft_find_quote_state(sh, i);
 		i++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_creation.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:17:44 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/28 12:00:17 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/06 18:05:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,18 @@ t_pipe	*add_back_pipe_token(t_pipe *pipe_lst)
 	t_pipe	*tmp;
 
 	tmp = NULL;
+	if (pipe_lst->cmd)
+	{
+		printf("pipe_lst != NULL\n");
+	}
 	new = create_pipe_token();
 	if (!new)
 		return (NULL);
-	if (!pipe_lst)
+	if (!pipe_lst->cmd)
+	{
+		printf("pipe == NULL\n");
 		return (new);
+	}
 	else
 	{
 		tmp = pipe_lst;
@@ -74,18 +81,30 @@ void	pipe_creation(t_sh *sh)
 	t_token	*token_start;
 
 	token_start = sh->token_lst;
+	if (sh->pipe_lst)
+		printf("pipe test first\n");
+	if (sh->pipe_lst->next)
+		printf("pipe next test first\n");
 	sh->pipe_lst = add_back_pipe_token(sh->pipe_lst);
+	if (sh->pipe_lst)
+		printf("pipe test\n");
+	if (sh->pipe_lst->next)
+		printf("pipe next test\n");
 	pipe_start = sh->pipe_lst;
 	while (sh->token_lst != NULL)
 	{
 		if (sh->token_lst->type != PIPE)
 		{
+			printf("\ntest pipe\n");
 			sh->pipe_lst->token = add_back_token(sh->pipe_lst->token,
 					sh->token_lst->type, sh->token_lst->value);
-			sh->token_lst = sh->token_lst->next;
+			if (sh->token_lst->next != NULL)
+				sh->token_lst = sh->token_lst->next;
+			else
+				break;
 		}
 		else
-		{			
+		{
 			sh->pipe_lst = add_back_pipe_token(sh->pipe_lst);
 			sh->token_lst = sh->token_lst->next;
 		}

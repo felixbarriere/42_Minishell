@@ -52,7 +52,8 @@ int	init_pipe(t_sh *sh)
 	
 	list_put_to_start(sh);
 	pipe_start = sh->pipe_lst;
-	while (sh->pipe_lst->next && sh->pipe_lst->next->next)
+	// while (sh->pipe_lst->next && sh->pipe_lst->next->next)
+	while (sh->pipe_lst->cmd)
 	{
 		printf("ICI PIPES\n");
 		if (pipe(sh->pipe_lst->fd) == -1)
@@ -178,23 +179,23 @@ int	nb_pipe(t_sh *sh)
 	return (i);
 }
 
-void	execution(t_sh	*sh, char **env_init)
-{
-	int		nb_pipes;
+// void	execution(t_sh	*sh, char **env_init)
+// {
+// 	int		nb_pipes;
 	
-	nb_pipes = nb_pipe(sh) - 1;
+// 	nb_pipes = nb_pipe(sh) - 1;
 // 	printf("nb_pipes = %d\n", nb_pipes);
-	if (nb_pipes == 0)
-	{
-		if (execution_no_pipe(sh, env_init) == FAILURE)
-			return ;
-	}
-	else if (nb_pipes > 0)
-	{
-		if (execution_pipe(sh, env_init) == FAILURE)
-			return ;
-	}
-}
+// 	if (nb_pipes == 0)
+// 	{
+// 		if (execution_no_pipe(sh, env_init) == FAILURE)
+// 			return ;
+// 	}
+// 	else if (nb_pipes > 0)
+// 	{
+// 		if (execution_pipe(sh, env_init) == FAILURE)
+// 			return ;
+// 	}
+// }
 
 
 
