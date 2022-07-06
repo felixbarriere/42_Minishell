@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/24 18:28:46 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/05 11:22:40 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,10 @@ typedef struct s_env
 typedef struct s_pipe
 {
 	t_token			*token;
-		int fdin;
-	int fdout;
-	int	pid;
+	// 	int fdin;
+	// int fdout;
+	// int	pid;
+	int				fd[2];
 	char			*cmd;
 	char			*cmd_verified;
 	char			*options;

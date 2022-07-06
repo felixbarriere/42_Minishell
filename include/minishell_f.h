@@ -5,11 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Updated: 2022/06/28 12:02:46 by ccalas           ###   ########.fr       */
+/*   Created: 2022/06/28 12:02:46 by ccalas            #+#    #+#             */
+/*   Updated: 2022/07/05 16:00:00 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_F_H
+# ifndef MINISHELL_F_H
 # define MINISHELL_F_H
 
 # include "minishell.h"
@@ -18,7 +19,9 @@
 # include "minishell_e.h"
 
 /**************** FUNCTIONS ****************/
-
+void	execution_2(t_sh	*sh, char **env_init);
+void	pipe_exec(t_sh *sh, char **env_init);
+int	execution_no_pipe(t_sh	*sh, char **env_init);
 /******** MAIN ********/
 void	ft_init_values(t_sh *sh, char **env);
 
@@ -171,5 +174,10 @@ void	export_command(t_sh *sh);
 int		contains_equal(char *str);
 void	unset_command(t_sh *sh);
 void	exit_command(t_sh *sh);
+
+
+/******** PIPEX ********/
+void	update_input_output(int *cpy_input, int *cpy_output, t_pipe *pipe_lst);
+void	reset_input_output(int cpy_input, int cpy_output, t_pipe *pipe_lst);
 
 #endif
