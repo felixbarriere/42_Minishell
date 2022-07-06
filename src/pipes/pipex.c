@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 19:59:52 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/06 11:35:21 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/06 18:16:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,30 +88,34 @@ int	execution_no_pipe(t_sh	*sh, char **env_init)
 	return (SUCCESS);
 }
 
-// void	execution(t_sh	*sh, char **env_init)
-// {
-// 	t_pipe	*pipe_start;
-// 	int		cpy_input;
-// 	int		cpy_output;
+void	execution(t_sh	*sh, char **env_init)
+{
+	t_pipe	*pipe_start;
+	int		cpy_input;
+	int		cpy_output;
 
-// 	pipe_start = sh->pipe_lst;
-// 	// printf("commande: %s\n",sh->pipe_lst->cmd);
-// 	// printf("commande  verified: %s\n",sh->pipe_lst->cmd_verified);
-// 	// printf("INPUT = %d | OUPUT = %d\n", sh->pipe_lst->input, sh->pipe_lst->output);
-// 	while (sh->pipe_lst->cmd != NULL)
-// 	{
-// 		update_input_output(&cpy_input, &cpy_output, sh->pipe_lst);
-// 		if (sh->pipe_lst->is_builtin == 1)
-// 			index_builtins(sh);
-// 		else if (sh->pipe_lst->cmd_verified != NULL)
-// 			pipe_exec(sh, env_init);
-// 		else
-// 		{
-// 			write (2, "command not found\n", 19);
-// 			g_sh.exit = 127;
-// 		}
-// 		reset_input_output(cpy_input, cpy_output, sh->pipe_lst);
-//     sh->pipe_lst = sh->pipe_lst->next;
-// 	}
-// 	sh->pipe_lst = pipe_start;
-// }
+	pipe_start = sh->pipe_lst;
+	printf("ICI\n");
+	printf("commande: %s\n",sh->pipe_lst->cmd);
+	printf("commande  verified: %s\n",sh->pipe_lst->cmd_verified);
+	printf("INPUT = %d | OUPUT = %d\n", sh->pipe_lst->input, sh->pipe_lst->output);
+	while (sh->pipe_lst != NULL)
+	{
+		printf("ICI 2\n");
+		update_input_output(&cpy_input, &cpy_output, sh->pipe_lst);
+		printf("ICI 3\n");
+		if (sh->pipe_lst->is_builtin == 1)
+			index_builtins(sh);
+		else if (sh->pipe_lst->cmd_verified != NULL)
+			pipe_exec(sh, env_init);
+		else
+		{
+			write (2, "command not found\n", 19);
+			g_sh.exit = 127;
+		}
+		printf("ICI 4\n");
+		reset_input_output(cpy_input, cpy_output, sh->pipe_lst);
+    	sh->pipe_lst = sh->pipe_lst->next;
+	}
+	sh->pipe_lst = pipe_start;
+}

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 12:08:45 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/05 16:28:49 by marvin           ###   ########.fr       */
+/*   Updated: 2022/07/06 14:30:29 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,8 @@ void	export_command(t_sh *sh)
 	char	*value;
 
 	printf("test\n");
-	printf("token= %s\n",sh->pipe_lst->token->next->value);
+	if (sh->pipe_lst->token->next != NULL)
+		printf("token= %s\n", sh->pipe_lst->token->next->value);
 	if (sh->pipe_lst->token->next && contains_equal(sh->pipe_lst->args[1]))
 	{
 		printf("test2\n");
