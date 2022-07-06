@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_command_path.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:27:17 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/28 15:54:14 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/05 15:41:06 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,9 @@ char	*get_exec(char *cmd)
 
 	exec = NULL;
 	getcwd(path, sizeof(path));
-	printf("cmd: %s\n", cmd);
+	// printf("cmd: %s\n", cmd);
 	exec = ft_substr(cmd, 1, ft_strlen(cmd) -1);
-	printf("exec: %s\n", exec);
+	// printf("exec: %s\n", exec);
 	exec_2 = ft_strjoin_path(path, exec);
 	free(exec);
 	return (exec_2);

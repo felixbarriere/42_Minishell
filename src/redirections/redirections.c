@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 15:39:55 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/28 15:40:28 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/06 10:21:41 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include "../../include/minishell_d.h"
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
+
+extern t_sh	g_sh;
 
 void	open_fdout(t_token *token, t_pipe **pipe_lst)
 {
@@ -64,6 +66,7 @@ int	open_fdin(char	*value, t_pipe **pipe_lst)
 		ft_putstr_fd("bash: ", 2);
 		ft_putstr_fd(value, 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
+		g_sh.exit = 1;
 		return (1);
 	}
 	return (0);
@@ -96,6 +99,15 @@ int	update_fdin(t_pipe **pipe_lst)
 			else
 				error = heredoc(temp->value, pipe_lst);
 			if (error)
+				return (1);
+		}
+		else if (temp->type == OUTPUT || temp->type == APPEND)
+		{
+			printf("TEST 1\n");
+			if ((*pipe_lst)->output != 1)
+				close ((*pipe_lst)->output);
+			open_fdout(temp, pipe_lst);
+			if ((*pipe_lst)->output == -1)
 				return (1);
 		}
 		temp = temp->next;

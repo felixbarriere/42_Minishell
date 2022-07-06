@@ -16,6 +16,7 @@ src/lists/lists_3.c\
 src/pipes/pipe_creation.c\
 src/pipes/get_command_path.c\
 src/pipes/pipex.c\
+src/pipes/execution.c\
 src/redirections/get_command_type.c\
 src/redirections/get_command_type_utils.c\
 src/redirections/redirections.c\
