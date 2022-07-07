@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:17:44 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/06 18:05:04 by marvin           ###   ########.fr       */
+/*   Updated: 2022/07/07 12:24:59 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	print_pipe_tokens(t_pipe *li)
 	{
 		printf("\n");
 		if (li->token != NULL)
-			printf("[%s] ", li->token->value);
+			printf("pipe_token: [%s] ", li->token->value);
 		li = li->next;
 	}
 	printf("\n");
@@ -46,25 +46,54 @@ t_pipe	*create_pipe_token(void)
 	return (elem);
 }
 
+// t_pipe	*add_back_pipe_token(t_pipe *pipe_lst)
+// {
+// 	t_pipe	*new;
+// 	t_pipe	*tmp;
+
+// 	tmp = NULL;
+// 	if (pipe_lst->cmd)
+// 	{
+// 		printf("pipe_lst != NULL\n");
+// 	}
+// 	new = create_pipe_token();
+// 	if (!new)
+// 		return (NULL);
+// 	if (!pipe_lst->token)
+// 	{
+// 		printf("pipe == NULL\n");
+// 		return (new);
+// 	}
+// 	else
+// 	{
+// 		tmp = pipe_lst;
+// 		while (tmp->next)
+// 			tmp = tmp->next;
+// 		tmp->next = new;
+// 		new->prev = tmp;
+// 	}
+// 	return (tmp);
+// }
+
 t_pipe	*add_back_pipe_token(t_pipe *pipe_lst)
 {
 	t_pipe	*new;
 	t_pipe	*tmp;
 
 	tmp = NULL;
-	if (pipe_lst->cmd)
+	if (pipe_lst->token->value)
 	{
 		printf("pipe_lst != NULL\n");
 	}
 	new = create_pipe_token();
 	if (!new)
 		return (NULL);
-	if (!pipe_lst->cmd)
-	{
-		printf("pipe == NULL\n");
-		return (new);
-	}
-	else
+	// if (!pipe_lst->token)
+	// {
+	// 	printf("pipe == NULL\n");
+	// 	return (new);
+	// }
+	if (pipe_lst->token)
 	{
 		tmp = pipe_lst;
 		while (tmp->next)
@@ -81,15 +110,17 @@ void	pipe_creation(t_sh *sh)
 	t_token	*token_start;
 
 	token_start = sh->token_lst;
-	if (sh->pipe_lst)
-		printf("pipe test first\n");
-	if (sh->pipe_lst->next)
-		printf("pipe next test first\n");
-	sh->pipe_lst = add_back_pipe_token(sh->pipe_lst);
-	if (sh->pipe_lst)
-		printf("pipe test\n");
-	if (sh->pipe_lst->next)
-		printf("pipe next test\n");
+	// if (sh->pipe_lst)
+	// 	printf("pipe test first\n");
+	// if (sh->pipe_lst->next)
+	// 	printf("pipe next test first\n");
+	if (sh->pipe_lst->token)
+		sh->pipe_lst = add_back_pipe_token(sh->pipe_lst);  //utile?
+	// printf("pipe_list2: %s", sh->pipe_lst->token->value );
+	// if (sh->pipe_lst)
+	// 	printf("pipe test\n");
+	// if (sh->pipe_lst->next)
+	// 	printf("pipe next test\n");
 	pipe_start = sh->pipe_lst;
 	while (sh->token_lst != NULL)
 	{
@@ -98,17 +129,21 @@ void	pipe_creation(t_sh *sh)
 			printf("\ntest pipe\n");
 			sh->pipe_lst->token = add_back_token(sh->pipe_lst->token,
 					sh->token_lst->type, sh->token_lst->value);
-			if (sh->token_lst->next != NULL)
-				sh->token_lst = sh->token_lst->next;
-			else
-				break;
+			printf("pipe_list2: %s\n", sh->pipe_lst->token->value );
+			// if (sh->token_lst->next != NULL)
+			sh->token_lst = sh->token_lst->next;
+			// else
+			// 	break;
 		}
 		else
 		{
 			sh->pipe_lst = add_back_pipe_token(sh->pipe_lst);
+			printf("if pipe, current pipe_lst token value: %s\n", sh->pipe_lst->token->value );
+			sh->pipe_lst = sh->pipe_lst->next;
 			sh->token_lst = sh->token_lst->next;
 		}
 	}
 	sh->pipe_lst = pipe_start;
 	sh->token_lst = token_start;
+	print_pipe_tokens(sh->pipe_lst);
 }
