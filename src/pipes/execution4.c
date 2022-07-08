@@ -58,7 +58,6 @@ void exec2(t_pipe *start, t_sh *sh, int **fd, int nb_pipes, char **env_init)
 			index_builtins(sh);
 	else if (start->cmd_verified != NULL)
 	{
-		printf("CMD != NULL\n");
 		pid = fork();
 		if (pid == -1)
 			return ;
@@ -123,10 +122,6 @@ void	execution_pipe(t_sh *sh, int nb_pipes, char **env_init)
 	int		**fd;
 	t_pipe	*start;
 
-	(void)nb_pipes;
-	(void)env_init;
-	(void)sh;
-
 	i = 0;
 	k = 0;
 	start = sh->pipe_lst;
@@ -177,7 +172,6 @@ int	nb_pipe(t_pipe *pipe_lst)
 void	execution(t_sh *sh, char **env_init)
 {
 	int		nb_pipes;
-	(void)env_init;
 
 	print_pipe_tokens(sh->pipe_lst);
 	nb_pipes = nb_pipe(sh->pipe_lst);
