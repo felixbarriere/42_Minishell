@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/07/05 11:22:40 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/07 13:17:14 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ typedef struct s_pipe
 	// int fdout;
 	// int	pid;
 	int				fd[2];
+	int				cpy_input;
+	int				cpy_output;
 	char			*cmd;
 	char			*cmd_verified;
 	char			*options;
