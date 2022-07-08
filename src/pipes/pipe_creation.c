@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_creation.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:17:44 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/07 12:24:59 by marvin           ###   ########.fr       */
+/*   Updated: 2022/07/07 15:04:29 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,10 @@ t_pipe	*add_back_pipe_token(t_pipe *pipe_lst)
 	t_pipe	*tmp;
 
 	tmp = NULL;
-	if (pipe_lst->token->value)
-	{
-		printf("pipe_lst != NULL\n");
-	}
+	// if (pipe_lst->token->value)
+	// {
+	// 	printf("pipe_lst != NULL\n");
+	// }
 	new = create_pipe_token();
 	if (!new)
 		return (NULL);
@@ -126,10 +126,10 @@ void	pipe_creation(t_sh *sh)
 	{
 		if (sh->token_lst->type != PIPE)
 		{
-			printf("\ntest pipe\n");
+			// printf("\ntest pipe\n");
 			sh->pipe_lst->token = add_back_token(sh->pipe_lst->token,
 					sh->token_lst->type, sh->token_lst->value);
-			printf("pipe_list2: %s\n", sh->pipe_lst->token->value );
+			// printf("pipe_list2: %s\n", sh->pipe_lst->token->value );
 			// if (sh->token_lst->next != NULL)
 			sh->token_lst = sh->token_lst->next;
 			// else
@@ -138,7 +138,7 @@ void	pipe_creation(t_sh *sh)
 		else
 		{
 			sh->pipe_lst = add_back_pipe_token(sh->pipe_lst);
-			printf("if pipe, current pipe_lst token value: %s\n", sh->pipe_lst->token->value );
+			// printf("if pipe, current pipe_lst token value: %s\n", sh->pipe_lst->token->value );
 			sh->pipe_lst = sh->pipe_lst->next;
 			sh->token_lst = sh->token_lst->next;
 		}
