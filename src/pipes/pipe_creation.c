@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:17:44 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/07 15:04:29 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/08 14:17:39 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,5 +145,5 @@ void	pipe_creation(t_sh *sh)
 	}
 	sh->pipe_lst = pipe_start;
 	sh->token_lst = token_start;
-	print_pipe_tokens(sh->pipe_lst);
+	// print_pipe_tokens(sh->pipe_lst);
 }
