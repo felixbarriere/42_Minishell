@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:02:46 by ccalas            #+#    #+#             */
-/*   Updated: 2022/07/07 13:22:07 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/08 14:34:27 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@
 # include "minishell_e.h"
 
 /**************** FUNCTIONS ****************/
-void	execution_2(t_sh	*sh, char **env_init);
-void	no_pipe_exec(t_sh *sh, char **env_init);
-int	execution_no_pipe(t_sh	*sh, char **env_init);
 /******** MAIN ********/
 void	ft_init_values(t_sh *sh, char **env);
 
@@ -174,8 +171,13 @@ void	export_command(t_sh *sh);
 int		contains_equal(char *str);
 void	unset_command(t_sh *sh);
 void	exit_command(t_sh *sh);
-
-
+/******** EXECUTION_UTILS ********/
+void	reset_input_output(t_pipe *pipe_lst);
+void	update_input_output(t_pipe *pipe_lst);
+void	ft_close(t_sh *sh, int nb_pipes);
+void	mess_cmd_not_found(t_sh *sh, char *cmd);
+void	init_pipe(t_pipe *start, int nb_pipes);
+int		nb_pipe(t_pipe *pipe_lst);
 /******** PIPEX ********/
 void	update_input_output(t_pipe *pipe_lst);
 void	reset_input_output(t_pipe *pipe_lst);

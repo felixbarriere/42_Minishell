@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/07/07 13:17:14 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/08 13:56:24 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,11 @@ typedef struct s_pipe
 /* structure principale du programe */
 typedef struct s_sh
 {
+	
 	char	**env;
 	pid_t	pid1;
 	pid_t	pid2;
-	int		pipefd[2];
+	// int		pipefd[2];
 	char	**path;
 	t_env	*env_lst;
 	t_pipe	*pipe_lst;
