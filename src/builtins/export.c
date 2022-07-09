@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 12:08:45 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/06 14:30:29 by marvin           ###   ########.fr       */
+/*   Updated: 2022/07/09 15:41:41 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,16 +108,13 @@ void	export_command(t_sh *sh)
 	char	**key_value;
 	char	*value;
 
-	printf("test\n");
 	if (sh->pipe_lst->token->next != NULL)
 		printf("token= %s\n", sh->pipe_lst->token->next->value);
 	if (sh->pipe_lst->token->next && contains_equal(sh->pipe_lst->args[1]))
 	{
-		printf("test2\n");
 		key_value = ft_split(sh->pipe_lst->token->next->value, '=');
 		if (!is_in_env(key_value[0], sh->env_lst))
 		{
-			printf("test3\n");
 			orchestrate_env_token(sh->pipe_lst->token->next->value, sh, 0);
 			add_array_export(sh, sh->pipe_lst->token->next->value);
 		}

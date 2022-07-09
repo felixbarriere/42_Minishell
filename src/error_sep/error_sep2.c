@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 18:25:05 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/22 14:52:56 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/09 12:15:44 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	check_error_sep_5(t_token *token_lst)
 		&& is_type(token_lst->next, BLANK))
 	{
 		g_sh.exit = 2;
-		ft_putstr_fd("syntax error near unexpected token `|'", 2);
+		ft_putstr_fd("syntax error near unexpected token `|'\n", 2);
 		return (FAILURE);
 	}
 	return (SUCCESS);

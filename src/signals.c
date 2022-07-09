@@ -22,6 +22,7 @@ static void	ft_signal_handler(int signal)
 	if (signal == SIGINT)
 	{
 		write(1, "\n", 1);
+		g_sh.exit = 130;
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
@@ -35,8 +36,11 @@ static void	ft_signal_handler(int signal)
 	}
 }
 
+
 void	ft_signals_orchestrator(void)
 {
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, ft_signal_handler);
+	// signal(SIGINT, SIG_DFL);
 }
+
