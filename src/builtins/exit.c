@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 18:19:33 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/28 11:42:29 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/09 12:16:41 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ void	exit_command(t_sh *sh)
 			&& !sh->pipe_lst->token->next->next)
 			sh->exit = ft_atoi(exit_nbr);
 		else
+		{
 			ft_putstr_fd("exit: bad argument\n", 2);
+			return ;
+		}
 	}
 	if (sh->path != NULL)
 	{

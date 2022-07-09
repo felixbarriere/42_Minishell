@@ -43,6 +43,8 @@ void	ft_close(t_sh *sh, int nb_pipes)
 
 void	mess_cmd_not_found(t_sh *sh, char *cmd)
 {
+	if (cmd == NULL)
+		return ;
 	ft_putstr_fd("bash: ", 2);
 	ft_putstr_fd(cmd, 2);
 	ft_putstr_fd(": command not found\n", 2);
