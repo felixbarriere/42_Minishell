@@ -22,6 +22,8 @@ pid_t exec2(t_pipe *start, t_sh *sh, int nb_pipes, char **env_init)
 		}
 		else if (start->cmd_verified != NULL)
 			execve(start->cmd_verified, start->args, env_init);
+		else
+			exit (0);
 	}
 	reset_input_output(start);
 	return (pid);
