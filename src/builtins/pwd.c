@@ -19,13 +19,11 @@ void	pwd_command(t_pipe	*pipe)
 {
 	char	cwd[256];
 
-ft_putstr_fd("HERE", 2);
 	(void)pipe;
 	if (getcwd(cwd, sizeof(cwd)) == NULL)
 		write (2, "error pwd\n", 10);
 	else
 	{
-		ft_putstr_fd("HERE", 2);
 		ft_putstr_fd(cwd, 1);
 		ft_putchar_fd('\n', 1);
 	}
