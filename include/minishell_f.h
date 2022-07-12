@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_f.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:02:46 by ccalas            #+#    #+#             */
-/*   Updated: 2022/07/08 14:34:27 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/12 18:47:09 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,9 @@ void	execution(t_sh	*sh, char **env_init);
 void	index_builtins(t_sh	*sh);
 void	cd_command(t_sh	*sh);
 void	error_cd(char	*bad_dir);
+void	cd_home(t_sh *sh, char *old_path);
+void	change_pwd(t_sh	*sh, char *path);
+void	change_old_pwd(t_sh	*sh, char *old_path);
 void	pwd_command(t_pipe	*pipe);
 void	echo_command(t_pipe	*pipe);
 void	env_command(t_sh	*sh);
@@ -171,6 +174,7 @@ void	export_command(t_sh *sh);
 int		contains_equal(char *str);
 void	unset_command(t_sh *sh);
 void	exit_command(t_sh *sh);
+
 /******** EXECUTION_UTILS ********/
 void	reset_input_output(t_pipe *pipe_lst);
 void	update_input_output(t_pipe *pipe_lst);
@@ -178,6 +182,7 @@ void	ft_close(t_sh *sh, int nb_pipes);
 void	mess_cmd_not_found(t_sh *sh, char *cmd);
 void	init_pipe(t_pipe *start, int nb_pipes);
 int		nb_pipe(t_pipe *pipe_lst);
+
 /******** PIPEX ********/
 void	update_input_output(t_pipe *pipe_lst);
 void	reset_input_output(t_pipe *pipe_lst);

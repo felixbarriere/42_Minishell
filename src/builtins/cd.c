@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:12:23 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/26 16:47:59 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/12 18:48:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,12 +95,12 @@ void	cd_command(t_sh *sh)
 	char	path[256];
 
 	getcwd(old_path, sizeof(old_path));
-	if (sh->pipe_lst->token->next != NULL)
+	if ((sh->pipe_lst->token->next) && !(sh->pipe_lst->token->next->next))
 	{
 		if (chdir(sh->pipe_lst->token->next->value) == -1)
 		{
 			error_cd(sh->pipe_lst->token->next->value);
-			g_sh.exit = 1;
+			
 		}
 		else
 		{
@@ -109,9 +109,11 @@ void	cd_command(t_sh *sh)
 			change_pwd(sh, path);
 		}
 	}
+	else if (!(sh->pipe_lst->token->next))
+		cd_home(sh, old_path);
 	else
 	{
-		ft_putstr_fd("cd: no path\n", 2);
+		ft_putstr_fd("cd: too many arguments\n", 2);
 		g_sh.exit = 1;
 	}
 }
