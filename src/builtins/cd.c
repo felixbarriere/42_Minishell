@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:12:23 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/12 18:48:44 by marvin           ###   ########.fr       */
+/*   Updated: 2022/07/12 19:26:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,28 +92,27 @@ void	change_old_pwd(t_sh	*sh, char *old_path)
 void	cd_command(t_sh *sh)
 {
 	char	old_path[256];
-	char	path[256];
 
-	getcwd(old_path, sizeof(old_path));
-	if ((sh->pipe_lst->token->next) && !(sh->pipe_lst->token->next->next))
+	if (getcwd(old_path, sizeof(old_path)) != NULL || !(sh->pipe_lst->token->next))
 	{
-		if (chdir(sh->pipe_lst->token->next->value) == -1)
+		if ((sh->pipe_lst->token->next) && !(sh->pipe_lst->token->next->next))
 		{
-			error_cd(sh->pipe_lst->token->next->value);
-			
+			if (chdir(sh->pipe_lst->token->next->value) == -1)
+				error_cd(sh->pipe_lst->token->next->value);
+			else
+				change_all_pwd(sh, old_path);
 		}
+		else if (!(sh->pipe_lst->token->next))
+			cd_home(sh, old_path);
 		else
 		{
-			getcwd(path, sizeof(path));
-			change_old_pwd(sh, old_path);
-			change_pwd(sh, path);
+			ft_putstr_fd("cd: too many arguments\n", 2);
+			g_sh.exit = 1;
 		}
 	}
-	else if (!(sh->pipe_lst->token->next))
-		cd_home(sh, old_path);
 	else
 	{
-		ft_putstr_fd("cd: too many arguments\n", 2);
+		ft_putstr_fd("chdir: error retrieving current directory\n", 2);
 		g_sh.exit = 1;
 	}
 }

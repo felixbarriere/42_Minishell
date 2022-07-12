@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 16:47:49 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/12 18:50:03 by marvin           ###   ########.fr       */
+/*   Updated: 2022/07/12 19:25:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,20 @@ void	error_cd(char	*bad_dir)
 void	cd_home(t_sh *sh, char *old_path)
 {
 	printf("test: %s\n", expander(sh, "HOME"));
-	chdir(expander(sh, "HOME"));
+	if (chdir(expander(sh, "HOME")) == -1)
+		printf("cd supprimé?\n");
+	if (getcwd(old_path, sizeof(old_path)) != NULL)
+	{
+		change_old_pwd(sh, old_path);
+		change_pwd(sh, expander(sh, "HOME"));
+	}
+}
+
+void	change_all_pwd(t_sh *sh, char *old_path)
+{
+	char	path[256];
+		
+	getcwd(path, sizeof(path));
 	change_old_pwd(sh, old_path);
-	change_pwd(sh, expander(sh, "HOME"));
+	change_pwd(sh, path);
 }
