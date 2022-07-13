@@ -17,7 +17,7 @@ pid_t exec2(t_pipe *start, t_sh *sh, int nb_pipes, char **env_init)
 		ft_close(sh, nb_pipes);
 		if (start->is_builtin == 1)
 		{
-			index_builtins(sh);
+			index_builtins(sh, start);
 			exit(0);
 		}
 		else if (start->cmd_verified != NULL)
@@ -106,15 +106,16 @@ void	no_pipe_exec(t_sh *sh, char **env_init)
 void	execution(t_sh *sh, char **env_init)
 {
 	int		nb_pipes;
+	t_pipe	*start;
 
-	// print_pipe_tokens(sh->pipe_lst);
+	start = sh->pipe_lst;
 	nb_pipes = nb_pipe(sh->pipe_lst);
 	fprintf(stderr, "nb de pipes = %d\n", nb_pipes);
 	if (nb_pipes == 0)
 	{
 		update_input_output(sh->pipe_lst);
 		if (sh->pipe_lst->is_builtin == 1)
-			index_builtins(sh);
+			index_builtins(sh, start);
 		else if (sh->pipe_lst->cmd_verified != NULL)
 			no_pipe_exec(sh, env_init);
 		else

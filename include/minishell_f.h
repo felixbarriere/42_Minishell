@@ -161,7 +161,7 @@ void	clear_list_pipe(t_pipe *a_list);
 
 /******** EXECUTION ********/
 void	execution(t_sh	*sh, char **env_init);
-void	index_builtins(t_sh	*sh);
+void	index_builtins(t_sh	*sh, t_pipe *start);
 void	cd_command(t_sh	*sh);
 void	error_cd(char	*bad_dir);
 void	cd_home(t_sh *sh, char *old_path);
@@ -174,7 +174,8 @@ void	env_command(t_sh	*sh);
 void	export_command(t_sh *sh);
 int		contains_equal(char *str);
 void	unset_command(t_sh *sh);
-void	exit_command(t_sh *sh);
+// void	exit_command(t_sh *sh);
+void	exit_command(t_sh *sh, t_pipe *pipe_lst);
 
 /******** EXECUTION_UTILS ********/
 void	reset_input_output(t_pipe *pipe_lst);

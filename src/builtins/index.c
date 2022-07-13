@@ -15,38 +15,38 @@
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
 
-// void	index_builtins(t_pipe *pipe_lst)
+// void	index_builtins(t_pistart)
 // {
-// 	if (!ft_strcmp(pipe_lst->cmd, "cd"))
+// 	if (!ft_strstart->cmd, "cd"))
 // 		cd_command(sh);
-// 	else if (!ft_strcmp(pipe_lst->cmd, "pwd"))
-// 		pwd_command(pipe_lst);
-// 	else if (!ft_strcmp(pipe_lst->cmd, "echo"))
-// 		echo_command(pipe_lst);
-// 	else if (!ft_strcmp(pipe_lst->cmd, "env"))
+// 	else if (!ft_strstart->cmd, "pwd"))
+// 		pwd_commstart);
+// 	else if (!ft_strstart->cmd, "echo"))
+// 		echo_commstart);
+// 	else if (!ft_strstart->cmd, "env"))
 // 		env_command(sh);
-// 	else if (!ft_strcmp(pipe_lst->cmd, "export"))
+// 	else if (!ft_strstart->cmd, "export"))
 // 		export_command(sh);
-// 	else if (!ft_strcmp(pipe_lst->cmd, "unset"))
+// 	else if (!ft_strstart->cmd, "unset"))
 // 		unset_command(sh);
-// 	else if (!prompt || !ft_strcmp(pipe_lst->cmd, "exit"))
+// 	else if (!prompt || !ft_strstart->cmd, "exit"))
 // 		exit_command(sh);
 // }
 
-void	index_builtins(t_sh	*sh)
+void	index_builtins(t_sh	*sh, t_pipe *start)
 {
-	if (!ft_strcmp(sh->pipe_lst->cmd, "cd"))
+	if (!ft_strcmp(start->cmd, "cd"))
 		cd_command(sh);
-	else if (!ft_strcmp(sh->pipe_lst->cmd, "pwd"))
-		pwd_command(sh->pipe_lst);
-	else if (!ft_strcmp(sh->pipe_lst->cmd, "echo"))
-		echo_command(sh->pipe_lst);
-	else if (!ft_strcmp(sh->pipe_lst->cmd, "env"))
+	else if (!ft_strcmp(start->cmd, "pwd"))
+		pwd_command(start);
+	else if (!ft_strcmp(start->cmd, "echo"))
+		echo_command(start);
+	else if (!ft_strcmp(start->cmd, "env"))
 		env_command(sh);
-	else if (!ft_strcmp(sh->pipe_lst->cmd, "export"))
+	else if (!ft_strcmp(start->cmd, "export"))
 		export_command(sh);
-	else if (!ft_strcmp(sh->pipe_lst->cmd, "unset"))
+	else if (!ft_strcmp(start->cmd, "unset"))
 		unset_command(sh);
-	else if (!sh->prompt || !ft_strcmp(sh->pipe_lst->cmd, "exit"))
-		exit_command(sh);
+	else if (!sh->prompt || !ft_strcmp(start->cmd, "exit"))
+		exit_command(sh, start);
 }
