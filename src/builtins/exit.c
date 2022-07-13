@@ -30,29 +30,79 @@ int	is_in_range(char *str)
 	return (1);
 }
 
-void	exit_command(t_sh *sh)
+
+
+void	exit_command(t_sh *sh, t_pipe *pipe_lst)
 {
 	char	*exit_nbr;
+	t_token *temp;
 
-	if (sh->pipe_lst->token->next)
+	temp = pipe_lst->token;
+	while (temp && temp->type != CMD)
+		temp = temp->next;
+	if (temp)
 	{
-		exit_nbr = sh->pipe_lst->token->next->value;
-		if (exit_nbr && is_in_range(exit_nbr) && ft_atoi(exit_nbr) <= 255
-			&& !sh->pipe_lst->token->next->next)
-			sh->exit = ft_atoi(exit_nbr);
-		else
+		if (temp->next && temp->next->type == ARG)
 		{
-			ft_putstr_fd("exit: bad argument\n", 2);
-			return ;
+			exit_nbr = temp->next->value;
+			if (is_in_range(exit_nbr) && ft_atoi(exit_nbr) <= 255
+					&& !temp->next->next)
+				sh->exit = ft_atoi(exit_nbr);
+			else
+			{
+				ft_putstr_fd("exit: bad argument\n", 2);
+				return ;
+			}
 		}
+		if (sh->path != NULL)
+		{
+			printf("sh->path existe\n");
+			ft_free(sh->path);
+		}
+		ft_free(sh->env);
+		clear_list(sh->token_lst);
+		clear_list_pipe(pipe_lst);
+		if (sh->exit)
+			exit(sh->exit);
+		else
+			exit(2);
 	}
-	if (sh->path != NULL)
-	{
-		printf("sh->path existe\n");
-		ft_free(sh->path);
-	}
-	ft_free(sh->env);
-	clear_list(sh->token_lst);
-	clear_list_pipe(sh->pipe_lst);
-	exit(0);
 }
+
+
+
+// void	exit_command(t_sh *sh)
+// {
+// 	char	*exit_nbr;
+
+// 	if (sh->pipe_lst->token->next)
+// 	{
+// 		exit_nbr = sh->pipe_lst->token->next->value;
+// 		if (exit_nbr && is_in_range(exit_nbr) && ft_atoi(exit_nbr) <= 255
+// 			&& !sh->pipe_lst->token->next->next)
+// 			sh->exit = ft_atoi(exit_nbr);
+// 		else
+// 		{
+// 			ft_putstr_fd("exit: bad argument\n", 2);
+// 			return ;
+// 		}
+// 	}
+// 	if (sh->path != NULL)
+// 	{
+// 		printf("sh->path existe\n");
+// 		ft_free(sh->path);
+// 	}
+// 	ft_free(sh->env);
+// 	clear_list(sh->token_lst);
+// 	clear_list_pipe(sh->pipe_lst);
+// 	if (sh->exit)
+// 	{
+// 			printf("ICI\n");
+// 			exit(sh->exit);
+// 	}
+// 		else
+// 		{
+// 			printf("ICI 2\n");
+// 			exit(2);
+// 		}
+// }

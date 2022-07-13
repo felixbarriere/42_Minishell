@@ -78,13 +78,14 @@ void	token_str(t_sh *sh)
 	char	*dollar_value;
 	char	*temp;
 	int		idx;
+	int		i;
 
+	i = 0;
 	idx = 0;
 	temp = NULL;
 	new_str = NULL;
 	dollar_value = NULL;
 	str = string_token(sh, &sh->prompt[sh->p_index]);
-	// printf("string token: %s\n", )
 	if (ft_lstlast_dr_left(sh->token_lst) == SUCCESS)  //externaliser et renvoyer un int. if(fction()== 1), return ;
 	{
 		if (str != NULL)
@@ -108,11 +109,14 @@ void	token_str(t_sh *sh)
 				idx++;
 				continue ;
 			}
+			idx = i;
 			dollar_value = noquote_dollar_manager(str, &idx, sh);
 			if (dollar_value != NULL)
+			{
 				new_str = severals_wds_value(sh, dollar_value, new_str);
-			if (str[idx ]  && str[idx + 1] == '?')
-				free(dollar_value);
+				if (str[i ]  && str[i + 1] == '?')
+					free(dollar_value);
+			}
 			continue ;
 		}
 		else
