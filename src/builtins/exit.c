@@ -63,7 +63,7 @@ void	exit_error(t_token *temp, t_sh *sh, char *exit_nbr)
 		ft_putstr_fd("exit: ", 2);
 		ft_putstr_fd(temp->next->value, 2);
 		ft_putstr_fd(": numeric argument required\n", 2);
-		sh->exit = 2;
+		sh->exit = 255;
 	}
 }
 
@@ -86,6 +86,7 @@ void	exit_command(t_sh *sh, t_pipe *pipe_lst)
 			else if (temp->next->next && is_in_range(temp->next->value))
 			{
 				ft_putstr_fd("exit: too many arguments\n", 2);
+				sh->exit = 1;
 				return ;
 			}
 			else
