@@ -55,7 +55,8 @@ void	print_args_2(char **args, int args_number, int type)
 			if (!is_valid_option(args[i])
 				|| (!is_only_n_before(i, args)))
 				ft_putstr_fd(args[i], 1);
-			if ((i + 1 < args_number) && !is_valid_option(args[i]))
+			if ((i + 1 < args_number) && (!is_valid_option(args[i])
+					|| (!is_only_n_before(i, args))))
 				ft_putchar_fd(' ', 1);
 		}
 		i++;
