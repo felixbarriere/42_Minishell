@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_f.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:02:46 by ccalas            #+#    #+#             */
-/*   Updated: 2022/07/12 19:24:14 by marvin           ###   ########.fr       */
+/*   Updated: 2022/07/13 19:34:21 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,7 @@ void	change_pwd(t_sh	*sh, char *path);
 void	change_old_pwd(t_sh	*sh, char *old_path);
 void	pwd_command(t_pipe	*pipe);
 void	echo_command(t_pipe	*pipe);
+int		only_n(char	*str);
 void	env_command(t_sh	*sh);
 void	export_command(t_sh *sh);
 int		contains_equal(char *str);

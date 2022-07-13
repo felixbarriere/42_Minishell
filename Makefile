@@ -36,6 +36,7 @@ src/builtins/cd.c\
 src/builtins/cd_2.c\
 src/builtins/pwd.c\
 src/builtins/echo.c\
+src/builtins/echo_2.c\
 src/builtins/env_cmd.c\
 src/builtins/export.c\
 src/builtins/export_2.c\
