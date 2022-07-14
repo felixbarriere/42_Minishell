@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_command_path.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:27:17 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/06 18:09:39 by marvin           ###   ########.fr       */
+/*   Updated: 2022/07/14 17:34:53 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,7 @@ char	*ft_strjoin_path(char *s1, char *s2)
 	dest = ft_calloc(sizeof(char), (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!dest)
 		return (NULL);
-	while (s1[i] != '\0') //externaliser les 2 whiles pour norminette
-	{
-		dest[i] = s1[i];
-		i++;
-	}
-	while (s2[j] != '\0')
-	{
-		dest[i] = s2[j];
-		j++;
-		i++;
-	}
-	dest[i] = '\0';
+	dest = ft_strjoin_path_2(dest, s1, s2);
 	return (dest);
 }
 
@@ -95,9 +84,7 @@ char	*get_exec(char *cmd)
 
 	exec = NULL;
 	getcwd(path, sizeof(path));
-	// printf("cmd: %s\n", cmd);
 	exec = ft_substr(cmd, 1, ft_strlen(cmd) -1);
-	// printf("exec: %s\n", exec);
 	exec_2 = ft_strjoin_path(path, exec);
 	free(exec);
 	return (exec_2);

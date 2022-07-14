@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 15:36:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/06/28 15:39:25 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/14 18:08:43 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,16 @@ void	get_commands_type(t_sh *sh)
 		sh->pipe_lst = sh->pipe_lst->next;
 	}
 	sh->pipe_lst = temp;
+}
+
+int	update_fdin_error(t_token *temp, t_pipe *pipe_lst)
+{
+	int		error;
+
+	error = 0;
+	if (temp->type == INPUT)
+		error = open_fdin(temp->value, &pipe_lst);
+	else
+		error = heredoc(temp->value, &pipe_lst);
+	return (error);
 }

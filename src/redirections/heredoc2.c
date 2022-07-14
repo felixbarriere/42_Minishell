@@ -1,23 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc2.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/14 15:13:58 by fbarrier          #+#    #+#             */
+/*   Updated: 2022/07/14 15:17:07 by fbarrier         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 #include "../../include/minishell_d.h"
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
 
 extern t_sh	g_sh;
-
-int	contains_charset(char *str, char c)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == c)
-			return (SUCCESS);
-		i++;
-	}
-	return (FAILURE);
-}
 
 int	process_eof(char **temp, t_pipe **pipe_lst)
 {
@@ -31,7 +29,9 @@ int	process_eof(char **temp, t_pipe **pipe_lst)
 
 int	contain_space(char	**value)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while ((*value)[i])
 	{
 		if ((*value)[i] == ' ')
@@ -42,6 +42,7 @@ int	contain_space(char	**value)
 	}
 	return (0);
 }
+
 char	*expand_env_in_heredoc(char *value)
 {
 	char	*new_str;

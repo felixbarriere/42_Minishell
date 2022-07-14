@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:12:23 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/12 19:26:08 by marvin           ###   ########.fr       */
+/*   Updated: 2022/07/14 15:07:35 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,8 @@ void	cd_command(t_sh *sh)
 {
 	char	old_path[256];
 
-	if (getcwd(old_path, sizeof(old_path)) != NULL || !(sh->pipe_lst->token->next))
+	if (getcwd(old_path, sizeof(old_path)) != NULL
+		|| !(sh->pipe_lst->token->next))
 	{
 		if ((sh->pipe_lst->token->next) && !(sh->pipe_lst->token->next->next))
 		{

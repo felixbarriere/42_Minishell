@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/06/27 15:27:55 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/14 14:44:23 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char	*severals_wds_value(t_sh *sh, char *dollar_value, char	*new_str)
 	if (j > 1)
 	{
 		new_str = ft_strjoin(new_str, value_dollar_split[i]);
-		while (value_dollar_split[i + 1]) // i++ pour norminette
+		while (value_dollar_split[i + 1])
 		{
 			sh->token_lst = add_back_token(sh->token_lst, STR, new_str);
 			i++;

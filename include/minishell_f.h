@@ -6,11 +6,11 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:02:46 by ccalas            #+#    #+#             */
-/*   Updated: 2022/07/13 19:34:21 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/14 18:08:59 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef MINISHELL_F_H
+#ifndef MINISHELL_F_H
 # define MINISHELL_F_H
 
 # include "minishell.h"
@@ -90,7 +90,6 @@ void	tokenizer(t_sh *sh);
 void	lexer(t_sh *sh);
 char	*expander(t_sh *sh, char *dollar);
 
-
 /******** FILE REDIRECTIONS ********/
 /******** GET_COMMAND_TYPE ********/
 void	update_command(t_sh *sh);
@@ -105,6 +104,7 @@ void	get_commands_type(t_sh *sh);
 int		open_fdin(char	*value, t_pipe **pipe_lst);
 int		update_fdout(t_pipe **pipe_lst);
 int		update_fdin(t_pipe **pipe_lst);
+int		update_fdin_error(t_token *temp, t_pipe *pipe_lst);
 
 /******** PROCESS_LIMITER ********/
 char	*process_quotes_limiter(char **value);
@@ -120,11 +120,12 @@ int		heredoc(char *limiter, t_pipe **pipe_lst);
 
 /******** HEREDOC_2 ********/
 char	*read_heredoc(t_pipe **pipe_lst, int quotes, char *limiter);
-
+int		contains_charset(char *str, char c);
 
 /******** FILE PIPES ********/
 /******** GET_COMMANDS_PATH ********/
 void	get_command_path(t_sh *sh);
+char	*ft_strjoin_path_2(char *dest, char *s1, char *s2);
 
 /******** PIPE_CREATION ********/
 void	pipe_creation(t_sh *sh);
@@ -182,9 +183,11 @@ void	exit_command(t_sh *sh, t_pipe *pipe_lst);
 void	reset_input_output(t_pipe *pipe_lst);
 void	update_input_output(t_pipe *pipe_lst);
 void	ft_close(t_sh *sh, int nb_pipes);
+void	ft_switch(t_pipe *start, int k);
 void	mess_cmd_not_found(t_sh *sh, char *cmd);
 void	init_pipe(t_pipe *start, int nb_pipes);
 int		nb_pipe(t_pipe *pipe_lst);
+void	update_path(t_sh *sh, char *key);
 
 /******** PIPEX ********/
 void	update_input_output(t_pipe *pipe_lst);

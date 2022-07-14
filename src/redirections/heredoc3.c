@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo_2.c                                           :+:      :+:    :+:   */
+/*   heredoc3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/13 19:33:52 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/14 15:08:48 by fbarrier         ###   ########.fr       */
+/*   Created: 2022/07/14 15:15:09 by fbarrier          #+#    #+#             */
+/*   Updated: 2022/07/14 15:21:01 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,16 @@
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
 
-int	only_n(char	*str)
+int	contains_charset(char *str, char c)
 {
 	int	i;
 
-	i = 1;
+	i = 0;
 	while (str[i])
 	{
-		if (str[i] == 'n')
-			i++;
-		else
-			return (0);
+		if (str[i] == c)
+			return (SUCCESS);
+		i++;
 	}
-	return (1);
+	return (FAILURE);
 }

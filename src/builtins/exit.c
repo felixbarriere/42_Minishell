@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 18:19:33 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/13 16:10:52 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/14 16:47:37 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,13 @@ int	too_many_chars(char *str)
 
 void	exit_error(t_token *temp, t_sh *sh, char *exit_nbr)
 {
-	if (!is_in_range(temp->next->value) || ft_atoi(temp->next->value) >= 255
+	if (!is_in_range(temp->next->value) || ft_atoi(temp->next->value) >= 256
 		|| too_many_chars(exit_nbr))
 	{
 		ft_putstr_fd("exit: ", 2);
 		ft_putstr_fd(temp->next->value, 2);
 		ft_putstr_fd(": numeric argument required\n", 2);
-		sh->exit = 255;
+		sh->exit = 2;
 	}
 }
 

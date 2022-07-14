@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/07/05 17:55:48 by marvin           ###   ########.fr       */
+/*   Updated: 2022/07/14 14:34:12 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,23 +48,13 @@ int	ft_token_part2(t_sh *sh, char *str)
 	return (0);
 }
 
-// void ft_token_part3(t_sh *sh, char *str, char *new_str, int *idx)
-// {
-// 	char	*dollar_value;
-	
-// 	dollar_value = NULL;
-// 	dollar_value = noquote_dollar_manager(str, &idx, sh);
-// 	if (dollar_value != NULL)
-// 		new_str = severals_wds_value(sh, dollar_value, new_str);
-// }
-
 char	*token_str_2(char *str, int *idx, t_sh *sh)
 {
-	char *new_str;
-	char *temp;
+	char	*new_str;
+	char	*temp;
 
 	new_str = NULL;
-	temp = quotes_manager(str, idx, sh);  //externaliser -5 lignes
+	temp = quotes_manager(str, idx, sh);//externaliser -5 lignes
 	if (temp != NULL)
 		new_str = ft_strjoin(new_str, temp);
 	free(temp);
@@ -73,8 +63,8 @@ char	*token_str_2(char *str, int *idx, t_sh *sh)
 
 void	token_str(t_sh *sh)
 {
-	char	*str;			//creer une structure a part avec les variables + une fonction pour les init. creer la structure dans "tokenizer" 
-	char	*new_str;			//et l'envoyer en arg a token_str
+	char	*str;	//creer une structure a part avec les variables + une fonction pour les init. creer la structure dans "tokenizer" 
+	char	*new_str;	//et l'envoyer en arg a token_str
 	char	*dollar_value;
 	char	*temp;
 	int		idx;
@@ -114,7 +104,7 @@ void	token_str(t_sh *sh)
 			if (dollar_value != NULL)
 			{
 				new_str = severals_wds_value(sh, dollar_value, new_str);
-				if (str[i ]  && str[i + 1] == '?')
+				if (str[i] && str[i + 1] == '?')
 					free(dollar_value);
 			}
 			continue ;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:43:57 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/09 14:25:53 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/14 17:36:58 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,18 @@ void	ft_prompt_start(t_sh *sh)
 	add_history(sh->prompt);
 }
 
+void	ft_prompt_init_2(t_sh *sh)
+{
+	ft_init_env(sh->env, sh);
+	get_path(sh);
+}
+
 void	ft_prompt_init(t_sh *sh, char **env_init)
 {
 	dup_env_array(sh, env_init);
 	ft_init_values(sh, env_init);
 	sh->exit = 0;
-	ft_init_env(sh->env, sh);
-	get_path(sh);
+	ft_prompt_init_2(sh);
 	while (1)
 	{
 		ft_prompt_start(sh);
