@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:02:46 by ccalas            #+#    #+#             */
-/*   Updated: 2022/07/15 14:39:59 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/15 17:02:18 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ char	*string_token(t_sh *sh, char *prompt);
 char	*join_dollar_value(char *str, char *new_str,
 			char *dollar_value, int idx);
 char	*severals_wds_value(t_sh *sh, char *dollar_value, char	*new_str);
+int		ft_strlen2(const char *s);
 
 /******** TOKENIZER_UTILS_QUOTES ********/
 char	*squote_manager(char *str, int *idx);
@@ -189,7 +190,6 @@ void	init_pipe(t_pipe *start, int nb_pipes);
 int		nb_pipe(t_pipe *pipe_lst);
 void	update_path(t_sh *sh, char *key);
 void	env_command_export(t_sh	*sh);
-
 
 /******** PIPEX ********/
 void	update_input_output(t_pipe *pipe_lst);

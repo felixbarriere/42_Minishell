@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/07/14 14:44:23 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/15 16:02:10 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,14 @@ char	*severals_wds_value(t_sh *sh, char *dollar_value, char	*new_str)
 		new_str = ft_strjoin(new_str, value_dollar_split[0]);
 	ft_free(value_dollar_split);
 	return (new_str);
+}
+
+int	ft_strlen2(const char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	return (i);
 }

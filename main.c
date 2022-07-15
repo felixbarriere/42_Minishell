@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 18:08:23 by marvin            #+#    #+#             */
-/*   Updated: 2022/07/14 17:37:02 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/15 17:05:16 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	main(int ac, char **av, char **env)
 {
 	(void)ac;
 	(void)av;
-
 	ft_memset(&g_sh, 0, sizeof(t_sh));
 	if (ac != 1)
 	{
