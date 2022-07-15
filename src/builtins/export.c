@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 12:08:45 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/14 17:34:25 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/15 14:39:08 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,5 +128,5 @@ void	export_command(t_sh *sh)
 			get_path(sh);
 	}
 	else if (!sh->pipe_lst->token->next)
-		env_command(sh);
+		env_command_export(sh);
 }

@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:02:46 by ccalas            #+#    #+#             */
-/*   Updated: 2022/07/14 18:08:59 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/15 14:39:59 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,8 @@ void	mess_cmd_not_found(t_sh *sh, char *cmd);
 void	init_pipe(t_pipe *start, int nb_pipes);
 int		nb_pipe(t_pipe *pipe_lst);
 void	update_path(t_sh *sh, char *key);
+void	env_command_export(t_sh	*sh);
+
 
 /******** PIPEX ********/
 void	update_input_output(t_pipe *pipe_lst);
