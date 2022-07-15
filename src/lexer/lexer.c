@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/07/06 16:50:27 by marvin           ###   ########.fr       */
+/*   Updated: 2022/07/14 14:44:57 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,6 @@ void	lexer(t_sh *sh)
 		return ;
 	}
 	pipe_creation(sh);
-	printf("pipe: %s\n", sh->pipe_lst->cmd);
-	// printf("token_lst value: %s\n", sh->token_lst->value);
-	// if (sh->token_lst->next)
-	// 	printf("token_lst  next value: %s\n", sh->token_lst->next->value);
-	if (sh->pipe_lst->next)
-		printf("pipe test\n");
 	get_commands_type(sh);
 	update_command(sh);
 	get_command_path(sh);

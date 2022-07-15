@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_s.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/07/08 13:56:24 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/14 18:35:11 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,6 @@ typedef struct s_env
 typedef struct s_pipe
 {
 	t_token			*token;
-	// 	int fdin;
-	// int fdout;
-	// int	pid;
 	int				fd[2];
 	int				cpy_input;
 	int				cpy_output;
@@ -73,11 +70,11 @@ typedef struct s_pipe
 /* structure principale du programe */
 typedef struct s_sh
 {
-	
+	int		exec_pipe_i;
+	int		exec_pipe_k;
 	char	**env;
 	pid_t	pid1;
 	pid_t	pid2;
-	// int		pipefd[2];
 	char	**path;
 	t_env	*env_lst;
 	t_pipe	*pipe_lst;

@@ -36,11 +36,8 @@ static void	ft_signal_handler(int signal)
 	}
 }
 
-
 void	ft_signals_orchestrator(void)
 {
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, ft_signal_handler);
-	// signal(SIGINT, SIG_DFL);
 }
-

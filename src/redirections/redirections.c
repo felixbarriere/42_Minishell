@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 15:39:55 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/06 10:21:41 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/14 18:08:27 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,11 @@ extern t_sh	g_sh;
 
 void	open_fdout(t_token *token, t_pipe **pipe_lst)
 {
-	printf("token value = %s\n", token->value);
 	if (token->type == OUTPUT)
 	{
-		printf("OUPUT BEFORE = %d\n", (*pipe_lst)->output);
 		(*pipe_lst)->output = open(token->value, O_WRONLY
 				| O_CREAT | O_TRUNC, 00644);
 		(*pipe_lst)->append_mode = 0;
-		// printf("TEST OPEN FDOUT\n");
-		// printf("OUPUT = %d\n", (*pipe_lst)->output);
 	}
 	else
 	{
@@ -46,7 +42,6 @@ int	update_fdout(t_pipe **pipe_lst)
 	{
 		if (temp->type == OUTPUT || temp->type == APPEND)
 		{
-			printf("TEST 1\n");
 			if ((*pipe_lst)->output != 1)
 				close ((*pipe_lst)->output);
 			open_fdout(temp, pipe_lst);
@@ -94,16 +89,12 @@ int	update_fdin(t_pipe **pipe_lst)
 	{
 		if (temp->type == INPUT || temp->type == LIMITER)
 		{
-			if (temp->type == INPUT)
-				error = open_fdin(temp->value, pipe_lst);
-			else
-				error = heredoc(temp->value, pipe_lst);
+			error = update_fdin_error(temp, *pipe_lst);
 			if (error)
 				return (1);
 		}
 		else if (temp->type == OUTPUT || temp->type == APPEND)
 		{
-			printf("TEST 1\n");
 			if ((*pipe_lst)->output != 1)
 				close ((*pipe_lst)->output);
 			open_fdout(temp, pipe_lst);

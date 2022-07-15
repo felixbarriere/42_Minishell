@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 12:08:45 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/09 15:41:41 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/14 17:34:25 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ char	*get_value(char **key_value)
 		{
 			value_2 = ft_strjoin_char_2(value_2, '=');
 			value_2 = ft_strjoin(value_2, key_value[i]);
-			// free(key_value[i]);
 			i++;
 		}
 		value = ft_strdup(value_2);
@@ -108,8 +107,6 @@ void	export_command(t_sh *sh)
 	char	**key_value;
 	char	*value;
 
-	if (sh->pipe_lst->token->next != NULL)
-		printf("token= %s\n", sh->pipe_lst->token->next->value);
 	if (sh->pipe_lst->token->next && contains_equal(sh->pipe_lst->args[1]))
 	{
 		key_value = ft_split(sh->pipe_lst->token->next->value, '=');
@@ -122,6 +119,7 @@ void	export_command(t_sh *sh)
 		{
 			value = get_value(key_value);
 			update_value(sh->env_lst, value, key_value[0]);
+			update_path(sh, key_value[0]);
 			if (key_value[2] != NULL)
 				free(value);
 		}

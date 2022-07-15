@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_command_type.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 19:28:11 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/05 17:48:19 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/14 15:10:31 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,20 +83,9 @@ void	update_command(t_sh *sh)
 			sh->error = 1;
 		if (update_args(&sh->pipe_lst) == 1)
 			sh->error = 1;
-		// if (update_fdout(&sh->pipe_lst) == 1)
-		// 	sh->error = 1;
 		if (update_fdin(&sh->pipe_lst) == 1)
 			sh->error = 1;
 		sh->pipe_lst = sh->pipe_lst->next;
 	}
-	//A SUPPRIMER ------------
-	// int i = 0;
-	// printf("COMMAND = %s\n", temp->cmd);
-	// while (temp->args[i] != NULL)
-	// {
-	// 	printf("ARG = %s\n", temp->args[i]);
-	// 	i++;
-	// }
-	// ------------------------
 	sh->pipe_lst = temp;
 }

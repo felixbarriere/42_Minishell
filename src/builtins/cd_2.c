@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 16:47:49 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/12 19:25:45 by marvin           ###   ########.fr       */
+/*   Updated: 2022/07/14 15:09:13 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	cd_home(t_sh *sh, char *old_path)
 void	change_all_pwd(t_sh *sh, char *old_path)
 {
 	char	path[256];
-		
+
 	getcwd(path, sizeof(path));
 	change_old_pwd(sh, old_path);
 	change_pwd(sh, path);

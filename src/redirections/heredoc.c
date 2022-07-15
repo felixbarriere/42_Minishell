@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/14 15:09:29 by fbarrier          #+#    #+#             */
+/*   Updated: 2022/07/14 15:09:58 by fbarrier         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 #include "../../include/minishell_d.h"
 #include "../../include/minishell_f.h"
@@ -32,7 +44,6 @@ int	init_heredoc(t_pipe **pipe_lst)
 {
 	ft_free_null_str(&(*pipe_lst)->limiter_name);
 	(*pipe_lst)->limiter_name = filename();
-	// printf("FILENAME = %s\n", (*pipe_lst)->limiter_name);
 	(*pipe_lst)->heredoc_mode = 1;
 	(*pipe_lst)->input = open((*pipe_lst)->limiter_name, O_RDWR
 			| O_CREAT | O_APPEND, 00644);
@@ -79,7 +90,7 @@ int	heredoc(char *limiter, t_pipe **pipe_lst)
 	return (0);
 }
 
-	// free(limiter);
-	// close((*pipe_lst)->input);
-	// if (open_fdin((*pipe_lst)->limiter_name, pipe_lst))
-	// 	return (1);
+// free(limiter);
+// close((*pipe_lst)->input);
+// if (open_fdin((*pipe_lst)->limiter_name, pipe_lst))
+// 	return (1);
