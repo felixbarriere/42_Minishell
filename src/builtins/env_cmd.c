@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 15:55:51 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/15 14:40:01 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/17 15:09:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ void	env_command_export(t_sh	*sh)
 	{
 		ft_putstr_fd("export ", 1);
 		ft_putstr_fd(sh->env_lst->key, 1);
-		ft_putchar_fd('=', 1);
+		ft_putstr_fd("=\"", 1);
 		ft_putstr_fd(sh->env_lst->value, 1);
-		ft_putchar_fd('\n', 1);
+		ft_putstr_fd("\"\n", 1);
 		sh->env_lst = sh->env_lst->next;
 	}
 	sh->env_lst = start;
