@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 12:08:45 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/17 14:45:32 by marvin           ###   ########.fr       */
+/*   Updated: 2022/07/17 15:47:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	export_command(t_sh *sh)
 	char	**key_value;
 	char	*value;
 
-	if (sh->pipe_lst->token->next && contains_equal(sh->pipe_lst->args[1]))
+	if (sh->pipe_lst->token->next && contains_equal(sh->pipe_lst->args[1], sh))
 	{
 		key_value = ft_split(sh->pipe_lst->token->next->value, '=');
 		if (!is_in_env(key_value[0], sh->env_lst))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/07/14 14:45:10 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/17 15:52:46 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,11 @@ int	ft_is_quote_ok(t_sh *sh)
 	int	i;
 
 	i = 0;
-	printf("test\n");
 	while (sh->prompt[i])
 	{
 		ft_find_quote_state(sh, i);
 		i++;
 	}
-	printf("test 2\n");
 	if (sh->state_quote != DEFAULT)
 		return (FAILURE);
 	return (SUCCESS);
