@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_f.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:02:46 by ccalas            #+#    #+#             */
-/*   Updated: 2022/07/15 17:02:18 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/17 15:48:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ void	echo_command(t_pipe	*pipe);
 int		only_n(char	*str);
 void	env_command(t_sh	*sh);
 void	export_command(t_sh *sh);
-int		contains_equal(char *str);
+int	contains_equal(char *str, t_sh *sh);
 void	unset_command(t_sh *sh);
 // void	exit_command(t_sh *sh);
 void	exit_command(t_sh *sh, t_pipe *pipe_lst);
