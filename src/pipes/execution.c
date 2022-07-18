@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/18 16:49:36 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/18 16:57:27 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,7 @@ void	wait_get_status(t_sh *sh, int nb_pipes, int pid)
 
 void	execution_pipe(t_sh *sh, t_pipe *start, int nb_pipes, char **env_init)
 {
-	int		i;
-	int		k;
-	pid_t	pid;
+	t_pipe	*start;
 
 	i = 0;
 	k = 0;
@@ -81,14 +79,14 @@ void	execution_pipe(t_sh *sh, t_pipe *start, int nb_pipes, char **env_init)
 			return ;
 		}
 		else
-			pid = exec2(start, sh, nb_pipes, env_init);
-		if (k % 2 != 0)
-			i++;
-		k++;
+			sh->exec_pid = exec2(start, sh, nb_pipes, env_init);
+		if (sh->exec_pipe_k % 2 != 0)
+			sh->exec_pipe_i++;
+		sh->exec_pipe_k++;
 		start = start->next;
 	}
 	ft_close(sh, nb_pipes);
-	wait_get_status(sh, nb_pipes, pid);
+	wait_get_status(sh, nb_pipes, sh->exec_pid);
 }
 
 void	no_pipe_exec(t_sh *sh, char **env_init)

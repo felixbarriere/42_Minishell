@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/07/18 13:40:03 by marvin           ###   ########.fr       */
+/*   Updated: 2022/07/18 16:21:21 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ typedef struct s_sh
 	int		state_quote;
 	int		ts_idx;
 	int		ts_i;
+	pid_t	exec_pid;
 }	t_sh;
 
 #endif
