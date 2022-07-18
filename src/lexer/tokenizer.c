@@ -5,16 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/07/18 13:39:58 by marvin           ###   ########.fr       */
-=======
-/*   Updated: 2022/07/18 13:21:23 by marvin           ###   ########.fr       */
->>>>>>> 64c256081e8122ad1cb2a312b5f92865536196c5
+/*   Created: 2022/07/18 13:45:10 by marvin            #+#    #+#             */
+/*   Updated: 2022/07/18 13:45:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
 #include "../../include/minishell_d.h"
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
@@ -54,12 +49,7 @@ char	*token_str_3(char *str, char *new_str, int *idx, t_sh *sh)
 	return (new_str);
 }
 
-<<<<<<< HEAD
 char	*token_str_2(char *str, char *new_str, t_sh *sh, char *dol_val)
-=======
-
-char	*token_str_2(char *str, char *new_str, t_sh *sh, char *dollar_value)
->>>>>>> 64c256081e8122ad1cb2a312b5f92865536196c5
 {
 	int	i;
 
