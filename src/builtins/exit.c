@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 18:19:33 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/18 17:22:29 by marvin           ###   ########.fr       */
+/*   Updated: 2022/07/18 17:42:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,12 @@ int	too_many_chars(char *str)
 
 void	exit_error(t_token *temp, t_sh *sh, char *exit_nbr)
 {
-	if (!is_in_range(temp->next->value) || ft_atoi(temp->next->value) >= 256
+	if (ft_atoi(temp->next->value) < 0 && !too_many_chars(exit_nbr))
+	{
+		sh->exit = 2;
+		return ;
+	}
+	if (!is_in_range(temp->next->value) || ft_atoi(temp->next->value) >= 255
 		|| too_many_chars(exit_nbr))
 	{
 		ft_putstr_fd("exit: ", 2);
@@ -81,7 +86,7 @@ void	exit_command(t_sh *sh, t_pipe *pipe_lst)
 		{
 			if (is_in_range(temp->next->value) && ft_atoi(temp->next->value)
 				<= 255 && !temp->next->next
-				&& !too_many_chars(temp->next->value))
+					&& !too_many_chars(temp->next->value))
 				sh->exit = ft_atoi(temp->next->value);
 			else if (temp->next->next && is_in_range(temp->next->value))
 			{
