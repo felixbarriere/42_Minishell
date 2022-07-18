@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 18:08:23 by marvin            #+#    #+#             */
-/*   Updated: 2022/07/15 17:05:16 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/18 16:45:10 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	main(int ac, char **av, char **env)
 		ft_putstr_fd("Error: wrong's args number\n", 2);
 		exit(EXIT_FAILURE);
 	}
-	ft_signals_orchestrator();
 	ft_prompt_init(&g_sh, env);
 	clear_list_env(g_sh.env_lst);
 	clear_list(g_sh.token_lst);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:13:58 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/14 15:17:07 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/18 16:36:31 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,20 @@
 
 extern t_sh	g_sh;
 
+int	contains_charset(char *str, char c)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (SUCCESS);
+		i++;
+	}
+	return (FAILURE);
+}
+
 int	process_eof(char **temp, t_pipe **pipe_lst)
 {
 	ft_putstr_fd("bash: warning: here-document delimited by end-of-file\n", 1);
@@ -24,14 +38,12 @@ int	process_eof(char **temp, t_pipe **pipe_lst)
 	close((*pipe_lst)->input);
 	unlink((*pipe_lst)->limiter_name);
 	ft_free_null_str(&(*pipe_lst)->limiter_name);
-	return (1);
+	exit(0);
 }
 
 int	contain_space(char	**value)
 {
-	int	i;
-
-	i = 0;
+	int i = 0;
 	while ((*value)[i])
 	{
 		if ((*value)[i] == ' ')
@@ -42,7 +54,6 @@ int	contain_space(char	**value)
 	}
 	return (0);
 }
-
 char	*expand_env_in_heredoc(char *value)
 {
 	char	*new_str;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_command_path.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:27:17 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/14 17:34:53 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/18 16:26:44 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	get_command_path(t_sh	*sh)
 			sh->pipe_lst->cmd_verified = com_line(sh->path, sh->pipe_lst->cmd);
 		if (sh->pipe_lst->cmd_verified == NULL)
 		{
-			if (ft_strncmp(sh->pipe_lst->cmd, "./", 2) == 0)
+			if (sh->pipe_lst->cmd && ft_strncmp(sh->pipe_lst->cmd, "./", 2) == 0)
 			{
 				executable = get_exec(sh->pipe_lst->cmd);
 				sh->pipe_lst->cmd_verified = ft_strdup(executable);

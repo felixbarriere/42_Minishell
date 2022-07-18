@@ -24,7 +24,6 @@ src/redirections/redirections.c\
 src/redirections/process_limiter.c\
 src/redirections/heredoc.c\
 src/redirections/heredoc2.c\
-src/redirections/heredoc3.c\
 src/signals.c\
 src/env/env.c\
 src/env/env_utils.c\

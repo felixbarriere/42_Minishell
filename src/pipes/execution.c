@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/18 16:17:03 by marvin           ###   ########.fr       */
+/*   Updated: 2022/07/18 16:49:36 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,17 @@
 #include "../../include/minishell_d.h"
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
-
+	
 extern t_sh	g_sh;
 
-pid_t	exec2(t_pipe *start, t_sh *sh, int nb_pipes, char **env_init)
+pid_t exec2(t_pipe *start, t_sh *sh, int nb_pipes, char **env_init)
 {
-	pid_t	pid;
+	pid_t	pid = 1;
 
+	signal(SIGINT, SIG_IGN);
 	pid = fork();
 	if (pid == -1)
-		return (-1);
+		return -1;
 	if (pid == 0)
 	{
 		ft_close(sh, nb_pipes);
@@ -37,9 +38,11 @@ pid_t	exec2(t_pipe *start, t_sh *sh, int nb_pipes, char **env_init)
 		else
 			exit (0);
 	}
+	ft_signals_orchestrator();
 	reset_input_output(start);
 	return (pid);
 }
+
 
 void	wait_get_status(t_sh *sh, int nb_pipes, int pid)
 {
@@ -56,19 +59,21 @@ void	wait_get_status(t_sh *sh, int nb_pipes, int pid)
 	}
 }
 
-void	execution_pipe(t_sh *sh, int nb_pipes, char **env_init)
+void	execution_pipe(t_sh *sh, t_pipe *start, int nb_pipes, char **env_init)
 {
-	t_pipe	*start;
+	int		i;
+	int		k;
 	pid_t	pid;
 
-	sh->exec_pipe_i = 0;
-	sh->exec_pipe_k = 0;
-	start = sh->pipe_lst;
+	i = 0;
+	k = 0;
+
 	init_pipe(start, nb_pipes);
 	while (start)
 	{
 		update_input_output(start);
-		ft_switch(start, sh->exec_pipe_k);
+		ft_switch(start, k);
+		// printf("2 / is_builtin = %d et cmd = %s\n", sh->pipe_lst->is_builtin, sh->pipe_lst->cmd_verified);
 		if (sh->pipe_lst->is_builtin != 1 && sh->pipe_lst->cmd_verified == NULL)
 		{
 			mess_cmd_not_found(sh, sh->pipe_lst->cmd);
@@ -77,9 +82,9 @@ void	execution_pipe(t_sh *sh, int nb_pipes, char **env_init)
 		}
 		else
 			pid = exec2(start, sh, nb_pipes, env_init);
-		if (sh->exec_pipe_k % 2 != 0)
-			sh->exec_pipe_i++;
-		sh->exec_pipe_k++;
+		if (k % 2 != 0)
+			i++;
+		k++;
 		start = start->next;
 	}
 	ft_close(sh, nb_pipes);
@@ -90,13 +95,19 @@ void	no_pipe_exec(t_sh *sh, char **env_init)
 {
 	pid_t	pid;
 
+	signal(SIGINT, SIG_IGN);
 	pid = fork();
 	if (pid == -1)
 		return ;
 	if (pid == 0)
+	{
+		// ft_signals_orchestrator();
 		execve(sh->pipe_lst->cmd_verified, sh->pipe_lst->args, env_init);
+		exit(0);
+	}
 	if ((0 < waitpid(pid, &g_sh.exit, 0)) && (WIFEXITED(g_sh.exit)))
 			g_sh.exit = WEXITSTATUS(g_sh.exit);
+	ft_signals_orchestrator();
 }
 
 void	execution(t_sh *sh, char **env_init)
@@ -106,7 +117,6 @@ void	execution(t_sh *sh, char **env_init)
 
 	start = sh->pipe_lst;
 	nb_pipes = nb_pipe(sh->pipe_lst);
-	fprintf(stderr, "nb de pipes = %d\n", nb_pipes);
 	if (nb_pipes == 0)
 	{
 		update_input_output(sh->pipe_lst);
@@ -123,5 +133,5 @@ void	execution(t_sh *sh, char **env_init)
 		reset_input_output(sh->pipe_lst);
 	}
 	else
-		execution_pipe(sh, nb_pipes, env_init);
+		execution_pipe(sh, start, nb_pipes, env_init);
 }

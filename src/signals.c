@@ -15,13 +15,13 @@
 #include "../include/minishell_f.h"
 #include "../include/minishell_s.h"
 
+extern t_sh	g_sh;
+
 static void	ft_signal_handler(int signal)
 {
-	extern t_sh	g_sh;
-
 	if (signal == SIGINT)
 	{
-		write(1, "\n", 1);
+		ft_putstr_fd("\n", 1);
 		g_sh.exit = 130;
 		rl_on_new_line();
 		rl_replace_line("", 0);
@@ -33,6 +33,19 @@ static void	ft_signal_handler(int signal)
 		clear_list_env(g_sh.env_lst);
 		clear_list(g_sh.token_lst);
 		exit(0);
+	}
+}
+
+void	heredoc_handler(int signal)
+{
+	if (signal == SIGINT)
+	{
+		ft_putstr_fd("\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		g_sh.error = 1;
+		g_sh.exit = 130;
+		exit (130);
 	}
 }
 

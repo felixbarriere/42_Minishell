@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_f.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:02:46 by ccalas            #+#    #+#             */
-/*   Updated: 2022/07/17 15:48:02 by marvin           ###   ########.fr       */
+/*   Updated: 2022/07/18 16:35:07 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	ft_prompt_init(t_sh *sh, char **env_init);
 
 /******** SIGNALS ********/
 void	ft_signals_orchestrator(void);
+void	heredoc_handler(int signal);
 
 /******** LEXER ********/
 void	lexer(t_sh *sh);
