@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/18 17:11:17 by marvin           ###   ########.fr       */
+/*   Updated: 2022/07/18 17:21:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ pid_t exec2(t_pipe *start, t_sh *sh, int nb_pipes, char **env_init)
 	reset_input_output(start);
 	return (pid);
 }
-
 
 void	wait_get_status(t_sh *sh, int nb_pipes, int pid)
 {

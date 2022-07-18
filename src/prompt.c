@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:43:57 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/18 16:41:47 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/18 17:11:46 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	ft_prompt_start(t_sh *sh)
 		ft_free(sh->env);
 		clear_list(sh->token_lst);
 		clear_list_pipe(sh->pipe_lst);
+		ft_putstr_fd("\nexit\n", 1);
 		exit(0);
 	}
 	add_history(sh->prompt);
