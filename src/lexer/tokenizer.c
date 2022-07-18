@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/07/15 17:02:21 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/18 13:39:58 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*token_str_3(char *str, char *new_str, int *idx, t_sh *sh)
 	return (new_str);
 }
 
-char	*token_str_2(char *str, char *new_str, t_sh *sh, char *dollar_value)
+char	*token_str_2(char *str, char *new_str, t_sh *sh, char *dol_val)
 {
 	while (str[sh->ts_idx])
 	{
@@ -74,12 +74,16 @@ char	*token_str_2(char *str, char *new_str, t_sh *sh, char *dollar_value)
 				sh->ts_idx++;
 				continue ;
 			}
-			sh->ts_idx = 0;
-			dollar_value = noquote_dollar_manager(str, &sh->ts_idx, sh);
-			if (dollar_value != NULL)
-				new_str = severals_wds_value(sh, dollar_value, new_str);
-			if (dollar_value != NULL && (str[0] && str[1] == '?'))
-				free(dollar_value);
+			sh->ts_i = sh->ts_idx;
+			dol_val = noquote_dollar_manager(str, &sh->ts_idx, sh);
+			if (dol_val != NULL)
+				new_str = severals_wds_value(sh, dol_val, new_str);
+			if (dol_val != NULL && (str[sh->ts_i] && str[sh->ts_i + 1] == '?'))
+			{
+				printf("i: %c", str[sh->ts_i]);
+				printf("i + 1: %c", str[sh->ts_i + 1]);
+				free(dol_val);
+			}
 			continue ;
 		}
 		else
@@ -97,6 +101,7 @@ void	token_str(t_sh *sh)
 	char	*temp;
 
 	sh->ts_idx = 0;
+	sh->ts_i = 0;
 	temp = NULL;
 	new_str = NULL;
 	dollar_value = NULL;
