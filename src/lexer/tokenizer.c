@@ -41,14 +41,15 @@ char	*token_str_3(char *str, char *new_str, int *idx, t_sh *sh)
 {
 	char	*temp;
 
-	temp = quotes_manager(str, idx, sh);
-	printf("temp: %s\n", temp);
-	if (temp != NULL)
-		new_str = ft_strjoin(new_str, temp);
-	printf("new_str: %s\n", new_str);
-	free(temp);
+  temp = quotes_manager(str, idx, sh);
+  printf("temp: %s\n", temp);
+  if (temp != NULL)
+ 		new_str = ft_strjoin(new_str, temp);
+  printf("new_str: %s\n", new_str);
+  free(temp);
 	return (new_str);
 }
+
 
 char	*token_str_2(char *str, char *new_str, t_sh *sh, char *dollar_value)
 {
@@ -85,29 +86,33 @@ char	*token_str_2(char *str, char *new_str, t_sh *sh, char *dollar_value)
 	return (new_str);
 }
 
-void	token_str(t_sh *sh)
+  void	token_str(t_sh *sh)
 {
 	char	*str;
-	char	*new_str;
+  char	*new_str;
 	char	*dollar_value;
-	char	*temp;
+  char	*temp;
 
-	sh->ts_idx = 0;
-	temp = NULL;
-	new_str = NULL;
-	dollar_value = NULL;
-	str = string_token(sh, &sh->prompt[sh->p_index]);
-	if (ft_lstlast_dr_left(sh->token_lst) == SUCCESS)
-	{
-		if (str != NULL)
-			sh->token_lst = add_back_token(sh->token_lst, LIMITER, str);
-		return ;
-	}
-	new_str = token_str_2(str, new_str, sh, dollar_value);
-	if (new_str != NULL)
-		sh->token_lst = add_back_token(sh->token_lst, STR, new_str);
+
+  sh->ts_idx = 0;
+  temp = NULL;
+  new_str = NULL;
+  dollar_value = NULL;
+  str = string_token(sh, &sh->prompt[sh->p_index]);
+  if (ft_lstlast_dr_left(sh->token_lst) == SUCCESS)
+  {
+    if (str != NULL)
+      sh->token_lst = add_back_token(sh->token_lst, LIMITER, str);
+    return ;
+ 	}
+  new_str = token_str_2(str, new_str, sh, dollar_value);
+  if (new_str != NULL)
+	  sh->token_lst = add_back_token(sh->token_lst, STR, new_str);
 	free(str);
 }
+
+
+
 
 // void	token_str(t_sh *sh)
 // {
