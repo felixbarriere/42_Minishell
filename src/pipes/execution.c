@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/18 16:22:37 by marvin           ###   ########.fr       */
+/*   Updated: 2022/07/18 16:28:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	wait_get_status(t_sh *sh, int nb_pipes, int pid)
 void	execution_pipe(t_sh *sh, int nb_pipes, char **env_init)
 {
 	t_pipe	*start;
-	// pid_t	pid;
 
 	sh->exec_pipe_i = 0;
 	sh->exec_pipe_k = 0;
