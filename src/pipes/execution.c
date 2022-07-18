@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/14 18:36:34 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/18 16:17:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	execution_pipe(t_sh *sh, int nb_pipes, char **env_init)
 		if (sh->pipe_lst->is_builtin != 1 && sh->pipe_lst->cmd_verified == NULL)
 		{
 			mess_cmd_not_found(sh, sh->pipe_lst->cmd);
+			reset_input_output(sh->pipe_lst);
 			return ;
 		}
 		else
@@ -116,6 +117,7 @@ void	execution(t_sh *sh, char **env_init)
 		else
 		{
 			mess_cmd_not_found(sh, sh->pipe_lst->cmd);
+			reset_input_output(sh->pipe_lst);
 			return ;
 		}
 		reset_input_output(sh->pipe_lst);
