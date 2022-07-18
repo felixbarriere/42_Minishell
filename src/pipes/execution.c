@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/18 16:57:27 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/18 17:11:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,14 @@ void	wait_get_status(t_sh *sh, int nb_pipes, int pid)
 
 void	execution_pipe(t_sh *sh, t_pipe *start, int nb_pipes, char **env_init)
 {
-	t_pipe	*start;
-
-	i = 0;
-	k = 0;
+	sh->exec_pipe_i = 0;
+	sh->exec_pipe_k = 0;
 
 	init_pipe(start, nb_pipes);
 	while (start)
 	{
 		update_input_output(start);
-		ft_switch(start, k);
+		ft_switch(start, sh->exec_pipe_k);
 		// printf("2 / is_builtin = %d et cmd = %s\n", sh->pipe_lst->is_builtin, sh->pipe_lst->cmd_verified);
 		if (sh->pipe_lst->is_builtin != 1 && sh->pipe_lst->cmd_verified == NULL)
 		{

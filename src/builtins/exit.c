@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 18:19:33 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/14 16:47:37 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/18 17:18:36 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ void	exit_command(t_sh *sh, t_pipe *pipe_lst)
 		temp = temp->next;
 	if (temp)
 	{
+		ft_putstr_fd("exit\n", 1);
 		if (temp->next && temp->next->type == ARG)
 		{
-			ft_putstr_fd("exit\n", 1);
 			if (is_in_range(temp->next->value) && ft_atoi(temp->next->value)
 				<= 255 && !temp->next->next
 				&& !too_many_chars(temp->next->value))
