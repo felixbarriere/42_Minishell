@@ -51,9 +51,9 @@ char	*token_str_3(char *str, char *new_str, int *idx, t_sh *sh)
 
 char	*token_str_2(char *str, char *new_str, t_sh *sh, char *dol_val)
 {
-	int	i;
+	// int	i;
 
-	i = 0;
+	// i = 0;
 	while (str[sh->ts_idx])
 	{
 		if (str[sh->ts_idx] == '\"' || str[sh->ts_idx] == '\'')
@@ -89,11 +89,9 @@ char	*token_str_2(char *str, char *new_str, t_sh *sh, char *dol_val)
 	char	*str;
   char	*new_str;
 	char	*dollar_value;
-  char	*temp;
 
 	sh->ts_idx = 0;
 	sh->ts_i = 0;
-	temp = NULL;
 	new_str = NULL;
 	dollar_value = NULL;
 	str = string_token(sh, &sh->prompt[sh->p_index]);

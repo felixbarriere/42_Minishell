@@ -18,11 +18,7 @@
 char	*ft_strjoin_path(char *s1, char *s2)
 {
 	char	*dest;
-	int		i;
-	int		j;
 
-	i = 0;
-	j = 0;
 	if (!s1)
 	{
 		s1 = malloc(sizeof(char) * 1);
