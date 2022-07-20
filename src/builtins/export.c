@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 12:08:45 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/17 15:47:03 by marvin           ###   ########.fr       */
+/*   Updated: 2022/07/20 19:52:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,14 +106,23 @@ void	export_command(t_sh *sh)
 {
 	char	**key_value;
 	char	*value;
+	char	*value_2;
 
+	if (sh->pipe_lst->token->next != NULL)
+	{
+		value_2 = delete_plus(sh->pipe_lst->args[1]);
+		printf( "sh->pipe_lst->args[1]: %s\n", sh->pipe_lst->args[1]);
+		printf( "sh->pipe_lst->token->next->value: %s\n", sh->pipe_lst->token->next->value);
+		printf( "value_2: %s\n", value_2);
+		// free(value_2);
+	}
 	if (sh->pipe_lst->token->next && contains_equal(sh->pipe_lst->args[1], sh))
 	{
-		key_value = ft_split(sh->pipe_lst->token->next->value, '=');
+		key_value = ft_split(value_2, '=');
 		if (!is_in_env(key_value[0], sh->env_lst))
 		{
-			orchestrate_env_token(sh->pipe_lst->token->next->value, sh, 0);
-			add_array_export(sh, sh->pipe_lst->token->next->value);
+			orchestrate_env_token(value_2, sh, 0);
+			add_array_export(sh, value_2);
 		}
 		else
 		{
@@ -124,6 +133,7 @@ void	export_command(t_sh *sh)
 				free(value);
 		}
 		ft_free(key_value);
+		free(value_2);
 		if (sh->path == NULL)
 			get_path(sh);
 	}
