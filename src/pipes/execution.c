@@ -96,7 +96,7 @@ void	no_pipe_exec(t_sh *sh, char **env_init)
 		return ;
 	if (pid == 0)
 	{
-		// ft_signals_orchestrator();
+		ft_signals_orchestrator();
 		execve(sh->pipe_lst->cmd_verified, sh->pipe_lst->args, env_init);
 		exit(0);
 	}
