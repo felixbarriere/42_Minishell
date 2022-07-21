@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_f.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:02:46 by ccalas            #+#    #+#             */
-/*   Updated: 2022/07/21 13:17:57 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/21 15:57:27 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,11 @@ int		only_n(char	*str);
 void	env_command(t_sh	*sh);
 void	export_command(t_sh *sh);
 int		contains_equal(char *str, t_sh *sh);
+char	*delete_plus(char *src);
+void	global_get_value(char **key_value, t_sh *sh);
+void	update_value(t_env	*list, char	*value, char *key);
+char	*get_value(char **key_value);
+char	*get_former_value(char *key, t_env *list);
 void	unset_command(t_sh *sh);
 void	exit_command(t_sh *sh, t_pipe *pipe_lst);
 
