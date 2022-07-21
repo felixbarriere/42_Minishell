@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 12:08:45 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/20 19:52:24 by marvin           ###   ########.fr       */
+/*   Updated: 2022/07/21 16:20:51 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ void	update_value(t_env	*list, char	*value, char *key)
 		{
 			free(list->value);
 			list->value = ft_strdup(value);
+			// free (value);
+			return ;
 		}
 		list = list->next;
 	}
@@ -105,38 +107,26 @@ void	update_value(t_env	*list, char	*value, char *key)
 void	export_command(t_sh *sh)
 {
 	char	**key_value;
-	char	*value;
-	char	*value_2;
+	char	*str_2;
 
-	if (sh->pipe_lst->token->next != NULL)
-	{
-		value_2 = delete_plus(sh->pipe_lst->args[1]);
-		printf( "sh->pipe_lst->args[1]: %s\n", sh->pipe_lst->args[1]);
-		printf( "sh->pipe_lst->token->next->value: %s\n", sh->pipe_lst->token->next->value);
-		printf( "value_2: %s\n", value_2);
-		// free(value_2);
-	}
+	if (sh->pipe_lst->token->next)
+		str_2 = delete_plus(sh->pipe_lst->args[1]);
 	if (sh->pipe_lst->token->next && contains_equal(sh->pipe_lst->args[1], sh))
 	{
-		key_value = ft_split(value_2, '=');
+		key_value = ft_split(str_2, '=');
 		if (!is_in_env(key_value[0], sh->env_lst))
 		{
-			orchestrate_env_token(value_2, sh, 0);
-			add_array_export(sh, value_2);
+			orchestrate_env_token(str_2, sh, 0);
+			add_array_export(sh, str_2);
 		}
 		else
-		{
-			value = get_value(key_value);
-			update_value(sh->env_lst, value, key_value[0]);
-			update_path(sh, key_value[0]);
-			if (key_value[2] != NULL)
-				free(value);
-		}
+			global_get_value(key_value, sh);
 		ft_free(key_value);
-		free(value_2);
 		if (sh->path == NULL)
 			get_path(sh);
 	}
 	else if (!sh->pipe_lst->token->next)
 		env_command_export(sh);
+	if (sh->pipe_lst->token->next)
+		free(str_2);
 }
