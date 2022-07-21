@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 16:47:49 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/14 15:09:13 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/21 14:57:02 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	error_cd(char	*bad_dir)
 
 void	cd_home(t_sh *sh, char *old_path)
 {
-	printf("test: %s\n", expander(sh, "HOME"));
+	// printf("test: %s\n", expander(sh, "HOME"));
 	if (chdir(expander(sh, "HOME")) == -1)
 		printf("cd supprimé?\n");
 	if (getcwd(old_path, sizeof(old_path)) != NULL)

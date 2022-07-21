@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_command_type_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 15:36:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/14 18:08:43 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/21 13:37:12 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	find_type(t_token *lst, t_sh *sh)
 		lst = lst->next;
 	}
 	lst = temp;
-	print_tokens(lst);
 }
 
 void	get_commands_type(t_sh *sh)

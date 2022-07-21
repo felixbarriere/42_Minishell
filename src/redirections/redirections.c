@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 15:39:55 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/14 18:08:27 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/21 13:34:46 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,3 @@ int	update_fdin(t_pipe **pipe_lst)
 	}
 	return (0);
 }
-
-	// elem->input = 0;
-	// elem->output = 1;
-	// elem->append_mode = 0;
-	// elem->heredoc_mode = 0;

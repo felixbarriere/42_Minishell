@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:43:57 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/18 17:11:46 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/21 17:43:54 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,21 @@ void	ft_prompt_start(t_sh *sh)
 	add_history(sh->prompt);
 }
 
-void	ft_prompt_init(t_sh *sh, char **env_init)
+void	ft_prompt_init2(t_sh *sh, char **env_init)
 {
 	dup_env_array(sh, env_init);
 	ft_init_values(sh, env_init);
 	sh->exit = 0;
 	ft_init_env(sh->env, sh);
 	get_path(sh);
+}
+
+void	ft_prompt_init(t_sh *sh, char **env_init)
+{
+	ft_prompt_init2(sh, env_init);
 	while (1)
 	{
 		ft_signals_orchestrator();
-		// fprintf(stderr, "|1|\n");
 		ft_prompt_start(sh);
 		sh->lenght = ft_strlen(sh->prompt);
 		if (!is_only_space(sh->prompt))
@@ -72,12 +76,10 @@ void	ft_prompt_init(t_sh *sh, char **env_init)
 			ft_init_values(sh, env_init);
 			continue ;
 		}
-		// fprintf(stderr, "|2|\n");
 		if (!ft_strcmp(sh->pipe_lst->cmd, "echo"))
 			sh->exit = 0;
 		if (!is_only_space(sh->prompt))
 			execution(sh, sh->env);
-		// fprintf(stderr, "|3|\n");
 		clear_list(sh->token_lst);
 		clear_list_pipe(sh->pipe_lst);
 		ft_init_values(sh, sh->env);

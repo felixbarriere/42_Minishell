@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:27:17 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/18 16:26:44 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/21 17:52:51 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,16 @@ char	*ft_strjoin_path(char *s1, char *s2)
 
 int	com_line_path(char **path, char *cmd)
 {
-	int		i;
+	// int		i;
 
-	i = 0;
-	while (path[i] && cmd != NULL)
-	{
+	(void)path;
+	// i = 0;
+	// while (path[i] && cmd != NULL)
+	// {
 		if (access(cmd, F_OK) == 0)
 			return (1);
-		i++;
-	}
+	// 	i++;
+	// }
 	return (0);
 }
 
@@ -92,17 +93,21 @@ void	get_command_path(t_sh	*sh)
 	char	*executable;
 
 	temp = sh->pipe_lst;
-	if (sh->pipe_lst->cmd == NULL)
-		return ;
 	while (sh->path != NULL && sh->pipe_lst)
 	{
+		if (sh->pipe_lst->cmd == NULL)
+		{
+			sh->pipe_lst = sh->pipe_lst->next;
+			continue ;	
+		}
 		if (com_line_path(sh->path, sh->pipe_lst->cmd) == 1)
 			sh->pipe_lst->cmd_verified = ft_strdup(sh->pipe_lst->cmd);
 		else
 			sh->pipe_lst->cmd_verified = com_line(sh->path, sh->pipe_lst->cmd);
 		if (sh->pipe_lst->cmd_verified == NULL)
 		{
-			if (sh->pipe_lst->cmd && ft_strncmp(sh->pipe_lst->cmd, "./", 2) == 0)
+			if (sh->pipe_lst->cmd
+				&& ft_strncmp(sh->pipe_lst->cmd, "./", 2) == 0)
 			{
 				executable = get_exec(sh->pipe_lst->cmd);
 				sh->pipe_lst->cmd_verified = ft_strdup(executable);

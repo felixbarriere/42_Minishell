@@ -27,13 +27,6 @@ static void	ft_signal_handler(int signal)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	// else if (signal == SIGSEGV)
-	// {
-	// 	write(1, "exit\n", 6);
-	// 	clear_list_env(g_sh.env_lst);
-	// 	clear_list(g_sh.token_lst);
-	// 	exit(0);
-	// }
 }
 
 void	heredoc_handler(int signal)

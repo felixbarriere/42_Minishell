@@ -122,7 +122,10 @@ int		heredoc(char *limiter, t_pipe **pipe_lst);
 
 /******** HEREDOC_2 ********/
 char	*read_heredoc(t_pipe **pipe_lst, int quotes, char *limiter);
+
+/******** HEREDOC_UTILS ********/
 int		contains_charset(char *str, char c);
+int		contain_space(char	**value);
 
 /******** FILE PIPES ********/
 /******** GET_COMMANDS_PATH ********/
@@ -183,7 +186,6 @@ void	update_value(t_env	*list, char	*value, char *key);
 char	*get_value(char **key_value);
 char	*get_former_value(char *key, t_env *list);
 void	unset_command(t_sh *sh);
-// void	exit_command(t_sh *sh);
 void	exit_command(t_sh *sh, t_pipe *pipe_lst);
 
 /******** EXECUTION_UTILS ********/

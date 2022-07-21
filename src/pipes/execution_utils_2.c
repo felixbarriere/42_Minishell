@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_utils_2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:57:13 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/14 17:06:40 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/21 17:16:44 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,17 @@ void	ft_close(t_sh *sh, int nb_pipes)
 
 void	ft_switch(t_pipe *start, int k)
 {
-	if (!k)
-		dup2(start->fd[1], start->output);
-	else if (k && !start->next)
-		dup2(start->prev->fd[0], start->input);
-	else if (k && start->next)
-	{
-		dup2(start->prev->fd[0], start->input);
-		dup2(start->fd[1], start->output);
+	if (start->cmd_verified != NULL)
+	{	
+		if (!k)
+			dup2(start->fd[1], start->output);
+		else if (k && !start->next)
+			dup2(start->prev->fd[0], start->input);
+		else if (k && start->next)
+		{
+			dup2(start->prev->fd[0], start->input);
+			dup2(start->fd[1], start->output);
+		}
 	}
 }
 
