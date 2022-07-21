@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 16:08:51 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/17 15:57:14 by marvin           ###   ########.fr       */
+/*   Updated: 2022/07/21 16:20:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	contains_equal(char *str, t_sh *sh)
 
 	i = 0;
 	while (str[i] && !ft_isdigit(str[0])
-		&&(ft_isalnum(str[i]) == 1 || str[i] == '_' || str[i] == '='))
+		&&(ft_isalnum(str[i]) == 1 || str[i] == '_'
+		|| str[i] == '=' || (str[i] == '+' && str[i + 1] == '=') ))
 	{
 		if (str[i] == '=' && i > 0)
 			return (1);
@@ -34,24 +35,114 @@ int	contains_equal(char *str, t_sh *sh)
 	return (0);
 }
 
-void	update_path_export(t_sh *sh, char *key)
+// void	update_path_export(t_sh *sh, char *key)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	if (!ft_strcmp(key, "PATH"))
+// 	{
+// 		printf("test\n");
+// 		printf("path avant :%s\n", sh->path[0]);
+// 		while (sh->path[i])
+// 		{
+// 			free(sh->path[i]);
+// 			i++;
+// 		}
+// 		free(sh->path[i]);
+// 		free(sh->path);
+// 		sh->path = NULL;
+// 		if (sh->path)
+// 			printf("path avant :%s\n", sh->path[0]);
+// 	}
+// }
+
+char	*delete_plus(char *src)
 {
-	int	i;
+	char	*dest;
+	int		i;
+	int		j;
 
 	i = 0;
-	if (!ft_strcmp(key, "PATH"))
+	j = 0;
+	dest = malloc(sizeof(char) * ft_strlen(src) + 1);
+	if (!dest)
+		return (NULL);
+	while (src[i] != '\0')
 	{
-		printf("test\n");
-		printf("path avant :%s\n", sh->path[0]);
-		while (sh->path[i])
+		if (src[i] == '+' && src[i + 1] == '=')
 		{
-			free(sh->path[i]);
 			i++;
+			// free (dest)
 		}
-		free(sh->path[i]);
-		free(sh->path);
-		sh->path = NULL;
-		if (sh->path)
-			printf("path avant :%s\n", sh->path[0]);
+
+		dest[j] = src[i];
+		i++;
+		j++;
 	}
+	dest[j] = '\0';
+	return (dest);
+}
+
+char	*get_former_value(char *key, t_env *list)
+{
+	t_env	*temp;
+
+	temp = list;
+	while (list != NULL)
+	{
+		if (!ft_strcmp(key, list->key))
+		{
+			return (list->value);
+		}
+		list = list->next;
+	}
+	list = temp;
+	return (NULL);
+}
+
+void	update_value_2(t_env	*list, char	*value, char *key)
+{
+	t_env	*temp;
+
+	temp = list;
+	while (list != NULL)
+	{
+		if (!ft_strcmp(key, list->key))
+		{
+			// free(list->value);
+			list->value = ft_strdup(value);
+			// free (value);
+			return ;
+		}
+		list = list->next;
+	}
+	list = temp;
+}
+
+void	global_get_value(char **key_value, t_sh *sh)
+{
+	char	*value;
+	char	*former_value;
+	char	**key_value_init;
+
+	value = NULL;
+	former_value = NULL;
+	key_value_init = ft_split(sh->pipe_lst->args[1], '=');
+	if (!ft_strcmp(key_value[0], key_value_init[0]))
+	{
+		value = get_value(key_value);
+		update_value(sh->env_lst, value, key_value[0]);
+		update_path(sh, key_value[0]);
+	}	
+	else
+	{
+		former_value = get_former_value(key_value[0], sh->env_lst);
+		printf("same key but with +\n");
+		value = ft_strjoin(former_value, key_value_init[1]);
+		update_value_2(sh->env_lst, value, key_value[0]);
+		update_path(sh, key_value[0]);
+		free(value);
+	}
+	ft_free(key_value_init);
 }
