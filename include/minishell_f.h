@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:02:46 by ccalas            #+#    #+#             */
-/*   Updated: 2022/07/18 16:35:07 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/21 11:41:54 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,7 @@ void	update_input_output(t_pipe *pipe_lst);
 void	ft_close(t_sh *sh, int nb_pipes);
 void	ft_switch(t_pipe *start, int k);
 void	mess_cmd_not_found(t_sh *sh, char *cmd);
+// void	mess_cmd_not_found(t_sh *sh, t_pipe *start, char *cmd);
 void	init_pipe(t_pipe *start, int nb_pipes);
 int		nb_pipe(t_pipe *pipe_lst);
 void	update_path(t_sh *sh, char *key);
