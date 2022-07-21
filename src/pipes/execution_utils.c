@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:52:05 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/21 11:41:33 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/21 17:00:53 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,28 @@ extern t_sh	g_sh;
 
 void	reset_input_output(t_pipe *pipe_lst)
 {
-	dup2(pipe_lst->cpy_input, 0);
-	dup2(pipe_lst->cpy_output, 1);
-	close(pipe_lst->cpy_input);
-	close(pipe_lst->cpy_output);
-	if (pipe_lst->input != 0 && pipe_lst->input != -1)
-		close(pipe_lst->input);
-	if (pipe_lst->output != 1 && pipe_lst->output != -1)
-		close(pipe_lst->output);
+	// if (pipe_lst->cmd_verified != NULL)
+	// {
+		dup2(pipe_lst->cpy_input, 0);
+		dup2(pipe_lst->cpy_output, 1);
+		close(pipe_lst->cpy_input);
+		close(pipe_lst->cpy_output);
+		if (pipe_lst->input != 0 && pipe_lst->input != -1)
+			close(pipe_lst->input);
+		if (pipe_lst->output != 1 && pipe_lst->output != -1)
+			close(pipe_lst->output);
+	// }
 }
 
 void	update_input_output(t_pipe *pipe_lst)
 {
-	pipe_lst->cpy_input = dup(0);
-	pipe_lst->cpy_output = dup(1);
-	dup2(pipe_lst->input, 0);
-	dup2(pipe_lst->output, 1);
+	// if (pipe_lst->cmd_verified != NULL)
+	// {
+		pipe_lst->cpy_input = dup(0);
+		pipe_lst->cpy_output = dup(1);
+		dup2(pipe_lst->input, 0);
+		dup2(pipe_lst->output, 1);
+	// }
 }
 
 void	mess_cmd_not_found(t_sh *sh, char *cmd)
@@ -44,7 +50,7 @@ void	mess_cmd_not_found(t_sh *sh, char *cmd)
 	ft_putstr_fd("bash: ", 2);
 	ft_putstr_fd(cmd, 2);
 	ft_putstr_fd(": command not found\n", 2);
-	g_sh.exit = 127;
+	sh->exit = 127;
 	sh->error = 1;
 	reset_input_output(sh->pipe_lst);
 }

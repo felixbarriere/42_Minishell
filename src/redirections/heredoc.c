@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:09:29 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/18 16:36:34 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/21 17:22:24 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	init_heredoc(t_pipe **pipe_lst)
 {
 	ft_free_null_str(&(*pipe_lst)->limiter_name);
 	(*pipe_lst)->limiter_name = filename();
-	// printf("FILENAME = %s\n", (*pipe_lst)->limiter_name);
 	(*pipe_lst)->heredoc_mode = 1;
 	(*pipe_lst)->input = open((*pipe_lst)->limiter_name, O_RDWR
 			| O_CREAT | O_APPEND, 00644);
@@ -66,15 +65,13 @@ int	heredoc2(char *limiter, t_pipe **pipe_lst, int quotes)
 		{
 			if (is_limiter(&temp, &limiter) == SUCCESS)
 				break ;
-			// if (i > 0)
-			// ft_putstr_fd("\n", (*pipe_lst)->input);
 			ft_putstr_fd(temp, (*pipe_lst)->input);
 			ft_putstr_fd("\n", (*pipe_lst)->input);
 			ft_free_null_str(&temp);
 		}
 		i++;
 	}
-	return (0);
+	return (g_sh.exit);
 }
 
 int	heredoc(char *limiter, t_pipe **pipe_lst)

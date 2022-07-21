@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:02:46 by ccalas            #+#    #+#             */
-/*   Updated: 2022/07/21 11:41:54 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/21 13:17:57 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,10 @@ int		heredoc(char *limiter, t_pipe **pipe_lst);
 
 /******** HEREDOC_2 ********/
 char	*read_heredoc(t_pipe **pipe_lst, int quotes, char *limiter);
+
+/******** HEREDOC_UTILS ********/
 int		contains_charset(char *str, char c);
+int		contain_space(char	**value);
 
 /******** FILE PIPES ********/
 /******** GET_COMMANDS_PATH ********/
@@ -176,9 +179,8 @@ void	echo_command(t_pipe	*pipe);
 int		only_n(char	*str);
 void	env_command(t_sh	*sh);
 void	export_command(t_sh *sh);
-int	contains_equal(char *str, t_sh *sh);
+int		contains_equal(char *str, t_sh *sh);
 void	unset_command(t_sh *sh);
-// void	exit_command(t_sh *sh);
 void	exit_command(t_sh *sh, t_pipe *pipe_lst);
 
 /******** EXECUTION_UTILS ********/
@@ -187,7 +189,6 @@ void	update_input_output(t_pipe *pipe_lst);
 void	ft_close(t_sh *sh, int nb_pipes);
 void	ft_switch(t_pipe *start, int k);
 void	mess_cmd_not_found(t_sh *sh, char *cmd);
-// void	mess_cmd_not_found(t_sh *sh, t_pipe *start, char *cmd);
 void	init_pipe(t_pipe *start, int nb_pipes);
 int		nb_pipe(t_pipe *pipe_lst);
 void	update_path(t_sh *sh, char *key);

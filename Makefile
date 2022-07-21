@@ -23,6 +23,7 @@ src/redirections/get_command_type_utils.c\
 src/redirections/redirections.c\
 src/redirections/process_limiter.c\
 src/redirections/heredoc.c\
+src/redirections/heredoc_utils.c\
 src/redirections/heredoc2.c\
 src/signals.c\
 src/env/env.c\

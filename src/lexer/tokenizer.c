@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 13:45:10 by marvin            #+#    #+#             */
-/*   Updated: 2022/07/18 13:45:15 by marvin           ###   ########.fr       */
+/*   Updated: 2022/07/21 13:28:48 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,15 @@ char	*token_str_3(char *str, char *new_str, int *idx, t_sh *sh)
 {
 	char	*temp;
 
-  temp = quotes_manager(str, idx, sh);
-  printf("temp: %s\n", temp);
-  if (temp != NULL)
- 		new_str = ft_strjoin(new_str, temp);
-  printf("new_str: %s\n", new_str);
-  free(temp);
+	temp = quotes_manager(str, idx, sh);
+	if (temp != NULL)
+		new_str = ft_strjoin(new_str, temp);
+	free(temp);
 	return (new_str);
 }
 
 char	*token_str_2(char *str, char *new_str, t_sh *sh, char *dol_val)
 {
-	// int	i;
-
-	// i = 0;
 	while (str[sh->ts_idx])
 	{
 		if (str[sh->ts_idx] == '\"' || str[sh->ts_idx] == '\'')
@@ -70,11 +65,7 @@ char	*token_str_2(char *str, char *new_str, t_sh *sh, char *dol_val)
 			if (dol_val != NULL)
 				new_str = severals_wds_value(sh, dol_val, new_str);
 			if (dol_val != NULL && (str[sh->ts_i] && str[sh->ts_i + 1] == '?'))
-			{
-				printf("i: %c", str[sh->ts_i]);
-				printf("i + 1: %c", str[sh->ts_i + 1]);
 				free(dol_val);
-			}
 			continue ;
 		}
 		else
@@ -84,10 +75,10 @@ char	*token_str_2(char *str, char *new_str, t_sh *sh, char *dol_val)
 	return (new_str);
 }
 
-  void	token_str(t_sh *sh)
+void	token_str(t_sh *sh)
 {
 	char	*str;
-  char	*new_str;
+	char	*new_str;
 	char	*dollar_value;
 
 	sh->ts_idx = 0;
@@ -106,62 +97,6 @@ char	*token_str_2(char *str, char *new_str, t_sh *sh, char *dol_val)
 		sh->token_lst = add_back_token(sh->token_lst, STR, new_str);
 	free(str);
 }
-
-
-
-
-// void	token_str(t_sh *sh)
-// {
-// 	char	*str;			//creer une structure a part avec les variables + une fonction pour les init. creer la structure dans "tokenizer" 
-// 	char	*new_str;			//et l'envoyer en arg a token_str
-// 	char	*dollar_value;
-// 	char	*temp;
-// 	int		idx;
-
-// 	idx = 0;
-// 	temp = NULL;
-// 	new_str = NULL;
-// 	dollar_value = NULL;
-// 	str = string_token(sh, &sh->prompt[sh->p_index]);
-// 	// printf("string token: %s\n", )
-// 	if (ft_lstlast_dr_left(sh->token_lst) == SUCCESS)  //externaliser et renvoyer un int. if(fction()== 1), return ;
-// 	{
-// 		if (str != NULL)
-// 			sh->token_lst = add_back_token(sh->token_lst, LIMITER, str);
-// 		return ;
-// 	}
-// 	while (str[idx])
-// 	{
-// 		if (str[idx] == '\"' || str[idx] == '\'')
-// 		{
-// 			temp = quotes_manager(str, &idx, sh);
-// 			if (temp != NULL)
-// 				new_str = ft_strjoin(new_str, temp);
-// 			free(temp);
-// 		// new_str = token_str_2(str, &idx, sh); attention au cas export ls="ls -la" si on externalise 
-// 		}
-// 		else if (str[idx] == '$')
-// 		{
-// 			if (str[idx + 1] == '\'' || str[idx + 1] == '\"')
-// 			{
-// 				idx++;
-// 				continue ;
-// 			}
-// 			dollar_value = noquote_dollar_manager(str, &idx, sh);
-// 			if (dollar_value != NULL)
-// 				new_str = severals_wds_value(sh, dollar_value, new_str);
-// 			if (str[idx ]  && str[idx + 1] == '?')
-// 				free(dollar_value);
-// 			continue ;
-// 		}
-// 		else
-// 			new_str = ft_strjoin_char(new_str, str[idx]);
-// 		idx++;
-// 	}
-// 	if (new_str != NULL)
-// 		sh->token_lst = add_back_token(sh->token_lst, STR, new_str);
-// 	free(str);
-// }
 
 void	tokenizer(t_sh *sh)
 {
@@ -183,3 +118,58 @@ void	tokenizer(t_sh *sh)
 		sh->p_index++;
 	}
 }
+
+/*
+void	token_str(t_sh *sh)
+{
+	char	*str;			
+	char	*new_str;
+	char	*dollar_value;
+	char	*temp;
+	int		idx;
+
+	idx = 0;
+	temp = NULL;
+	new_str = NULL;
+	dollar_value = NULL;
+	str = string_token(sh, &sh->prompt[sh->p_index]);
+	// printf("string token: %s\n", )
+	if (ft_lstlast_dr_left(sh->token_lst) == SUCCESS)  //
+	{
+		if (str != NULL)
+			sh->token_lst = add_back_token(sh->token_lst, LIMITER, str);
+		return ;
+	}
+	while (str[idx])
+	{
+		if (str[idx] == '\"' || str[idx] == '\'')
+		{
+			temp = quotes_manager(str, &idx, sh);
+			if (temp != NULL)
+				new_str = ft_strjoin(new_str, temp);
+			free(temp);
+		// new_str = token_str_2(str, &idx, sh);
+		}
+		else if (str[idx] == '$')
+		{
+			if (str[idx + 1] == '\'' || str[idx + 1] == '\"')
+			{
+				idx++;
+				continue ;
+			}
+			dollar_value = noquote_dollar_manager(str, &idx, sh);
+			if (dollar_value != NULL)
+				new_str = severals_wds_value(sh, dollar_value, new_str);
+			if (str[idx ]  && str[idx + 1] == '?')
+				free(dollar_value);
+			continue ;
+		}
+		else
+			new_str = ft_strjoin_char(new_str, str[idx]);
+		idx++;
+	}
+	if (new_str != NULL)
+		sh->token_lst = add_back_token(sh->token_lst, STR, new_str);
+	free(str);
+}
+*/

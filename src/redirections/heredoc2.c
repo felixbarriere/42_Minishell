@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:13:58 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/18 16:36:31 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/21 17:21:46 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,6 @@
 
 extern t_sh	g_sh;
 
-int	contains_charset(char *str, char c)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == c)
-			return (SUCCESS);
-		i++;
-	}
-	return (FAILURE);
-}
-
 int	process_eof(char **temp, t_pipe **pipe_lst)
 {
 	ft_putstr_fd("bash: warning: here-document delimited by end-of-file\n", 1);
@@ -38,22 +24,9 @@ int	process_eof(char **temp, t_pipe **pipe_lst)
 	close((*pipe_lst)->input);
 	unlink((*pipe_lst)->limiter_name);
 	ft_free_null_str(&(*pipe_lst)->limiter_name);
-	exit(0);
+	exit(g_sh.exit);
 }
 
-int	contain_space(char	**value)
-{
-	int i = 0;
-	while ((*value)[i])
-	{
-		if ((*value)[i] == ' ')
-		{
-			return (i);
-		}
-		i++;
-	}
-	return (0);
-}
 char	*expand_env_in_heredoc(char *value)
 {
 	char	*new_str;
