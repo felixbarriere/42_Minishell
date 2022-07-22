@@ -1,0 +1,2 @@
+#!/bin/bash
+sh -c "DBUS_SESSION_BUS_ADDRESS='' /usr/share/terminator/terminator"

@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/21 17:42:53 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/22 13:30:04 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,9 @@ pid_t	exec2(t_pipe *start, t_sh *sh, int nb_pipes, char **env_init)
 			exit(sh->exit);
 		}
 		else if (start->cmd_verified != NULL)
-		{
-			// fprintf(stderr, "1\n");
 			execve(start->cmd_verified, start->args, env_init);
-		}
 		else
 		{
-			// fprintf(stderr, "2\n");
 			mess_cmd_not_found(sh, start->cmd);
 			exit (sh->exit);
 		}
@@ -72,29 +68,30 @@ void	execution_pipe(t_sh *sh, t_pipe *start, int nb_pipes, char **env_init)
 	init_pipe(start, nb_pipes);
 	while (start)
 	{
-		// printf("cmd = %s\n", start->cmd_verified);
 		update_input_output(start);
-		// printf("1\n");
 		ft_switch(start, sh->exec_pipe_k);
-		// printf("2\n");
-		// printf("Value = %s TYPE = %d\n",start->token->value, start->token->type);
 		if (start->is_builtin != 1 && start->cmd_verified == NULL)
 		{
 			mess_cmd_not_found(sh, start->cmd);
 			reset_input_output(sh->pipe_lst);
-			// return ;
+			return ;
 		}
 		else
 		{
-			sh->exec_pid = exec2(start, sh, nb_pipes, env_init);
+			if (start->is_builtin == 1)
+			{	
+				if (!ft_strcmp(start->cmd, "export"))
+					index_builtins(sh, start);
+			}	
+			else
+				sh->exec_pid = exec2(start, sh, nb_pipes, env_init);
 		}
 		if (sh->exec_pipe_k % 2 != 0)
 			sh->exec_pipe_i++;
 		sh->exec_pipe_k++;
 		start = start->next;
 	}
-	// if (start->cmd_verified != NULL)
-		ft_close(sh, nb_pipes);
+	ft_close(sh, nb_pipes);
 	wait_get_status(sh, nb_pipes, sh->exec_pid);
 }
 

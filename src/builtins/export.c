@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 12:08:45 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/21 16:20:51 by marvin           ###   ########.fr       */
+/*   Updated: 2022/07/22 13:27:27 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,14 +104,14 @@ void	update_value(t_env	*list, char	*value, char *key)
 	list = temp;
 }
 
-void	export_command(t_sh *sh)
+void	export_command(t_sh *sh, t_pipe *start)
 {
 	char	**key_value;
 	char	*str_2;
 
-	if (sh->pipe_lst->token->next)
-		str_2 = delete_plus(sh->pipe_lst->args[1]);
-	if (sh->pipe_lst->token->next && contains_equal(sh->pipe_lst->args[1], sh))
+	if (start->token->next)
+		str_2 = delete_plus(start->args[1]);
+	if (start->token->next && contains_equal(start->args[1], sh))
 	{
 		key_value = ft_split(str_2, '=');
 		if (!is_in_env(key_value[0], sh->env_lst))
@@ -125,8 +125,8 @@ void	export_command(t_sh *sh)
 		if (sh->path == NULL)
 			get_path(sh);
 	}
-	else if (!sh->pipe_lst->token->next)
+	else if (!start->token->next)
 		env_command_export(sh);
-	if (sh->pipe_lst->token->next)
+	if (start->token->next)
 		free(str_2);
 }
