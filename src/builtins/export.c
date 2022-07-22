@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 12:08:45 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/22 13:27:27 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/22 15:02:26 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,14 +104,15 @@ void	update_value(t_env	*list, char	*value, char *key)
 	list = temp;
 }
 
-void	export_command(t_sh *sh, t_pipe *start)
+void	export_command_2(t_sh *sh, char *str)
 {
 	char	**key_value;
 	char	*str_2;
 
-	if (start->token->next)
-		str_2 = delete_plus(start->args[1]);
-	if (start->token->next && contains_equal(start->args[1], sh))
+	printf("str: %s\n", str);
+	if (str)
+		str_2 = delete_plus(str);
+	if (str && contains_equal(str, sh))
 	{
 		key_value = ft_split(str_2, '=');
 		if (!is_in_env(key_value[0], sh->env_lst))
@@ -125,8 +126,22 @@ void	export_command(t_sh *sh, t_pipe *start)
 		if (sh->path == NULL)
 			get_path(sh);
 	}
-	else if (!start->token->next)
-		env_command_export(sh);
-	if (start->token->next)
+	// else if (!str)
+	// 	env_command_export(sh);
+	if (str)
 		free(str_2);
+}
+
+void	export_command(t_sh *sh, t_pipe *start)
+{
+	int	i;
+
+	i = 1;
+	if (start->args[0] && !start->args[1])
+		env_command_export(sh);
+	while (start->args[i])
+	{
+		export_command_2(sh, start->args[i]);
+		i++;
+	}
 }
