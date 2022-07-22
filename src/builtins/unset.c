@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 11:18:45 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/05 16:12:36 by marvin           ###   ########.fr       */
+/*   Updated: 2022/07/22 14:23:22 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,37 @@ void	update_path(t_sh *sh, char *key)
 	}
 }
 
+int	ft_isalnum_2(int c)
+{
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_')
+		return (1);
+	else if (c >= '0' && c <= '9')
+		return (1);
+	else
+		return (0);
+}
+
+int	identifier_is_valid(char *str, t_sh *sh)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (ft_isdigit(str[0])
+			|| (!ft_isalnum_2(str[i])))
+		{
+			ft_putstr_fd("unset: \'", 2);
+			ft_putstr_fd(str, 2);
+			ft_putstr_fd("\': not a valid identifier\n", 2);
+			sh->exit = 1;
+			return (0);
+		}
+		i++;
+	}
+	return (1);
+}
+
 void	unset_command(t_sh *sh)
 {
 	t_env	*start;
@@ -52,10 +83,12 @@ void	unset_command(t_sh *sh)
 
 	i = 0;
 	start = sh->env_lst;
+	printf("sh->pipe_lst->args[i]: %s\n", sh->pipe_lst->args[i]);
 	while (sh->pipe_lst->args[i])
 	{
-		while (sh->env_lst)
+		while (sh->env_lst && identifier_is_valid(sh->pipe_lst->args[i], sh))
 		{
+			//  && identifier_is_valid();
 			if (!ft_strcmp(sh->pipe_lst->args[i], sh->env_lst->key))
 			{
 				update_path(sh, sh->env_lst->key);
