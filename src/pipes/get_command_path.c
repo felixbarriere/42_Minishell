@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:27:17 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/21 17:52:51 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/22 11:53:56 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,16 @@ char	*ft_strjoin_path(char *s1, char *s2)
 
 int	com_line_path(char **path, char *cmd)
 {
-	// int		i;
+	int		i;
 
 	(void)path;
-	// i = 0;
-	// while (path[i] && cmd != NULL)
-	// {
+	i = 0;
+	while (path[i] && cmd != NULL)
+	{
 		if (access(cmd, F_OK) == 0)
 			return (1);
-	// 	i++;
-	// }
+		i++;
+	}
 	return (0);
 }
 
