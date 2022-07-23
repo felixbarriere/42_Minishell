@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc_utils.c                                    :+:      :+:    :+:   */
+/*   export_3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/23 16:20:29 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/23 16:20:30 by fbarrier         ###   ########.fr       */
+/*   Created: 2022/07/23 15:01:15 by fbarrier          #+#    #+#             */
+/*   Updated: 2022/07/23 16:18:17 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,20 @@
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
 
-int	contains_charset(char *str, char c)
+int	is_in_env(char	*key, t_env	*list)
 {
-	int	i;
+	t_env	*temp;
 
-	i = 0;
-	while (str[i])
+	temp = list;
+	while (list != NULL)
 	{
-		if (str[i] == c)
-			return (SUCCESS);
-		i++;
-	}
-	return (FAILURE);
-}
-
-int	contain_space(char	**value)
-{
-	int	i;
-
-	i = 0;
-	while ((*value)[i])
-	{
-		if ((*value)[i] == ' ')
+		if (!ft_strcmp(key, list->key))
 		{
-			return (i);
+			list = temp;
+			return (1);
 		}
-		i++;
+		list = list->next;
 	}
+	list = temp;
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 12:08:45 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/22 13:27:27 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/23 15:57:01 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,6 @@ void	add_array_export(t_sh *sh, char *value)
 	sh->env[i++] = ft_strdup(value);
 	sh->env[i] = NULL;
 	ft_free(env_temp);
-}
-
-int	is_in_env(char	*key, t_env	*list)
-{
-	t_env	*temp;
-
-	temp = list;
-	while (list != NULL)
-	{
-		if (!ft_strcmp(key, list->key))
-		{
-			list = temp;
-			return (1);
-		}
-		list = list->next;
-	}
-	list = temp;
-	return (0);
 }
 
 char	*get_value(char **key_value)
@@ -96,7 +78,6 @@ void	update_value(t_env	*list, char	*value, char *key)
 		{
 			free(list->value);
 			list->value = ft_strdup(value);
-			// free (value);
 			return ;
 		}
 		list = list->next;
@@ -104,16 +85,19 @@ void	update_value(t_env	*list, char	*value, char *key)
 	list = temp;
 }
 
-void	export_command(t_sh *sh, t_pipe *start)
+void	export_command_2(t_sh *sh, char *str)
 {
 	char	**key_value;
 	char	*str_2;
 
-	if (start->token->next)
-		str_2 = delete_plus(start->args[1]);
-	if (start->token->next && contains_equal(start->args[1], sh))
+	if (str)
+		str_2 = delete_plus(str);
+	if (str && contains_equal(str, sh))
 	{
+		printf("str: %s\n", str_2);
 		key_value = ft_split(str_2, '=');
+		printf("key_value[0]: %s\n", key_value[0]);
+		printf("key_value[1]: %s\n", key_value[1]);
 		if (!is_in_env(key_value[0], sh->env_lst))
 		{
 			orchestrate_env_token(str_2, sh, 0);
@@ -125,8 +109,20 @@ void	export_command(t_sh *sh, t_pipe *start)
 		if (sh->path == NULL)
 			get_path(sh);
 	}
-	else if (!start->token->next)
-		env_command_export(sh);
-	if (start->token->next)
+	if (str)
 		free(str_2);
+}
+
+void	export_command(t_sh *sh, t_pipe *start)
+{
+	int	i;
+
+	i = 1;
+	if (start->args[0] && !start->args[1])
+		env_command_export(sh);
+	while (start->args[i])
+	{
+		export_command_2(sh, start->args[i]);
+		i++;
+	}
 }

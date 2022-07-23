@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 16:08:51 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/21 16:20:26 by marvin           ###   ########.fr       */
+/*   Updated: 2022/07/23 16:00:55 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int	contains_equal(char *str, t_sh *sh)
 
 	i = 0;
 	while (str[i] && !ft_isdigit(str[0])
-		&&(ft_isalnum(str[i]) == 1 || str[i] == '_'
-		|| str[i] == '=' || (str[i] == '+' && str[i + 1] == '=') ))
+		&& (ft_isalnum(str[i]) == 1 || str[i] == '_'
+			|| str[i] == '=' || (str[i] == '+' && str[i + 1] == '=')))
 	{
-		if (str[i] == '=' && i > 0)
+		if ((str[i] == '=' && i > 0) || str[i + 1] == '\0')
 			return (1);
 		i++;
 	}
@@ -71,11 +71,7 @@ char	*delete_plus(char *src)
 	while (src[i] != '\0')
 	{
 		if (src[i] == '+' && src[i + 1] == '=')
-		{
 			i++;
-			// free (dest)
-		}
-
 		dest[j] = src[i];
 		i++;
 		j++;
@@ -110,9 +106,7 @@ void	update_value_2(t_env	*list, char	*value, char *key)
 	{
 		if (!ft_strcmp(key, list->key))
 		{
-			// free(list->value);
 			list->value = ft_strdup(value);
-			// free (value);
 			return ;
 		}
 		list = list->next;

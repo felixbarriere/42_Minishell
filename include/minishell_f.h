@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_f.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:02:46 by ccalas            #+#    #+#             */
 /*   Updated: 2022/07/23 16:21:54 by ccalas           ###   ########.fr       */
@@ -131,6 +131,7 @@ int		contain_space(char	**value);
 /******** FILE PIPES ********/
 /******** GET_COMMANDS_PATH ********/
 void	get_command_path(t_sh *sh);
+char	*ft_strjoin_path(char *s1, char *s2);
 char	*ft_strjoin_path_2(char *dest, char *s1, char *s2);
 
 /******** PIPE_CREATION ********/
@@ -180,6 +181,7 @@ void	echo_command(t_pipe	*pipe);
 int		only_n(char	*str);
 void	env_command(t_sh	*sh);
 void	export_command(t_sh *sh, t_pipe *start);
+int		is_in_env(char	*key, t_env	*list);
 int		contains_equal(char *str, t_sh *sh);
 char	*delete_plus(char *src);
 void	global_get_value(char **key_value, t_sh *sh);

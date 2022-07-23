@@ -41,6 +41,7 @@ src/builtins/echo_2.c\
 src/builtins/env_cmd.c\
 src/builtins/export.c\
 src/builtins/export_2.c\
+src/builtins/export_3.c\
 src/builtins/unset.c\
 src/builtins/exit.c\
 

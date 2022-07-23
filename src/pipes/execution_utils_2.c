@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_utils_2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:57:13 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/23 15:10:46 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/23 16:13:29 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,26 @@ char	*ft_strjoin_path_2(char *dest, char *s1, char *s2)
 		i++;
 	}
 	dest[i] = '\0';
+	return (dest);
+}
+
+char	*ft_strjoin_path(char *s1, char *s2)
+{
+	char	*dest;
+
+	if (!s1)
+	{
+		s1 = malloc(sizeof(char) * 1);
+		s1[0] = '\0';
+	}
+	if (!s2)
+	{
+		s2 = malloc(sizeof(char) * 1);
+		s2[0] = '\0';
+	}
+	dest = ft_calloc(sizeof(char), (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!dest)
+		return (NULL);
+	dest = ft_strjoin_path_2(dest, s1, s2);
 	return (dest);
 }
