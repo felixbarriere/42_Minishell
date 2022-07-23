@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:27:17 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/23 16:13:23 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/23 16:59:02 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	get_command_path_2(t_pipe	*pipe_lst)
 
 	if (pipe_lst->cmd_verified == NULL)
 	{
+		printf("pipe_lst->cmd_verified: %s\n", pipe_lst->cmd_verified);
 		if (pipe_lst->cmd
 			&& ft_strncmp(pipe_lst->cmd, "./", 2) == 0)
 		{

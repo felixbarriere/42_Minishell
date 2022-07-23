@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 16:47:49 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/23 16:19:59 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/23 17:30:14 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,15 @@ void	error_cd(char	*bad_dir)
 
 void	cd_home(t_sh *sh, char *old_path)
 {
+	char	*key;
+
+	key = expander(sh, "HOME");
+	if (key == NULL || chdir(key) == -1)
+	{
+		ft_putstr_fd("bash: cd: HOME not set\n", 2);
+		return ;
+	}
+		// printf("cd supprimé?\n");
 	if (getcwd(old_path, sizeof(old_path)) != NULL)
 	{
 		change_old_pwd(sh, old_path);
