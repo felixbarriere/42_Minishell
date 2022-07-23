@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 18:19:33 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/23 16:20:53 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/23 16:50:44 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	exit_command_2(t_sh *sh, t_pipe *pipe_lst)
 	if (sh->exit)
 		exit(sh->exit);
 	else
-		exit(2);
+		exit(0);
 }
 
 int	is_in_range(char *str)

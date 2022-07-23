@@ -18,6 +18,7 @@ src/pipes/get_command_path.c\
 src/pipes/execution.c\
 src/pipes/execution_utils.c\
 src/pipes/execution_utils_2.c\
+src/pipes/execution_utils3.c\
 src/redirections/get_command_type.c\
 src/redirections/get_command_type_utils.c\
 src/redirections/redirections.c\

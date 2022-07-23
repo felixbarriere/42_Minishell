@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 15:36:31 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/22 14:44:57 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/23 16:40:57 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ char	*process_quotes_limiter(char **value)
 
 	i = 0;
 	new = NULL;
-	// printf("value: %c\n", (*value)[i]);
 	while ((*value)[i])
 	{
 		if (!((*value)[i] == '\"' || (*value)[i] == '\''))
