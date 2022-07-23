@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_command_path.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:27:17 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/22 11:53:56 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/23 16:13:23 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,6 @@
 #include "../../include/minishell_d.h"
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
-
-char	*ft_strjoin_path(char *s1, char *s2)
-{
-	char	*dest;
-
-	if (!s1)
-	{
-		s1 = malloc(sizeof(char) * 1);
-		s1[0] = '\0';
-	}
-	if (!s2)
-	{
-		s2 = malloc(sizeof(char) * 1);
-		s2[0] = '\0';
-	}
-	dest = ft_calloc(sizeof(char), (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!dest)
-		return (NULL);
-	dest = ft_strjoin_path_2(dest, s1, s2);
-	return (dest);
-}
 
 int	com_line_path(char **path, char *cmd)
 {
@@ -87,10 +66,25 @@ char	*get_exec(char *cmd)
 	return (exec_2);
 }
 
+void	get_command_path_2(t_pipe	*pipe_lst)
+{
+	char	*executable;
+
+	if (pipe_lst->cmd_verified == NULL)
+	{
+		if (pipe_lst->cmd
+			&& ft_strncmp(pipe_lst->cmd, "./", 2) == 0)
+		{
+			executable = get_exec(pipe_lst->cmd);
+			pipe_lst->cmd_verified = ft_strdup(executable);
+			free(executable);
+		}
+	}
+}
+
 void	get_command_path(t_sh	*sh)
 {
 	t_pipe	*temp;
-	char	*executable;
 
 	temp = sh->pipe_lst;
 	while (sh->path != NULL && sh->pipe_lst)
@@ -98,22 +92,13 @@ void	get_command_path(t_sh	*sh)
 		if (sh->pipe_lst->cmd == NULL)
 		{
 			sh->pipe_lst = sh->pipe_lst->next;
-			continue ;	
+			continue ;
 		}
 		if (com_line_path(sh->path, sh->pipe_lst->cmd) == 1)
 			sh->pipe_lst->cmd_verified = ft_strdup(sh->pipe_lst->cmd);
 		else
 			sh->pipe_lst->cmd_verified = com_line(sh->path, sh->pipe_lst->cmd);
-		if (sh->pipe_lst->cmd_verified == NULL)
-		{
-			if (sh->pipe_lst->cmd
-				&& ft_strncmp(sh->pipe_lst->cmd, "./", 2) == 0)
-			{
-				executable = get_exec(sh->pipe_lst->cmd);
-				sh->pipe_lst->cmd_verified = ft_strdup(executable);
-				free(executable);
-			}
-		}
+		get_command_path_2(sh->pipe_lst);
 		sh->pipe_lst = sh->pipe_lst->next;
 	}
 	sh->pipe_lst = temp;

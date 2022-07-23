@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:02:46 by ccalas            #+#    #+#             */
-/*   Updated: 2022/07/23 15:02:19 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/23 16:14:07 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ int		contain_space(char	**value);
 /******** FILE PIPES ********/
 /******** GET_COMMANDS_PATH ********/
 void	get_command_path(t_sh *sh);
+char	*ft_strjoin_path(char *s1, char *s2);
 char	*ft_strjoin_path_2(char *dest, char *s1, char *s2);
 
 /******** PIPE_CREATION ********/
