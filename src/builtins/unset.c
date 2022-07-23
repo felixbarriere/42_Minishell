@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 11:18:45 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/22 14:23:22 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/23 14:14:14 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
 
-void	delete_env(t_env	*env_lst)
+void	delete_env(t_env *env_lst)
 {
 	env_lst->prev->next = env_lst->next;
+	if (env_lst->next)
+		env_lst->next->prev = env_lst->prev;
 	free(env_lst->key);
 	free(env_lst->value);
 	free(env_lst);
@@ -31,7 +33,6 @@ void	update_path(t_sh *sh, char *key)
 	if (!ft_strcmp(key, "PATH"))
 	{
 		printf("test\n");
-		printf("path avant :%s\n", sh->path[0]);
 		while (sh->path[i])
 		{
 			free(sh->path[i]);
@@ -40,8 +41,6 @@ void	update_path(t_sh *sh, char *key)
 		free(sh->path[i]);
 		free(sh->path);
 		sh->path = NULL;
-		if (sh->path)
-			printf("path avant :%s\n", sh->path[0]);
 	}
 }
 
@@ -83,12 +82,10 @@ void	unset_command(t_sh *sh)
 
 	i = 0;
 	start = sh->env_lst;
-	printf("sh->pipe_lst->args[i]: %s\n", sh->pipe_lst->args[i]);
 	while (sh->pipe_lst->args[i])
 	{
 		while (sh->env_lst && identifier_is_valid(sh->pipe_lst->args[i], sh))
 		{
-			//  && identifier_is_valid();
 			if (!ft_strcmp(sh->pipe_lst->args[i], sh->env_lst->key))
 			{
 				update_path(sh, sh->env_lst->key);
