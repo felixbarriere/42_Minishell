@@ -32,18 +32,15 @@ void	ft_close(t_sh *sh, int nb_pipes)
 }
 
 void	ft_switch(t_pipe *start, int k)
-{
-	if (start->cmd_verified != NULL)
-	{	
-		if (!k)
-			dup2(start->fd[1], start->output);
-		else if (k && !start->next)
-			dup2(start->prev->fd[0], start->input);
-		else if (k && start->next)
-		{
-			dup2(start->prev->fd[0], start->input);
-			dup2(start->fd[1], start->output);
-		}
+{	
+	if (!k)
+		dup2(start->fd[1], start->output);
+	else if (k && !start->next)
+		dup2(start->prev->fd[0], start->input);
+	else if (k && start->next)
+	{
+		dup2(start->prev->fd[0], start->input);
+		dup2(start->fd[1], start->output);
 	}
 }
 

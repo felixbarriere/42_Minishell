@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:43:57 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/21 17:43:54 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/23 16:31:16 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,21 @@ void	dup_env_array(t_sh *sh, char **env)
 	sh->env[i] = NULL;
 }
 
+void	ft_close_final(void)
+{
+	int	i;
+	
+	i = 2;
+	close(0);
+	close(1);
+	while (i < 1024)
+	{
+		if (!read(i, 0 , 0))
+			close(i);
+		i++;
+	}
+}
+
 void	ft_prompt_start(t_sh *sh)
 {
 	sh->prompt = readline("➜ minishell ");
@@ -44,10 +59,13 @@ void	ft_prompt_start(t_sh *sh)
 		ft_free(sh->env);
 		clear_list(sh->token_lst);
 		clear_list_pipe(sh->pipe_lst);
+		clear_list_env(sh->env_lst);
 		ft_putstr_fd("\nexit\n", 1);
+		ft_close_final();
 		exit(0);
 	}
-	add_history(sh->prompt);
+	if (ft_strcmp(sh->prompt, ""))
+		add_history(sh->prompt);
 }
 
 void	ft_prompt_init2(t_sh *sh, char **env_init)
@@ -82,6 +100,6 @@ void	ft_prompt_init(t_sh *sh, char **env_init)
 			execution(sh, sh->env);
 		clear_list(sh->token_lst);
 		clear_list_pipe(sh->pipe_lst);
-		ft_init_values(sh, sh->env);
+		ft_init_values(sh, sh->env); 
 	}
 }
