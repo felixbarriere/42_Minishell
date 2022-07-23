@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:12:23 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/14 15:07:35 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/23 17:02:56 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,10 @@ void	cd_command(t_sh *sh)
 				change_all_pwd(sh, old_path);
 		}
 		else if (!(sh->pipe_lst->token->next))
+		{
+			printf("cd home\n");
 			cd_home(sh, old_path);
+		}
 		else
 		{
 			ft_putstr_fd("cd: too many arguments\n", 2);

@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:43:57 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/23 16:31:16 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/23 16:40:36 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ void	dup_env_array(t_sh *sh, char **env)
 void	ft_close_final(void)
 {
 	int	i;
-	
+
 	i = 2;
 	close(0);
 	close(1);
 	while (i < 1024)
 	{
-		if (!read(i, 0 , 0))
+		if (!read(i, 0, 0))
 			close(i);
 		i++;
 	}
@@ -100,6 +100,6 @@ void	ft_prompt_init(t_sh *sh, char **env_init)
 			execution(sh, sh->env);
 		clear_list(sh->token_lst);
 		clear_list_pipe(sh->pipe_lst);
-		ft_init_values(sh, sh->env); 
+		ft_init_values(sh, sh->env);
 	}
 }

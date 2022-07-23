@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/23 15:14:37 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/23 16:47:24 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,6 @@ pid_t	exec2(t_pipe *start, t_sh *sh, int nb_pipes, char **env_init)
 	return (pid);
 }
 
-void	wait_get_status(t_sh *sh, int nb_pipes, int pid)
-{
-	int	i;
-	int	nb_cmds;
-
-	nb_cmds = nb_pipes + 1;
-	i = 0;
-	while (i < nb_cmds)
-	{
-		if ((0 < waitpid(pid, &sh->exit, 0)) && (WIFEXITED(sh->exit)))
-			sh->exit = WEXITSTATUS(sh->exit);
-		i++;
-	}
-}
-
 void	execution_pipe2(t_sh *sh, t_pipe *start, int nb_pipes, char **env_init)
 {
 	if (start->is_builtin == 1)
@@ -98,13 +83,8 @@ void	execution_pipe(t_sh *sh, t_pipe *start, int nb_pipes, char **env_init)
 			reset_input_output(sh->pipe_lst);
 			return ;
 		}
-		else
-		{
-			execution_pipe2(sh, start, nb_pipes, env_init);
-		}
-		if (sh->exec_pipe_k % 2 != 0)
-			sh->exec_pipe_i++;
-		sh->exec_pipe_k++;
+		execution_pipe2(sh, start, nb_pipes, env_init);
+		execution_pipe3(sh);
 		start = start->next;
 	}
 	ft_close(sh, nb_pipes);
