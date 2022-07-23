@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 15:55:51 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/17 15:09:55 by marvin           ###   ########.fr       */
+/*   Updated: 2022/07/23 15:56:06 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,13 @@ void	env_command(t_sh	*sh)
 	start = sh->env_lst;
 	while (sh->env_lst != NULL)
 	{
-		ft_putstr_fd(sh->env_lst->key, 1);
-		ft_putchar_fd('=', 1);
-		ft_putstr_fd(sh->env_lst->value, 1);
-		ft_putchar_fd('\n', 1);
+		if (ft_strcmp(sh->env_lst->value, ""))
+		{
+			ft_putstr_fd(sh->env_lst->key, 1);
+			ft_putchar_fd('=', 1);
+			ft_putstr_fd(sh->env_lst->value, 1);
+			ft_putchar_fd('\n', 1);
+		}
 		sh->env_lst = sh->env_lst->next;
 	}
 	sh->env_lst = start;
