@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:02:46 by ccalas            #+#    #+#             */
-/*   Updated: 2022/07/22 13:28:09 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/23 16:21:54 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ char	*ft_strjoin_char_2(char *s1, char c);
 /******** PROMPT ********/
 void	ft_prompt_start(t_sh *sh);
 void	ft_prompt_init(t_sh *sh, char **env_init);
+void	ft_close_final(void);
 
 /******** SIGNALS ********/
 void	ft_signals_orchestrator(void);

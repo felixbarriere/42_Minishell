@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 15:39:55 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/21 13:34:46 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/22 14:54:09 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	close_fdin(t_pipe **pipe_lst)
 	if ((*pipe_lst)->heredoc_mode == 1)
 	{
 		(*pipe_lst)->heredoc_mode = 0;
-		unlink((*pipe_lst)->limiter);
+		// unlink((*pipe_lst)->limiter);
 	}
 }
 
