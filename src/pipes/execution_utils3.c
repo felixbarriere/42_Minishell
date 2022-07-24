@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc_utils.c                                    :+:      :+:    :+:   */
+/*   execution_utils3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/23 16:20:29 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/23 16:20:30 by fbarrier         ###   ########.fr       */
+/*   Created: 2022/07/14 14:59:40 by fbarrier          #+#    #+#             */
+/*   Updated: 2022/07/23 16:47:59 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,9 @@
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
 
-int	contains_charset(char *str, char c)
+void	execution_pipe3(t_sh *sh)
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == c)
-			return (SUCCESS);
-		i++;
-	}
-	return (FAILURE);
-}
-
-int	contain_space(char	**value)
-{
-	int	i;
-
-	i = 0;
-	while ((*value)[i])
-	{
-		if ((*value)[i] == ' ')
-		{
-			return (i);
-		}
-		i++;
-	}
-	return (0);
+	if (sh->exec_pipe_k % 2 != 0)
+		sh->exec_pipe_i++;
+	sh->exec_pipe_k++;
 }

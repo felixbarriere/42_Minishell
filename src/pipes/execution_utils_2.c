@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:57:13 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/22 11:56:27 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/23 16:42:31 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,30 @@ void	ft_close(t_sh *sh, int nb_pipes)
 }
 
 void	ft_switch(t_pipe *start, int k)
+{	
+	if (!k)
+		dup2(start->fd[1], start->output);
+	else if (k && !start->next)
+		dup2(start->prev->fd[0], start->input);
+	else if (k && start->next)
+	{
+		dup2(start->prev->fd[0], start->input);
+		dup2(start->fd[1], start->output);
+	}
+}
+
+void	wait_get_status(t_sh *sh, int nb_pipes, int pid)
 {
-	if (start->cmd_verified != NULL)
-	{	
-		if (!k)
-			dup2(start->fd[1], start->output);
-		else if (k && !start->next)
-			dup2(start->prev->fd[0], start->input);
-		else if (k && start->next)
-		{
-			dup2(start->prev->fd[0], start->input);
-			dup2(start->fd[1], start->output);
-		}
+	int	i;
+	int	nb_cmds;
+
+	nb_cmds = nb_pipes + 1;
+	i = 0;
+	while (i < nb_cmds)
+	{
+		if ((0 < waitpid(pid, &sh->exit, 0)) && (WIFEXITED(sh->exit)))
+			sh->exit = WEXITSTATUS(sh->exit);
+		i++;
 	}
 }
 
@@ -66,5 +78,26 @@ char	*ft_strjoin_path_2(char *dest, char *s1, char *s2)
 		i++;
 	}
 	dest[i] = '\0';
+	return (dest);
+}
+
+char	*ft_strjoin_path(char *s1, char *s2)
+{
+	char	*dest;
+
+	if (!s1)
+	{
+		s1 = malloc(sizeof(char) * 1);
+		s1[0] = '\0';
+	}
+	if (!s2)
+	{
+		s2 = malloc(sizeof(char) * 1);
+		s2[0] = '\0';
+	}
+	dest = ft_calloc(sizeof(char), (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!dest)
+		return (NULL);
+	dest = ft_strjoin_path_2(dest, s1, s2);
 	return (dest);
 }

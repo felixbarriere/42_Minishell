@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 16:08:51 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/21 16:20:26 by marvin           ###   ########.fr       */
+/*   Updated: 2022/07/23 17:50:03 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int	contains_equal(char *str, t_sh *sh)
 
 	i = 0;
 	while (str[i] && !ft_isdigit(str[0])
-		&&(ft_isalnum(str[i]) == 1 || str[i] == '_'
-		|| str[i] == '=' || (str[i] == '+' && str[i + 1] == '=') ))
+		&& (ft_isalnum(str[i]) == 1 || str[i] == '_'
+			|| str[i] == '=' || (str[i] == '+' && str[i + 1] == '=')))
 	{
-		if (str[i] == '=' && i > 0)
+		if ((str[i] == '=' && i > 0) || str[i + 1] == '\0')
 			return (1);
 		i++;
 	}
@@ -34,28 +34,6 @@ int	contains_equal(char *str, t_sh *sh)
 	sh->exit = 1;
 	return (0);
 }
-
-// void	update_path_export(t_sh *sh, char *key)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	if (!ft_strcmp(key, "PATH"))
-// 	{
-// 		printf("test\n");
-// 		printf("path avant :%s\n", sh->path[0]);
-// 		while (sh->path[i])
-// 		{
-// 			free(sh->path[i]);
-// 			i++;
-// 		}
-// 		free(sh->path[i]);
-// 		free(sh->path);
-// 		sh->path = NULL;
-// 		if (sh->path)
-// 			printf("path avant :%s\n", sh->path[0]);
-// 	}
-// }
 
 char	*delete_plus(char *src)
 {
@@ -71,11 +49,7 @@ char	*delete_plus(char *src)
 	while (src[i] != '\0')
 	{
 		if (src[i] == '+' && src[i + 1] == '=')
-		{
 			i++;
-			// free (dest)
-		}
-
 		dest[j] = src[i];
 		i++;
 		j++;
@@ -110,9 +84,7 @@ void	update_value_2(t_env	*list, char	*value, char *key)
 	{
 		if (!ft_strcmp(key, list->key))
 		{
-			// free(list->value);
 			list->value = ft_strdup(value);
-			// free (value);
 			return ;
 		}
 		list = list->next;
@@ -128,6 +100,8 @@ void	global_get_value(char **key_value, t_sh *sh)
 
 	value = NULL;
 	former_value = NULL;
+	if (!ft_strcmp(key_value[1], "(null)") || key_value[1] == NULL)
+		return ;
 	key_value_init = ft_split(sh->pipe_lst->args[1], '=');
 	if (!ft_strcmp(key_value[0], key_value_init[0]))
 	{

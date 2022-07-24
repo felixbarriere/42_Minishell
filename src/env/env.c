@@ -78,11 +78,11 @@ char	*get_key(char *full)
 	int		i;
 
 	i = 0;
-	while (full[i] != '=')
+	while (full[i] != '=' && full[i])
 		i++;
 	key = malloc(sizeof(char) * (i + 1));
 	i = 0;
-	while (full[i] != '=')
+	while (full[i] != '=' && full[i])
 	{
 		key[i] = full[i];
 		i++;

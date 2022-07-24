@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/22 13:30:04 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/23 16:47:24 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,20 @@ pid_t	exec2(t_pipe *start, t_sh *sh, int nb_pipes, char **env_init)
 	return (pid);
 }
 
-void	wait_get_status(t_sh *sh, int nb_pipes, int pid)
+void	execution_pipe2(t_sh *sh, t_pipe *start, int nb_pipes, char **env_init)
 {
-	int	i;
-	int	nb_cmds;
-
-	nb_cmds = nb_pipes + 1;
-	i = 0;
-	while (i < nb_cmds)
-	{
-		if ((0 < waitpid(pid, &sh->exit, 0)) && (WIFEXITED(sh->exit)))
-			sh->exit = WEXITSTATUS(sh->exit);
-		i++;
-	}
+	if (start->is_builtin == 1)
+	{	
+		if (!ft_strcmp(start->cmd, "export"))
+		{
+			index_builtins(sh, start);
+			reset_input_output(start);
+		}
+		else
+			sh->exec_pid = exec2(start, sh, nb_pipes, env_init);
+	}	
+	else
+		sh->exec_pid = exec2(start, sh, nb_pipes, env_init);
 }
 
 void	execution_pipe(t_sh *sh, t_pipe *start, int nb_pipes, char **env_init)
@@ -70,25 +71,20 @@ void	execution_pipe(t_sh *sh, t_pipe *start, int nb_pipes, char **env_init)
 	{
 		update_input_output(start);
 		ft_switch(start, sh->exec_pipe_k);
+		if (!ft_strcmp(start->token->value, "<<"))
+		{
+			start = start->next;
+			reset_input_output(sh->pipe_lst);
+			continue ;
+		}
 		if (start->is_builtin != 1 && start->cmd_verified == NULL)
 		{
 			mess_cmd_not_found(sh, start->cmd);
 			reset_input_output(sh->pipe_lst);
 			return ;
 		}
-		else
-		{
-			if (start->is_builtin == 1)
-			{	
-				if (!ft_strcmp(start->cmd, "export"))
-					index_builtins(sh, start);
-			}	
-			else
-				sh->exec_pid = exec2(start, sh, nb_pipes, env_init);
-		}
-		if (sh->exec_pipe_k % 2 != 0)
-			sh->exec_pipe_i++;
-		sh->exec_pipe_k++;
+		execution_pipe2(sh, start, nb_pipes, env_init);
+		execution_pipe3(sh);
 		start = start->next;
 	}
 	ft_close(sh, nb_pipes);

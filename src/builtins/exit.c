@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 18:19:33 by fbarrier          #+#    #+#             */
 /*   Updated: 2022/07/24 21:14:39 by marvin           ###   ########.fr       */
@@ -22,10 +22,12 @@ void	exit_command_2(t_sh *sh, t_pipe *pipe_lst)
 	ft_free(sh->env);
 	clear_list(sh->token_lst);
 	clear_list_pipe(pipe_lst);
+	clear_list_env(sh->env_lst);
+	ft_close_final();
 	if (sh->exit)
 		exit(sh->exit);
 	else
-		exit(2);
+		exit(0);
 }
 
 int	is_in_range(char *str)
@@ -159,7 +161,7 @@ void	exit_error(t_token *temp, t_sh *sh, char *exit_nbr)
 		sh->exit = 2;
 	}
 	if ((ft_atoi(temp->next->value) < 0 && !too_many_chars(exit_nbr))
-		|| ft_atoi(temp->next->value) >= 255) // creer un atoll?
+		|| ft_atoi(temp->next->value) >= 255)
 	{
 		sh->exit = 2;
 		return ;
@@ -180,7 +182,7 @@ void	exit_command(t_sh *sh, t_pipe *pipe_lst)
 		{
 			if (is_in_range(temp->next->value) && ft_atoi(temp->next->value)
 				<= 255 && !temp->next->next
-					&& !too_many_chars(temp->next->value))
+				&& !too_many_chars(temp->next->value))
 				sh->exit = ft_atoi(temp->next->value);
 			else if (temp->next->next && is_in_range(temp->next->value))
 			{

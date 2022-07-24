@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:09:29 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/21 17:22:24 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/23 15:04:36 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ char	*filename(void)
 int	init_heredoc(t_pipe **pipe_lst)
 {
 	ft_free_null_str(&(*pipe_lst)->limiter_name);
-	(*pipe_lst)->limiter_name = filename();
+	(*pipe_lst)->limiter_name = ft_strdup("./heredoc");
 	(*pipe_lst)->heredoc_mode = 1;
-	(*pipe_lst)->input = open((*pipe_lst)->limiter_name, O_RDWR
-			| O_CREAT | O_APPEND, 00644);
+	(*pipe_lst)->input = open((*pipe_lst)->limiter_name, O_WRONLY
+			| O_CREAT | O_TRUNC, 00644);
 	if ((*pipe_lst)->input == -1)
 		return (1);
 	return (0);
@@ -95,6 +95,26 @@ int	heredoc(char *limiter, t_pipe **pipe_lst)
 	free(limiter);
 	close((*pipe_lst)->input);
 	if (open_fdin((*pipe_lst)->limiter_name, pipe_lst))
+	{
+		unlink((*pipe_lst)->limiter_name);
+		return (1);
+	}
+	unlink((*pipe_lst)->limiter_name);
+	return (0);
+}
+
+/*
+int	init_heredoc(t_pipe **pipe_lst)
+{
+	ft_free_null_str(&(*pipe_lst)->limiter_name);
+	(*pipe_lst)->limiter_name = filename();
+	(*pipe_lst)->heredoc_mode = 1;
+	// (*pipe_lst)->input = open((*pipe_lst)->limiter_name, O_RDWR
+	// 		| O_CREAT | O_APPEND, 00644);
+	(*pipe_lst)->input = open((*pipe_lst)->limiter_name, O_WRONLY
+			| O_CREAT | O_TRUNC, 00644);
+	if ((*pipe_lst)->input == -1)
 		return (1);
 	return (0);
 }
+*/

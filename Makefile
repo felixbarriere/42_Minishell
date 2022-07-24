@@ -18,6 +18,7 @@ src/pipes/get_command_path.c\
 src/pipes/execution.c\
 src/pipes/execution_utils.c\
 src/pipes/execution_utils_2.c\
+src/pipes/execution_utils3.c\
 src/redirections/get_command_type.c\
 src/redirections/get_command_type_utils.c\
 src/redirections/redirections.c\
@@ -41,6 +42,7 @@ src/builtins/echo_2.c\
 src/builtins/env_cmd.c\
 src/builtins/export.c\
 src/builtins/export_2.c\
+src/builtins/export_3.c\
 src/builtins/unset.c\
 src/builtins/exit.c\
 
@@ -71,5 +73,9 @@ fclean:		clean
 			${RM} ${NAME}
 
 re:			fclean all
+
+valgrind: ${NAME}
+	@valgrind --suppressions=cmd_valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --verbose --log-file=valgrind-out.txt ./minishell
+	#@vim valgrind-out.txt
 
 .PHONY:		all clean fclean re
