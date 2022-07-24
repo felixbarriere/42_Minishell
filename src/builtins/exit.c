@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 18:19:33 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/23 16:50:44 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/24 21:14:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	is_in_range(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (ft_isdigit(str[i]) == 1)
+		if (ft_isdigit(str[i]) == 1 || (i == 0 && str[i] == '-'))
 			i++;
 		else
 			return (0);
@@ -45,14 +45,108 @@ int	is_in_range(char *str)
 	return (1);
 }
 
-int	too_many_chars(char *str)
+unsigned long long	ft_long_atoi(const char *str)
 {
-	int	i;
+	int						i;
+	// int						sign;
+	unsigned long long	nb;
 
 	i = 0;
-	while (str[i])
+	// sign = 1;
+	nb = 0;
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
 		i++;
-	if (i >= 20)
+	if (str[i] == '-' || str[i] == '+')
+	{
+		// if (str[i] == '-')
+		// 	sign *= -1;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		nb = nb * 10 + (str[i] - 48);
+		i++;
+	}
+	// * sign;
+	return (nb);
+}
+
+// static int	check_max(char *str)
+// {
+// 	char	*max;
+// 	int		i;
+
+// 	while (*str == '0')
+// 		str++;
+// 	if (!*str)
+// 		return (0);
+// 	if (ft_strlen(str) > 19)
+// 		return (0);
+// 	if (ft_strlen(str) < 19)
+// 		return (1);
+// 	max = ft_strdup("9223372036854775807");
+// 	if (!max)
+// 		return (1);
+// 	i = 0;
+// 	while (max[i])
+// 	{
+// 		if (str[i] > max[i])
+// 			return (free(max), 0);
+// 		if (str[i] < max[i])
+// 			return (free(max), 1);
+// 		i++;
+// 	}
+// 	return (free(max), 1);
+// }
+
+char	*delete_neg(char *str)
+{
+	int		i;
+	int		j;
+	char	*str_2;
+
+	i = 1;
+	j = 0;
+	str_2 = NULL;
+	if (str[0] == '-')
+	{
+		str_2 = malloc(sizeof(char) * ft_strlen(str));
+		if (!str)
+			return NULL;
+		while (str[i])
+		{
+
+			str_2[j] = str[i];
+			j++;
+			i++;
+		}
+		str_2[j] = '\0';
+		return (str_2);
+	}
+	return (str);
+}
+
+int	too_many_chars(char *str)
+{
+	printf("ft_long_atoi(str): %lld \n", ft_long_atoi(str));
+	printf("str: %s \n", str);
+	printf("ft_atoi(str): %d \n", ft_atoi(str));
+	if (ft_atoi(str) < 0)
+	{
+		printf("test\n");
+		printf("ft_long_atoi(str): %lld \n", ft_long_atoi(str));
+		printf("str: %s \n", str);
+		str = delete_neg(str);
+		printf("ft_long_atoi(str): %lld \n", ft_long_atoi(str));
+		printf("str: %s \n", str);
+		printf("test2\n");
+		if (ft_long_atoi(str) > 9223372036854775808)
+		{
+			free (str);
+			return (1);
+		}
+	}
+	else if (ft_long_atoi(str) > 9223372036854775807 )
 		return (1);
 	return (0);
 }
