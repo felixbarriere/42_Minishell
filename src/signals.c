@@ -42,8 +42,24 @@ void	heredoc_handler(int signal)
 	}
 }
 
-void	ft_signals_orchestrator(void)
+void	ft_sigquit_handler(int signal)
 {
-	signal(SIGQUIT, SIG_IGN);
+	if (signal == SIGQUIT)
+	{
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		g_sh.error = 1;
+		g_sh.exit = 131;
+		rl_clear_history();
+		exit (131);
+	}
+}
+
+void	ft_signals_orchestrator(int sigquit_active)
+{
 	signal(SIGINT, ft_signal_handler);
+	if (sigquit_active)
+		signal(SIGQUIT, ft_sigquit_handler);
+	else
+		signal(SIGQUIT, SIG_IGN);
 }
