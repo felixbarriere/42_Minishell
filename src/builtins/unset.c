@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 11:18:45 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/22 17:28:09 by marvin           ###   ########.fr       */
+/*   Updated: 2022/07/25 15:00:35 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	update_path(t_sh *sh, char *key)
 	i = 0;
 	if (!ft_strcmp(key, "PATH"))
 	{
-		printf("test\n");
 		while (sh->path[i])
 		{
 			free(sh->path[i]);

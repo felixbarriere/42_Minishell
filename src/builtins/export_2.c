@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 16:08:51 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/23 17:50:03 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/25 15:00:15 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,6 @@ void	global_get_value(char **key_value, t_sh *sh)
 	else
 	{
 		former_value = get_former_value(key_value[0], sh->env_lst);
-		printf("same key but with +\n");
 		value = ft_strjoin(former_value, key_value_init[1]);
 		update_value_2(sh->env_lst, value, key_value[0]);
 		update_path(sh, key_value[0]);

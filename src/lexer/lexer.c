@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:48 by ccalas            #+#    #+#             */
-/*   Updated: 2022/07/25 13:44:16 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/25 15:03:33 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	lexer(t_sh *sh)
 		return ;
 	}
 	tokenizer(sh);
-	print_tokens(sh->token_lst);
 	if (check_error_sep(sh->token_lst) == FAILURE)
 	{
 		sh->error = 1;
