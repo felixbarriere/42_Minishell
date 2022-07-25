@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:57:13 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/23 16:42:31 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/25 11:37:39 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,6 @@ void	ft_switch(t_pipe *start, int k)
 	{
 		dup2(start->prev->fd[0], start->input);
 		dup2(start->fd[1], start->output);
-	}
-}
-
-void	wait_get_status(t_sh *sh, int nb_pipes, int pid)
-{
-	int	i;
-	int	nb_cmds;
-
-	nb_cmds = nb_pipes + 1;
-	i = 0;
-	while (i < nb_cmds)
-	{
-		if ((0 < waitpid(pid, &sh->exit, 0)) && (WIFEXITED(sh->exit)))
-			sh->exit = WEXITSTATUS(sh->exit);
-		i++;
 	}
 }
 

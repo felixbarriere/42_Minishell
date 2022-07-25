@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/23 16:47:24 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/25 11:59:56 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ pid_t	exec2(t_pipe *start, t_sh *sh, int nb_pipes, char **env_init)
 		return (-1);
 	if (pid == 0)
 	{
+		ft_signals_orchestrator(1);
 		ft_close(sh, nb_pipes);
 		if (start->is_builtin == 1)
 		{
@@ -41,7 +42,6 @@ pid_t	exec2(t_pipe *start, t_sh *sh, int nb_pipes, char **env_init)
 			exit (sh->exit);
 		}
 	}
-	ft_signals_orchestrator();
 	reset_input_output(start);
 	return (pid);
 }
@@ -71,12 +71,12 @@ void	execution_pipe(t_sh *sh, t_pipe *start, int nb_pipes, char **env_init)
 	{
 		update_input_output(start);
 		ft_switch(start, sh->exec_pipe_k);
-		if (!ft_strcmp(start->token->value, "<<"))
-		{
-			start = start->next;
-			reset_input_output(sh->pipe_lst);
-			continue ;
-		}
+		// if (!ft_strcmp(start->token->value, "<<"))
+		// {
+		// 	start = start->next;
+		// 	reset_input_output(sh->pipe_lst);
+		// 	continue ;
+		// }
 		if (start->is_builtin != 1 && start->cmd_verified == NULL)
 		{
 			mess_cmd_not_found(sh, start->cmd);
@@ -101,13 +101,14 @@ void	no_pipe_exec(t_sh *sh, char **env_init)
 		return ;
 	if (pid == 0)
 	{
-		ft_signals_orchestrator();
+		ft_signals_orchestrator(1);
 		execve(sh->pipe_lst->cmd_verified, sh->pipe_lst->args, env_init);
 		exit(sh->exit);
 	}
 	if ((0 < waitpid(pid, &g_sh.exit, 0)) && (WIFEXITED(g_sh.exit)))
 			g_sh.exit = WEXITSTATUS(g_sh.exit);
-	ft_signals_orchestrator();
+	control_sigquit(sh);
+	ft_signals_orchestrator(0);
 }
 
 void	execution(t_sh *sh, char **env_init)
