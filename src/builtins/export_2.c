@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 16:08:51 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/25 15:00:15 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/25 15:39:48 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	contains_equal(char *str, t_sh *sh)
 
 	i = 0;
 	while (str[i] && !ft_isdigit(str[0])
-		&& (ft_isalnum(str[i]) == 1 || str[i] == '_'
-			|| str[i] == '=' || (str[i] == '+' && str[i + 1] == '=')))
+		&& (ft_isalnum(str[i]) == 1 || str[i] == '_' || (str[i] == '=' && i > 0)
+			|| (str[i] == '+' && str[i + 1] == '=' && i > 0)))
 	{
 		if ((str[i] == '=' && i > 0) || str[i + 1] == '\0')
 			return (1);
