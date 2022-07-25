@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_f.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:02:46 by ccalas            #+#    #+#             */
-/*   Updated: 2022/07/25 11:43:33 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/25 14:54:59 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,9 @@ char	*get_value(char **key_value);
 char	*get_former_value(char *key, t_env *list);
 void	unset_command(t_sh *sh);
 void	exit_command(t_sh *sh, t_pipe *pipe_lst);
+int		is_in_range(char *str);
+int		check_min(char *str);
+int		ft_strlen_3(const char *s);
 
 /******** EXECUTION_UTILS ********/
 void	reset_input_output(t_pipe *pipe_lst);

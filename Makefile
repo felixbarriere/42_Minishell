@@ -45,6 +45,7 @@ src/builtins/export_2.c\
 src/builtins/export_3.c\
 src/builtins/unset.c\
 src/builtins/exit.c\
+src/builtins/exit_2.c\
 
 OBJS = ${SRCS:.c=.o}
 INCS	=	-I ./includes -I ./libft/includes
