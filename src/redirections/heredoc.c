@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:09:29 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/25 11:48:12 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/25 11:50:22 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ int	heredoc(char *limiter, t_pipe **pipe_lst)
 	pid = fork();
 	if (pid == 0)
 	{
-		ft_signals_orchestrator(0);
 		signal(SIGINT, &heredoc_handler);
 		exit(heredoc2(limiter, pipe_lst, quotes));
 	}
