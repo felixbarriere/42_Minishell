@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_command_path.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:27:17 by fbarrier          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/07/23 18:39:34 by fbarrier         ###   ########.fr       */
-=======
-/*   Updated: 2022/07/23 16:59:02 by fbarrier         ###   ########.fr       */
->>>>>>> 3522ddb362fbc7f6ab537358d698e4f0794bf7a9
+/*   Updated: 2022/07/25 14:11:55 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +72,6 @@ void	get_command_path_2(t_pipe	*pipe_lst, t_sh *sh)
 
 	if (pipe_lst->cmd_verified == NULL)
 	{
-		printf("pipe_lst->cmd_verified: %s\n", pipe_lst->cmd_verified);
 		if (pipe_lst->cmd
 			&& ft_strncmp(pipe_lst->cmd, "./", 2) == 0)
 		{
@@ -101,7 +96,7 @@ void	get_command_path(t_sh	*sh)
 	temp = sh->pipe_lst;
 	while (sh->path != NULL && sh->pipe_lst)
 	{
-		if (sh->pipe_lst->cmd == NULL)
+		if (sh->pipe_lst->cmd == NULL || !ft_strcmp(sh->pipe_lst->cmd, ""))
 		{
 			sh->pipe_lst = sh->pipe_lst->next;
 			continue ;

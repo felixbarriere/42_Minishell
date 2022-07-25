@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 18:19:33 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/24 21:14:39 by marvin           ###   ########.fr       */
+/*   Updated: 2022/07/25 12:22:38 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,14 +140,14 @@ int	too_many_chars(char *str)
 		printf("ft_long_atoi(str): %lld \n", ft_long_atoi(str));
 		printf("str: %s \n", str);
 		printf("test2\n");
-		if (ft_long_atoi(str) > 9223372036854775808)
-		{
-			free (str);
-			return (1);
-		}
+		// if (ft_long_atoi(str) > 9223372036854775808)
+		// {
+		// 	free (str);
+		// 	return (1);
+		// }
 	}
-	else if (ft_long_atoi(str) > 9223372036854775807 )
-		return (1);
+	// else if (ft_long_atoi(str) > 9223372036854775807 )
+	// 	return (1);
 	return (0);
 }
 
