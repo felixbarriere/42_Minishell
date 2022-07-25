@@ -124,7 +124,7 @@ int	too_many_chars(char *str)
 			return (1);
 	}
 	else if (ft_long_atoi(str) > 9223372036854775807 )
-		return (1);
+	  return (1);
 	return (0);
 }
 

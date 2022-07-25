@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 13:45:10 by marvin            #+#    #+#             */
-/*   Updated: 2022/07/21 13:28:48 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/25 14:37:17 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ char	*token_str_3(char *str, char *new_str, int *idx, t_sh *sh)
 	temp = quotes_manager(str, idx, sh);
 	if (temp != NULL)
 		new_str = ft_strjoin(new_str, temp);
+	else if (temp == NULL)
+		new_str = ft_strjoin_null(new_str, temp);
 	free(temp);
 	return (new_str);
 }
