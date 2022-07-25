@@ -6,7 +6,11 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:27:17 by fbarrier          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2022/07/23 18:39:34 by fbarrier         ###   ########.fr       */
+=======
 /*   Updated: 2022/07/23 16:59:02 by fbarrier         ###   ########.fr       */
+>>>>>>> 3522ddb362fbc7f6ab537358d698e4f0794bf7a9
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +70,7 @@ char	*get_exec(char *cmd)
 	return (exec_2);
 }
 
-void	get_command_path_2(t_pipe	*pipe_lst)
+void	get_command_path_2(t_pipe	*pipe_lst, t_sh *sh)
 {
 	char	*executable;
 
@@ -79,6 +83,13 @@ void	get_command_path_2(t_pipe	*pipe_lst)
 			executable = get_exec(pipe_lst->cmd);
 			pipe_lst->cmd_verified = ft_strdup(executable);
 			free(executable);
+			if (access(pipe_lst->cmd_verified, F_OK) != 0)
+			{
+				ft_putstr_fd("bash: ", 2);
+				ft_putstr_fd(pipe_lst->cmd, 2);
+				ft_putstr_fd(": No such file or directory\n", 1);
+				sh->exit = 127;
+			}	
 		}
 	}
 }
@@ -99,7 +110,7 @@ void	get_command_path(t_sh	*sh)
 			sh->pipe_lst->cmd_verified = ft_strdup(sh->pipe_lst->cmd);
 		else
 			sh->pipe_lst->cmd_verified = com_line(sh->path, sh->pipe_lst->cmd);
-		get_command_path_2(sh->pipe_lst);
+		get_command_path_2(sh->pipe_lst, sh);
 		sh->pipe_lst = sh->pipe_lst->next;
 	}
 	sh->pipe_lst = temp;

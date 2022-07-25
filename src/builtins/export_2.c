@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 16:08:51 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/23 16:00:55 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/23 17:50:03 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,28 +34,6 @@ int	contains_equal(char *str, t_sh *sh)
 	sh->exit = 1;
 	return (0);
 }
-
-// void	update_path_export(t_sh *sh, char *key)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	if (!ft_strcmp(key, "PATH"))
-// 	{
-// 		printf("test\n");
-// 		printf("path avant :%s\n", sh->path[0]);
-// 		while (sh->path[i])
-// 		{
-// 			free(sh->path[i]);
-// 			i++;
-// 		}
-// 		free(sh->path[i]);
-// 		free(sh->path);
-// 		sh->path = NULL;
-// 		if (sh->path)
-// 			printf("path avant :%s\n", sh->path[0]);
-// 	}
-// }
 
 char	*delete_plus(char *src)
 {
@@ -122,6 +100,8 @@ void	global_get_value(char **key_value, t_sh *sh)
 
 	value = NULL;
 	former_value = NULL;
+	if (!ft_strcmp(key_value[1], "(null)") || key_value[1] == NULL)
+		return ;
 	key_value_init = ft_split(sh->pipe_lst->args[1], '=');
 	if (!ft_strcmp(key_value[0], key_value_init[0]))
 	{

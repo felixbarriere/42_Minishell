@@ -70,6 +70,7 @@ void	print_args(char **args, int args_number)
 	i = 1;
 	while (args[i])
 	{
+		printf("test\n");
 		ft_putstr_fd(args[i], 1);
 		if (i + 1 < args_number)
 			ft_putchar_fd(' ', 1);
