@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_f.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:02:46 by ccalas            #+#    #+#             */
-/*   Updated: 2022/07/25 14:54:59 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/26 15:56:53 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,7 +204,7 @@ void	init_pipe(t_pipe *start, int nb_pipes);
 int		nb_pipe(t_pipe *pipe_lst);
 void	update_path(t_sh *sh, char *key);
 void	env_command_export(t_sh	*sh);
-void	wait_get_status(t_sh *sh, int nb_pipes, int pid);
+void	wait_get_status(t_sh *sh, int nb_pipes);
 void	execution_pipe3(t_sh *sh);
 void	control_sigquit(t_sh *sh);
 

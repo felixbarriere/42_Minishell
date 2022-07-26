@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/25 11:41:24 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/26 16:36:11 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,25 @@ void	control_sigquit(t_sh *sh)
 	}
 }
 
-void	wait_get_status(t_sh *sh, int nb_pipes, int pid)
+void	wait_get_status(t_sh *sh, int nb_pipes)
 {
-	int	i;
-	int	nb_cmds;
+	int		i;
+	int		status;
+	int		nb_cmds;
+	t_pipe	*start;
 
+	status = 0;
+	start = sh->pipe_lst;
 	nb_cmds = nb_pipes + 1;
 	i = 0;
 	while (i < nb_cmds)
 	{
-		if ((0 < waitpid(pid, &sh->exit, 0)) && (WIFEXITED(sh->exit)))
-			sh->exit = WEXITSTATUS(sh->exit);
+		if (start->pid != -1 && (0 < waitpid(start->pid, &status, 0))
+			&& start->cmd_verified)
+			sh->exit = WEXITSTATUS(status);
+		if (!ft_strcmp(start->cmd, "cat"))
+			control_sigquit(sh);
 		i++;
+		start = start->next;
 	}
-	control_sigquit(sh);
 }
