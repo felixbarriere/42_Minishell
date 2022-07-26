@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lists_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:54:27 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/23 16:26:46 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/26 17:32:43 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_token	*new_list(void)
 
 void	ft_set_null_free_elem(t_env *elem)
 {
+	// printf("elem->key: %s\n", elem->key);
 	if (elem)
 	{
 		if (elem->key)
@@ -30,7 +31,8 @@ void	ft_set_null_free_elem(t_env *elem)
 			free(elem->value);
 		if (elem->full)
 			free(elem->full);
-		free(elem);
+		if (elem)
+			free(elem);
 	}
 }
 
@@ -40,7 +42,7 @@ void	clear_list_env(t_env *a_list)
 
 	if (!(a_list))
 		return ;
-	while (a_list)
+	while (a_list != NULL)
 	{
 		tmp = (a_list)->next;
 		ft_set_null_free_elem(a_list);
