@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 12:08:45 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/23 12:39:21 by marvin           ###   ########.fr       */
+/*   Updated: 2022/07/26 13:51:34 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,7 @@ void	export_command_2(t_sh *sh, char *str)
 		str_2 = delete_plus(str);
 	if (str && contains_equal(str, sh))
 	{
-		printf("str: %s\n", str_2);
 		key_value = ft_split(str_2, '=');
-		printf("key_value[0]: %s\n", key_value[0]);
-		printf("key_value[1]: %s\n", key_value[1]);
 		if (!is_in_env(key_value[0], sh->env_lst))
 		{
 			orchestrate_env_token(str_2, sh, 0);

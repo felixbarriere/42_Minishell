@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 18:20:05 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/15 14:26:56 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/26 13:52:19 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ int	check_error_sep_0(t_token *token_lst)
 		|| (is_type(token_lst->prev, BLANK) && is_type(token_lst, PIPE))
 		|| (is_type(token_lst, PIPE) && is_type(token_lst->next, BLANK)))
 	{
-		printf("syntax error near unexpected token  `|'\n");
+		ft_putstr_fd("syntax error near unexpected token  `|'\n", 2);
 		g_sh.exit = 2;
 		return (FAILURE);
 	}
 	else if (is_type(token_lst->prev, DR_RIGHT) && is_type(token_lst, PIPE)
 		&& is_type(token_lst->next, PIPE))
 	{
-		printf("syntax error near unexpected token  `||'\n");
+		ft_putstr_fd("syntax error near unexpected token  `||'\n", 2);
 		g_sh.exit = 2;
 		return (FAILURE);
 	}

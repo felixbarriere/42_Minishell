@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/25 14:42:11 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/26 13:52:41 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ void	execution(t_sh *sh, char **env_init)
 	nb_pipes = nb_pipe(sh->pipe_lst);
 	if (nb_pipes == 0)
 	{
-		printf("CMD VER = %s\n", sh->pipe_lst->cmd_verified);
 		update_input_output(sh->pipe_lst);
 		if (sh->pipe_lst->is_builtin == 1)
 			index_builtins(sh, start);

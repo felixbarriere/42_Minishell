@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 16:53:47 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/21 13:29:50 by marvin           ###   ########.fr       */
+/*   Updated: 2022/07/26 13:51:40 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	ft_free_3(t_env *list)
 {
 	t_env	*tmp;
 
-	printf("test leaks");
 	while (list)
 	{
 		tmp = list->next;
