@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_s.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/07/18 16:21:21 by marvin           ###   ########.fr       */
+/*   Updated: 2022/07/26 13:55:55 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_env
 /* liste chainee representant les commandes autours des pipes */
 typedef struct s_pipe
 {
+	pid_t			pid;
 	t_token			*token;
 	int				fd[2];
 	int				cpy_input;

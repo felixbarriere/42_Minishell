@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:09:29 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/25 11:50:22 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/26 14:52:17 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,15 +74,32 @@ int	heredoc2(char *limiter, t_pipe **pipe_lst, int quotes)
 	return (g_sh.exit);
 }
 
+int	wait_heredoc(pid_t pid, int *status)
+{
+	waitpid(pid, status, 0);
+	if (WIFEXITED(*status))
+	{
+		if (WEXITSTATUS(*status))
+		{
+			g_sh.exit = WEXITSTATUS(*status);
+			g_sh.error = 1;
+			return (1);
+		}
+	}
+	return (0);
+}
+
 int	heredoc(char *limiter, t_pipe **pipe_lst)
 {
 	int		quotes;
+	int		status;
 	pid_t	pid;
 
 	quotes = 0;
 	process_limiter(&limiter, &quotes);
 	if (init_heredoc(pipe_lst))
 		return (1);
+	status = 0;
 	signal(SIGINT, SIG_IGN);
 	pid = fork();
 	if (pid == 0)
@@ -90,8 +107,9 @@ int	heredoc(char *limiter, t_pipe **pipe_lst)
 		signal(SIGINT, &heredoc_handler);
 		exit(heredoc2(limiter, pipe_lst, quotes));
 	}
-	if ((0 < waitpid(pid, &g_sh.exit, 0)) && (WIFEXITED(g_sh.exit)))
-		g_sh.exit = WEXITSTATUS(g_sh.exit);
+	if (wait_heredoc(pid, &status))
+		return (1);
+	ft_signals_orchestrator(0);
 	free(limiter);
 	close((*pipe_lst)->input);
 	if (open_fdin((*pipe_lst)->limiter_name, pipe_lst))
