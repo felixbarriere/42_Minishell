@@ -17,15 +17,13 @@
 
 extern t_sh	g_sh;
 
-pid_t	exec2(t_pipe *start, t_sh *sh, int nb_pipes, char **env_init)
+void	exec2(t_pipe *start, t_sh *sh, int nb_pipes, char **env_init)
 {
-	pid_t	pid;
-
 	signal(SIGINT, SIG_IGN);
-	pid = fork();
-	if (pid == -1)
-		return (-1);
-	if (pid == 0)
+	start->pid = fork();
+	if (start->pid == -1)
+		return ;
+	if (start->pid == 0)
 	{
 		ft_signals_orchestrator(1);
 		ft_close(sh, nb_pipes);
@@ -43,7 +41,6 @@ pid_t	exec2(t_pipe *start, t_sh *sh, int nb_pipes, char **env_init)
 		}
 	}
 	reset_input_output(start);
-	return (pid);
 }
 
 void	execution_pipe2(t_sh *sh, t_pipe *start, int nb_pipes, char **env_init)
@@ -56,10 +53,10 @@ void	execution_pipe2(t_sh *sh, t_pipe *start, int nb_pipes, char **env_init)
 			reset_input_output(start);
 		}
 		else
-			sh->exec_pid = exec2(start, sh, nb_pipes, env_init);
+			exec2(start, sh, nb_pipes, env_init);
 	}	
 	else
-		sh->exec_pid = exec2(start, sh, nb_pipes, env_init);
+		exec2(start, sh, nb_pipes, env_init);
 }
 
 void	execution_pipe(t_sh *sh, t_pipe *start, int nb_pipes, char **env_init)
@@ -82,7 +79,7 @@ void	execution_pipe(t_sh *sh, t_pipe *start, int nb_pipes, char **env_init)
 		start = start->next;
 	}
 	ft_close(sh, nb_pipes);
-	wait_get_status(sh, nb_pipes, sh->exec_pid);
+	wait_get_status(sh, nb_pipes);
 }
 
 void	no_pipe_exec(t_sh *sh, char **env_init)
@@ -101,7 +98,8 @@ void	no_pipe_exec(t_sh *sh, char **env_init)
 	}
 	if ((0 < waitpid(pid, &g_sh.exit, 0)) && (WIFEXITED(g_sh.exit)))
 			g_sh.exit = WEXITSTATUS(g_sh.exit);
-	control_sigquit(sh);
+	if (!ft_strcmp(sh->pipe_lst->cmd, "cat"))
+		control_sigquit(sh);
 	ft_signals_orchestrator(0);
 }
 
