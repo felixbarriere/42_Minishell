@@ -49,6 +49,10 @@ void	exec2(t_pipe *start, t_sh *sh, int nb_pipes, char **env_init)
 		else
 		{
 			mess_cmd_not_found(sh, start->cmd);
+			ft_free(sh->env);
+			clear_list(sh->token_lst);
+			clear_list_pipe(sh->pipe_lst);
+			clear_list_env(sh->env_lst);
 			ft_close2();
 			exit (sh->exit);
 		}
@@ -60,13 +64,11 @@ void	execution_pipe2(t_sh *sh, t_pipe *start, int nb_pipes, char **env_init)
 {
 	if (start->is_builtin == 1)
 	{	
-		if (!ft_strcmp(start->cmd, "export"))
+		if (!ft_strcmp(start->cmd, "export") || !ft_strcmp(start->cmd, "env") || !ft_strcmp(start->cmd, "unset"))
 		{
 			index_builtins(sh, start);
 			reset_input_output(start);
 		}
-		else
-			exec2(start, sh, nb_pipes, env_init);
 	}	
 	else
 		exec2(start, sh, nb_pipes, env_init);
@@ -85,7 +87,8 @@ void	execution_pipe(t_sh *sh, t_pipe *start, int nb_pipes, char **env_init)
 		{
 			mess_cmd_not_found(sh, start->cmd);
 			reset_input_output(sh->pipe_lst);
-			return ;
+			start = start->next;
+			continue ;
 		}
 		execution_pipe2(sh, start, nb_pipes, env_init);
 		execution_pipe3(sh);
@@ -114,10 +117,12 @@ void	no_pipe_exec(t_sh *sh, char **env_init)
 		ft_close2();
 		exit(sh->exit);
 	}
-	if ((0 < waitpid(pid, &g_sh.exit, 0)) && (WIFEXITED(g_sh.exit)))
-			g_sh.exit = WEXITSTATUS(g_sh.exit);
-	if (!ft_strcmp(sh->pipe_lst->cmd, "cat"))
-		control_sigquit(sh);
+	// if ((0 < waitpid(pid, &g_sh.exit, 0)) && (WIFEXITED(g_sh.exit)))
+	// 		g_sh.exit = WEXITSTATUS(g_sh.exit);
+	// 
+	// if (!ft_strcmp(sh->pipe_lst->cmd, "cat"))
+	// 	control_sigquit(sh);
+	wait_get_status(sh, 0);
 	ft_signals_orchestrator(0);
 }
 

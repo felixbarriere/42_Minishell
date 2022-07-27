@@ -17,7 +17,6 @@
 
 void	exit_command_2(t_sh *sh, t_pipe *pipe_lst)
 {
-	printf("exit cmd 2\n");
 	if (sh->path != NULL)
 		ft_free(sh->path);
 	ft_free(sh->env);
