@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:09:29 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/27 14:41:58 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/27 15:07:08 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ int	wait_heredoc(pid_t pid, int *status)
 		{
 			g_sh.exit = WEXITSTATUS(*status);
 			g_sh.error = 1;
-			if (g_sh.exit == 130)
-				return (2);
 			return (1);
 		}
 	}
