@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/27 15:51:30 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/27 16:28:46 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ void	no_pipe_exec(t_sh *sh, char **env_init)
 	if (pid == 0)
 	{
 		ft_signals_orchestrator(1);
-		printf("LS\n");
 		execve(sh->pipe_lst->cmd_verified, sh->pipe_lst->args, env_init);
 		exit(sh->exit);
 	}
@@ -113,7 +112,6 @@ void	execution(t_sh *sh, char **env_init)
 	nb_pipes = nb_pipe(sh->pipe_lst);
 	if (nb_pipes == 0)
 	{
-		printf("CMD_VERIFIED = %s\n", sh->pipe_lst->cmd_verified);
 		update_input_output(sh->pipe_lst);
 		if (sh->pipe_lst->is_builtin == 1)
 			index_builtins(sh, start);
