@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_command_path.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:27:17 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/27 16:49:33 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/27 18:05:06 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,11 +101,7 @@ void	get_command_path(t_sh	*sh)
 			continue ;
 		}
 		if (com_line_path(sh->path, sh->pipe_lst->cmd) == 1)
-		{
 			sh->pipe_lst->cmd_verified = ft_strdup(sh->pipe_lst->cmd);
-			printf("sh->pipe_lst->cmd: %s\n", sh->pipe_lst->cmd);
-			printf("sh->pipe_lst->cmd_verified: %s\n", sh->pipe_lst->cmd_verified);
-		}
 		else
 			sh->pipe_lst->cmd_verified = com_line(sh->path, sh->pipe_lst->cmd);
 		get_command_path_2(sh->pipe_lst, sh);
