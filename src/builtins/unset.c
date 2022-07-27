@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 11:18:45 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/26 17:36:37 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/27 14:59:57 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,50 +51,45 @@
 // 	env_lst = temp;
 // }
 
-void	print_tokens_env(t_env *li)
-{
-	while (li != NULL)
-	{
-		printf("\n");
-		printf("[%s] = [%s]", li->key, li->value);
-		li = li->next;
-	}
-	printf("\n");
-}
+// void	print_tokens_env(t_env *li)
+// {
+// 	while (li != NULL)
+// 	{
+// 		printf("\n");
+// 		printf("[%s] = [%s]", li->key, li->value);
+// 		li = li->next;
+// 	}
+// 	printf("\n");
+// }
 
-t_env	*remove_first_env(t_env *env_lst, t_sh *sh)
-{
-	(void)sh;
-	// (void)env_lst;
-	t_env	*first;
+// t_env	*remove_first_env(t_env *env_lst, t_sh *sh)
+// {
+// 	(void)sh;
+// 	// (void)env_lst;
+// 	t_env	*first;
 
-	first = env_lst->next;
-	// if (env_lst->key)
-		free(env_lst->key);
-	// if (env_lst->value)
-		free(env_lst->value);
-	// if (env_lst)
-	// {
-		free(env_lst);
-		env_lst = NULL;
-	// }
-	// env_lst = first;
-	return (first);
-}
+// 	first = env_lst->next;
+// 	// if (env_lst->key)
+// 		free(env_lst->key);
+// 	// if (env_lst->value)
+// 		free(env_lst->value);
+// 	// if (env_lst)
+// 	// {
+// 		free(env_lst);
+// 		env_lst = NULL;
+// 	// }
+// 	// env_lst = first;
+// 	return (first);
+// }
 
 void	delete_env(t_env *env_lst)
 {
-	// (void)sh;
-	// (void)env_lst;
 	if (!env_lst->prev)
 	{
 		env_lst = env_lst->next;
 		free (env_lst->prev->key);
 		free (env_lst->prev->value);
 		free (env_lst->prev);
-		// remove_first_env(sh->env_lst, sh);
-		// env_lst = remove_first_env(env_lst);
-		// env_lst->prev = NULL;
 	}
 	else
 	{
@@ -171,7 +166,7 @@ void	unset_command(t_sh *sh)
 			{
 				update_path(sh, sh->env_lst->key);
 				if (!sh->env_lst->prev)
-					start= start->next;
+					start = start->next;
 				delete_env(sh->env_lst);
 				break ;
 			}
