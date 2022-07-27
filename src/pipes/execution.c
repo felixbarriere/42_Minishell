@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/27 19:25:01 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/27 20:56:12 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ void	execution_pipe2(t_sh *sh, t_pipe *start, int nb_pipes, char **env_init)
 {
 	if (start->is_builtin == 1)
 	{	
-		if (!ft_strcmp(start->cmd, "export"))
+		if (!ft_strcmp(start->cmd, "export") || !ft_strcmp(start->cmd, "env")
+			|| !ft_strcmp(start->cmd, "unset"))
 		{
 			index_builtins(sh, start);
 			reset_input_output(start);
