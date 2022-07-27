@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/27 16:28:46 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/27 17:43:33 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,21 @@ void	exec2(t_pipe *start, t_sh *sh, int nb_pipes, char **env_init)
 		if (start->is_builtin == 1)
 		{
 			index_builtins(sh, start);
+			ft_free(sh->env);
+			clear_list(sh->token_lst);
+			clear_list_pipe(sh->pipe_lst);
+			clear_list_env(sh->env_lst);
+			ft_close_final();
 			exit(sh->exit);
 		}
 		else if (start->cmd_verified != NULL)
+		{
 			execve(start->cmd_verified, start->args, env_init);
+			ft_free(sh->env);
+			clear_list(sh->token_lst);
+			clear_list_pipe(sh->pipe_lst);
+			clear_list_env(sh->env_lst);
+		}
 		else
 		{
 			mess_cmd_not_found(sh, start->cmd);
@@ -94,6 +105,11 @@ void	no_pipe_exec(t_sh *sh, char **env_init)
 	{
 		ft_signals_orchestrator(1);
 		execve(sh->pipe_lst->cmd_verified, sh->pipe_lst->args, env_init);
+		ft_free(sh->env);
+		clear_list(sh->token_lst);
+		clear_list_pipe(sh->pipe_lst);
+		clear_list_env(sh->env_lst);
+		
 		exit(sh->exit);
 	}
 	if ((0 < waitpid(pid, &g_sh.exit, 0)) && (WIFEXITED(g_sh.exit)))

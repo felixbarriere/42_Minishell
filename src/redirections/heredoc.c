@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:09:29 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/27 16:39:52 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/27 17:43:53 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,13 @@ int	heredoc(char *limiter, t_pipe **pipe_lst)
 		signal(SIGINT, &heredoc_handler);
 		heredoc2(limiter, pipe_lst, quotes);
 		free (limiter);
+		
+		ft_free(g_sh.env);
+		clear_list(g_sh.token_lst);
+		clear_list_pipe(g_sh.pipe_lst);
+		clear_list_env(g_sh.env_lst);
+		ft_close_final();
+	
 		exit(g_sh.exit);
 	}
 	if (wait_heredoc(pid, &status, *pipe_lst))
