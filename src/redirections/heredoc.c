@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:09:29 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/26 17:34:07 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/27 15:07:08 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,16 +105,21 @@ int	heredoc(char *limiter, t_pipe **pipe_lst)
 	if (pid == 0)
 	{
 		signal(SIGINT, &heredoc_handler);
-		exit(heredoc2(limiter, pipe_lst, quotes));
+		heredoc2(limiter, pipe_lst, quotes);
+		free (limiter);
+		exit(g_sh.exit);
 	}
 	if (wait_heredoc(pid, &status))
 	{
 		free(limiter);
+		if (g_sh.exit == 130)
+			return (2);
 		return (1);
 	}
 	ft_signals_orchestrator(0);
 	free(limiter);
-	close((*pipe_lst)->input);
+	if ((*pipe_lst)->input)
+		close((*pipe_lst)->input);
 	if (open_fdin((*pipe_lst)->limiter_name, pipe_lst))
 	{
 		unlink((*pipe_lst)->limiter_name);

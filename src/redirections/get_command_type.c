@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_command_type.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 19:28:11 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/23 18:22:44 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/27 14:22:07 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	is_cmd(t_token *lst, t_sh *sh)
 void	update_command(t_sh *sh)
 {
 	t_pipe	*temp;
+	int		i;
 
 	temp = sh->pipe_lst;
 	while (sh->pipe_lst)
@@ -83,8 +84,11 @@ void	update_command(t_sh *sh)
 			sh->error = 1;
 		if (update_args(&sh->pipe_lst) == 1)
 			sh->error = 1;
-		if (update_fdin(&sh->pipe_lst) == 1)
+		i = update_fdin(&sh->pipe_lst);
+		if (i == 1)
 			sh->error = 1;
+		else if (i == 2)
+			return ;
 		sh->pipe_lst = sh->pipe_lst->next;
 	}
 	sh->pipe_lst = temp;
