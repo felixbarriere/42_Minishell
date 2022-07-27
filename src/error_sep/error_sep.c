@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   error_sep.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 18:20:05 by fbarrier          #+#    #+#             */
 /*   Updated: 2022/07/26 13:52:19 by fbarrier         ###   ########.fr       */

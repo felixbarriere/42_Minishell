@@ -22,10 +22,10 @@ static void	ft_signal_handler(int signal)
 	if (signal == SIGINT)
 	{
 		ft_putstr_fd("\n", 1);
-		g_sh.exit = 130;
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
+		g_sh.exit = 130;
 	}
 }
 
@@ -50,7 +50,7 @@ void	ft_sigquit_handler(int signal)
 		rl_replace_line("", 0);
 		g_sh.error = 1;
 		g_sh.exit = 131;
-		rl_clear_history();
+		// rl_clear_history();
 		exit (131);
 	}
 }
