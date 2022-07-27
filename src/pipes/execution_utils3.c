@@ -41,25 +41,69 @@ void	control_sigquit(t_sh *sh)
 	}
 }
 
+
 void	wait_get_status(t_sh *sh, int nb_pipes)
 {
 	int		i;
-	int		status;
+	// int		status;
 	int		nb_cmds;
 	t_pipe	*start;
 
-	status = 0;
+	// status = 0;
 	start = sh->pipe_lst;
 	nb_cmds = nb_pipes + 1;
 	i = 0;
 	while (i < nb_cmds)
 	{
-		if (start->pid != -1 && (0 < waitpid(start->pid, &status, 0))
-			&& start->cmd_verified)
-			sh->exit = WEXITSTATUS(status);
-		if (!ft_strcmp(start->cmd, "cat"))
-			control_sigquit(sh);
+		waitpid(start->pid, &sh->exit, 0);
+			if (WIFSIGNALED(sh->exit) && WTERMSIG(sh->exit) == 2)
+		{
+			ft_putstr_fd("\n", 2);
+			sh->exit = 130;
+			break ;
+		}
+		else if (WIFSIGNALED(sh->exit) && WTERMSIG(sh->exit) == 3)
+		{
+			if (nb_cmds > 01)
+				sh->exit = 0;
+			else
+			{
+				ft_putstr_fd("Quit (core dumped)\n", 2);
+				sh->exit = 131;
+			}
+			break ;
+		}
+		if (start->pid != -1 && (0 < waitpid(start->pid, &sh->exit, 0))
+			&& start->cmd)
+			sh->exit = WEXITSTATUS(sh->exit);
+		while (sh->exit> 255)
+				sh->exit = sh->exit % 255;
 		i++;
 		start = start->next;
 	}
 }
+
+
+
+// void	wait_get_status(t_sh *sh, int nb_pipes)
+// {
+// 	int		i;
+// 	int		status;
+// 	int		nb_cmds;
+// 	t_pipe	*start;
+
+// 	status = 0;
+// 	start = sh->pipe_lst;
+// 	nb_cmds = nb_pipes + 1;
+// 	i = 0;
+// 	while (i < nb_cmds)
+// 	{
+// 		if (start->pid != -1 && (0 < waitpid(start->pid, &status, 0))
+// 			&& start->cmd_verified)
+// 			sh->exit = WEXITSTATUS(status);
+// 		if (!ft_strcmp(start->cmd, "cat"))
+// 			control_sigquit(sh);
+// 		i++;
+// 		start = start->next;
+// 	}
+// }
