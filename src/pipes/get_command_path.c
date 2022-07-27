@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_command_path.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:27:17 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/25 14:11:55 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/27 16:46:49 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	com_line_path(char **path, char *cmd)
 {
 	int		i;
 
-	(void)path;
+	// (void)path;
 	i = 0;
-	while (path[i] && cmd != NULL)
+	while (!ft_strncmp(cmd, "/", 1) && path[i] && cmd != NULL)
 	{
 		if (access(cmd, F_OK) == 0)
 			return (1);
@@ -102,7 +102,11 @@ void	get_command_path(t_sh	*sh)
 			continue ;
 		}
 		if (com_line_path(sh->path, sh->pipe_lst->cmd) == 1)
+		{
 			sh->pipe_lst->cmd_verified = ft_strdup(sh->pipe_lst->cmd);
+			printf("sh->pipe_lst->cmd: %s\n", sh->pipe_lst->cmd);
+			printf("sh->pipe_lst->cmd_verified: %s\n", sh->pipe_lst->cmd_verified);
+		}
 		else
 			sh->pipe_lst->cmd_verified = com_line(sh->path, sh->pipe_lst->cmd);
 		get_command_path_2(sh->pipe_lst, sh);
