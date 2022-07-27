@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 15:39:55 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/23 16:41:18 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/27 14:19:48 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,9 @@ int	update_fdin(t_pipe **pipe_lst)
 		if (temp->type == INPUT || temp->type == LIMITER)
 		{
 			error = update_fdin_error(temp, *pipe_lst);
-			if (error)
+			if (error == 2)
+				return (2);
+			else if (error)
 				return (1);
 		}
 		else if (temp->type == OUTPUT || temp->type == APPEND)
