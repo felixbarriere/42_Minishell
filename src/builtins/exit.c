@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 18:19:33 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/27 14:59:27 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/27 15:23:42 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 void	exit_command_2(t_sh *sh, t_pipe *pipe_lst)
 {
+	printf("exit cmd 2\n");
 	if (sh->path != NULL)
 		ft_free(sh->path);
 	ft_free(sh->env);

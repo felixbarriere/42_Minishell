@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:09:29 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/27 15:07:08 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/27 16:39:52 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	heredoc2(char *limiter, t_pipe **pipe_lst, int quotes)
 	return (g_sh.exit);
 }
 
-int	wait_heredoc(pid_t pid, int *status)
+int	wait_heredoc(pid_t pid, int *status, t_pipe *pipe_lst)
 {
 	waitpid(pid, status, 0);
 	if (WIFEXITED(*status))
@@ -83,6 +83,7 @@ int	wait_heredoc(pid_t pid, int *status)
 		{
 			g_sh.exit = WEXITSTATUS(*status);
 			g_sh.error = 1;
+			close(pipe_lst->input);
 			return (1);
 		}
 	}
@@ -109,7 +110,7 @@ int	heredoc(char *limiter, t_pipe **pipe_lst)
 		free (limiter);
 		exit(g_sh.exit);
 	}
-	if (wait_heredoc(pid, &status))
+	if (wait_heredoc(pid, &status, *pipe_lst))
 	{
 		free(limiter);
 		if (g_sh.exit == 130)

@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:51:18 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/27 14:40:05 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/27 15:42:34 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_set_null_free_elem_pipe(t_pipe *elem)
 	if (elem)
 	{
 		free (elem->cmd);
-		free (elem->limiter);
+		// free (elem->limiter);
 		free (elem->limiter_name);
 		free (elem->cmd_verified);
 	}

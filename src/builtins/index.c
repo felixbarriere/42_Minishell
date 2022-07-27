@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 16:12:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/22 13:26:52 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/27 15:19:56 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,7 @@ void	index_builtins(t_sh	*sh, t_pipe *start)
 	else if (!ft_strcmp(start->cmd, "unset"))
 		unset_command(sh);
 	else if (!sh->prompt || !ft_strcmp(start->cmd, "exit"))
+	{
 		exit_command(sh, start);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:27:17 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/27 16:46:49 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/27 16:49:33 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	com_line_path(char **path, char *cmd)
 {
 	int		i;
 
-	// (void)path;
 	i = 0;
 	while (!ft_strncmp(cmd, "/", 1) && path[i] && cmd != NULL)
 	{
