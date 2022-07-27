@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/27 17:43:33 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/27 19:13:40 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	no_pipe_exec(t_sh *sh, char **env_init)
 		clear_list(sh->token_lst);
 		clear_list_pipe(sh->pipe_lst);
 		clear_list_env(sh->env_lst);
-		
+		ft_close_final();
 		exit(sh->exit);
 	}
 	if ((0 < waitpid(pid, &g_sh.exit, 0)) && (WIFEXITED(g_sh.exit)))
