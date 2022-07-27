@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:54:27 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/26 17:32:43 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/27 14:59:12 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_token	*new_list(void)
 
 void	ft_set_null_free_elem(t_env *elem)
 {
-	// printf("elem->key: %s\n", elem->key);
 	if (elem)
 	{
 		if (elem->key)
