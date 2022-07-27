@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 15:55:51 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/27 14:19:58 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/27 20:38:20 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 #include "../../include/minishell_d.h"
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
+
+int	ft_strchr2(const char *str, int to_find_char)
+{
+	while (*str && *str != (char)to_find_char)
+		str++;
+	if (*str == (char)to_find_char)
+		return (1);
+	return (0);
+}
 
 void	env_command(t_sh	*sh)
 {
@@ -30,12 +39,17 @@ void	env_command(t_sh	*sh)
 	}
 	while (sh->env_lst != NULL)
 	{
-		if (sh->env_lst->key && ft_strcmp(sh->env_lst->value, ""))
+		// printf("\n\ntest sh->env_lst->key: %s", sh->env_lst->key);
+		if (sh->env_lst->key) // && ft_strcmp(sh->env_lst->value, "")
 		{
 			ft_putstr_fd(sh->env_lst->key, 1);
 			ft_putchar_fd('=', 1);
 			ft_putstr_fd(sh->env_lst->value, 1);
 			ft_putchar_fd('\n', 1);
+			// printf("%s", sh->env_lst->key);
+			// printf("=");
+			// printf("%s", sh->env_lst->value);
+			// printf("\n");
 		}
 		sh->env_lst = sh->env_lst->next;
 	}
