@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 11:18:45 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/27 14:59:57 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/28 15:59:00 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,13 +86,17 @@ void	delete_env(t_env *env_lst)
 {
 	if (!env_lst->prev)
 	{
+		printf("pas de prev\n");
 		env_lst = env_lst->next;
 		free (env_lst->prev->key);
 		free (env_lst->prev->value);
 		free (env_lst->prev);
+		env_lst->prev = NULL;
 	}
 	else
 	{
+		printf("prev\n");
+		if (env_lst->prev)
 		env_lst->prev->next = env_lst->next;
 		if (env_lst->next)
 			env_lst->next->prev = env_lst->prev;
@@ -164,9 +168,9 @@ void	unset_command(t_sh *sh)
 		{
 			if (!ft_strcmp(sh->pipe_lst->args[i], sh->env_lst->key))
 			{
-				update_path(sh, sh->env_lst->key);
 				if (!sh->env_lst->prev)
 					start = start->next;
+				update_path(sh, sh->env_lst->key);
 				delete_env(sh->env_lst);
 				break ;
 			}
