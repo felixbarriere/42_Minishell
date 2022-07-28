@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 15:55:51 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/27 20:57:39 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/28 13:25:39 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,12 @@ void	env_command(t_sh	*sh)
 	}
 	while (sh->env_lst != NULL)
 	{
-		// printf("\n\ntest sh->env_lst->key: %s", sh->env_lst->key);
-		if (sh->env_lst->key) // && ft_strcmp(sh->env_lst->value, "")
+		if (sh->env_lst->key)
 		{
-			// ft_putstr_fd(sh->env_lst->key, 1);
-			// ft_putchar_fd('=', 1);
-			// ft_putstr_fd(sh->env_lst->value, 1);
-			// ft_putchar_fd('\n', 1);
-			printf("%s", sh->env_lst->key);
-			printf("=");
-			printf("%s", sh->env_lst->value);
-			printf("\n");
+			ft_putstr_fd(sh->env_lst->key, 1);
+			ft_putchar_fd('=', 1);
+			ft_putstr_fd(sh->env_lst->value, 1);
+			ft_putchar_fd('\n', 1);
 		}
 		sh->env_lst = sh->env_lst->next;
 	}

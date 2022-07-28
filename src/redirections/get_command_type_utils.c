@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_command_type_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 15:36:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/27 16:19:11 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/28 13:29:11 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,6 @@ void	find_type(t_token *lst, t_sh *sh)
 			lst->next->type = OUTPUT;
 		else if (lst->type == DR_RIGHT)
 			lst->next->type = APPEND;
-		// else if (lst->type == LIMITER)
-		// {
-		// 	sh->pipe_lst->limiter = ft_strdup(lst->value);
-		// 	printf("LIMITER = %s\n", sh->pipe_lst->limiter);
-		// }
 		else if (lst->type == STR)
 			find_type_args(lst, sh);
 		lst = lst->next;

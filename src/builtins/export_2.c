@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 16:08:51 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/27 20:36:45 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/28 13:26:14 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	contains_equal(char *str, t_sh *sh)
 	{
 		if ((str[i] != '=' && i > 0) && str[i + 1] == '\0')
 			return (0);
-		else if ((str[i] == '=' && i > 0)) // || str[i + 1] == '\0'
+		else if ((str[i] == '=' && i > 0))
 			return (1);
 		i++;
 	}

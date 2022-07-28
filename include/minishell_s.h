@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_s.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/07/27 15:42:53 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/28 13:30:23 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ typedef struct s_pipe
 	char			*cmd;
 	char			*cmd_verified;
 	char			*options;
-	// char			*limiter;
 	char			**args;
 	int				input;
 	int				output;
