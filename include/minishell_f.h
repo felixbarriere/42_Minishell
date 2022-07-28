@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_f.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:02:46 by ccalas            #+#    #+#             */
-/*   Updated: 2022/07/28 13:32:30 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/28 15:13:07 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,5 +212,7 @@ void	control_sigquit(t_sh *sh);
 void	update_input_output(t_pipe *pipe_lst);
 void	reset_input_output(t_pipe *pipe_lst);
 void	ft_close2();
+
+void	free_free_all(t_sh *sh);
 
 #endif

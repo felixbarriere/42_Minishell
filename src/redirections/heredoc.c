@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:09:29 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/27 19:07:55 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/28 15:18:22 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,44 @@ void	ft_close2()
 	}
 }
 
+
+
+
+
+
+void	heredoc_child(char *limiter, t_pipe **pipe_lst, int quotes)
+{
+	signal(SIGINT, &heredoc_handler);
+	heredoc2(limiter, pipe_lst, quotes);
+	free (limiter);
+	free_free_all(&g_sh);
+	exit(g_sh.exit);
+}
+
+int	heredoc_2(char *limiter, t_pipe **pipe_lst)
+{
+	ft_signals_orchestrator(0);
+	free(limiter);
+	if ((*pipe_lst)->input)
+		close((*pipe_lst)->input);
+	if (open_fdin((*pipe_lst)->limiter_name, pipe_lst))
+	{
+		unlink((*pipe_lst)->limiter_name);
+		return (1);
+	}
+	unlink((*pipe_lst)->limiter_name);
+	return (0);
+}
+
+void	free_free_all(t_sh *sh)
+{
+	ft_free(sh->env);
+	clear_list(sh->token_lst);
+	clear_list_pipe(sh->pipe_lst);
+	clear_list_env(sh->env_lst);
+	ft_close2();
+}
+
 int	heredoc(char *limiter, t_pipe **pipe_lst)
 {
 	int		quotes;
@@ -116,20 +154,7 @@ int	heredoc(char *limiter, t_pipe **pipe_lst)
 	signal(SIGINT, SIG_IGN);
 	pid = fork();
 	if (pid == 0)
-	{
-		signal(SIGINT, &heredoc_handler);
-		heredoc2(limiter, pipe_lst, quotes);
-		free (limiter);
-		
-		ft_free(g_sh.env);
-		clear_list(g_sh.token_lst);
-		clear_list_pipe(g_sh.pipe_lst);
-		clear_list_env(g_sh.env_lst);
-		ft_close2();
-		// ft_close_final();
-	
-		exit(g_sh.exit);
-	}
+		heredoc_child(limiter, pipe_lst, quotes);
 	if (wait_heredoc(pid, &status, *pipe_lst))
 	{
 		free(limiter);
@@ -137,18 +162,116 @@ int	heredoc(char *limiter, t_pipe **pipe_lst)
 			return (2);
 		return (1);
 	}
-	ft_signals_orchestrator(0);
-	free(limiter);
-	if ((*pipe_lst)->input)
-		close((*pipe_lst)->input);
-	if (open_fdin((*pipe_lst)->limiter_name, pipe_lst))
-	{
-		unlink((*pipe_lst)->limiter_name);
-		return (1);
-	}
-	unlink((*pipe_lst)->limiter_name);
-	return (0);
+	// ft_signals_orchestrator(0);
+	// free(limiter);
+	// if ((*pipe_lst)->input)
+	// 	close((*pipe_lst)->input);
+	// if (open_fdin((*pipe_lst)->limiter_name, pipe_lst))
+	// {
+	// 	unlink((*pipe_lst)->limiter_name);
+	// 	return (1);
+	// }
+	// unlink((*pipe_lst)->limiter_name);
+	// return (0);
+	return (heredoc_2(limiter, pipe_lst));
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// int	heredoc(char *limiter, t_pipe **pipe_lst)
+// {
+// 	int		quotes;
+// 	int		status;
+// 	pid_t	pid;
+
+// 	quotes = 0;
+// 	process_limiter(&limiter, &quotes);
+// 	if (init_heredoc(pipe_lst))
+// 		return (1);
+// 	status = 0;
+// 	signal(SIGINT, SIG_IGN);
+// 	pid = fork();
+// 	if (pid == 0)
+// 	{
+// 		signal(SIGINT, &heredoc_handler);
+// 		heredoc2(limiter, pipe_lst, quotes);
+// 		free (limiter);
+		
+// 		ft_free(g_sh.env);
+// 		clear_list(g_sh.token_lst);
+// 		clear_list_pipe(g_sh.pipe_lst);
+// 		clear_list_env(g_sh.env_lst);
+// 		ft_close2();
+// 		// ft_close_final();
+	
+// 		exit(g_sh.exit);
+// 	}
+// 	if (wait_heredoc(pid, &status, *pipe_lst))
+// 	{
+// 		free(limiter);
+// 		if (g_sh.exit == 130)
+// 			return (2);
+// 		return (1);
+// 	}
+// 	ft_signals_orchestrator(0);
+// 	free(limiter);
+// 	if ((*pipe_lst)->input)
+// 		close((*pipe_lst)->input);
+// 	if (open_fdin((*pipe_lst)->limiter_name, pipe_lst))
+// 	{
+// 		unlink((*pipe_lst)->limiter_name);
+// 		return (1);
+// 	}
+// 	unlink((*pipe_lst)->limiter_name);
+// 	return (0);
+// }
 
 /*
 int	init_heredoc(t_pipe **pipe_lst)
