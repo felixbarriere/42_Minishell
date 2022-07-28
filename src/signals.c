@@ -50,7 +50,6 @@ void	ft_sigquit_handler(int signal)
 		rl_replace_line("", 0);
 		g_sh.error = 1;
 		g_sh.exit = 131;
-		// rl_clear_history();
 		exit (131);
 	}
 }

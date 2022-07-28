@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:09:29 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/27 19:07:55 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/28 15:34:21 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,40 +40,6 @@ char	*filename(void)
 	return (filename);
 }
 
-int	init_heredoc(t_pipe **pipe_lst)
-{
-	ft_free_null_str(&(*pipe_lst)->limiter_name);
-	(*pipe_lst)->limiter_name = ft_strdup("./heredoc");
-	(*pipe_lst)->heredoc_mode = 1;
-	(*pipe_lst)->input = open((*pipe_lst)->limiter_name, O_WRONLY
-			| O_CREAT | O_TRUNC, 00644);
-	if ((*pipe_lst)->input == -1)
-		return (1);
-	return (0);
-}
-
-int	heredoc2(char *limiter, t_pipe **pipe_lst, int quotes)
-{
-	char	*temp;
-	int		i;
-
-	i = 0;
-	while (1)
-	{
-		temp = read_heredoc(pipe_lst, quotes, limiter);
-		if (temp)
-		{
-			if (is_limiter(&temp, &limiter) == SUCCESS)
-				break ;
-			ft_putstr_fd(temp, (*pipe_lst)->input);
-			ft_putstr_fd("\n", (*pipe_lst)->input);
-			ft_free_null_str(&temp);
-		}
-		i++;
-	}
-	return (g_sh.exit);
-}
-
 int	wait_heredoc(pid_t pid, int *status, t_pipe *pipe_lst)
 {
 	waitpid(pid, status, 0);
@@ -90,18 +56,56 @@ int	wait_heredoc(pid_t pid, int *status, t_pipe *pipe_lst)
 	return (0);
 }
 
-void	ft_close2()
+void	heredoc_child(char *limiter, t_pipe **pipe_lst, int quotes)
 {
-	int	i;
-
-	i = 0;
-	while (i < 1024)
-	{
-		close(i);
-		i++;
-	}
+	signal(SIGINT, &heredoc_handler);
+	heredoc2(limiter, pipe_lst, quotes);
+	free (limiter);
+	free_free_all(&g_sh);
+	exit(g_sh.exit);
 }
 
+int	heredoc_bis(char *limiter, t_pipe **pipe_lst)
+{
+	ft_signals_orchestrator(0);
+	free(limiter);
+	if ((*pipe_lst)->input)
+		close((*pipe_lst)->input);
+	if (open_fdin((*pipe_lst)->limiter_name, pipe_lst))
+	{
+		unlink((*pipe_lst)->limiter_name);
+		return (1);
+	}
+	unlink((*pipe_lst)->limiter_name);
+	return (0);
+}
+
+int	heredoc(char *limiter, t_pipe **pipe_lst)
+{
+	int		quotes;
+	int		status;
+	pid_t	pid;
+
+	quotes = 0;
+	process_limiter(&limiter, &quotes);
+	if (init_heredoc(pipe_lst))
+		return (1);
+	status = 0;
+	signal(SIGINT, SIG_IGN);
+	pid = fork();
+	if (pid == 0)
+		heredoc_child(limiter, pipe_lst, quotes);
+	if (wait_heredoc(pid, &status, *pipe_lst))
+	{
+		free(limiter);
+		if (g_sh.exit == 130)
+			return (2);
+		return (1);
+	}
+	return (heredoc_bis(limiter, pipe_lst));
+}
+
+/*
 int	heredoc(char *limiter, t_pipe **pipe_lst)
 {
 	int		quotes;
@@ -150,7 +154,6 @@ int	heredoc(char *limiter, t_pipe **pipe_lst)
 	return (0);
 }
 
-/*
 int	init_heredoc(t_pipe **pipe_lst)
 {
 	ft_free_null_str(&(*pipe_lst)->limiter_name);
