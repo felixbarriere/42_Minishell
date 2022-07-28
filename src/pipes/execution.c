@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/28 15:53:25 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/28 16:58:19 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,7 @@ void	no_pipe_exec(t_sh *sh, char **env_init)
 	{
 		ft_signals_orchestrator(1);
 		execve(sh->pipe_lst->cmd_verified, sh->pipe_lst->args, env_init);
-		ft_free(sh->env);
-		clear_list(sh->token_lst);
-		clear_list_pipe(sh->pipe_lst);
-		clear_list_env(sh->env_lst);
-		ft_close2();
+		free_free_all(sh);
 		exit(sh->exit);
 	}
 	wait_get_status(sh, 0);

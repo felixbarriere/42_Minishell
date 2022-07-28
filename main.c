@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 18:08:23 by marvin            #+#    #+#             */
-/*   Updated: 2022/07/18 16:45:10 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/28 17:15:49 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	main(int ac, char **av, char **env)
 {
 	(void)ac;
 	(void)av;
+	if (isatty(0) == 0 || isatty(1) == 0)
+		return (0);
 	ft_memset(&g_sh, 0, sizeof(t_sh));
 	if (ac != 1)
 	{
