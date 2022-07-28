@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_f.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:02:46 by ccalas            #+#    #+#             */
-/*   Updated: 2022/07/28 13:32:30 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/28 15:35:04 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,10 @@ int		heredoc(char *limiter, t_pipe **pipe_lst);
 
 /******** HEREDOC_2 ********/
 char	*read_heredoc(t_pipe **pipe_lst, int quotes, char *limiter);
-
+int		init_heredoc(t_pipe **pipe_lst);
+int		heredoc2(char *limiter, t_pipe **pipe_lst, int quotes);
+void	free_free_all(t_sh *sh);
+int		wait_heredoc(pid_t pid, int *status, t_pipe *pipe_lst);
 /******** HEREDOC_UTILS ********/
 int		contains_charset(char *str, char c);
 int		contain_space(char	**value);
@@ -211,6 +214,6 @@ void	control_sigquit(t_sh *sh);
 /******** PIPEX ********/
 void	update_input_output(t_pipe *pipe_lst);
 void	reset_input_output(t_pipe *pipe_lst);
-void	ft_close2();
+void	ft_close2(void);
 
 #endif

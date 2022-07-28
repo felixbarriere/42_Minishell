@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/27 20:56:12 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/28 15:53:25 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,32 +30,18 @@ void	exec2(t_pipe *start, t_sh *sh, int nb_pipes, char **env_init)
 		if (start->is_builtin == 1)
 		{
 			index_builtins(sh, start);
-			ft_free(sh->env);
-			clear_list(sh->token_lst);
-			clear_list_pipe(sh->pipe_lst);
-			clear_list_env(sh->env_lst);
-			ft_close2();
+			free_free_all(sh);
 			exit(sh->exit);
 		}
 		else if (start->cmd_verified != NULL)
-		{
 			execve(start->cmd_verified, start->args, env_init);
-			ft_free(sh->env);
-			clear_list(sh->token_lst);
-			clear_list_pipe(sh->pipe_lst);
-			clear_list_env(sh->env_lst);
-			ft_close2();
-		}
 		else
 		{
 			mess_cmd_not_found(sh, start->cmd);
-			ft_free(sh->env);
-			clear_list(sh->token_lst);
-			clear_list_pipe(sh->pipe_lst);
-			clear_list_env(sh->env_lst);
-			ft_close2();
+			free_free_all(sh);
 			exit (sh->exit);
 		}
+		free_free_all(sh);
 	}
 	reset_input_output(start);
 }
@@ -118,11 +104,6 @@ void	no_pipe_exec(t_sh *sh, char **env_init)
 		ft_close2();
 		exit(sh->exit);
 	}
-	// if ((0 < waitpid(pid, &g_sh.exit, 0)) && (WIFEXITED(g_sh.exit)))
-	// 		g_sh.exit = WEXITSTATUS(g_sh.exit);
-	// 
-	// if (!ft_strcmp(sh->pipe_lst->cmd, "cat"))
-	// 	control_sigquit(sh);
 	wait_get_status(sh, 0);
 	ft_signals_orchestrator(0);
 }

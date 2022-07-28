@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 15:39:55 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/27 14:19:48 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/28 15:46:42 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,26 +33,6 @@ void	open_fdout(t_token *token, t_pipe **pipe_lst)
 	}
 }
 
-int	update_fdout(t_pipe **pipe_lst)
-{
-	t_token	*temp;
-
-	temp = (*pipe_lst)->token;
-	while (temp)
-	{
-		if (temp->type == OUTPUT || temp->type == APPEND)
-		{
-			if ((*pipe_lst)->output != 1)
-				close ((*pipe_lst)->output);
-			open_fdout(temp, pipe_lst);
-			if ((*pipe_lst)->output == -1)
-				return (1);
-		}
-		temp = temp->next;
-	}
-	return (0);
-}
-
 int	open_fdin(char	*value, t_pipe **pipe_lst)
 {
 	(*pipe_lst)->input = open(value, O_RDONLY);
@@ -75,6 +55,15 @@ void	close_fdin(t_pipe **pipe_lst)
 		(*pipe_lst)->heredoc_mode = 0;
 }
 
+int	update_error(int error)
+{
+	if (error == 2)
+		return (2);
+	else if (error)
+		return (1);
+	return (0);
+}
+
 int	update_fdin(t_pipe **pipe_lst)
 {
 	t_token	*temp;
@@ -87,10 +76,8 @@ int	update_fdin(t_pipe **pipe_lst)
 		if (temp->type == INPUT || temp->type == LIMITER)
 		{
 			error = update_fdin_error(temp, *pipe_lst);
-			if (error == 2)
-				return (2);
-			else if (error)
-				return (1);
+			if (error)
+				return (update_error(error));
 		}
 		else if (temp->type == OUTPUT || temp->type == APPEND)
 		{
@@ -104,3 +91,25 @@ int	update_fdin(t_pipe **pipe_lst)
 	}
 	return (0);
 }
+
+/*
+int	update_fdout(t_pipe **pipe_lst)
+{
+	t_token	*temp;
+
+	temp = (*pipe_lst)->token;
+	while (temp)
+	{
+		if (temp->type == OUTPUT || temp->type == APPEND)
+		{
+			if ((*pipe_lst)->output != 1)
+				close ((*pipe_lst)->output);
+			open_fdout(temp, pipe_lst);
+			if ((*pipe_lst)->output == -1)
+				return (1);
+		}
+		temp = temp->next;
+	}
+	return (0);
+}
+*/
