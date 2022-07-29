@@ -73,6 +73,7 @@ void	wait_get_status(t_sh *sh, int nb_pipes)
 	while (i < nb_cmds)
 	{
 		waitpid(start->pid, &sh->exit, 0);
+		// printf("sh->exit = %d\n", sh->exit);
 		if (WIFSIGNALED(sh->exit) && WTERMSIG(sh->exit) == 2)
 		{
 			ft_putstr_fd("\n", 2);
