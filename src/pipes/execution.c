@@ -56,6 +56,8 @@ void	execution_pipe2(t_sh *sh, t_pipe *start, int nb_pipes, char **env_init)
 			index_builtins(sh, start);
 			reset_input_output(start);
 		}
+		else
+			exec2(start, sh, nb_pipes, env_init);
 	}	
 	else
 		exec2(start, sh, nb_pipes, env_init);
@@ -128,6 +130,8 @@ void	execution(t_sh *sh, char **env_init)
 	}
 	else
 		execution_pipe(sh, start, nb_pipes, env_init);
+	if (sh->exit == 13)
+		sh->exit = 127;
 }
 
 /*
