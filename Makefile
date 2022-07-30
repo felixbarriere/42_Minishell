@@ -15,6 +15,7 @@ src/lists/lists_2.c\
 src/lists/lists_3.c\
 src/pipes/pipe_creation.c\
 src/pipes/get_command_path.c\
+src/pipes/get_command_path_2.c\
 src/pipes/execution.c\
 src/pipes/execution_utils.c\
 src/pipes/execution_utils_2.c\
