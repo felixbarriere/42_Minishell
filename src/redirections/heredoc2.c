@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:13:58 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/23 15:12:16 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/30 17:50:53 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	process_eof(char **temp, t_pipe **pipe_lst)
 	ft_free_null_str(temp);
 	close((*pipe_lst)->input);
 	ft_free_null_str(&(*pipe_lst)->limiter_name);
+	free(g_sh.limiter);
+	free_free_all(&g_sh);
 	exit(g_sh.exit);
 }
 

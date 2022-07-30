@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:09:29 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/28 16:13:02 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/30 17:48:51 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	heredoc_child(char *limiter, t_pipe **pipe_lst, int quotes)
 {
 	signal(SIGINT, &heredoc_handler);
 	heredoc2(limiter, pipe_lst, quotes);
-	free (limiter);
+	free(limiter);
 	free_free_all(&g_sh);
 	exit(g_sh.exit);
 }
@@ -88,6 +88,7 @@ int	heredoc(char *limiter, t_pipe **pipe_lst)
 
 	quotes = 0;
 	process_limiter(&limiter, &quotes);
+	g_sh.limiter = limiter;
 	if (init_heredoc(pipe_lst))
 		return (1);
 	status = 0;

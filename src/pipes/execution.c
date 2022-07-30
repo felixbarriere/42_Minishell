@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/30 15:37:41 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/30 18:15:25 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	execution_pipe2(t_sh *sh, t_pipe *start, int nb_pipes, char **env_init)
 	if (start->is_builtin == 1)
 	{	
 		if (!ft_strcmp(start->cmd, "env") || !ft_strcmp(start->cmd, "export")
-			|| !ft_strcmp(start->cmd, "unset")) //!ft_strcmp(start->cmd, "export") || !ft_strcmp(start->cmd, "unset")
+			|| !ft_strcmp(start->cmd, "unset"))
 		{
 			if (sh->exit == 127)
 				sh->exit = 0;
@@ -88,7 +88,6 @@ void	execution_pipe(t_sh *sh, t_pipe *start, int nb_pipes, char **env_init)
 		start = start->next;
 	}
 	ft_close(sh, nb_pipes);
-	printf("cmd Valide %d\n", sh->exec_nb_cmds_valids);
 	wait_get_status(sh, nb_pipes);
 }
 
@@ -107,7 +106,6 @@ void	no_pipe_exec(t_sh *sh, char **env_init)
 		free_free_all(sh);
 		exit(sh->exit);
 	}
-	// wait_get_status(sh, 0);
 	wait_get_status_no_pipe(sh);
 	ft_signals_orchestrator(0);
 }
