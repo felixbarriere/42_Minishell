@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:27:17 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/30 19:14:16 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/30 19:29:19 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	com_line_path(char **path, char *cmd)
 	int		i;
 
 	i = 0;
-	printf("com_line_path command: %s\n", cmd);
 	while (!ft_strncmp(cmd, "/", 1) && path[i] && cmd != NULL)
 	{
 		if (access(cmd, F_OK) == 0)
@@ -39,7 +38,6 @@ char	*com_line(char **path, char *cmd)
 	path_slash = NULL;
 	path_complete = NULL;
 	i = 0;
-	printf("com_line command: %s\n", cmd);
 	while (path[i] && cmd != NULL)
 	{
 		path_slash = ft_strjoin_path(path[i], "/");
@@ -77,9 +75,7 @@ void	get_command_path_2(t_pipe	*pipe_lst, t_sh *sh)
 			&& ft_strncmp(pipe_lst->cmd, "./", 2) == 0)
 		{
 			executable = get_exec(pipe_lst->cmd);
-			printf("executable: %s\n", executable);
 			pipe_lst->cmd_verified = ft_strdup(executable);
-			printf("pipe_lst->cmd_verified: %s\n", pipe_lst->cmd_verified);
 			free(executable);
 			if (access(pipe_lst->cmd_verified, F_OK) != 0)
 			{

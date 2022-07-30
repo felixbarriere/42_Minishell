@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 11:18:45 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/30 15:47:55 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/30 19:29:04 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,73 +14,6 @@
 #include "../../include/minishell_d.h"
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
-
-// void	delete_env(t_env *env_lst)  //utiliser une temp?
-// {
-// 	t_env *temp;
-
-// 	temp = env_lst;
-// 	if (temp->prev)
-// 	{
-// 		printf("prev existe\n");
-// 		temp->prev->next = temp->next;
-// 	}
-// 	if (temp->next)
-// 	{
-// 		printf("next existe\n");
-// 		temp->next->prev = temp->prev;
-// 	}
-// 	printf("test\n");
-// 	if (!temp->prev)
-// 	{
-// 		printf("test2\n");
-// 		printf("temp->key: %s\n", temp->key);
-// 		temp = temp->next;
-// 		printf("test3\n");
-// 		printf("temp->key: %s\n", temp->key);
-// 		printf("temp->prev->key: %s\n", temp->prev->key);
-// 		free(temp->prev->key);
-// 		free(temp->prev->value);
-// 		free(temp->prev);
-// 		env_lst = temp;
-// 		return ;
-// 	}
-// 	free(temp->key);
-// 	free(temp->value);
-// 	free(temp);
-// 	env_lst = temp;
-// }
-
-// void	print_tokens_env(t_env *li)
-// {
-// 	while (li != NULL)
-// 	{
-// 		printf("\n");
-// 		printf("[%s] = [%s]", li->key, li->value);
-// 		li = li->next;
-// 	}
-// 	printf("\n");
-// }
-
-// t_env	*remove_first_env(t_env *env_lst, t_sh *sh)
-// {
-// 	(void)sh;
-// 	// (void)env_lst;
-// 	t_env	*first;
-
-// 	first = env_lst->next;
-// 	// if (env_lst->key)
-// 		free(env_lst->key);
-// 	// if (env_lst->value)
-// 		free(env_lst->value);
-// 	// if (env_lst)
-// 	// {
-// 		free(env_lst);
-// 		env_lst = NULL;
-// 	// }
-// 	// env_lst = first;
-// 	return (first);
-// }
 
 void	delete_env(t_env *env_lst)
 {

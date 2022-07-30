@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:02:46 by ccalas            #+#    #+#             */
-/*   Updated: 2022/07/30 19:26:52 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/30 19:52:02 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,10 +185,11 @@ void	echo_command(t_sh *sh, t_pipe *pipe_lst);
 int		only_n(char	*str);
 void	env_command(t_sh *sh, t_pipe *pipe_lst);
 void	export_command(t_sh *sh, t_pipe *start);
+void	update_value_null(t_env	*list, char *key);
 int		is_in_env(char	*key, t_env	*list);
 int		contains_equal(char *str, t_sh *sh);
 char	*delete_plus(char *src);
-void	global_get_value(char **key_value, t_sh *sh);
+void	global_get_value(char **key_value, t_sh *sh, char *value, char* for_val);
 void	update_value(t_env	*list, char	*value, char *key);
 char	*get_value(char **key_value);
 char	*get_former_value(char *key, t_env *list);

@@ -43,7 +43,8 @@ t_env	*create_env_token(char *value, char *key, int index)
 		return (NULL);
 	elem->type = ENV;
 	elem->key = ft_strdup(key);
-	elem->value = ft_strdup(value);
+	if (value)
+		elem->value = ft_strdup(value);
 	elem->index = index;
 	elem->next = NULL;
 	elem->prev = NULL;
@@ -99,7 +100,8 @@ void	orchestrate_env_token(char *env_init, t_sh *sh, int index)
 	key = get_key(env_init);
 	value = ft_substr(env_init, (ft_strlen(key) + 1), ft_strlen(env_init));
 	sh->env_lst = add_back_env_token(sh->env_lst, value, key, index);
-	free(value);
+	if (value)
+		free(value);
 	free(key);
 }
 

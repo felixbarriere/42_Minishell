@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 16:08:51 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/30 15:47:07 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/30 19:52:43 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,16 +94,16 @@ void	update_value_2(t_env	*list, char	*value, char *key)
 	list = temp;
 }
 
-void	global_get_value(char **key_value, t_sh *sh)
+void	global_get_value(char **key_value, t_sh *sh, char *value, char *for_val)
 {
-	char	*value;
-	char	*former_value;
 	char	**key_value_init;
 
-	value = NULL;
-	former_value = NULL;
 	if (!ft_strcmp(key_value[1], "(null)") || key_value[1] == NULL)
+	{
+		update_value_null(sh->env_lst, key_value[0]);
+		update_path(sh, key_value[0]);
 		return ;
+	}
 	key_value_init = ft_split(sh->pipe_lst->args[1], '=');
 	if (!ft_strcmp(key_value[0], key_value_init[0]))
 	{
@@ -113,8 +113,8 @@ void	global_get_value(char **key_value, t_sh *sh)
 	}	
 	else
 	{
-		former_value = get_former_value(key_value[0], sh->env_lst);
-		value = ft_strjoin(former_value, key_value_init[1]);
+		for_val = get_former_value(key_value[0], sh->env_lst);
+		value = ft_strjoin(for_val, key_value_init[1]);
 		update_value_2(sh->env_lst, value, key_value[0]);
 		update_path(sh, key_value[0]);
 		free(value);
