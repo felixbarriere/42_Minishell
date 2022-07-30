@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:09:29 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/30 12:36:14 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/30 17:33:40 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ void	ft_close2(void)
 void	free_free_all(t_sh *sh)
 {
 	ft_free(sh->env);
+	ft_free(sh->path);
+	if (sh->prompt)
+		free(sh->prompt);
 	clear_list(sh->token_lst);
 	clear_list_pipe(sh->pipe_lst);
 	clear_list_env(sh->env_lst);

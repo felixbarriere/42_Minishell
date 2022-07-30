@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 16:53:47 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/27 17:50:08 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/30 17:29:46 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,16 @@ void	ft_free(char **str)
 	int	i;
 
 	i = 0;
-	while (str[i])
+	if (str)
 	{
+		while (str[i])
+		{
+			free(str[i]);
+			i++;
+		}
 		free(str[i]);
-		i++;
+		free(str);
 	}
-	free(str[i]);
-	free(str);
-	str = NULL;
 }
 
 void	ft_free_2(char *str)

@@ -38,6 +38,8 @@ void	heredoc_handler(int signal)
 		rl_replace_line("", 0);
 		g_sh.error = 1;
 		g_sh.exit = 130;
+		free(g_sh.limiter);
+		free_free_all(&g_sh);
 		exit (130);
 	}
 }
@@ -50,6 +52,8 @@ void	ft_sigquit_handler(int signal)
 		rl_replace_line("", 0);
 		g_sh.error = 1;
 		g_sh.exit = 131;
+		free(g_sh.limiter);
+		free_free_all(&g_sh);
 		exit (131);
 	}
 }

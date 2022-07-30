@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/30 15:51:04 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/30 17:39:39 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	execution_pipe3(t_sh *sh)
 
 void	wait_get_status3(t_pipe *start, t_sh *sh)
 {
+	// printf("sh->exit = %d\n", sh->exit);
 	if (start->pid != -1 && (0 < waitpid(start->pid, &sh->exit, 0))
 		&& start->cmd_verified)
 		sh->exit = WEXITSTATUS(sh->exit);
@@ -56,8 +57,10 @@ void	wait_get_status(t_sh *sh, int nb_pipes)
 	i = 0;
 	while (i < nb_cmds)
 	{
+		// printf("BEFORE i = %d | exit = %d\n", i, sh->exit);
 		waitpid(start->pid, &sh->exit, 0);
-		if (sh->exec_nb_cmds_valids - 1 == nb_pipes && (sh->exit) && WTERMSIG(sh->exit) == 2)
+		// printf("AFTER i = %d | exit = %d\n", i, sh->exit);
+		if (sh->exec_nb_cmds_valids - 1 == nb_pipes && WIFSIGNALED(sh->exit) && WTERMSIG(sh->exit) == 2)
 		{
 			ft_putstr_fd("\n", 2);
 			sh->exit = 0;
