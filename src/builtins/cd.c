@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:12:23 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/25 14:52:30 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/30 15:49:49 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,21 +89,21 @@ void	change_old_pwd(t_sh	*sh, char *old_path)
 	sh->env_lst = start;
 }
 
-void	cd_command(t_sh *sh)
+void	cd_command(t_sh	*sh, t_pipe *pipe_lst)
 {
 	char	old_path[256];
 
 	if (getcwd(old_path, sizeof(old_path)) != NULL
-		|| !(sh->pipe_lst->token->next))
+		|| !(pipe_lst->token->next))
 	{
-		if ((sh->pipe_lst->token->next) && !(sh->pipe_lst->token->next->next))
+		if ((pipe_lst->token->next) && !(pipe_lst->token->next->next))
 		{
-			if (chdir(sh->pipe_lst->token->next->value) == -1)
-				error_cd(sh->pipe_lst->token->next->value);
+			if (chdir(pipe_lst->token->next->value) == -1)
+				error_cd(pipe_lst->token->next->value);
 			else
 				change_all_pwd(sh, old_path);
 		}
-		else if (!(sh->pipe_lst->token->next))
+		else if (!(pipe_lst->token->next))
 			cd_home(sh, old_path);
 		else
 		{

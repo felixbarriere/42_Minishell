@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:40 by fbarrier          #+#    #+#             */
 /*   Updated: 2022/07/30 15:37:41 by ccalas           ###   ########.fr       */
@@ -50,8 +50,8 @@ void	execution_pipe2(t_sh *sh, t_pipe *start, int nb_pipes, char **env_init)
 {
 	if (start->is_builtin == 1)
 	{	
-		if (!ft_strcmp(start->cmd, "export") || !ft_strcmp(start->cmd, "env")
-			|| !ft_strcmp(start->cmd, "unset"))
+		if (!ft_strcmp(start->cmd, "env") || !ft_strcmp(start->cmd, "export")
+			|| !ft_strcmp(start->cmd, "unset")) //!ft_strcmp(start->cmd, "export") || !ft_strcmp(start->cmd, "unset")
 		{
 			if (sh->exit == 127)
 				sh->exit = 0;

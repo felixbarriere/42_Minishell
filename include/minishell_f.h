@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_f.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:02:46 by ccalas            #+#    #+#             */
 /*   Updated: 2022/07/30 15:37:24 by ccalas           ###   ########.fr       */
@@ -173,16 +173,16 @@ void	clear_list_pipe(t_pipe *a_list);
 /******** EXECUTION ********/
 void	execution(t_sh	*sh, char **env_init);
 void	index_builtins(t_sh	*sh, t_pipe *start);
-void	cd_command(t_sh	*sh);
+void	cd_command(t_sh	*sh, t_pipe *pipe_lst);
 void	error_cd(char	*bad_dir);
 void	cd_home(t_sh *sh, char *old_path);
 void	change_all_pwd(t_sh *sh, char *old_path);
 void	change_pwd(t_sh	*sh, char *path);
 void	change_old_pwd(t_sh	*sh, char *old_path);
-void	pwd_command(t_pipe	*pipe);
-void	echo_command(t_pipe	*pipe);
+void	pwd_command(t_sh *sh, t_pipe	*pipe);
+void	echo_command(t_sh *sh, t_pipe *pipe_lst);
 int		only_n(char	*str);
-void	env_command(t_sh	*sh);
+void	env_command(t_sh *sh, t_pipe *pipe_lst);
 void	export_command(t_sh *sh, t_pipe *start);
 int		is_in_env(char	*key, t_env	*list);
 int		contains_equal(char *str, t_sh *sh);
@@ -191,7 +191,7 @@ void	global_get_value(char **key_value, t_sh *sh);
 void	update_value(t_env	*list, char	*value, char *key);
 char	*get_value(char **key_value);
 char	*get_former_value(char *key, t_env *list);
-void	unset_command(t_sh *sh);
+void	unset_command(t_sh *sh, t_pipe *pipe_lst);
 void	exit_command(t_sh *sh, t_pipe *pipe_lst);
 int		is_in_range(char *str);
 int		check_min(char *str);
