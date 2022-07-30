@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 11:18:45 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/28 16:53:06 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/30 15:47:55 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,8 @@ void	update_path(t_sh *sh, char *key)
 
 int	ft_isalnum_2(int c)
 {
-	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_')
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_'
+		|| c == ';')
 		return (1);
 	else if (c >= '0' && c <= '9')
 		return (1);
@@ -150,21 +151,22 @@ int	identifier_is_valid(char *str, t_sh *sh)
 		}
 		i++;
 	}
+	sh->exit = 0;
 	return (1);
 }
 
-void	unset_command(t_sh *sh)
+void	unset_command(t_sh *sh, t_pipe *pipe_lst)
 {
 	t_env	*start;
 	int		i;
 
-	i = 0;
+	i = 1;
 	start = sh->env_lst;
-	while (sh->pipe_lst->args[i])
+	while (pipe_lst->args[i])
 	{
-		while (sh->env_lst && identifier_is_valid(sh->pipe_lst->args[i], sh))
+		while (sh->env_lst && identifier_is_valid(pipe_lst->args[i], sh))
 		{
-			if (!ft_strcmp(sh->pipe_lst->args[i], sh->env_lst->key))
+			if (!ft_strcmp(pipe_lst->args[i], sh->env_lst->key))
 			{
 				if (!sh->env_lst->prev)
 					start = start->next;

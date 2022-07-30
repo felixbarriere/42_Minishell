@@ -78,7 +78,7 @@ void	print_args(char **args, int args_number)
 	ft_putchar_fd('\n', 1);
 }
 
-void	echo_command(t_pipe	*pipe)
+void	echo_command(t_sh	*sh, t_pipe	*pipe)
 {
 	int		i;
 	int		args_number;
@@ -96,7 +96,9 @@ void	echo_command(t_pipe	*pipe)
 			print_args_2(pipe->args, args_number, pipe->token->next->type);
 		else
 			print_args(pipe->args, args_number);
+		sh->exit = 0;
 	}
 	else
 		ft_putstr_fd("\n", 2);
+	sh->exit = 0;
 }

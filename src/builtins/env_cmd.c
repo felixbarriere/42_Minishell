@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 15:55:51 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/28 13:25:39 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/30 13:00:49 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@ int	ft_strchr2(const char *str, int to_find_char)
 	return (0);
 }
 
-void	env_command(t_sh	*sh)
+void	env_command(t_sh	*sh, t_pipe *pipe_lst)
 {
 	t_env	*start;
 
 	start = sh->env_lst;
-	if (sh->pipe_lst->args[1])
+	if (pipe_lst->args[1])
 	{
 		ft_putstr_fd("env: ‘", 2);
-		ft_putstr_fd(sh->pipe_lst->args[1], 2);
+		ft_putstr_fd(pipe_lst->args[1], 2);
 		ft_putstr_fd("’: No such file or directory\n", 2);
 		sh->exit = 127;
 		return ;
@@ -49,6 +49,7 @@ void	env_command(t_sh	*sh)
 		sh->env_lst = sh->env_lst->next;
 	}
 	sh->env_lst = start;
+	sh->exit = 0;
 }
 
 void	env_command_export(t_sh	*sh)
