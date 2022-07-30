@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:02:46 by ccalas            #+#    #+#             */
-/*   Updated: 2022/07/30 19:13:21 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/30 19:26:52 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,6 +212,7 @@ void	wait_get_status(t_sh *sh, int nb_pipes);
 void	execution_pipe3(t_sh *sh);
 void	control_sigquit(t_sh *sh);
 
+void	wait_get_status_no_pipe(t_sh *sh);
 /******** PIPEX ********/
 void	update_input_output(t_pipe *pipe_lst);
 void	reset_input_output(t_pipe *pipe_lst);

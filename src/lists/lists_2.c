@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lists_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:51:18 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/28 13:28:07 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/30 18:13:36 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,12 @@ void	ft_set_null_free_elem_pipe(t_pipe *elem)
 		free(elem->args[i]);
 		free (elem->args);
 	}
-	free (elem->cmd);
-	free (elem->limiter_name);
-	free (elem->cmd_verified);
+	// if (elem->cmd)
+		free(elem->cmd);
+	// if (elem->limiter_name)
+		free(elem->limiter_name);
+	// if (elem->cmd_verified)
+		free(elem->cmd_verified);
 	while (elem->token)
 	{
 		tmp = (elem->token)->next;
