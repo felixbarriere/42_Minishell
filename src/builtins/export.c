@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 12:08:45 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/26 13:51:34 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/30 13:28:44 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void	export_command_2(t_sh *sh, char *str)
 		ft_free(key_value);
 		if (sh->path == NULL)
 			get_path(sh);
+		sh->exit = 0;
 	}
 	if (str)
 		free(str_2);

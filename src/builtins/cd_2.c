@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 16:47:49 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/25 14:43:06 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/30 13:09:55 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	cd_home(t_sh *sh, char *old_path)
 		change_old_pwd(sh, old_path);
 		change_pwd(sh, expander(sh, "HOME"));
 	}
+	sh->exit = 0;
 }
 
 void	change_all_pwd(t_sh *sh, char *old_path)
@@ -49,4 +50,5 @@ void	change_all_pwd(t_sh *sh, char *old_path)
 	getcwd(path, sizeof(path));
 	change_old_pwd(sh, old_path);
 	change_pwd(sh, path);
+	sh->exit = 0;
 }

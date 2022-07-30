@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   index.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 16:12:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/27 15:19:56 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/30 13:02:43 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,17 @@
 void	index_builtins(t_sh	*sh, t_pipe *start)
 {
 	if (!ft_strcmp(start->cmd, "cd"))
-		cd_command(sh);
+		cd_command(sh, start);
 	else if (!ft_strcmp(start->cmd, "pwd"))
-		pwd_command(start);
+		pwd_command(sh, start);
 	else if (!ft_strcmp(start->cmd, "echo"))
-		echo_command(start);
+		echo_command(sh, start);
 	else if (!ft_strcmp(start->cmd, "env"))
-		env_command(sh);
+		env_command(sh, start);
 	else if (!ft_strcmp(start->cmd, "export"))
 		export_command(sh, start);
 	else if (!ft_strcmp(start->cmd, "unset"))
-		unset_command(sh);
+		unset_command(sh, start);
 	else if (!sh->prompt || !ft_strcmp(start->cmd, "exit"))
 	{
 		exit_command(sh, start);
