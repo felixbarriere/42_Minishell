@@ -17,9 +17,11 @@ src/pipes/pipe_creation.c\
 src/pipes/get_command_path.c\
 src/pipes/get_command_path_2.c\
 src/pipes/execution.c\
+src/pipes/execution_no_pipe.c\
+src/pipes/execution_pipes.c\
 src/pipes/execution_utils.c\
-src/pipes/execution_utils_2.c\
-src/pipes/execution_utils3.c\
+src/pipes/execution_in_output.c\
+src/pipes/execution_wait_status.c\
 src/redirections/get_command_type.c\
 src/redirections/get_command_type_utils.c\
 src/redirections/redirections.c\

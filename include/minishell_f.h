@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_f.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:02:46 by ccalas            #+#    #+#             */
-/*   Updated: 2022/07/30 19:52:02 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/31 15:08:30 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 /**************** FUNCTIONS ****************/
 /******** MAIN ********/
+void	last_cmd(t_sh *sh);
 void	ft_init_values(t_sh *sh, char **env);
 
 /******** INIT ********/
@@ -172,7 +173,6 @@ void	ft_set_null_free_elem_pipe(t_pipe *elem);
 void	clear_list_pipe(t_pipe *a_list);
 
 /******** EXECUTION ********/
-void	execution(t_sh	*sh, char **env_init);
 void	index_builtins(t_sh	*sh, t_pipe *start);
 void	cd_command(t_sh	*sh, t_pipe *pipe_lst);
 void	error_cd(char	*bad_dir);
@@ -189,7 +189,8 @@ void	update_value_null(t_env	*list, char *key);
 int		is_in_env(char	*key, t_env	*list);
 int		contains_equal(char *str, t_sh *sh);
 char	*delete_plus(char *src);
-void	global_get_value(char **key_value, t_sh *sh, char *value, char* for_val);
+void	global_get_value(char **key_value, t_sh *sh, char *value,
+			char *for_val);
 void	update_value(t_env	*list, char	*value, char *key);
 char	*get_value(char **key_value);
 char	*get_former_value(char *key, t_env *list);
@@ -199,26 +200,38 @@ int		is_in_range(char *str);
 int		check_min(char *str);
 int		ft_strlen_3(const char *s);
 
-/******** EXECUTION_UTILS ********/
-void	reset_input_output(t_pipe *pipe_lst);
+/******** EXECUTION ********/
+void	execution(t_sh *sh, char **env_init);
+int		nb_pipe(t_pipe *pipe_lst);
+void	init_pipe(t_pipe *start, int nb_pipes);
+
+/******** EXECUTION_IN_OUPUT ********/
 void	update_input_output(t_pipe *pipe_lst);
+void	reset_input_output(t_pipe *pipe_lst);
+
+/******** EXECUTION_UTILS ********/
 void	ft_close(t_sh *sh, int nb_pipes);
 void	ft_switch(t_pipe *start, int k);
 void	mess_cmd_not_found(t_sh *sh, char *cmd);
-void	init_pipe(t_pipe *start, int nb_pipes);
-int		nb_pipe(t_pipe *pipe_lst);
+char	*ft_strjoin_path_2(char *dest, char *s1, char *s2);
+char	*ft_strjoin_path(char *s1, char *s2);
+
+/******** EXECUTION_NO_PIPE ********/
+void	no_pipe_exec(t_sh *sh, char **env_init);
+void	wait_get_status_no_pipe(t_sh *sh);
+
+/******** EXECUTION_PIPE ********/
+void	execution_pipe(t_sh *sh, t_pipe *start, int nb_pipes, char **env_init);
+
+/******** EXECUTION_WAIT_STATUS ********/
+void	wait_get_status(t_sh *sh, int nb_pipes);
+
 void	update_path(t_sh *sh, char *key);
 void	env_command_export(t_sh	*sh);
 void	wait_get_status(t_sh *sh, int nb_pipes);
-void	execution_pipe3(t_sh *sh);
 void	control_sigquit(t_sh *sh);
-
-void	wait_get_status_no_pipe(t_sh *sh);
 /******** PIPEX ********/
-void	update_input_output(t_pipe *pipe_lst);
-void	reset_input_output(t_pipe *pipe_lst);
 void	ft_close2(void);
-
 void	free_free_all(t_sh *sh);
 
 #endif
