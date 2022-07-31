@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/31 14:57:49 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/31 15:38:58 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	execution(t_sh *sh, char **env_init)
 	t_pipe	*start;
 
 	start = sh->pipe_lst;
+	sh->exec_pipe_k = 0;
 	nb_pipes = nb_pipe(sh->pipe_lst);
 	if (nb_pipes == 0)
 	{
