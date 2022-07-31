@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/30 18:15:25 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/31 13:41:15 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	execution_pipe(t_sh *sh, t_pipe *start, int nb_pipes, char **env_init)
 		ft_switch(start, sh->exec_pipe_k);
 		if (start->is_builtin != 1 && start->cmd_verified == NULL)
 		{
+			start->cmd_ok = 1;
 			mess_cmd_not_found(sh, start->cmd);
 			reset_input_output(sh->pipe_lst);
 			start = start->next;

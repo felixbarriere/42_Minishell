@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:43:57 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/27 20:42:55 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/31 13:40:21 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,17 @@ void	ft_prompt_init2(t_sh *sh, char **env_init)
 	get_path(sh);
 }
 
+void	last_cmd(t_sh *sh)
+{
+	t_pipe *start;
+
+	start = sh->pipe_lst;
+	while (start->next)
+		start= start->next;
+	if (start && start->cmd_ok == 1)
+		sh->exit = 127;
+}
+
 void	ft_prompt_init(t_sh *sh, char **env_init)
 {
 	ft_prompt_init2(sh, env_init);
@@ -98,6 +109,8 @@ void	ft_prompt_init(t_sh *sh, char **env_init)
 			sh->exit = 0;
 		if (!is_only_space(sh->prompt))
 			execution(sh, sh->env);
+		if (nb_pipe(sh->pipe_lst))
+			last_cmd(sh);
 		clear_list(sh->token_lst);
 		clear_list_pipe(sh->pipe_lst);
 		ft_init_values(sh, sh->env);
