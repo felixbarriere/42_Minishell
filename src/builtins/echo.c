@@ -98,6 +98,12 @@ void	echo_command(t_sh	*sh, t_pipe	*pipe)
 			print_args(pipe->args, args_number);
 		sh->exit = 0;
 	}
+	else if (nb_pipe(sh->pipe_lst) == 0)
+		ft_putstr_fd("\n", 2);
+	else if (nb_pipe(sh->pipe_lst) > 0 && sh->exec_pipe_k == 0)
+	{
+		ft_putstr_fd("", 2);
+	}
 	else
 		ft_putstr_fd("\n", 2);
 	sh->exit = 0;

@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/07/31 14:25:53 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/31 17:16:27 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ typedef struct s_pipe
 /* structure principale du programe */
 typedef struct s_sh
 {
-	int		exec_pipe_i;
 	int		exec_pipe_k;
 	int		exec_nb_cmds_valids;
 	char	**env;

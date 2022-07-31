@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/31 14:58:25 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/31 17:49:36 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,6 @@
 #include "../../include/minishell_s.h"
 
 extern t_sh	g_sh;
-
-void	execution_pipe3(t_sh *sh)
-{
-	if (sh->exec_pipe_k % 2 != 0)
-		sh->exec_pipe_i++;
-	sh->exec_pipe_k++;
-}
 
 void	exec2(t_pipe *start, t_sh *sh, int nb_pipes, char **env_init)
 {
@@ -73,10 +66,21 @@ void	execution_pipe2(t_sh *sh, t_pipe *start, int nb_pipes, char **env_init)
 	sh->exec_nb_cmds_valids++;
 }
 
+void	ft_switch(t_pipe *start, int k)
+{	
+	if (!k)
+		dup2(start->fd[1], start->output);
+	else if (k && !start->next)
+		dup2(start->prev->fd[0], start->input);
+	else if (k && start->next)
+	{
+		dup2(start->prev->fd[0], start->input);
+		dup2(start->fd[1], start->output);
+	}
+}
+
 void	execution_pipe_init(t_sh *sh, t_pipe *start, int nb_pipes)
 {
-	sh->exec_pipe_k = 0;
-	sh->exec_pipe_i = 0;
 	sh->exec_nb_cmds_valids = 0;
 	init_pipe(start, nb_pipes);
 }
@@ -92,7 +96,7 @@ void	execution_pipe(t_sh *sh, t_pipe *start, int nb_pipes, char **env_init)
 			start = start->next;
 			continue ;
 		}
-		update_input_output(start);
+		update_input_output(start);	
 		ft_switch(start, sh->exec_pipe_k);
 		if (start->is_builtin != 1 && start->cmd_verified == NULL)
 		{
@@ -103,7 +107,7 @@ void	execution_pipe(t_sh *sh, t_pipe *start, int nb_pipes, char **env_init)
 			continue ;
 		}
 		execution_pipe2(sh, start, nb_pipes, env_init);
-		execution_pipe3(sh);
+		sh->exec_pipe_k++;
 		start = start->next;
 	}
 	ft_close(sh, nb_pipes);
