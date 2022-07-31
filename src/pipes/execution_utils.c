@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution_utils.c                                  :+:      :+:    :+:   */
+/*   execution_utils_2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/14 14:52:05 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/22 13:56:00 by ccalas           ###   ########.fr       */
+/*   Created: 2022/07/14 14:57:13 by fbarrier          #+#    #+#             */
+/*   Updated: 2022/07/31 14:45:35 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,33 @@
 #include "../../include/minishell_f.h"
 #include "../../include/minishell_s.h"
 
-extern t_sh	g_sh;
-
-void	reset_input_output(t_pipe *pipe_lst)
+void	ft_close(t_sh *sh, int nb_pipes)
 {
-	dup2(pipe_lst->cpy_input, 0);
-	dup2(pipe_lst->cpy_output, 1);
-	close(pipe_lst->cpy_input);
-	close(pipe_lst->cpy_output);
-	if (pipe_lst->input != 0 && pipe_lst->input != -1)
-		close(pipe_lst->input);
-	if (pipe_lst->output != 1 && pipe_lst->output != -1)
-		close(pipe_lst->output);
+	t_pipe	*start;
+	int		i;
+
+	start = sh->pipe_lst;
+	i = 0;
+	while (i < nb_pipes)
+	{
+		close(start->fd[0]);
+		close(start->fd[1]);
+		start = start->next;
+		i++;
+	}
 }
 
-void	update_input_output(t_pipe *pipe_lst)
-{
-	pipe_lst->cpy_input = dup(0);
-	pipe_lst->cpy_output = dup(1);
-	dup2(pipe_lst->input, 0);
-	dup2(pipe_lst->output, 1);
+void	ft_switch(t_pipe *start, int k)
+{	
+	if (!k)
+		dup2(start->fd[1], start->output);
+	else if (k && !start->next)
+		dup2(start->prev->fd[0], start->input);
+	else if (k && start->next)
+	{
+		dup2(start->prev->fd[0], start->input);
+		dup2(start->fd[1], start->output);
+	}
 }
 
 void	mess_cmd_not_found(t_sh *sh, char *cmd)
@@ -49,31 +56,45 @@ void	mess_cmd_not_found(t_sh *sh, char *cmd)
 	reset_input_output(sh->pipe_lst);
 }
 
-void	init_pipe(t_pipe *start, int nb_pipes)
+char	*ft_strjoin_path_2(char *dest, char *s1, char *s2)
 {
-	int	i;
+	int		i;
+	int		j;
 
 	i = 0;
-	while (i < nb_pipes)
+	j = 0;
+	while (s1[i] != '\0')
 	{
-		if (pipe(start->fd) == -1)
-			return ;
-		start = start->next;
+		dest[i] = s1[i];
 		i++;
 	}
+	while (s2[j] != '\0')
+	{
+		dest[i] = s2[j];
+		j++;
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }
 
-int	nb_pipe(t_pipe *pipe_lst)
+char	*ft_strjoin_path(char *s1, char *s2)
 {
-	int		nb_pipes;
-	t_pipe	*start;
+	char	*dest;
 
-	start = pipe_lst;
-	nb_pipes = 0;
-	while (start->next)
+	if (!s1)
 	{
-		nb_pipes++;
-		start = start->next;
+		s1 = malloc(sizeof(char) * 1);
+		s1[0] = '\0';
 	}
-	return (nb_pipes);
+	if (!s2)
+	{
+		s2 = malloc(sizeof(char) * 1);
+		s2[0] = '\0';
+	}
+	dest = ft_calloc(sizeof(char), (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!dest)
+		return (NULL);
+	dest = ft_strjoin_path_2(dest, s1, s2);
+	return (dest);
 }

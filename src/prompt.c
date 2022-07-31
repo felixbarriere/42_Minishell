@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:43:57 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/31 13:40:21 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/31 15:08:15 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,17 +77,6 @@ void	ft_prompt_init2(t_sh *sh, char **env_init)
 	get_path(sh);
 }
 
-void	last_cmd(t_sh *sh)
-{
-	t_pipe *start;
-
-	start = sh->pipe_lst;
-	while (start->next)
-		start= start->next;
-	if (start && start->cmd_ok == 1)
-		sh->exit = 127;
-}
-
 void	ft_prompt_init(t_sh *sh, char **env_init)
 {
 	ft_prompt_init2(sh, env_init);
@@ -98,7 +87,7 @@ void	ft_prompt_init(t_sh *sh, char **env_init)
 		sh->lenght = ft_strlen(sh->prompt);
 		if (!is_only_space(sh->prompt))
 			lexer(sh);
-		if (sh->error)
+		if (sh->error && sh->error != 3)
 		{
 			clear_list(sh->token_lst);
 			clear_list_pipe(sh->pipe_lst);

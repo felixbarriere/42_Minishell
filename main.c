@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 18:08:23 by marvin            #+#    #+#             */
-/*   Updated: 2022/07/28 17:15:49 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/31 15:08:20 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,17 @@
 #include "include/minishell_s.h"
 
 t_sh	g_sh;
+
+void	last_cmd(t_sh *sh)
+{
+	t_pipe	*start;
+
+	start = sh->pipe_lst;
+	while (start->next)
+		start = start->next;
+	if (start && start->cmd_ok == 1)
+		sh->exit = 127;
+}
 
 int	main(int ac, char **av, char **env)
 {

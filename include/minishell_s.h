@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 18:02:57 by ccalas            #+#    #+#             */
-/*   Updated: 2022/07/31 13:38:05 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/31 14:25:53 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_pipe
 {
 	pid_t			pid;
 	t_token			*token;
+	int				pipe_ok;
 	int				cmd_ok;
 	int				fd[2];
 	int				cpy_input;

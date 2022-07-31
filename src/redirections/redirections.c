@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 15:39:55 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/28 15:46:42 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/31 14:25:39 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,14 @@ int	open_fdin(char	*value, t_pipe **pipe_lst)
 	(*pipe_lst)->input = open(value, O_RDONLY);
 	if ((*pipe_lst)->input == -1)
 	{
+		(*pipe_lst)->input = 0;
 		ft_putstr_fd("bash: ", 2);
 		ft_putstr_fd(value, 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
 		g_sh.exit = 1;
-		return (1);
+		g_sh.error = 3;
+		(*pipe_lst)->pipe_ok = 1;
+		return (3);
 	}
 	return (0);
 }
@@ -77,7 +80,7 @@ int	update_fdin(t_pipe **pipe_lst)
 		{
 			error = update_fdin_error(temp, *pipe_lst);
 			if (error)
-				return (update_error(error));
+				return (error);
 		}
 		else if (temp->type == OUTPUT || temp->type == APPEND)
 		{
