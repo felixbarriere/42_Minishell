@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/31 15:38:58 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/07/31 18:45:31 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,21 @@ void	execution(t_sh *sh, char **env_init)
 	nb_pipes = nb_pipe(sh->pipe_lst);
 	if (nb_pipes == 0)
 	{
-		update_input_output(sh->pipe_lst);
-		if (sh->pipe_lst->is_builtin == 1)
-			index_builtins(sh, start);
-		else if (sh->pipe_lst->cmd_verified != NULL)
-			no_pipe_exec(sh, env_init);
-		else
+		if (start->pipe_ok != 1)
 		{
-			mess_cmd_not_found(sh, sh->pipe_lst->cmd);
+			update_input_output(sh->pipe_lst);
+			if (sh->pipe_lst->is_builtin == 1)
+				index_builtins(sh, start);
+			else if (sh->pipe_lst->cmd_verified != NULL)
+				no_pipe_exec(sh, env_init);
+			else
+			{
+				mess_cmd_not_found(sh, sh->pipe_lst->cmd);
+				reset_input_output(sh->pipe_lst);
+				return ;
+			}
 			reset_input_output(sh->pipe_lst);
-			return ;
 		}
-		reset_input_output(sh->pipe_lst);
 	}
 	else
 		execution_pipe(sh, start, nb_pipes, env_init);
