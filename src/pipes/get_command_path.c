@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:27:17 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/30 19:29:19 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/31 19:00:20 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	get_command_path(t_sh	*sh)
 	t_pipe	*temp;
 
 	temp = sh->pipe_lst;
-	while (sh->path != NULL && sh->pipe_lst)
+	while (sh->pipe_lst)
 	{
 		if (sh->pipe_lst->cmd == NULL || !ft_strcmp(sh->pipe_lst->cmd, ""))
 		{
@@ -104,7 +104,7 @@ void	get_command_path(t_sh	*sh)
 		}
 		if (com_line_path(sh->path, sh->pipe_lst->cmd) == 1)
 			sh->pipe_lst->cmd_verified = ft_strdup(sh->pipe_lst->cmd);
-		else
+		else if (sh->path != NULL)
 			sh->pipe_lst->cmd_verified = com_line(sh->path, sh->pipe_lst->cmd);
 		get_command_path_2(sh->pipe_lst, sh);
 		sh->pipe_lst = sh->pipe_lst->next;

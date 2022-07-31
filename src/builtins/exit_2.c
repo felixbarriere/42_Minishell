@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 14:50:00 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/25 14:54:47 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/07/31 19:18:23 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	is_in_range(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (ft_isdigit(str[i]) == 1 || (i == 0 && str[i] == '-'))
+		if (ft_isdigit(str[i]) == 1 || (i == 0 && (str[i] == '-'
+					|| str[i] == '+')))
 			i++;
 		else
 			return (0);

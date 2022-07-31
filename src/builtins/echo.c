@@ -105,6 +105,8 @@ void	echo_command(t_sh	*sh, t_pipe	*pipe)
 		ft_putstr_fd("", 2);
 	}
 	else
+	{
 		ft_putstr_fd("\n", 2);
+	}
 	sh->exit = 0;
 }
