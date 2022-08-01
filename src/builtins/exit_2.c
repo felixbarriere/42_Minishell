@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 14:50:00 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/31 19:18:23 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/08/01 16:29:01 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,34 @@ int	check_min(char *str)
 		i++;
 	}
 	return (free(min), 1);
+}
+
+int	check_max(char *str)
+{
+	char	*max;
+	int		i;
+
+	while (*str == '0')
+		str++;
+	if (!*str)
+		return (0);
+	if (ft_strlen_3(str) > 19)
+		return (0);
+	if (ft_strlen_3(str) < 19)
+		return (1);
+	max = ft_strdup("9223372036854775807");
+	if (!max)
+		return (1);
+	i = 0;
+	while (max[i])
+	{
+		if (str[i] > max[i])
+			return (free(max), 0);
+		if (str[i] < max[i])
+			return (free(max), 1);
+		i++;
+	}
+	return (free(max), 1);
 }
 
 int	ft_strlen_3(const char *s)

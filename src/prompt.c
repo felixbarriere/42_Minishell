@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:43:57 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/08/01 15:26:35 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/08/01 16:51:23 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	ft_prompt_init(t_sh *sh, char **env_init)
 		if (!ft_strcmp(sh->pipe_lst->cmd, "echo"))
 			sh->exit = 0;
 		if (!is_only_space(sh->prompt))
-			execution(sh, sh->env, 0);
+			execution(sh, sh->env, 0, NULL);
 		if (nb_pipe(sh->pipe_lst))
 			last_cmd(sh);
 		clear_list(sh->token_lst);

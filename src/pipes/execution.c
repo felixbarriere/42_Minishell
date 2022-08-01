@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/08/01 15:28:51 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/08/01 16:54:03 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,8 @@ void	ft_sh_exit(void)
 		g_sh.exit = 127;
 }
 
-void	execution(t_sh *sh, char **env_init, int nb_pipes)
+void	execution(t_sh *sh, char **env_init, int nb_pipes, t_pipe *start)
 {
-	t_pipe	*start;
-
 	start = sh->pipe_lst;
 	sh->exec_pipe_k = 0;
 	nb_pipes = nb_pipe(sh->pipe_lst);
@@ -63,16 +61,17 @@ void	execution(t_sh *sh, char **env_init, int nb_pipes)
 	{
 		if (start->pipe_ok != 1)
 		{
+			if (sh->pipe_lst->is_builtin != 1 && start->cmd
+				&& sh->pipe_lst->cmd_verified == NULL)
+			{
+				mess_cmd_not_found(sh, sh->pipe_lst->cmd);
+				return ;
+			}
 			update_input_output(sh->pipe_lst);
 			if (sh->pipe_lst->is_builtin == 1)
 				index_builtins(sh, start);
 			else if (sh->pipe_lst->cmd_verified != NULL)
 				no_pipe_exec(sh, env_init);
-			else
-			{
-				mess_cmd_not_found(sh, sh->pipe_lst->cmd);
-				return ;
-			}
 			reset_input_output(sh->pipe_lst);
 		}
 	}
