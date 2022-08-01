@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 18:19:33 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/31 19:16:19 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/08/01 16:22:50 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,33 +51,33 @@ unsigned long long	ft_long_atoi(const char *str)
 	return (nb);
 }
 
-// int	check_max(char *str)
-// {
-// 	char	*max;
-// 	int		i;
+int	check_max(char *str)
+{
+	char	*max;
+	int		i;
 
-// 	while (*str == '0')
-// 		str++;
-// 	if (!*str)
-// 		return (0);
-// 	if (ft_strlen_3(str) > 19)
-// 		return (0);
-// 	if (ft_strlen_3(str) < 19)
-// 		return (1);
-// 	max = ft_strdup("9223372036854775807");
-// 	if (!max)
-// 		return (1);
-// 	i = 0;
-// 	while (max[i])
-// 	{
-// 		if (str[i] > max[i])
-// 			return (free(max), 0);
-// 		if (str[i] < max[i])
-// 			return (free(max), 1);
-// 		i++;
-// 	}
-// 	return (free(max), 1);
-// }
+	while (*str == '0')
+		str++;
+	if (!*str)
+		return (0);
+	if (ft_strlen_3(str) > 19)
+		return (0);
+	if (ft_strlen_3(str) < 19)
+		return (1);
+	max = ft_strdup("9223372036854775807");
+	if (!max)
+		return (1);
+	i = 0;
+	while (max[i])
+	{
+		if (str[i] > max[i])
+			return (free(max), 0);
+		if (str[i] < max[i])
+			return (free(max), 1);
+		i++;
+	}
+	return (free(max), 1);
+}
 
 int	too_many_chars(char *str)
 {
@@ -88,8 +88,16 @@ int	too_many_chars(char *str)
 	}
 	else
 	{
-		if (ft_long_atoi(str) > 9223372036854775807)
-			return (1);
+		if (str[0] == '+')
+		{
+			if (ft_long_atoi(str) > 9223372036854775807)
+				return (1);
+		}
+		else
+		{
+			if (check_max(str) == 0)
+				return (1);
+		}
 	}
 	return (0);
 }
