@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:09:29 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/30 17:33:40 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/08/01 12:50:25 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	ft_close2(void)
 void	free_free_all(t_sh *sh)
 {
 	ft_free(sh->env);
-	ft_free(sh->path);
+	if (sh->path != NULL)
+		ft_free(sh->path);
 	if (sh->prompt)
 		free(sh->prompt);
 	clear_list(sh->token_lst);

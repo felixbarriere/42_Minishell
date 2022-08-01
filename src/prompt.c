@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:43:57 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/31 15:08:15 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/08/01 15:26:35 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,8 @@ void	ft_prompt_start(t_sh *sh)
 	sh->prompt = readline("➜ minishell ");
 	if (!sh->prompt)
 	{
-		if (sh->path != NULL)
-			ft_free(sh->path);
-		ft_free(sh->env);
-		clear_list(sh->token_lst);
-		clear_list_pipe(sh->pipe_lst);
-		clear_list_env(sh->env_lst);
 		ft_putstr_fd("\nexit\n", 1);
-		ft_close_final();
+		free_free_all(sh);
 		exit(0);
 	}
 	if (ft_strcmp(sh->prompt, ""))
@@ -97,7 +91,7 @@ void	ft_prompt_init(t_sh *sh, char **env_init)
 		if (!ft_strcmp(sh->pipe_lst->cmd, "echo"))
 			sh->exit = 0;
 		if (!is_only_space(sh->prompt))
-			execution(sh, sh->env);
+			execution(sh, sh->env, 0);
 		if (nb_pipe(sh->pipe_lst))
 			last_cmd(sh);
 		clear_list(sh->token_lst);

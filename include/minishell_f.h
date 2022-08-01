@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 12:02:46 by ccalas            #+#    #+#             */
-/*   Updated: 2022/07/31 15:08:30 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/08/01 15:28:02 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,7 +201,7 @@ int		check_min(char *str);
 int		ft_strlen_3(const char *s);
 
 /******** EXECUTION ********/
-void	execution(t_sh *sh, char **env_init);
+void	execution(t_sh *sh, char **env_init, int nb_pipes);
 int		nb_pipe(t_pipe *pipe_lst);
 void	init_pipe(t_pipe *start, int nb_pipes);
 

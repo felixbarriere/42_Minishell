@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:57:13 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/31 17:18:24 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/08/01 15:19:14 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	mess_cmd_not_found(t_sh *sh, char *cmd)
 	ft_putstr_fd(": command not found\n", 2);
 	sh->exit = 127;
 	sh->error = 1;
-	reset_input_output(sh->pipe_lst);
 }
 
 char	*ft_strjoin_path_2(char *dest, char *s1, char *s2)
