@@ -45,12 +45,12 @@ void	get_command_path_3(t_sh	*sh, t_pipe	*pipe_lst)
 {
 	int		i;
 	char	path[256];
-	char	*path_complete;
+	// char	*path_complete;
 	char	*executable;
 
 	executable = NULL;
 	i = 0;
-	path_complete = NULL;
+	// path_complete = NULL;
 	getcwd(path, sizeof(path));
 	while (pipe_lst->cmd[i] && pipe_lst->cmd[i] == '.'
 		&& pipe_lst->cmd[i + 1] == '.' && pipe_lst->cmd[i + 2] == '/')

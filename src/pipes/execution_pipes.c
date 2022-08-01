@@ -17,6 +17,20 @@
 
 extern t_sh	g_sh;
 
+int	last_cmd_null(t_sh *sh)
+{
+	t_pipe	*start;
+
+	start = sh->pipe_lst;
+	while (start->next)
+	{
+		if (start->cmd_verified == NULL)
+			return (1);
+		start = start->next;
+	}
+	return (0);
+}
+
 void	exec2(t_pipe *start, t_sh *sh, int nb_pipes, char **env_init)
 {
 	(void)nb_pipes;
@@ -29,11 +43,12 @@ void	exec2(t_pipe *start, t_sh *sh, int nb_pipes, char **env_init)
 		ft_signals_orchestrator(1);
 		// echo dd | fdf -> ne pas close
 		// ls > a | exit 123 | wc -c close
-		if (!ft_strncmp(start->cmd, "wc", 2))
-		{
-			ft_putstr_fd(start->cmd, 2);
-			ft_close(sh, nb_pipes);
-		}
+		// if (last_cmd_null(sh) == 0)
+		// {
+			// ft_putstr_fd(start->cmd, 2);
+			// ft_close(sh, nb_pipes);
+		// }
+		// Finalament le ft_close est mis dans le else if, semble marcher
 		if (start->is_builtin == 1)
 		{
 			index_builtins(sh, start);
@@ -41,7 +56,10 @@ void	exec2(t_pipe *start, t_sh *sh, int nb_pipes, char **env_init)
 			exit(sh->exit);
 		}
 		else if (start->cmd_verified != NULL && start->cmd)
+		{
+			ft_close(sh, nb_pipes);
 			execve(start->cmd_verified, start->args, env_init);
+		}
 		else
 		{
 			mess_cmd_not_found(sh, start->cmd);
