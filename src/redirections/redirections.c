@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 15:39:55 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/31 14:25:39 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/08/01 15:18:01 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,16 @@ void	open_fdout(t_token *token, t_pipe **pipe_lst)
 {
 	if (token->type == OUTPUT)
 	{
+		if ((*pipe_lst)->output != 1)
+			close ((*pipe_lst)->output);
 		(*pipe_lst)->output = open(token->value, O_WRONLY
 				| O_CREAT | O_TRUNC, 00644);
 		(*pipe_lst)->append_mode = 0;
 	}
-	else
+	else if (token->type == APPEND)
 	{
+		if ((*pipe_lst)->output != 1)
+			close ((*pipe_lst)->output);
 		(*pipe_lst)->output = open(token->value, O_WRONLY
 				| O_CREAT | O_APPEND, 00644);
 		(*pipe_lst)->append_mode = 1;
@@ -35,6 +39,8 @@ void	open_fdout(t_token *token, t_pipe **pipe_lst)
 
 int	open_fdin(char	*value, t_pipe **pipe_lst)
 {
+	if ((*pipe_lst)->input != 0)
+		close ((*pipe_lst)->input);
 	(*pipe_lst)->input = open(value, O_RDONLY);
 	if ((*pipe_lst)->input == -1)
 	{
@@ -42,9 +48,9 @@ int	open_fdin(char	*value, t_pipe **pipe_lst)
 		ft_putstr_fd("bash: ", 2);
 		ft_putstr_fd(value, 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
+		(*pipe_lst)->pipe_ok = 1;
 		g_sh.exit = 1;
 		g_sh.error = 3;
-		(*pipe_lst)->pipe_ok = 1;
 		return (3);
 	}
 	return (0);

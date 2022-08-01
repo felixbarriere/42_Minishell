@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/31 18:45:31 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/08/01 15:28:51 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,14 @@ int	nb_pipe(t_pipe *pipe_lst)
 	return (nb_pipes);
 }
 
-void	execution(t_sh *sh, char **env_init)
+void	ft_sh_exit(void)
 {
-	int		nb_pipes;
+	if (g_sh.exit == 13)
+		g_sh.exit = 127;
+}
+
+void	execution(t_sh *sh, char **env_init, int nb_pipes)
+{
 	t_pipe	*start;
 
 	start = sh->pipe_lst;
@@ -66,7 +71,6 @@ void	execution(t_sh *sh, char **env_init)
 			else
 			{
 				mess_cmd_not_found(sh, sh->pipe_lst->cmd);
-				reset_input_output(sh->pipe_lst);
 				return ;
 			}
 			reset_input_output(sh->pipe_lst);
@@ -74,8 +78,7 @@ void	execution(t_sh *sh, char **env_init)
 	}
 	else
 		execution_pipe(sh, start, nb_pipes, env_init);
-	if (sh->exit == 13)
-		sh->exit = 127;
+	ft_sh_exit();
 }
 
 /*
