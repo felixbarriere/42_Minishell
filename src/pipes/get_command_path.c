@@ -6,7 +6,7 @@
 /*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:27:17 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/31 19:00:20 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/08/01 11:14:41 by fbarrier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	get_command_path_2(t_pipe	*pipe_lst, t_sh *sh)
 			{
 				ft_putstr_fd("bash: ", 2);
 				ft_putstr_fd(pipe_lst->cmd, 2);
-				ft_putstr_fd(": No such file or directory\n", 1);
+				ft_putstr_fd(": No such file or directory\n", 2);
 				sh->exit = 127;
 			}	
 		}
