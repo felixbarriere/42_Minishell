@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/08/01 15:19:02 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/08/01 19:22:39 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ extern t_sh	g_sh;
 
 void	exec2(t_pipe *start, t_sh *sh, int nb_pipes, char **env_init)
 {
+	(void)nb_pipes;
 	signal(SIGINT, SIG_IGN);
 	start->pid = fork();
 	if (start->pid == -1)
@@ -26,7 +27,13 @@ void	exec2(t_pipe *start, t_sh *sh, int nb_pipes, char **env_init)
 	if (start->pid == 0)
 	{
 		ft_signals_orchestrator(1);
-		ft_close(sh, nb_pipes);
+		// echo dd | fdf -> ne pas close
+		// ls > a | exit 123 | wc -c close
+		if (!ft_strncmp(start->cmd, "wc", 2))
+		{
+			ft_putstr_fd(start->cmd, 2);
+			ft_close(sh, nb_pipes);
+		}
 		if (start->is_builtin == 1)
 		{
 			index_builtins(sh, start);

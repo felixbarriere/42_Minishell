@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 18:19:33 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/08/01 16:28:50 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/08/01 18:20:26 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,9 @@
 
 void	exit_command_2(t_sh *sh, t_pipe *pipe_lst)
 {
-	if (sh->path != NULL)
-		ft_free(sh->path);
-	ft_free(sh->env);
-	clear_list(sh->token_lst);
-	clear_list_pipe(pipe_lst);
-	clear_list_env(sh->env_lst);
-	ft_close_final();
+	(void)pipe_lst;
+	ft_close2();
+	free_free_all(sh);
 	if (sh->exit)
 		exit(sh->exit);
 	else
@@ -99,12 +95,13 @@ void	exit_command(t_sh *sh, t_pipe *pipe_lst)
 		temp = temp->next;
 	if (temp)
 	{
-		ft_putstr_fd("exit\n", 1);
+		if (nb_pipe(sh->pipe_lst) == 0)
+			ft_putstr_fd("exit\n", 1);
 		if (temp->next && temp->next->type == ARG)
 		{
 			if (is_in_range(temp->next->value) && !temp->next->next
 				&& !too_many_chars(temp->next->value))
-				sh->exit = ft_atoi(temp->next->value);
+					sh->exit = ft_atoi(temp->next->value);
 			else if (temp->next->next && is_in_range(temp->next->value))
 			{
 				ft_putstr_fd("exit: too many arguments\n", 2);

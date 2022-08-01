@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   index.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 16:12:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/31 15:46:47 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/08/01 18:21:00 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,5 @@ void	index_builtins(t_sh	*sh, t_pipe *start)
 	else if (!ft_strcmp(start->cmd, "unset"))
 		unset_command(sh, start);
 	else if (!sh->prompt || !ft_strcmp(start->cmd, "exit"))
-	{
 		exit_command(sh, start);
-	}
 }
