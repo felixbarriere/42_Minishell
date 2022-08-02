@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:52:05 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/31 14:57:59 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/08/02 12:53:26 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,19 @@
 #include "../../include/minishell_s.h"
 
 extern t_sh	g_sh;
+
+void	ft_switch(t_pipe *start, int k)
+{	
+	if (!k)
+		dup2(start->fd[1], start->output);
+	else if (k && !start->next)
+		dup2(start->prev->fd[0], start->input);
+	else if (k && start->next)
+	{
+		dup2(start->prev->fd[0], start->input);
+		dup2(start->fd[1], start->output);
+	}
+}
 
 void	reset_input_output(t_pipe *pipe_lst)
 {

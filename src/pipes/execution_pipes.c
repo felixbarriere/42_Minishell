@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:59:40 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/08/01 19:22:39 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/08/02 12:53:53 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,20 @@
 
 extern t_sh	g_sh;
 
-int	last_cmd_null(t_sh *sh)
-{
-	t_pipe	*start;
+	// echo dd | fdf -> ne pas close
+	// ls > a | exit 123 | wc -c close
+	// if (last_cmd_null(sh) == 0)
+	// {
+		// ft_putstr_fd(start->cmd, 2);
+		// ft_close(sh, nb_pipes);
+	// }
+	// Finalament le ft_close est mis dans le else if, semble marcher
 
-	start = sh->pipe_lst;
-	while (start->next)
-	{
-		if (start->cmd_verified == NULL)
-			return (1);
-		start = start->next;
-	}
-	return (0);
+void	exec3(t_sh *sh, t_pipe *start)
+{
+	index_builtins(sh, start);
+	free_free_all(sh);
+	exit(sh->exit);
 }
 
 void	exec2(t_pipe *start, t_sh *sh, int nb_pipes, char **env_init)
@@ -41,20 +43,8 @@ void	exec2(t_pipe *start, t_sh *sh, int nb_pipes, char **env_init)
 	if (start->pid == 0)
 	{
 		ft_signals_orchestrator(1);
-		// echo dd | fdf -> ne pas close
-		// ls > a | exit 123 | wc -c close
-		// if (last_cmd_null(sh) == 0)
-		// {
-			// ft_putstr_fd(start->cmd, 2);
-			// ft_close(sh, nb_pipes);
-		// }
-		// Finalament le ft_close est mis dans le else if, semble marcher
 		if (start->is_builtin == 1)
-		{
-			index_builtins(sh, start);
-			free_free_all(sh);
-			exit(sh->exit);
-		}
+			exec3(sh, start);
 		else if (start->cmd_verified != NULL && start->cmd)
 		{
 			ft_close(sh, nb_pipes);
@@ -89,19 +79,6 @@ void	execution_pipe2(t_sh *sh, t_pipe *start, int nb_pipes, char **env_init)
 	else
 		exec2(start, sh, nb_pipes, env_init);
 	sh->exec_nb_cmds_valids++;
-}
-
-void	ft_switch(t_pipe *start, int k)
-{	
-	if (!k)
-		dup2(start->fd[1], start->output);
-	else if (k && !start->next)
-		dup2(start->prev->fd[0], start->input);
-	else if (k && start->next)
-	{
-		dup2(start->prev->fd[0], start->input);
-		dup2(start->fd[1], start->output);
-	}
 }
 
 void	execution_pipe_init(t_sh *sh, t_pipe *start, int nb_pipes)

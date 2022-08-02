@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_command_path_2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbarrier <fbarrier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:12:18 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/30 19:12:31 by fbarrier         ###   ########.fr       */
+/*   Updated: 2022/08/02 12:51:15 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,10 @@ void	get_command_path_3(t_sh	*sh, t_pipe	*pipe_lst)
 {
 	int		i;
 	char	path[256];
-	// char	*path_complete;
 	char	*executable;
 
 	executable = NULL;
 	i = 0;
-	// path_complete = NULL;
 	getcwd(path, sizeof(path));
 	while (pipe_lst->cmd[i] && pipe_lst->cmd[i] == '.'
 		&& pipe_lst->cmd[i + 1] == '.' && pipe_lst->cmd[i + 2] == '/')

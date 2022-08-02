@@ -6,7 +6,7 @@
 /*   By: ccalas <ccalas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 19:28:11 by fbarrier          #+#    #+#             */
-/*   Updated: 2022/07/27 16:24:18 by ccalas           ###   ########.fr       */
+/*   Updated: 2022/08/02 12:47:57 by ccalas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,22 +74,21 @@ int	is_cmd(t_token *lst, t_sh *sh)
 
 void	update_command(t_sh *sh)
 {
-	t_pipe	*temp;
+	t_pipe	*pipe;
 	int		i;
 
-	temp = sh->pipe_lst;
-	while (sh->pipe_lst)
+	pipe = sh->pipe_lst;
+	while (pipe)
 	{
 		if (is_cmd(sh->token_lst, sh) == 1)
 			sh->error = 1;
-		if (update_args(&sh->pipe_lst) == 1)
+		if (update_args(&pipe) == 1)
 			sh->error = 1;
-		i = update_fdin(&sh->pipe_lst);
+		i = update_fdin(&pipe);
 		if (i == 1)
 			sh->error = 1;
 		else if (i == 2)
 			return ;
-		sh->pipe_lst = sh->pipe_lst->next;
+		pipe = pipe->next;
 	}
-	sh->pipe_lst = temp;
 }
